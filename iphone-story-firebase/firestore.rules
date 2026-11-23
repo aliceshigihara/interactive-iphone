@@ -1,0 +1,24 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /publishedStories/{storyId} {
+      // Qualquer pessoa que conhece o link pode ler a história.
+      allow get: if true;
+      allow list: if false;
+      // Criar requer autenticação anônima; documentos são imutáveis.
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['payload', 'name', 'ownerUid', 'createdAt', 'version'])
+        && request.resource.data.keys().hasAll(['payload', 'name', 'ownerUid', 'createdAt', 'version'])
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid is string
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 120
+        && request.resource.data.payload is string
+        && request.resource.data.payload.size() <= 850000
+        && request.resource.data.payload.matches('^(gz|raw)\\.[A-Za-z0-9_-]+$')
+        && request.resource.data.createdAt is int
+        && request.resource.data.version == 1;
+      allow update, delete: if false;
+    }
+  }
+}

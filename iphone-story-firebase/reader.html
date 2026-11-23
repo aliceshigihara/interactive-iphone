@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Interactive iPhone Story - Reader View</title>
+<style>
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0}
+body{display:grid;place-items:center;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#fbfbfd 0%,#eeeef3 46%,#dedee6 100%);font-family:-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif}
+.device{position:fixed;left:50%;top:50%;width:390px;height:844px;padding:10px;border-radius:56px;background:#000;box-shadow:0 0 0 2px #3a3a3c,0 28px 70px rgba(0,0,0,.38),0 8px 20px rgba(0,0,0,.18);flex:none;transform:translate(-50%,-50%) scale(1);transform-origin:center;will-change:transform}
+.device::before{content:"";position:absolute;left:-3px;top:172px;width:3px;height:58px;border-radius:3px 0 0 3px;background:linear-gradient(#3a3a3e,#161619);box-shadow:0 84px 0 #1d1d21}
+.device::after{content:"";position:absolute;right:-3px;top:214px;width:3px;height:96px;border-radius:0 3px 3px 0;background:linear-gradient(#3a3a3e,#161619)}
+.screen{display:block;width:370px;height:824px;border:0;border-radius:46px;background:#000;overflow:hidden}
+.screen:focus{outline:none}
+@media (prefers-reduced-motion:no-preference){
+ .device{animation:device-in .55s cubic-bezier(.2,.8,.2,1) both}
+ .screen{animation:screen-in .35s ease .1s both}
+}
+@keyframes device-in{from{opacity:0}to{opacity:1}}
+@keyframes screen-in{from{opacity:0}to{opacity:1}}
+@supports(height:100dvh){html,body{height:100dvh}}
+</style>
+</head>
+<body>
+<div class="device" id="device">
+<iframe class="screen" id="screen" src="about:blank" title="Interactive iPhone Story" scrolling="no"></iframe>
+</div>
+<script>
+(function(){
+  const device=document.getElementById('device');
+  const screen=document.getElementById('screen');
+  const params=new URLSearchParams(location.hash.slice(1));
+  const story=params.get('story');
+  const id=new URLSearchParams(location.search).get('id');
+  const appUrl=new URL('index.html?reader=1',location.href);
+  if(story)appUrl.hash=new URLSearchParams({story}).toString();
+  if(id)appUrl.searchParams.set('id',id);
+  screen.src=appUrl.href;
+  function fit(){
+    const vw=window.visualViewport?window.visualViewport.width:window.innerWidth;
+    const vh=window.visualViewport?window.visualViewport.height:window.innerHeight;
+    const scale=Math.min(1,(vw-32)/390,(vh-32)/844);
+    device.style.transform='translate(-50%,-50%) scale('+Math.max(.1,scale)+')';
+  }
+  addEventListener('resize',fit,{passive:true});
+  if(window.visualViewport)visualViewport.addEventListener('resize',fit,{passive:true});
+  fit();
+})();
+</script>
+</body>
+</html>
