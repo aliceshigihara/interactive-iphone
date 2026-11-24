@@ -33,7 +33,52 @@
     return node;
   }
   function dayPreview(key) {
-    return (typeof plan.days[key] === 'string' && plan.days[key].trim()) || '+ Anotar';
+    const note = typeof plan.days[key] === 'string' ? plan.days[key].trim() : '';
+    const count = refsFor(key).length;
+    return note || (count ? `${count} ${count===1?'referência':'referências'}` : '+ Anotar');
+  }
+  function refsFor(key) {
+    return StoryConnections.refList(plan.refs[key]);
+  }
+  function updateDayTile(key) {
+    const tile=[...byId('days').children].find(button=>button.dataset.day===key);
+    if(!tile)return;
+    tile.querySelector('.planner-day-preview').textContent=dayPreview(key);
+    const count=refsFor(key).length;
+    tile.classList.toggle('planner-day-referenced',!!count);
+    tile.setAttribute('aria-label',`${fullDate.format(dateTime(key))}${count?`, ${count} ${count===1?'referência':'referências'}`:''}`);
+  }
+  function renderReferences() {
+    const root=byId('refs'),day=selectedDay;
+    root.replaceChildren();
+    for(const ref of refsFor(day)){
+      const item=StoryConnections.resolve(ref), unavailable=StoryConnections.availability(ref);
+      const mismatch=item?.dates.length&&!item.dates.includes(day);
+      const details=item?[FN[item.app],StoryConnections.dateLabel(item.dates)].filter(Boolean).join(' · '):'Registro removido';
+      const row=make('div',null,'story-ref-row');
+      const open=make('button',null,'story-ref-open');
+      open.type='button';open.disabled=!!unavailable;
+      if(item){
+        const icon=make('span',null,'story-ref-icon');icon.setAttribute('aria-hidden','true');icon.innerHTML=iconOf(item.app);open.append(icon);
+      }
+      const words=make('span');
+      words.append(make('b',item?.title||ref.title||'Registro indisponível'),make('small',details));
+      if(mismatch)words.append(make('small','A data do registro não coincide com este dia.','story-ref-warning'));
+      if(unavailable&&item)words.append(make('small',unavailable,'story-ref-warning'));
+      open.append(words);
+      if(!unavailable)open.append(make('span','›','story-ref-chevron'));
+      open.onclick=async()=>{await closeEditorDialog(dialog);if(S===story)StoryConnections.open(ref)};
+      const remove=make('button','×','story-ref-remove');remove.type='button';
+      remove.setAttribute('aria-label',`Remover referência a ${item?.title||ref.title||'este registro'}`);
+      remove.onclick=()=>{
+        if(S!==story)return;
+        const updated=refsFor(day).filter(link=>!StoryConnections.same(link,ref));
+        if(updated.length)plan.refs[day]=updated;else delete plan.refs[day];
+        persistPlan();updateDayTile(day);renderReferences();
+      };
+      row.append(open,remove);root.append(row);
+    }
+    if(!root.children.length)root.append(make('p','Nenhum registro vinculado a este dia.','story-ref-empty'));
   }
   function renderDays() {
     const range = bounds();
@@ -44,13 +89,13 @@
 
     const from = range.start + page * pageDays * dayMs;
     const to = Math.min(range.end, from + (pageDays - 1) * dayMs);
-    const otherNotes = Object.keys(plan.days).filter(date => {
+    const otherNotes = [...new Set([...Object.keys(plan.days),...Object.keys(plan.refs)])].filter(date => {
       const t = dateTime(date);
       return t < range.start || t > range.end;
     }).length;
     byId('period').textContent = `${shortDate.format(from)} – ${shortDate.format(to)} · ${new Date(from).getUTCFullYear()}${new Date(to).getUTCFullYear() !== new Date(from).getUTCFullYear() ? `–${new Date(to).getUTCFullYear()}` : ''}`;
     byId('period-note').textContent = otherNotes
-      ? `${otherNotes} ${otherNotes === 1 ? 'dia anotado fora do período atual (preservado)' : 'dias anotados fora do período atual (preservados)'}.`
+      ? `${otherNotes} ${otherNotes === 1 ? 'dia com notas ou referências fora do período atual (preservado)' : 'dias com notas ou referências fora do período atual (preservados)'}.`
       : 'Selecione um dia para escrever.';
     byId('prev-days').disabled = page === 0;
     byId('next-days').disabled = to >= range.end;
@@ -67,6 +112,7 @@
       button.append(make('small', edge, 'planner-day-edge'), make('strong', shortDate.format(t)), make('span', null, 'planner-day-dot'), make('span', dayPreview(key), 'planner-day-preview'));
       button.addEventListener('click', () => selectDay(key));
       rail.append(button);
+      updateDayTile(key);
     }
     rail.scrollLeft = 0;
     selectDay(selectedDay);
@@ -79,6 +125,7 @@
     for (const button of rail.children) button.setAttribute('aria-pressed', String(button.dataset.day === key));
     byId('day-title').textContent = fullDate.format(dateTime(key));
     byId('day-note').value = typeof plan.days[key] === 'string' ? plan.days[key] : '';
+    renderReferences();
   }
   function stepPage(step) {
     const range = bounds();
@@ -148,6 +195,7 @@
     byId('prev-person').disabled = index === 0;
     byId('next-person').disabled = index === list.length - 1;
     byId('remove-person').hidden = !!person.char;
+    byId('person-connections').hidden = !person.char;
   }
   function stepPerson(step) {
     const list = people();
@@ -167,7 +215,8 @@
       start: saved.start || '',
       end: saved.end || '',
       days: saved.days && typeof saved.days === 'object' && !Array.isArray(saved.days) ? saved.days : {},
-      cards: Array.isArray(saved.cards) ? saved.cards.filter(card => card && typeof card.key === 'string') : []
+      cards: Array.isArray(saved.cards) ? saved.cards.filter(card => card && typeof card.key === 'string') : [],
+      refs: saved.refs&&typeof saved.refs==='object'&&!Array.isArray(saved.refs)?saved.refs:{}
     };
     byId('start').value = plan.start || phoneDateValue();
     byId('end').value = plan.end;
@@ -213,8 +262,24 @@
     const note = event.target.value;
     if (note.trim()) plan.days[selectedDay] = note;
     else delete plan.days[selectedDay];
-    byId('days').querySelector('[aria-pressed="true"] .planner-day-preview').textContent = dayPreview(selectedDay);
+    updateDayTile(selectedDay);
     persistPlan();
+  });
+  byId('add-reference').addEventListener('click',()=>{
+    if(!selectedDay||S!==story)return;
+    const day=selectedDay,currentPlan=plan;
+    StoryConnections.openPicker({mode:'planner',title:'Adicionar referência',
+      hint:`${shortDate.format(dateTime(day))} · O vínculo aparece só no planejamento.`,exclude:refsFor(day),onSelect:ref=>{
+        if(S!==story||plan!==currentPlan)return;
+        plan.refs[day]=[...refsFor(day),ref];
+        persistPlan();updateDayTile(day);
+        if(selectedDay===day)renderReferences();
+      }
+    });
+  });
+  byId('person-connections').addEventListener('click',()=>{
+    const person=people().find(entry=>entry.key===selectedPerson);
+    if(person?.char)StoryConnections.openContact(person.char);
   });
   byId('add-person').addEventListener('click', () => {
     selectedPerson = `card:${crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`}`;
