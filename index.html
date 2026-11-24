@@ -166,7 +166,6 @@ html.reader-mode .scr{border-radius:46px;height:100%;background:#000}
 .pmod{position:fixed;inset:0;background:#0007;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.pmod .mb{max-width:380px}
 .pmod input,.pmod select,.pmod textarea{color:#111;-webkit-text-fill-color:#111;background:#fff}
 .sndr{display:flex;flex-wrap:wrap;gap:6px}.sndr button{padding:7px 12px}
-.crop-modal{width:min(360px,100%);max-height:92%;overflow:auto;background:#fff;border-radius:18px;padding:14px}.crop-modal h3{font-size:18px;margin-bottom:10px}.crop-preview{display:grid;place-items:center;background:#111;border-radius:12px;overflow:hidden;padding:8px;margin-bottom:10px}.crop-preview canvas{display:block;width:auto;height:auto;max-width:100%;max-height:420px;cursor:grab}.crop-controls{display:grid;grid-template-columns:52px 1fr;gap:8px 10px;align-items:center;font-size:13px;color:#6b6b70}.crop-controls input{width:100%;accent-color:#0a84ff}.crop-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.crop-actions button{border:0;border-radius:8px;padding:8px 14px;background:#eee;font-size:15px}.crop-actions button:last-child{background:#0a84ff;color:#fff}
 .conv-action{display:flex;flex-direction:column;gap:12px}.conv-current{background:#f2f2f7;border-radius:12px;padding:12px}.conv-current b{display:block;font-size:16px}.conv-current span{display:block;color:#8e8e93;font-size:13px;margin-top:3px}.conv-section{border-top:.5px solid #d1d1d6;padding:12px 0 0}.conv-section h3{font-size:13px;color:#6b6b70;margin:0 0 10px}.sender-list{display:flex;flex-wrap:wrap;gap:8px}.sender-list button{border:1px solid #d1d1d6;border-radius:16px;background:#fff;padding:7px 11px;color:#111;font-size:14px}.sender-list button.on{border-color:#0a84ff;background:#0a84ff;color:#fff}.conv-section>.conv-row{display:block;width:100%;margin-top:8px}.conv-section>.conv-row:first-of-type{margin-top:0}.pc .conv-row{width:100%;border:0;border-radius:10px;background:#f2f2f7!important;color:#0a84ff!important;text-align:left;padding:10px 12px;font-size:15px}.pc .conv-row.warn{color:#ff3b30!important}
 .cm>div{flex:1;min-width:0}.cm>div.aw{flex:none}
 .lock .d{font-size:21px;font-weight:400;letter-spacing:.2px;opacity:.95}
@@ -233,9 +232,6 @@ body{background:radial-gradient(90% 90% at 20% 0%,#f7f9ff,#e7e8ef 75%)}
 html.reader-mode .control-center{border-radius:0}
 
 /* v2.1 — Messages closer to current iOS (keyboard intentionally omitted). */
-#app:has(.ios-chat-header){background:#fff}
-.ios-chat-header{min-height:104px;flex:none;align-items:center;justify-content:space-between;padding:3px 17px 9px;background:linear-gradient(180deg,#f7f7f9 0%,#f4f4f6 100%);border-bottom:1px solid #dcdce1;position:relative;z-index:2}
-.ios-chat-header .tc{position:absolute;left:50%;top:4px;transform:translateX(-50%);width:60%;gap:4px;font-size:12px;font-weight:500;white-space:nowrap}.ios-chat-header .tc .av{box-shadow:0 1px 3px #00000016}.ios-chat-header .tc span{max-width:190px;overflow:hidden;text-overflow:ellipsis;color:#222;font-size:12px}.ios-contact-chevron{font-size:15px;color:#8f8f95;font-weight:400;margin-left:3px}.ios-chat-header a.ios-back{align-self:center;padding:10px 6px;display:flex;align-items:center;color:#007aff}.ios-back svg{width:24px;height:24px}.ios-video-action{width:37px;height:37px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:#007aff;margin-left:auto;z-index:1}.ios-video-action svg,.ios-camera-btn svg{width:25px;height:25px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .ios-chat-body{background:#fff;scrollbar-width:none;padding-bottom:8px}.ios-chat-body::-webkit-scrollbar{display:none}
 .ios-chat-body #th{padding:14px 17px 16px;gap:5px}.ios-chat-body .b{font-size:17px;font-weight:400;line-height:1.23;max-width:82%;padding:9px 13px;border-radius:19px;letter-spacing:-.23px;white-space:pre-wrap;overflow-wrap:anywhere}.ios-chat-body .b.me{background:linear-gradient(180deg,#278dff 0%,#006cff 100%);color:#fff}.ios-chat-body .b.th{background:#e5e5e8;color:#0b0b0c}.ios-chat-body .b.tail{margin-bottom:5px}.ios-chat-body .b.me.tail::before{background:#0878fb;right:-6px;bottom:-1px}.ios-chat-body .b.th.tail::before{background:#e5e5e8;left:-6px;bottom:-1px}.ios-chat-body .b.me.tail::after,.ios-chat-body .b.th.tail::after{width:16px;bottom:-1px}.ios-chat-body .b.me.tail::after{right:-20px}.ios-chat-body .b.th.tail::after{left:-20px}.ios-chat-body .dv{font-size:11px;margin:2px 0 11px;color:#94949b;font-weight:500}.ios-chat-body .dl{font-size:12px;font-weight:600;color:#88888e;margin-right:4px}
 .ios-msg-footer{background:#f9f9fb;padding:6px 5px 14px;box-shadow:0 -1px 0 #e6e6e9;flex:none}.ios-msg-footer .cmp{padding:0 6px 2px;gap:7px;min-height:38px}.ios-camera-btn{flex:none;width:30px;height:30px;border:0;background:none;color:#8e8e93!important;cursor:pointer;padding:2px}.ios-msg-footer .pl{border:0;width:31px;height:31px;font-size:24px;font-weight:300;cursor:pointer}.ios-msg-footer .pill{background:#fff;border:1.3px solid #d0d0d5;min-height:34px;border-radius:21px;padding:1px 3px 1px 12px}.ios-msg-footer .pill input{font-size:16px;line-height:1.2}.ios-msg-footer .pill button{width:27px;height:27px;background:#007aff}.ios-mic{display:grid;place-items:center;width:19px;color:#999;font-size:23px}.ios-msg-appstrip:not([hidden]){display:flex;justify-content:space-around;gap:8px;padding:7px 8px 0}.ios-msg-appstrip span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#dfe2e8;font-size:19px}
@@ -279,12 +275,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .ios-chat-body .b.me.tail::after{right:-26px!important;left:auto!important;width:26px!important;height:18px!important;background:#fff!important;border-bottom-left-radius:10px!important;clip-path:none!important}
 .ios-chat-body .b.th.tail::before{left:-7px!important;width:20px!important;background:#e5e5e8!important;border-bottom-right-radius:16px 14px!important}
 .ios-chat-body .b.th.tail::after{left:-26px!important;right:auto!important;width:26px!important;height:18px!important;background:#fff!important;border-bottom-right-radius:10px!important;clip-path:none!important}
-.ios-chat-header{min-height:86px!important;height:86px!important;padding:8px 16px 8px!important;align-items:center!important}
-.ios-chat-header .tc{top:10px!important;gap:3px!important;line-height:1.15;width:58%!important}
-.ios-chat-header .tc .av{width:38px!important;height:38px!important;font-size:15px!important}
-.ios-chat-header .tc span{font-size:12px!important;line-height:1.2}
-.ios-chat-header a.ios-back{padding:10px 4px!important;align-self:center!important}
-.ios-chat-header .ios-video-action{width:34px!important;height:34px!important;align-self:center!important}
 .notification-panel{padding:0!important;overflow:hidden}
 .notification-details{display:block;width:100%}
 .notification-toggle{list-style:none;display:flex;align-items:center;gap:11px;cursor:pointer;padding:15px 16px;user-select:none;-webkit-user-select:none}
@@ -493,7 +483,72 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 
 /* Messages · Liquid Glass composer */
 .ios-msg-footer{position:relative;z-index:3;background:transparent;box-shadow:none;padding:8px 15px 24px;flex:none}.ios-msg-footer .cmp{padding:0;gap:11px;min-height:44px;align-items:center}.ios-msg-footer .pl,.ios-msg-footer .pill{height:44px;border:1px solid #b9b9bf66;background:linear-gradient(180deg,#f1f1f48c,#ffffffa8);backdrop-filter:blur(24px) saturate(145%);-webkit-backdrop-filter:blur(24px) saturate(145%);box-shadow:inset 0 1px 1px #fff,inset 0 -1px 2px #ffffffc9,0 5px 14px #25252f0a;transition:transform .22s cubic-bezier(.2,.8,.2,1),background .2s}.ios-msg-footer .pl{width:44px;min-width:44px;border-radius:50%;color:#111;padding:0;display:grid;place-items:center}.ios-msg-footer .pl svg{transition:transform .25s cubic-bezier(.2,.8,.2,1)}.ios-msg-footer .pl[aria-expanded=true] svg{transform:rotate(45deg)}.ios-msg-footer .pl:active,.ios-msg-footer .ios-glass-send:active{transform:scale(.92)}.ios-msg-footer .pill{border-radius:999px;padding:0 12px 0 17px;gap:7px;min-width:0}.ios-msg-footer .pill input{font-size:17px;line-height:1.3;color:#17171a}.ios-msg-footer .pill input::placeholder{color:#b2b2b8}.ios-glass-wave{display:grid;place-items:center;color:#a6a6af;flex:none;width:23px}.ios-msg-footer .pill .ios-glass-send{display:grid;place-items:center;width:29px;height:29px;flex:none;background:#087bff;color:white;margin-right:-6px;padding:0;transition:transform .18s}.ios-msg-footer [hidden]{display:none!important}.ios-glass-menu{position:absolute;bottom:calc(100% - 4px);left:15px;width:180px;padding:7px;background:#f7f7f9e8;border:1px solid #ffffffd9;border-radius:23px;box-shadow:0 8px 30px #0002,inset 0 1px 1px #fff;backdrop-filter:blur(30px) saturate(150%);-webkit-backdrop-filter:blur(30px) saturate(150%);animation:msgGlassIn .24s cubic-bezier(.2,.8,.2,1);transform-origin:bottom left}.ios-glass-menu button{width:100%;display:flex;gap:12px;align-items:center;text-align:left;border:0;background:transparent;color:#18181b;padding:12px 10px;border-radius:15px;font-size:15px;cursor:pointer}.ios-glass-menu button:hover{background:#dddde766}.ios-glass-menu button svg{flex:none;width:23px;height:23px}.reader-mode .ios-msg-footer .pl{pointer-events:none}.reader-mode .ios-glass-menu{display:none!important}@keyframes msgGlassIn{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){.ios-glass-menu{animation:none}.ios-msg-footer *{transition:none!important}}
-</style></head><body>
+/* Twitter post rows */
+.x-post{gap:8px;padding:12px 16px 8px;border-bottom-color:#eff3f4}
+.x-post-avatar{width:40px;flex:none}
+.x-post-top{align-items:center;gap:4px;min-height:20px;font-size:15px;line-height:20px;color:#0f1419}
+.x-post-top b,.x-post-handle{overflow:hidden;text-overflow:ellipsis}
+.x-post-handle{min-width:0}
+.x-post-meta{display:flex;align-items:center;gap:4px;min-width:0;color:#536471}
+.x-post-meta time,.x-post-dot{flex:none}
+.x-post-lock,.x-post-tools{display:flex;align-items:center;flex:none}
+.x-post-tools{gap:10px;margin-left:auto;padding-left:4px;color:#536471}
+.x-post-text{margin:0;color:#0f1419;font-size:15px;line-height:20px}
+.x-post-img{display:block;margin-top:12px}
+.x-actions{justify-content:initial;align-items:center;gap:0;margin-top:8px;min-height:28px}
+.x-actions .x-action{flex:1;min-width:0}
+.x-actions .x-action-end{display:flex;align-items:center;gap:8px;flex:none}
+.x-actions button{gap:4px;padding:0;min-height:28px;font-size:13px;line-height:16px;white-space:nowrap}
+.x-actions svg{flex:none;display:block}
+.x-actions .x-repost.on{color:#00ba7c}.x-actions .x-heart.on{color:#f91880}.x-actions .x-bookmark.on{color:#1d9bf0}
+/* Messages: floating iOS-style conversation controls and editor tools */
+#app:has(.msg-glass-head){--msg-paper:#fafcfb;background:var(--msg-paper)!important}
+.msg-glass-head{position:relative;z-index:2;flex:none;min-height:96px;padding:0 15px 8px;display:grid;justify-items:center;color:#121316}
+.msg-glass-surface,.ios-msg-footer .pl,.ios-msg-footer .pill{border:1px solid #20212a29;background:linear-gradient(155deg,#ffffffed,#ffffff50 55%,#f2f4f5a8);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);box-shadow:inset 0 1px 1px #fff,inset 0 -1px 2px #fff9,0 4px 12px #26263809}
+.msg-glass-back{position:absolute;top:0;left:15px;display:grid;place-items:center;width:44px;height:44px;padding:0;border-radius:50%;cursor:pointer}
+.msg-glass-contact{display:flex;min-width:0;max-width:68%;align-items:center;flex-direction:column;padding:0;border:0;background:none;cursor:pointer}
+.msg-glass-contact:disabled{cursor:default;opacity:1}
+.msg-glass-contact>.av,.msg-glass-avatar{position:relative;z-index:1;border-radius:50%;box-shadow:0 3px 7px #474f7229}
+.msg-glass-avatar{display:grid;place-items:center;width:58px;height:58px;background:linear-gradient(#a7c2db,#7985bd);color:#fff}
+.msg-glass-avatar svg{width:45px;height:45px}
+.msg-glass-name{display:flex;align-items:center;gap:4px;max-width:100%;min-height:33px;margin-top:-4px;padding:2px 11px 0;border-radius:999px;color:#111;font-weight:700;font-size:16px}
+.msg-glass-name span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.msg-glass-name svg{flex:none;color:#9b9ea1}
+.ios-chat-body{background:var(--msg-paper,#fff)}
+.ios-chat-body .b.me.tail::after,.ios-chat-body .b.th.tail::after{background:var(--msg-paper,#fff)!important}
+.ios-chat-body .dv{align-self:center;text-align:center;color:#85858b;font-size:11px;font-weight:500;line-height:1.3}
+.ios-msg-footer .pill input::placeholder{color:#a5a9ac;-webkit-text-fill-color:#a5a9ac}
+.msg-read-panel{border-top:1px solid #e8e9ee;margin-top:2px;padding-top:4px}
+.msg-read-panel summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;padding:7px 0;color:#555963}
+.msg-read-panel summary::-webkit-details-marker{display:none}
+.msg-read-panel summary small{display:block;margin-top:2px;font-size:11px;color:#757781}
+.msg-read-panel summary svg{flex:none;transition:transform .2s}
+.msg-read-panel[open] summary svg{transform:rotate(180deg)}
+.pc .read-toggle{background:none!important;box-shadow:none!important;padding:5px 4px;color:#0a72dc;font-weight:600}
+.pc .narration-entry{display:flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(145deg,#39a0ff,#007aff);font-weight:650}
+.pc .narration-entry[hidden]{display:none}
+#narration.sc-drawer{inset:0;transform:none;margin:auto;width:min(720px,calc(100% - 32px));max-width:none;height:fit-content;max-height:calc(100dvh - 32px);min-height:min(380px,calc(100dvh - 32px));padding:24px;border:1px solid #fff;border-radius:26px;background:#f8f9fd;box-shadow:0 24px 80px #152a4a40;color:#161b25}
+#narration:not([open]),#narration [hidden]{display:none!important}
+#narration::backdrop{background:#101c355e;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+#narration header{align-items:flex-start}
+#narration header p{margin-top:5px;color:#636875;font-size:13px;line-height:1.4}
+#narration .nar-close{width:38px;flex:none;font-size:20px;line-height:20px}
+.nar-switch{display:flex;gap:4px;margin:4px 0;padding:4px;border-radius:14px;background:#ebeef4}
+.nar-switch button{flex:1;background:transparent!important}
+.nar-switch button[aria-pressed="true"]{background:white!important;color:#086bd6!important;box-shadow:0 2px 8px #22305115}
+.nar-section{display:grid;gap:10px;min-width:0}
+.nar-section>.sc-primary{justify-self:start}
+#narration .sc-primary{background:#087bfa;color:#fff}
+#narration .nar-row{padding:10px 12px;margin-bottom:7px;border:0;border-radius:12px;background:#fff}
+#narration .nar-empty{color:#656b78;font-size:13px;padding:8px 0}
+@media(max-width:760px){
+ #narration.sc-drawer{width:calc(100% - 20px);max-height:calc(100dvh - 24px);min-height:min(380px,calc(100dvh - 24px));padding:16px;border-radius:22px}
+ #narration .nar-close{min-width:44px}
+ #narration .sc-list-row{flex-wrap:wrap}
+ #narration .sc-list-row strong{flex-basis:100%}
+ #narration .sc-two{grid-template-columns:minmax(0,1fr)}
+}
+</style><link rel="stylesheet" href="story-planner.css"><link rel="stylesheet" href="photo-editor.css"><link rel="stylesheet" href="editor-panels.css"><link rel="stylesheet" href="form-previews.css"></head><body>
 <script>if(new URLSearchParams(location.search).get('reader')==='1')document.documentElement.classList.add('reader-mode');</script>
 <svg width="0" height="0" style="position:absolute"><defs>
 <linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#67f27f"/><stop offset="1" stop-color="#0fb92f"/></linearGradient>
@@ -508,8 +563,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 <nav class="mobile-editor-nav" aria-label="Navegação do editor">
 <button type="button" data-view="phone" aria-selected="true"><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg>iPhone</button>
 <button type="button" data-view="edit" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2" fill="#f9f9fb"/><circle cx="15" cy="12" r="2" fill="#f9f9fb"/><circle cx="10" cy="18" r="2" fill="#f9f9fb"/></svg>Editar</button>
-<button type="button" onclick="narrationOpen()"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16M8 3v4M16 10v4M8 17v4"/></svg>Narração</button><button type="button" data-view="stories" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Histórias</button>
-<button type="button" data-view="calls" hidden aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>Chamadas</button>
+<button type="button" aria-haspopup="dialog" onclick="narrationOpen()"><svg viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16M8 3v4M16 10v4M8 17v4"/></svg>Narração</button><button type="button" data-view="stories" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Histórias</button>
 </nav>
 <div class="ph"><div class="scr" id="scr">
 <div class="di"></div><div class="sb dark" id="statusbar"><span id="t1" style="color:#111!important;-webkit-text-fill-color:#111!important">2:31</span><span id="statusicons" style="color:#111!important"><svg data-status-icon width="18" height="12" viewBox="0 0 18 12"><rect fill="#111" y="8" width="3" height="4" rx="1"/><rect fill="#111" x="5" y="5.5" width="3" height="6.5" rx="1"/><rect fill="#111" x="10" y="3" width="3" height="9" rx="1"/><rect fill="#111" x="15" width="3" height="12" rx="1"/></svg><svg data-status-icon width="16" height="12" viewBox="0 0 16 12"><path fill="#111" d="M8 11.500 10.200 9a3.200 3.200 0 00-4.400 0zM3.600 6.700a6.600 6.600 0 018.800 0l1.300-1.500a8.600 8.600 0 00-11.400 0zM.9 3.700a10.500 10.500 0 0114.200 0L16 2.800a12.400 12.400 0 00-16 0z"/></svg><svg data-status-icon width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="22" height="12" rx="3.500" fill="none" stroke="#111" opacity=".45"/><rect id="bf" x="2" y="2" width="19" height="9" rx="2" fill="#111"/><rect x="24" y="4.500" width="2" height="4" rx="1" fill="#111" opacity=".5"/></svg></span></div>
@@ -543,8 +597,21 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
   <div class="cc-close-hint" onclick="closeCC()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')closeCC()" aria-label="Fechar Central de Controle"></div>
 </div><button type="button" class="hi" id="home-indicator" aria-label="Voltar à tela inicial" title="Voltar à tela inicial" onclick="homeGesture()"></button>
 </div></div>
-<button class="narration-launch" onclick="narrationOpen()">Narração interativa</button><aside id="narration" class="sc-drawer" hidden><header><h2>Narração interativa</h2><button onclick="narrationClose()" aria-label="Fechar">×</button></header><div class="nar-actions"><button onclick="eventForm('message')">+ Mensagem</button><button onclick="eventForm('notification')">+ Notificação</button><button onclick="narrationClose();scOpenFromNarration()">Chamadas</button></div><p>Eventos aparecem somente durante a leitura. Cada evento ocorre uma vez por sessão.</p><div id="nar-list"></div><div id="nar-form"></div></aside><button class="sc-launch" id="sc-launch" hidden type="button" onclick="scOpen()">Chamadas</button><aside class="sc-drawer" id="sc-drawer" hidden><header><h2>Chamadas da história</h2><button onclick="scClose()" aria-label="Fechar painel">×</button></header><button class="sc-primary" onclick="scNew()">+ Nova chamada</button><div id="sc-list"></div><div id="sc-editor"></div></aside><div class="pn">
-<div class="pc L"><h1>Painel da história</h1><p id="ctx"></p><a href="reader.html" target="_blank" style="color:#0a84ff;font-size:13px;text-decoration:none;font-weight:600">Abrir Reader View</a></div>
+<dialog id="narration" class="sc-drawer" aria-labelledby="narration-title">
+ <header><div><h2 id="narration-title">Narração interativa</h2><p>Programe o que acontece no iPhone durante a leitura. Cada evento ocorre uma vez por sessão.</p></div><button type="button" class="nar-close" autofocus onclick="narrationClose()" aria-label="Fechar">×</button></header>
+ <div class="nar-switch" role="group" aria-label="Categoria da narração">
+  <button type="button" id="nar-events-tab" aria-controls="nar-events" aria-pressed="true" onclick="narrationSection('events')">Mensagens e notificações</button>
+  <button type="button" id="nar-calls-tab" aria-controls="nar-calls" aria-pressed="false" onclick="narrationSection('calls')">Chamadas</button>
+ </div>
+ <section id="nar-events" class="nar-section" aria-labelledby="nar-events-tab">
+  <div class="nar-actions"><button type="button" class="sc-primary" onclick="eventForm('message')">+ Mensagem</button><button type="button" class="sc-primary" onclick="eventForm('notification')">+ Notificação</button></div>
+  <div id="nar-list"></div><div id="nar-form"></div>
+ </section>
+ <section id="nar-calls" class="nar-section" aria-labelledby="nar-calls-tab" hidden>
+  <button type="button" class="sc-primary" onclick="scNew()">+ Nova chamada</button><div id="sc-list"></div><div id="sc-editor"></div>
+ </section>
+</dialog><div class="pn">
+<div class="pc L"><h1>Painel da história</h1><p id="ctx"></p><a href="reader.html" target="_blank" style="color:#0a84ff;font-size:13px;text-decoration:none;font-weight:600">Abrir Reader View</a><button type="button" id="planner-launch" class="planner-launch" aria-haspopup="dialog" aria-controls="story-planner"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-14 5h3m4 0h3"/></svg>Planejamento da história</button><button type="button" id="narration-fallback" class="narration-entry" aria-haspopup="dialog" onclick="narrationOpen()">Narração interativa</button></div>
 <div class="pc notification-panel L"><details class="notification-details" id="generalDetails" open><summary class="notification-toggle"><span class="notification-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h2v4h-2"/></svg></span><span class="notification-toggle-title">Geral<small>Toque para abrir ou fechar</small></span><span class="notification-toggle-chevron" aria-hidden="true">⌄</span></summary><div class="notification-panel-content"><div class="panel-stack">
   <div class="general-grid">
     <label class="input-card"><b>Hora</b><input type="text" id="pt" placeholder="9:41" oninput="S.time=this.value;save();R()"></label>
@@ -594,19 +661,15 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
   <div class="weather-pill">O widget e o app Weather usam estes mesmos dados.</div>
 </div></div></details></div>
 <div class="pc ps notification-panel" data-s="home"><details class="notification-details" id="wallpaperDetails"><summary class="notification-toggle"><span class="notification-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg></span><span class="notification-toggle-title">Wallpapers<small>Toque para configurar</small></span><span class="notification-toggle-chevron" aria-hidden="true">⌄</span></summary><div class="notification-panel-content">
-<label>Tela inicial<input type="file" accept="image/*" onchange="setWp('wpH',this)"></label>
-<label>Tela de bloqueio<input type="file" accept="image/*" onchange="setWp('wpL',this)"></label>
+<label>Tela inicial<input type="file" accept="image/*" data-photo-picker onchange="setWp('wpH',this)"></label>
+<label>Tela de bloqueio<input type="file" accept="image/*" data-photo-picker onchange="setWp('wpL',this)"></label>
 <div class="row2b"><button class="g" onclick="S.wpH='';save();R()">Resetar início</button><button class="g" onclick="S.wpL='';save();R()">Resetar bloqueio</button></div></div></details></div>
-<div class="pc ps notification-panel" data-s="home"><details class="notification-details" id="notificationDetails"><summary class="notification-toggle"><span class="notification-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><span class="notification-toggle-title">Notificações da tela bloqueada<small>Toque para configurar</small></span><span class="notification-toggle-chevron" aria-hidden="true">⌄</span></summary><div class="notification-panel-content">
-<div id="nl"></div>
-<div class="notif-guide">Escolha o aplicativo</div><div class="notif-app-grid" id="notifAppGrid" role="group" aria-label="Aplicativo da notificação"></div>
-<select id="na" hidden aria-hidden="true" tabindex="-1"></select>
-<label>Título da notificação<input type="text" id="ntt" placeholder="Ex.: Nova mensagem"></label><label>Mensagem<input type="text" id="nb" placeholder="O que vai aparecer na tela?"></label><label>Quando aparece?<input type="text" id="nh" placeholder="agora, 5m, 1h..." value="now"></label>
-<button class="notif-add" onclick="addNot()">＋ Adicionar à tela bloqueada</button></div></details></div>
+<div class="pc ps notification-panel" data-s="home"><button type="button" id="lock-notifications-launch" class="notification-toggle" aria-haspopup="dialog" aria-controls="lock-notifications"><span class="notification-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><span class="notification-toggle-title">Notificações da tela bloqueada<small>Editar e ver prévia</small></span><span class="notification-toggle-chevron" aria-hidden="true">›</span></button></div>
 <div class="pc ps msg-panel" data-s="msg"><div class="msg-panel-head"><div class="msg-panel-heading"><h2>Personagens</h2><p>Eles viram contatos e grupos nas conversas. Para criar uma conversa, use o ＋ no app.</p></div><button id="personPanelToggle" class="msg-panel-toggle" type="button" onclick="togglePersonagens()">Fechar</button></div>
 <div id="personagensBody" class="msg-panel-body"><div id="cl" class="person-list"></div>
 <div class="msg-panel-actions"><button onclick="addChar()">＋ Adicionar personagem</button></div>
-<label class="msg-panel-label">Conversas <small>toque para alternar lida / não lida</small></label><div id="cul" class="person-list"></div></div></div>
+<div class="msg-panel-actions"><button type="button" class="narration-entry" aria-haspopup="dialog" onclick="narrationOpen()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16M8 3v4M16 10v4M8 17v4"/></svg>Narração interativa</button></div>
+<details class="msg-read-panel"><summary><span><b>Conversas</b><small>Marcar como lida ou não lida</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="cul" class="person-list"></div></details></div></div>
 <div class="pc ps" data-s="yt"><h2>YouTube</h2><button onclick="ytChannelForm()">＋ Criar canal</button><button class="g" onclick="ytVideoForm()">＋ Adicionar vídeo</button><div id="yt-editor"></div></div><div class="pc ps" data-s="wallet"><h2>Wallet</h2><p>Cartões fictícios para a história. Não utilize dados bancários reais.</p><button onclick="walletForm()">＋ Adicionar cartão</button><div id="wallet-editor"></div><p class="barclays-panel-note">O Internet Banking fictício agora fica em um app separado: <b>Bank</b>.</p></div><div class="pc ps" data-s="bar"><h2>Bank</h2><p>App de Internet Banking fictício, chique, minimalista e com suporte a várias moedas.</p><button onclick="barclaysSettings()">Configurar conta</button><button class="g" onclick="barclaysTransaction()">＋ Adicionar transação</button><div id="barclays-editor" class="barclays-panel-list"></div></div><div class="pc ps" data-s="x"><h2>Twitter</h2><button onclick="xProfileForm()">＋ Criar perfil</button><button class="g" onclick="xPostForm()">＋ Publicar</button><div id="x-editor"></div></div><div class="pc ps" data-s="ig"><h2>Perfis do Instagram</h2><p>Independentes dos personagens. Para postar, use o ＋ na barra do app.</p>
 <label>Seu perfil (dono do iPhone)<select id="meSel" onchange="S.meId=+this.value;save();R()"></select></label>
 <div id="pl2"></div>
@@ -623,10 +686,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 <div class="pc ps" data-s="map"><h2>Maps</h2>
 <button onclick="beginLocationPick('owner')">Definir localização do dono</button><button class="g" onclick="beginMapPin()">Selecionar local no mapa</button><p>Toque no mapa para marcar um endereço ou local da história.</p><div id="mapPinEditor"></div><label>Novo lugar recente<input type="text" id="pp1" onkeydown="if(event.key==='Enter')addPlaceP()"></label><button class="g" onclick="addPlaceP()">Adicionar lugar pelo nome</button></div>
 <div class="pc ps" data-s="find"><h2>Find My</h2><button onclick="findPersonForm()">Adicionar pessoa</button><button class="g" onclick="beginLocationPick('owner')">Definir minha localização</button><div id="find-editor"></div></div><div class="pc ps" data-s="clk"><h2>Clock</h2><p>Os horários seguem a hora definida em Geral.</p><button onclick="addClk()">Novo relógio mundial</button><button onclick="addAlarm()">Novo alarme</button></div>
-<div class="pc ps" data-s="pho"><h2>Photos</h2><label>Adicionar fotos<input type="file" accept="image/*" multiple onchange="addPh(this.files)"></label></div>
+<div class="pc ps" data-s="pho"><h2>Photos</h2><label>Adicionar fotos<input type="file" accept="image/*" multiple data-photo-picker onchange="addPh(this)"></label></div>
 <div class="pc ps" data-s="st"><h2>Dono do iPhone</h2><p>Aparece no topo de Settings. Tocar no cartão do perfil dentro do app também edita.</p>
 <label>Nome<input type="text" id="so_name" oninput="S.owner.name=this.value;save();R()"></label>
-<label>Foto<input type="file" accept="image/*" onchange="setOwnerPh(this)"></label>
+<label>Foto<input type="file" accept="image/*" data-photo-picker onchange="setOwnerPh(this)"></label>
 <label>Wi-Fi<input type="text" id="so_wifi" oninput="S.st.wifi=this.value;save();R()"></label>
 <label>Bluetooth<input type="text" id="so_bt" oninput="S.st.bt=this.value;save();R()"></label>
 <label>Bateria (%) — também muda a barra de status<input type="text" id="so_batt" oninput="S.st.batt=this.value;save();R()"></label></div>
@@ -649,6 +712,78 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 </div></div>
 </div>
 <div id="pm" class="pmod"></div></div>
+<dialog id="lock-notifications" aria-labelledby="lock-notifications-title">
+ <header class="planner-header"><div><span class="planner-kicker">Tela de bloqueio</span><h2 id="lock-notifications-title">Notificações</h2><p>Monte sua notificação e confira como ela fica antes de adicionar.</p></div><button type="button" class="planner-icon" id="lock-notifications-close" aria-label="Fechar notificações" autofocus>×</button></header>
+ <div class="lock-notification-tabs" role="group" aria-label="Área de notificações">
+  <button type="button" data-lock-view="edit" aria-pressed="true">Editar</button><button type="button" data-lock-view="preview" aria-pressed="false">Prévia</button><button type="button" data-lock-view="saved" aria-pressed="false">Adicionadas</button>
+ </div>
+ <div class="lock-notifications-layout" data-lock-tab="edit">
+  <div class="lock-notifications-fields">
+   <form id="lock-notifications-form" class="pc" onsubmit="event.preventDefault();addNot()">
+    <h3>Nova notificação</h3>
+    <div class="notif-guide">Escolha o aplicativo</div><div class="notif-app-grid" id="notifAppGrid" role="group" aria-label="Aplicativo da notificação"></div>
+    <select id="na" hidden aria-hidden="true" tabindex="-1"></select>
+    <div class="lock-notification-inputs"><label>Título<input type="text" id="ntt" placeholder="Ex.: Nome do contato" required></label>
+    <label>Horário exibido<input type="text" id="nh" placeholder="now, 5m ago…" value="now"></label>
+    <label class="lock-notification-wide">Mensagem<input type="text" id="nb" placeholder="O que vai aparecer na tela?"></label>
+    <label class="lock-notification-wide" id="lock-notification-contact">Contato ou grupo (opcional)<input type="text" id="notification-contact" placeholder="Se diferente do título"></label></div>
+    <button type="submit" class="notif-add">＋ Adicionar à tela bloqueada</button>
+   </form>
+   <section class="pc lock-notifications-saved" aria-labelledby="lock-notifications-saved-title"><h3 id="lock-notifications-saved-title">Notificações adicionadas</h3><div id="nl"></div><div class="lock-notification-pagination" hidden><button type="button" id="lock-saved-prev" aria-label="Notificações anteriores">‹</button><span id="lock-saved-page"></span><button type="button" id="lock-saved-next" aria-label="Próximas notificações">›</button></div></section>
+  </div>
+  <figure class="lock-preview">
+   <figcaption>Prévia da tela bloqueada</figcaption>
+   <div class="lock-preview-phone"><div class="lock-preview-screen"><div class="lock wp" id="lock-preview-wallpaper">
+    <div class="d" id="lock-preview-date"></div><div class="t" id="lock-preview-time"></div>
+    <div class="nts" id="lock-preview-notices" tabindex="0" role="region" aria-label="Prévia das notificações"></div>
+   </div><span class="lock-preview-island" aria-hidden="true"></span><span class="lock-preview-indicator" aria-hidden="true"></span></div></div>
+  </figure>
+ </div>
+</dialog>
+<dialog id="story-planner" aria-labelledby="planner-title">
+ <header class="planner-header">
+  <div><span class="planner-kicker">Caderno da história</span><h2 id="planner-title">Planejamento da história</h2><p>Organize datas e personagens sem alterar o que aparece no iPhone.</p></div>
+  <button type="button" class="planner-icon" id="planner-close" aria-label="Fechar planejamento" autofocus>×</button>
+ </header>
+ <div class="planner-layout">
+  <section class="planner-card planner-timeline" aria-labelledby="planner-timeline-title">
+   <h3 id="planner-timeline-title">Linha do tempo</h3>
+   <form id="planner-range" class="planner-range">
+    <label>Data inicial<input type="date" id="planner-start" required></label>
+    <label>Data final<input type="date" id="planner-end" required></label>
+    <button class="planner-primary" type="submit" id="planner-apply">Montar linha</button>
+   </form>
+   <p id="planner-range-error" class="planner-error" role="alert" hidden></p>
+   <p id="planner-timeline-empty" class="planner-empty">Escolha o começo e o fim da história. Você pode anotar apenas os dias importantes.</p>
+   <div id="planner-timeline-content" hidden>
+    <div class="planner-toolbar">
+     <div><strong id="planner-period"></strong><p id="planner-period-note"></p></div>
+     <div class="planner-controls"><button type="button" id="planner-prev-days" class="planner-icon" aria-label="Dias anteriores">‹</button><button type="button" id="planner-next-days" class="planner-icon" aria-label="Próximos dias">›</button></div>
+    </div>
+    <div class="planner-rail" id="planner-days" role="group" aria-label="Dias da linha do tempo"></div>
+    <label class="planner-note" id="planner-day-card"><span id="planner-day-title"></span><textarea id="planner-day-note" rows="5" placeholder="O que aconteceu neste dia? Escreva os eventos, horários ou ideias que quiser lembrar."></textarea></label>
+   </div>
+  </section>
+  <section class="planner-card planner-characters" aria-labelledby="planner-characters-title">
+   <div class="planner-toolbar"><h3 id="planner-characters-title">Fichas de personagens</h3><button type="button" id="planner-add-person" class="planner-soft">+ Nova ficha</button></div>
+   <p id="planner-people-empty" class="planner-empty">Crie uma ficha aqui ou use um personagem que já existe na história.</p>
+   <div id="planner-person" hidden>
+    <div class="planner-id-head"><div id="planner-photo" class="planner-avatar" aria-hidden="true"></div><div><strong id="planner-person-name"></strong><p id="planner-person-source"></p><div class="planner-photo-actions"><label class="planner-photo-label">Trocar foto<input type="file" id="planner-photo-file" accept="image/*"></label><button type="button" id="planner-remove-photo" class="planner-link" hidden>Remover foto</button></div></div></div>
+    <p class="planner-error" id="planner-photo-error" role="alert" hidden></p>
+    <div class="planner-fields">
+     <label>Nome<input type="text" data-planner-field="name" placeholder="Nome do personagem"></label>
+     <label>Aniversário<input type="text" data-planner-field="birthday" placeholder="Ex.: 24/11" maxlength="60"></label>
+     <label>Data importante (opcional)<input type="date" data-planner-field="referenceDate" aria-describedby="planner-date-hint"><small id="planner-date-hint">Ex.: início do curso ou do trabalho.</small></label>
+     <label class="planner-full">Trabalho ou curso<input type="text" data-planner-field="occupation" placeholder="Ex.: estudante de arquitetura"></label>
+     <label class="planner-full">Outras informações<textarea rows="3" data-planner-field="notes" placeholder="Idade, relações, detalhes importantes…"></textarea></label>
+    </div>
+    <div class="planner-id-nav"><button type="button" id="planner-prev-person" class="planner-icon" aria-label="Ficha anterior">‹</button><select id="planner-person-select" aria-label="Selecionar ficha"></select><button type="button" id="planner-next-person" class="planner-icon" aria-label="Próxima ficha">›</button></div>
+    <button type="button" id="planner-remove-person" class="planner-link planner-danger" hidden>Excluir ficha</button>
+   </div>
+  </section>
+ </div>
+ <footer class="planner-footer">Salvo neste navegador e incluído no backup JSON. Não aparece no modo leitor nem no link publicado.</footer>
+</dialog>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const readerMode=new URLSearchParams(location.search).get('reader')==='1';
@@ -725,42 +860,59 @@ if(k==='s'||k==='story'||k==='i'||k==='cover')return 9/16;
 if(k==='image'||k==='ytthumb')return 16/9;if(k==='ytbanner')return 3/1;
 if(k==='imgs'||k==='post'||k==='carousel')return 4/5;
 return 1}
-function cropImageFile(file,ratio=1,max=900){
-return new Promise((resolve,reject)=>{
-if(!file||!file.type?.startsWith('image/')){resolve('');return}
-const fr=new FileReader();fr.onerror=()=>reject(fr.error);
-fr.onload=()=>{
-const image=new Image();image.onerror=()=>reject(new Error('Invalid image'));
-image.onload=()=>{
-const host=$('#pm');let zoom=1,posX=0,posY=0,drag=false,dx=0,dy=0;
-let targetW=ratio>=1?900:Math.round(900*ratio),targetH=ratio>=1?Math.round(900/ratio):900;
-if(targetW>max)targetW=max;if(targetH>max)targetH=Math.round(max*targetW/targetW);
-host.innerHTML=`<div class="crop-modal"><h3>Centralizar foto</h3><div class="crop-preview"><canvas id="cropCanvas"></canvas></div><div class="crop-controls"><span>Zoom</span><input id="cropZoom" type="range" min="100" max="300" value="100"><span>Horizontal</span><input id="cropX" type="range" min="-100" max="100" value="0"><span>Vertical</span><input id="cropY" type="range" min="-100" max="100" value="0"></div><div class="crop-actions"><button id="cropCancel" type="button">Cancelar</button><button id="cropOk" type="button">Usar foto</button></div></div>`;host.style.display='flex';
-const canvas=$('#cropCanvas'),ctx=canvas.getContext('2d');
-canvas.width=targetW;canvas.height=targetH;
-const previewW=280,previewH=Math.min(420,Math.round(previewW*targetH/targetW));canvas.style.width=previewW+'px';canvas.style.height=previewH+'px';
-function draw(){ctx.clearRect(0,0,targetW,targetH);ctx.fillStyle='#fff';ctx.fillRect(0,0,targetW,targetH);const cover=Math.max(targetW/image.width,targetH/image.height)*zoom,drawW=image.width*cover,drawH=image.height*cover,rangeX=(drawW-targetW)/2,rangeY=(drawH-targetH)/2,x=(targetW-drawW)/2+(posX/100)*rangeX,y=(targetH-drawH)/2+(posY/100)*rangeY;ctx.drawImage(image,x,y,drawW,drawH)}
-draw();
-$('#cropZoom').oninput=e=>{zoom=+e.target.value/100;draw()};
-$('#cropX').oninput=e=>{posX=+e.target.value;draw()};
-$('#cropY').oninput=e=>{posY=+e.target.value;draw()};
-canvas.onpointerdown=e=>{drag=true;dx=e.clientX;dy=e.clientY;canvas.setPointerCapture&&canvas.setPointerCapture(e.pointerId)};
-canvas.onpointermove=e=>{if(!drag)return;const rect=canvas.getBoundingClientRect();posX=Math.max(-100,Math.min(100,posX+(e.clientX-dx)/rect.width*200));posY=Math.max(-100,Math.min(100,posY+(e.clientY-dy)/rect.height*200));dx=e.clientX;dy=e.clientY;$('#cropX').value=Math.round(posX);$('#cropY').value=Math.round(posY);draw()};
-canvas.onpointerup=()=>{drag=false};
-$('#cropCancel').onclick=()=>{host.style.display='none';resolve('')};
-$('#cropOk').onclick=()=>{const result=canvas.toDataURL('image/jpeg',.86);host.style.display='none';resolve(result)};
-};image.src=fr.result};fr.readAsDataURL(file)})
+function form(title,fs,ok,host='#md',existing={}){
+ if(readerMode)return;
+ const preview=resolveFormPreview(title,fs,cur,existing),insidePhone=host==='#md';
+ if(preview||(insidePhone&&matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone'))host='#pm';
+ const m=$(host);
+ m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${esc(o.v)}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v??'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${esc(o.v)}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v??'')}">`}</label>`).join('')}<div class="bt"><button type="button">${insidePhone?'Cancel':'Cancelar'}</button><button type="button" id="okb">${insidePhone?'Save':'OK'}</button></div></div>`;
+ const panel=m.querySelector('.mb'),okb=panel.querySelector('#okb'),fields=fs.map(f=>[f,panel.querySelector('#f_'+f.k)]),photos=new Map();
+ let pending=0,updatePreview=()=>{};
+ function readForm(){return Object.fromEntries(fields.filter(([,e])=>e).map(([f,e])=>[f.k,f.t==='file'?photos.get(e).value():f.t==='chk'?[...e.querySelectorAll('input:checked')].map(x=>x.value):e.value]))}
+ panel.querySelector('.bt button').onclick=()=>closeEditorForm(m,panel);
+ for(const [f,e] of fields)if(e&&f.t==='file')photos.set(e,photoPicker(e,{ratio:cropRatio(f.k),onBusy:busy=>{pending+=busy?1:-1;okb.disabled=pending>0;if(!busy)updatePreview()}}));
+ if(preview)updatePreview=mountFormPreview(panel,preview,readForm);
+ okb.onclick=async()=>{okb.disabled=true;try{await ok(readForm());await closeEditorForm(m,panel);save();R()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}};
+ m.style.display='flex';
+ return m;
 }
-function form(title,fs,ok,host='#md'){if(readerMode)return;if(host==='#md'&&matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone')host='#pm';const m=$(host);m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${o.v}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v||'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${o.v}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v||'')}">`}</label>`).join('')}<div class="bt"><button onclick="$('${host}').style.display='none'">${host=='#md'?'Cancel':'Cancelar'}</button><button id="okb">${host=='#md'?'Save':'OK'}</button></div></div>`;m.style.display='flex';
-const okb=m.querySelector('#okb');okb.onclick=async()=>{okb.disabled=true;try{const v={},fields=fs.map(f=>[f,m.querySelector('#f_'+f.k)]);for(const [f,e] of fields){if(!e)continue;if(f.t==='file'){if(f.m){v[f.k]=[];for(const file of [...e.files]){const cropped=await cropImageFile(file,cropRatio(f.k),900);if(cropped)v[f.k].push(cropped)}}else v[f.k]=e.files[0]?await cropImageFile(e.files[0],cropRatio(f.k),900):''}else v[f.k]=f.t==='chk'? [...e.querySelectorAll('input:checked')].map(x=>x.value):e.value}await ok(v);m.style.display='none';save();R()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}}}
 const charOpts=()=>S.chars.map(c=>({v:c.id,l:c.name}));
 /* Painel */
-async function setWp(k,inp){if(readerMode)return;const f=inp.files[0];if(!f)return;S[k]=await cropImageFile(f,370/824,900);if(S[k])save();R();inp.value=''}
+async function setWp(k,inp){if(readerMode)return;const story=S;const [photo]=await cropPhotoSelection(inp,370/824);if(photo&&S===story){S[k]=photo;save();R()}}
 async function addChar(){const n=$('#cn').value.trim();if(!n)return;const f=$('#cp').files[0];S.chars.push({id:Date.now(),name:n,photo:f?await img(f,320):''});$('#cn').value='';$('#cp').value='';save();R()}
 async function addProf(){const u=$('#iu').value.trim().replace(/\s+/g,'.').toLowerCase();if(!u)return;const g=s=>$(s).files[0];S.profiles.push({id:Date.now(),user:u,name:$('#in').value.trim()||u,bio:$('#ib').value,link:$('#il').value,fol:$('#ig1').value||'0',fng:$('#ig2').value||'0',photo:g('#ip')?await img(g('#ip'),320):'',story:g('#is')?await img(g('#is')):''});['iu','in','ib','il'].forEach(k=>$('#'+k).value='');$('#ip').value=$('#is').value='';save();R()}
-function addNot(){if(readerMode)return;const title=$('#ntt').value.trim(),body=$('#nb').value.trim();if(!title){$('#ntt').focus();return}S.notifs.push({app:$('#na').value||'msg',title,body,time:$('#nh').value.trim()||'now'});$('#ntt').value=$('#nb').value='';save();R()}
-function selectNotificationApp(key){const select=$('#na');if(!select||!FN[key])return;select.value=key;const grid=$('#notifAppGrid');if(grid)grid.querySelectorAll('button[data-notification-app]').forEach(btn=>{const isSelected=btn.dataset.notificationApp===key;btn.classList.toggle('selected',isSelected);btn.setAttribute('aria-pressed',String(isSelected))})}
+function addNot(){if(readerMode)return;const n=notificationDraft();if(!n.title){$('#ntt').focus();return}S.notifs.push({...n,createdAt:Date.now()});$('#ntt').value=$('#nb').value=$('#notification-contact').value='';save();R()}
+function notificationDraft(){const app=$('#na').value||'msg',contact=chatNotificationApps.has(app)?$('#notification-contact').value.trim():'';return {app,title:$('#ntt').value.trim(),body:$('#nb').value.trim(),time:$('#nh').value.trim()||'now',...(contact?{contact}:{})}}
+function selectNotificationApp(key){const select=$('#na');if(!select||!FN[key])return;select.value=key;const grid=$('#notifAppGrid');if(grid)grid.querySelectorAll('button[data-notification-app]').forEach(btn=>{const isSelected=btn.dataset.notificationApp===key;btn.classList.toggle('selected',isSelected);btn.setAttribute('aria-pressed',String(isSelected))});window.refreshNotificationPreview?.()}
 function renderNotificationApps(){const grid=$('#notifAppGrid'),select=$('#na');if(!grid||!select)return;const selected=select.value||'msg';if(!grid.children.length)grid.innerHTML=Object.keys(FN).map(key=>`<button type="button" class="notif-app-choice" data-notification-app="${key}" aria-label="${esc(FN[key])}" aria-pressed="false" title="${esc(FN[key])}" onclick="selectNotificationApp('${key}')"><span class="notif-app-icon">${iconOf(key)}</span><span class="notif-app-label">${esc(FN[key])}</span></button>`).join('');selectNotificationApp(selected)}
+const chatNotificationApps=new Set(['msg','wa','ka','ig','x']),lockNoticeState=new WeakMap();
+function lockNotice(n,draft=false){return `<div class="nf${draft?' lock-preview-draft':''}"><div class="ic" style="width:38px;height:38px;border-radius:9px;flex:none;cursor:default">${iconOf(n.app)}</div><div class="x"><div class="l1"><b>${esc(n.title)}</b><em>${esc(n.time)}</em></div><p>${esc(n.body)}</p></div></div>`}
+function renderLockNotices(target,draft){
+ let state=lockNoticeState.get(target);
+ if(!state||state.story!==S){state={story:S,expanded:new Set()};lockNoticeState.set(target,state)}
+ const records=S.notifs.map((n,i)=>({n,i})).sort((a,b)=>(Number(b.n.createdAt)||0)-(Number(a.n.createdAt)||0)||b.i-a.i).map(({n})=>n);
+ if(draft)records.unshift(draft);
+ const groups=new Map();
+ records.forEach((n,i)=>{
+  const contact=String(n.contact||n.title||'').trim().replace(/\s+/g,' ').normalize('NFC').toLowerCase();
+  const key=chatNotificationApps.has(n.app)&&contact&&(!n.draft||n.hasContact)?`${n.app}:${contact}`:`single:${i}`;
+  if(!groups.has(key))groups.set(key,[]);
+  groups.get(key).push(n);
+ });
+ target.innerHTML=[...groups].map(([key,list])=>{
+  const n=list[0];if(list.length===1)return lockNotice(n,n.draft);
+  const expanded=state.expanded.has(key);
+  return `<div class="lock-notice-group ${expanded?'is-expanded':'is-stacked'}"><div class="lock-notice-top">${lockNotice(n,n.draft)}<span class="lock-notice-count" aria-hidden="true">${expanded?'⌃':list.length}</span><button type="button" data-lock-group="${esc(key)}" aria-expanded="${expanded}" aria-label="${esc(`${n.contact||n.title}: ${list.length} notificações. ${expanded?'Recolher':'Expandir'}`)}"></button></div>${expanded?list.slice(1).map(item=>lockNotice(item,item.draft)).join(''):''}</div>`;
+ }).join('');
+ target.onclick=event=>{
+  const button=event.target.closest('[data-lock-group]');if(!button)return;
+  event.stopPropagation();
+  const key=button.dataset.lockGroup;
+  if(state.expanded.has(key))state.expanded.delete(key);else state.expanded.add(key);
+  const top=target.scrollTop;renderLockNotices(target,draft);target.scrollTop=top;
+  [...target.querySelectorAll('[data-lock-group]')].find(el=>el.dataset.lockGroup===key)?.focus({preventScroll:true});
+ };
+}
 /* Messages */
 const cname=c=>c.name||c.mem.map(i=>ch(i).name).join(', ');
 const gav=(c,s)=>c.mem.length==1?av(ch(c.mem[0]),s):`<div style="position:relative;width:${s}px;height:${s}px;flex:none">${c.mem.slice(0,3).map((id,k)=>`<div style="position:absolute;left:${[24,0,48][k]}%;top:${[0,46,46][k]}%">${av(ch(id),s*.52)}</div>`).join('')}</div>`;
@@ -863,7 +1015,7 @@ function refreshPinMode(){const el=$('.globe-map');if(!el)return;el.classList.to
 function beginMapPin(i=null){locationPick=null;if(readerMode||!['map','find'].includes(cur))return;mapPinMove=Number.isInteger(i)?S.places[i]:null;mapPinMode=true;globeOpen=false;if(matchMedia('(max-width:760px)').matches)mobileView('phone');R();refreshPinMode()}
 function toggleMapPin(){if(readerMode)return;if(locationPick){locationPick=null;mapPinMode=false;refreshPinMode();return}if(mapPinMode){mapPinMode=false;mapPinMove=null;refreshPinMode()}else beginMapPin()}
 function mapPinAt(lng,lat){if(locationPick){finishLocationPick(lng,lat);return}if(readerMode||!mapPinMode||!Number.isFinite(lng)||!Number.isFinite(lat))return;lng=((lng+180)%360+360)%360-180;lat=Math.max(-85,Math.min(85,lat));const old=mapPinMove;mapPinMode=false;mapPinMove=null;refreshPinMode();mapPinForm(old,[lng,lat])}
-function mapPinForm(old,xy){if(readerMode)return;const existing=pinRecord(old);const story=S;form(old?'Editar pino':'Novo pino',[{k:'name',l:'Nome do local',v:old||''},{k:'description',l:'Descrição (opcional)',t:'area',v:existing?.description||''}],v=>{if(S!==story)return;const name=v.name.trim();if(!name)throw new Error('Informe o nome do local');if(S.places.some(n=>n!==old&&n.toLowerCase()===name.toLowerCase()))throw new Error('Já existe um lugar com esse nome');S.mapPins=pinRecords().filter(p=>p.name!==old&&p.name!==name);S.mapPins.push({name,lng:xy[0],lat:xy[1],description:v.description.trim()});const i=S.places.indexOf(old);if(i>=0){S.places[i]=name;mSelected=i}else{S.places.unshift(name);mSelected=0}globeOpen=false;drawGlobe();syncMapMarkers()},'#md');const host=matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone'?'#pm':'#md';const input=$(host)?.querySelector('#f_name');if(input){input.required=true;input.maxLength=120;input.addEventListener('input',()=>input.setCustomValidity(''));const b=$(host).querySelector('#okb'),submit=b.onclick;b.onclick=()=>{const n=input.value.trim();input.setCustomValidity(!n?'Informe um nome.':S.places.some(x=>x!==old&&x.toLowerCase()===n.toLowerCase())?'Este nome já existe.':'');if(input.reportValidity())return submit()}}}
+function mapPinForm(old,xy){if(readerMode)return;const existing=pinRecord(old),story=S;const host=form(old?'Editar pino':'Novo pino',[{k:'name',l:'Nome do local',v:old||''},{k:'description',l:'Descrição (opcional)',t:'area',v:existing?.description||''}],v=>{if(S!==story)return;const name=v.name.trim();if(!name)throw new Error('Informe o nome do local');if(S.places.some(n=>n!==old&&n.toLowerCase()===name.toLowerCase()))throw new Error('Já existe um lugar com esse nome');S.mapPins=pinRecords().filter(p=>p.name!==old&&p.name!==name);S.mapPins.push({name,lng:xy[0],lat:xy[1],description:v.description.trim()});const i=S.places.indexOf(old);if(i>=0){S.places[i]=name;mSelected=i}else{S.places.unshift(name);mSelected=0}globeOpen=false;drawGlobe();syncMapMarkers()},'#md');const input=host.querySelector('#f_name');if(input){input.required=true;input.maxLength=120;input.addEventListener('input',()=>input.setCustomValidity(''));const b=host.querySelector('#okb'),submit=b.onclick;b.onclick=()=>{const n=input.value.trim();input.setCustomValidity(!n?'Informe um nome.':S.places.some(x=>x!==old&&x.toLowerCase()===n.toLowerCase())?'Este nome já existe.':'');if(input.reportValidity())return submit()}}}
 function editMapPin(i){if(readerMode)return;const n=S.places[i],xy=globePoint(n);if(xy)mapPinForm(n,xy);else beginMapPin(i)}
 function renderMapPinEditor(){const el=$('#mapPinEditor');if(!el||readerMode)return;el.innerHTML=S.places.map((n,i)=>`<div class="map-pin-editor-row"><button class="map-pin-name" onclick="selectMap(${i});if(matchMedia('(max-width:760px)').matches)mobileView('phone')">${esc(n)}<small>${pinRecord(n)?'Pino personalizado':globePoint(n)?'Local conhecido':'Sem posição'}</small></button><button class="g" onclick="editMapPin(${i})" title="Editar" aria-label="Editar">${I('<path d="m4 16-1 5 5-1L20 8l-4-4zM14 6l4 4"/>',17)}</button><button class="g" onclick="beginMapPin(${i})" title="Mover pino" aria-label="Mover pino">${mapPinIcon()}</button><button class="g" onclick="globeRemove(${i})" title="Excluir" aria-label="Excluir">${I('<path d="M6 6l12 12M18 6 6 18"/>',17)}</button></div>`).join('')}
 function globePoint(name){const pin=pinRecord(name);if(pin)return [pin.lng,pin.lat];const q=String(name).trim().toLowerCase();const aliases={brasil:'brazil',coreia:'south korea','coreia do sul':'south korea',japão:'japan',alemanha:'germany',frança:'france',eua:'united states of america',usa:'united states of america','united states':'united states of america'};const c=mapCountries.find(x=>x[0].toLowerCase()===(aliases[q]||q));return globeCities[q]||(c?[c[1],c[2]]:null)}
@@ -929,10 +1081,10 @@ function vMap(){const sel=S.places[mSelected],initials=String(S.owner?.name||'')
 function addClk(){form('New clock',[{k:'city',l:'City'},{k:'off',l:'Hours difference (e.g. -3, 5)',t:'number',v:'0'}],v=>v.city&&S.clocks.push({city:v.city,off:+v.off||0}))}
 function vClk(){const nw=new Date(nowTs()),h=nw.getHours(),m=nw.getMinutes();return nv('<a>Edit</a>',plus('addClk()'))+'<div class="lg">World Clock</div><div class="bd">'+S.clocks.map((c,i)=>{const t=(((h+c.off)%24)+24)%24,h12=t%12||12;return `<div class="cl" onclick="if(ed)del('clocks',${i})"><div><b style="font-size:20px;font-weight:500">${esc(c.city)}</b><p style="color:#8e8e93;font-size:14px">${c.off>=0?'+':''}${c.off}HRS</p></div><b class="t">${h12}:${String(m||0).padStart(2,'0')}</b></div>`}).join('')+'</div>'}
 /* Photos */
-async function addPh(fs){if(readerMode)return;for(const f of fs){const cropped=await cropImageFile(f,1,900);if(cropped)S.photos.unshift(cropped)}save();R()}
+async function addPh(input){if(readerMode)return;const story=S;const photos=await cropPhotoSelection(input);if(S===story&&photos.length){S.photos.unshift(...photos.reverse());save();R()}}
 function vPho(){
 const n=S.photos.length;const a=S.photos;
-return `<div class="photos-header"><div class="photos-kicker">${photoTab==='library'?'LIBRARY':'COLLECTIONS'}</div><div class="photos-title">${photoTab==='library'?'Photos':'Albums'} <a class="photos-add" onclick="$('#pf').click()" aria-label="Add photos">${I('<path d="M12 5v14M5 12h14"/>',25,'none','#007aff',2.3)}</a></div><input id="pf" type="file" accept="image/*" multiple hidden onchange="addPh(this.files)"></div>
+ return `<div class="photos-header"><div class="photos-kicker">${photoTab==='library'?'LIBRARY':'COLLECTIONS'}</div><div class="photos-title">${photoTab==='library'?'Photos':'Albums'} <a class="photos-add" onclick="$('#pf').click()" aria-label="Add photos">${I('<path d="M12 5v14M5 12h14"/>',25,'none','#007aff',2.3)}</a></div><input id="pf" type="file" accept="image/*" multiple hidden onchange="addPh(this)"></div>
 <div class="bd ios-photos-body">${photoTab==='library'?`<div class="photo-filter"><span class="active">All</span><span onclick="photoTab='albums';R()">Albums</span><span>${n} Items</span></div><div class="ios-photo-grid">${a.map((p,i)=>`<button class="photo-tile" style="background-image:url('${p}')" onclick="photoSelected=${i};vPhotoOpen()" aria-label="Open photo ${i+1}"></button>`).join('')}</div>${!n?'<div class="photo-empty">✿<strong>Your Library</strong><span>Tap + to add memories.</span></div>':''}`:`<div class="photo-album" onclick="photoTab='library';R()"><div class="album-cover" style="${a[0]?`background-image:url('${a[0]}')`:''}"></div><strong>Recents</strong><small>${n} photos</small></div>`}</div>
 <div class="photo-bottom"><a class="${photoTab==='library'?'chosen':''}" onclick="photoTab='library';R()">${I('<rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/>',21)}<span>Library</span></a><a class="${photoTab==='albums'?'chosen':''}" onclick="photoTab='albums';R()">${I('<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 5V3h10v2"/>',21)}<span>Collections</span></a></div>`;
 }
@@ -968,7 +1120,7 @@ const pf=id=>S.profiles.find(p=>p.id==id)||{id:0,user:'unknown',name:'Unknown',p
 const avp=(p,s)=>av({name:p.user,photo:p.photo},s);
 const HRT='<path d="M12 21s-8-5.200-8-11a4.600 4.600 0 018-3 4.600 4.600 0 018 3c0 5.800-8 11-8 11z"/>',CMT='<path d="M20 12a8 8 0 01-11.700 7L4 20l1.200-4.200A8 8 0 1120 12z"/>',SND='<path d="M21 3L3 10.500l7 2.500 2.500 7zM10 13l11-10"/>',BKM='<path d="M6 3h12v18l-6-4.500L6 21z"/>';
 function addPost(){if(!S.profiles.length)return form('Create an Instagram profile in the side panel first.',[],()=>{});form('New post',[{k:'pid',l:'Author',t:'sel',o:S.profiles.map(p=>({v:p.id,l:p.user}))},{k:'imgs',l:'Photos (select several for a carousel)',t:'file',m:1},{k:'cap',l:'Caption',t:'area'},{k:'likes',l:'Likes',t:'number',v:'1024'},{k:'views',l:'Views (optional; marks it as a video/reel)',t:'number'},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(nowTs())}],v=>S.posts.unshift({...v,ts:fromL(v.ts),img:(v.imgs||[])[0]||'',pid:+v.pid,likes:+v.likes||0,liked:0,saved:0,comments:[]}))}
-function editPost(i){const p=S.posts[i];if(ed)return del('posts',i);form('Edit post',[{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())}],v=>Object.assign(p,{cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts)}))}
+function editPost(i){const p=S.posts[i];if(ed)return del('posts',i);form('Edit post',[{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())}],v=>Object.assign(p,{cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts)}),'#md',p)}
 function like(i){if(readerMode)return;const p=S.posts[i];p.liked=!p.liked;p.likes=Math.max(0,(+p.likes||0)+(p.liked?1:-1));save();R()}
 function dbl(i){if(readerMode)return;if(!S.posts[i].liked)like(i);const e=document.querySelector(`[data-i="${i}"]`);e&&e.insertAdjacentHTML('beforeend','<b class="hb">❤</b>')}
 function sav(i){if(readerMode)return;S.posts[i].saved=!S.posts[i].saved;save();R()}
@@ -984,7 +1136,7 @@ return (sty?vSty():'')+`<div class="igh"><span class="ig-logo"><img src="./asset
 function vSty(){const p=pf(sty);return `<div class="sv" onclick="sty=null;R()"><div class="pg"><i></i></div><div class="sh">${avp(p,32)}${esc(p.user)}</div><div class="si" style="background-image:url(${p.story})"></div></div>`}
 const YL='#e5a400',NG=['Pinned','Today','Yesterday','Previous 7 Days','Previous 30 Days'];
 const CTX={find:'Find My',yt:'YouTube',wallet:'Wallet',bar:'Bank',x:'Twitter',home:'Tela inicial e bloqueio',msg:'Messages',wa:'WhatsApp',ka:'KakaoTalk',mail:'Mail',saf:'Safari',map:'Maps',clk:'Clock',pho:'Photos',ig:'Instagram',nt:'Notes',st:'Settings',ph:'Phone',cal:'Calendar',wx:'Weather'};
-function panelSync(){scSyncVisibility();const c=cur||'home';document.querySelectorAll('.ps').forEach(e=>e.style.display=e.dataset.s==c||(['wa','ka'].includes(c)&&e.dataset.s==='msg')?'':'none');$('#ctx').textContent='Editando: '+CTX[c];const ac=$('#acFavorite');if(ac)ac.checked=academicData().favorite;const nf=$("#newsFavorite");if(nf)nf.checked=newsData().favorite;barclaysEditor()}
+function panelSync(){const c=cur||'home';document.querySelectorAll('.ps').forEach(e=>e.style.display=e.dataset.s==c||(['wa','ka'].includes(c)&&e.dataset.s==='msg')?'':'none');$('#ctx').textContent='Editando: '+CTX[c];$('#narration-fallback').hidden=isMessenger(c);const ac=$('#acFavorite');if(ac)ac.checked=academicData().favorite;const nf=$("#newsFavorite");if(nf)nf.checked=newsData().favorite;barclaysEditor()}
 function addSearchP(){if(readerMode)return;const v=$('#ps1').value.trim();if(v){S.searches.unshift(v);$('#ps1').value='';save();R()}}
 function addPlaceP(){if(readerMode)return;const v=$('#pp1').value.trim();if(v){S.places.unshift(v);$('#pp1').value='';save();R()}}
 const hdate=()=>`${S.date.split(',').slice(1).join(',').trim()}, 2026 at ${S.time}`;
@@ -1015,8 +1167,8 @@ function evW(){const T=tod(),te=S.events.filter(e=>e.y==YR&&e.m==T.m&&e.d==T.d).
 function extraSync(){const f=[['so_name',S.owner.name],['so_wifi',S.st.wifi],['so_bt',S.st.bt],['so_batt',S.st.batt]];for(const [i,v] of f)if(document.activeElement.id!=i)$('#'+i).value=v;
 $('#meSel').innerHTML=S.profiles.map(p=>`<option value="${p.id}">@${esc(p.user)}</option>`).join('');if(me())$('#meSel').value=me().id;
 $('#bf').setAttribute('width',Math.max(2,19*(+S.st.batt||0)/100))}
-async function setOwnerPh(i){if(readerMode)return;const f=i.files[0];if(f){const cropped=await cropImageFile(f,1,320);if(cropped)S.owner.photo=cropped;save();R()}i.value=''}
-function editOwner(){form('Apple ID',[{k:'name',l:'Name',v:S.owner.name},{k:'photo',l:'Photo',t:'file'}],v=>{S.owner.name=v.name||S.owner.name;if(v.photo)S.owner.photo=v.photo})}
+async function setOwnerPh(input){if(readerMode)return;const story=S;const [photo]=await cropPhotoSelection(input,1,320);if(photo&&S===story){S.owner.photo=photo;save();R()}}
+function editOwner(){form('Apple ID',[{k:'name',l:'Name',v:S.owner.name},{k:'photo',l:'Photo',t:'file'}],v=>{S.owner.name=v.name||S.owner.name;if(v.photo)S.owner.photo=v.photo},'#md',S.owner)}
 /* Settings */
 const g=(d,f)=>`<svg width="19" height="19" viewBox="0 0 24 24" fill="${f?'#fff':'none'}" stroke="${f?'none':'#fff'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 function vSet(){const o=S.owner,s=S.st;
@@ -1047,7 +1199,7 @@ const has=d=>S.events.some(e=>e.y==cy_&&e.m==cmo&&e.d==d),isT=d=>cy_==YR&&cmo==T
 let rows='';for(let i=0;i<cs.length;i+=7)rows+=`<div class="rw">${cs.slice(i,i+7).map((d,j)=>d?`<div class="cd2" onclick="csel=${d};R()"><i class="${d==csel?(isT(d)?'sel t':'sel'):isT(d)?'t0':(j==0||j==6)?'wk':''}">${d}</i><s class="${has(d)?'dt':''}"></s></div>`:'<div></div>').join('')}</div>`;
 return `<div class="nv" style="color:${R_}"><a>${I('<path d="M15 5l-7 7 7 7"/>',26,'none',R_,2.4)} ${cy_}</a><a onclick="addEvent()">${I('<path d="M12 5v14M5 12h14"/>',26,'none',R_,2.2)}</a></div><div class="cmh"><b>${MN[cmo]}</b><span><a onclick="cm(-1)">‹</a><a onclick="cm(1)">›</a></span></div><div class="cwd">${'SMTWTFS'.split('').map(x=>`<span>${x}</span>`).join('')}</div><div>${rows}</div><div class="bd cev">${evs.map(({e,i})=>`<div class="ev2" onclick="editEv(${i})"><u style="background:${e.c}"></u><span>${esc(e.title)}</span><em>${esc(e.time)}</em></div>`).join('')||'<div class="mb2" style="text-align:center"><p class="m">No Events</p></div>'}</div><div class="ctb"><a onclick="cmo=null;cy_=YR;R()">Today</a><a>Calendars</a><a>Inbox</a></div>`}
 /* Instagram: profile */
-function editProf(id){const p=pf(id);form('Edit profile',[{k:'name',l:'Name',v:p.name},{k:'user',l:'Username',v:p.user},{k:'bio',l:'Bio (multiple lines allowed)',t:'area',v:p.bio},{k:'link',l:'Link',v:p.link||''},{k:'fol',l:'Followers',v:p.fol},{k:'fng',l:'Following',v:p.fng},{k:'photo',l:'Change photo',t:'file'}],v=>{const ph=v.photo;delete v.photo;Object.assign(p,v);if(ph)p.photo=ph})}
+function editProf(id){const p=pf(id);form('Edit profile',[{k:'name',l:'Name',v:p.name},{k:'user',l:'Username',v:p.user},{k:'bio',l:'Bio (multiple lines allowed)',t:'area',v:p.bio},{k:'link',l:'Link',v:p.link||''},{k:'fol',l:'Followers',v:p.fol},{k:'fng',l:'Following',v:p.fng},{k:'photo',l:'Change photo',t:'file'}],v=>{const ph=v.photo;delete v.photo;Object.assign(p,v);if(ph)p.photo=ph},'#md',p)}
 function vProf(id){const p=pf(id),ps=S.posts.filter(x=>x.pid==id),mine=me()&&me().id==id,K1='none',bl='#000';
 const PL='<path d="M8 5v14l11-7z"/>';
 return `<div class="nv" style="color:#000"><span style="display:flex;align-items:center;gap:14px;font-size:20px;font-weight:700"><a onclick="igv=null;R()">${I('<path d="M15 5l-7 7 7 7"/>',26,K1,bl,2.2)}</a>${esc(p.user)}</span><span style="display:flex;gap:16px;align-items:center">${mine?I('<path d="M6 17V11a6 6 0 0112 0v6l2 2H4zM10 21h4"/>',24):''}${I('<path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3"/>',24)}</span></div><div class="bd"><div class="pr"><div class="ring${p.story?'':' no'}" style="margin:0;padding:3px" onclick="${p.story?`openSty(${id})`:mine?`addStory(${id})`:''}">${avp(p,82)}</div><div class="sts2"><div><b>${ps.length}</b>posts</div><div><b>${esc(p.fol)}</b>followers</div><div><b>${esc(p.fng)}</b>following</div></div></div><div class="pbio"><div style="white-space:pre-wrap">${esc(p.bio)}</div>${p.link?`<div class="lnk">${I('<path d="M10 14a4 4 0 005.700 0l3-3a4 4 0 00-5.700-5.700l-1 1M14 10a4 4 0 00-5.700 0l-3 3a4 4 0 005.700 5.700l1-1"/>',14,K1,'#00376b',2)} ${esc(p.link)}</div>`:''}</div><div class="bs">${mine?`<button onclick="editProf(${id})">Edit profile</button><button>Share profile</button>`:`<button class="${p.f?'':'bl'}" onclick="pf(${id}).f=!pf(${id}).f;save();R()">${p.f?'Following':'Follow'}</button><button onclick="igv={t:'dm',id:${id}};R()">Message</button>`}<button class="ic1">${I('<circle cx="10" cy="8" r="4"/><path d="M2 21a8 8 0 0116 0M19 8v6M16 11h6"/>',20)}</button></div><div class="ptab"><span class="on">${I('<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',24)}</span><span>${I('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8l6 4-6 4z"/>',24,K1,'#8e8e93')}</span><span>${I('<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6 19a6 6 0 0112 0"/>',24,K1,'#8e8e93')}</span></div><div class="p4 p3 pgd">${ps.map(x=>`<div style="${x.img?`background-image:url(${x.img})`:'background:linear-gradient(135deg,#c9ccd6,#9aa0b0)'}">${x.imgs&&x.imgs.length>1?'<i class="vi" style="color:#fff;font-style:normal;font-size:14px">❐</i>':''}${x.views?`<i class="vi">${I(PL,14,'#fff','none',0)}</i><span class="vw">▷ ${num(x.views)}</span>`:''}</div>`).join('')}</div></div>`+TABS()}
@@ -1083,18 +1235,28 @@ function send(){if(readerMode)return;const i=$('#mi'),c=activeChatsFor(cur).find
 function addTime(){const c=activeChatsFor(cur).find(x=>x.id==cid);form('Date & time',[{k:'ts',l:'Date & time for the messages that follow',t:'datetime-local',v:toL(cts(c))}],v=>{const ts=fromL(v.ts);c.msgs.push({m:2,ts});c.cursor=ts+60000;save();R()})}
 function editTime(i){const m=activeChatsFor(cur).find(x=>x.id==cid).msgs[i];form('Edit date & time',[{k:'ts',l:'Date & time',t:'datetime-local',v:toL(m.ts)}],v=>{m.ts=fromL(v.ts)})}
 function markUnread(){if(readerMode)return;const c=activeChatsFor(cur).find(x=>x.id==cid);c.unread=true;cid=null;save();R()}
+function toggleChatRead(i){if(readerMode)return;const c=activeChatsFor(cur)[i];if(c){c.unread=!c.unread;save();R();$('#cul').querySelectorAll('.read-toggle')[i]?.focus()}}
 function openChatContact(){if(readerMode)return;const c=activeChatsFor(cur).find(x=>x.id==cid);if(!c)return;if(c.mem.length!==1){form('Informações do grupo',[{k:'name',l:'Nome do grupo',v:c.name||cname(c)}],v=>{if(v.name.trim())c.name=v.name.trim()},'#pm');return}
 cinfo=true;R()}
 function editChatContact(){const c=activeChatsFor(cur).find(x=>x.id==cid);if(!c||c.mem.length!==1)return;const i=S.chars.findIndex(x=>x.id==c.mem[0]);if(i<0)return;const person=S.chars[i];
-form('Editar contato',[{k:'name',l:'Nome',v:person.name},{k:'phone',l:'Telefone',v:person.phone||''},{k:'email',l:'Email',v:person.email||''},{k:'photo',l:'Foto',t:'file'}],v=>{person.name=v.name.trim()||person.name;person.phone=v.phone||'';person.email=v.email||'';if(v.photo)person.photo=v.photo})}
+ form('Editar contato',[{k:'name',l:'Nome',v:person.name},{k:'phone',l:'Telefone',v:person.phone||''},{k:'email',l:'Email',v:person.email||''},{k:'photo',l:'Foto',t:'file'}],v=>{person.name=v.name.trim()||person.name;person.phone=v.phone||'';person.email=v.email||'';if(v.photo)person.photo=v.photo},'#md',person)}
 function vMsg(){if(cid){const c=S.chats.find(x=>x.id==cid);if(!c){cid=null;return vMsg()}const ms=c.msgs,l=ms[ms.length-1],grp=c.mem.length>1,ss=snd(c),cs=ss[who%ss.length];
 if(cinfo){if(c.mem.length!==1){cinfo=false}else{const p=ch(c.mem[0]);return `<div class="ci-screen"><div class="ci-nav"><a onclick="cinfo=false;R()">${BK}<span>Messages</span></a><button onclick="editChatContact()">Editar</button></div><div class="ci-body"><div class="ci-profile">${av(p,92)}<h2>${esc(p.name)}</h2></div><div class="ci-actions"><div onclick="addCall()"><i>${I('<path d="M5 3h4l2 5-2.500 1.500a11 11 0 006 6L16 13l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"/>',24,'none','#0a84ff',1.8)}</i><span>message</span></div><div><i>${I('<rect x="3" y="5" width="13" height="14" rx="3"/><path d="M16 9l5-3v12l-5-3z"/>',24,'none','#0a84ff',1.8)}</i><span>audio</span></div><div><i>${I('<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M8 9l6 3-6 3z"/>',24,'none','#0a84ff',1.8)}</i><span>video</span></div><div><i>${I('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6l9 7 9-7"/>',24,'none','#0a84ff',1.8)}</i><span>mail</span></div></div><div class="ci-list"><div><small>mobile</small><b>${esc(p.phone||'No phone number')}</b></div></div><div class="ci-list"><div><span>Share Contact</span></div></div><div class="ci-list"><div><span>Share My Location</span></div></div><div class="ci-list ci-toggle"><div><span>Hide Alerts</span><i></i></div></div><div class="ci-list ci-danger"><div><span>Block Contact</span></div></div></div></div>`}}
 const same=(a,b)=>a&&b&&a.m==b.m&&a.s==b.s;
-const bs=ms.map((m,i)=>{if(m.m==2){const w=fDiv(m.ts);return `<div class="dv" style="cursor:pointer" onclick="if(ed)del2(${i});else editTime(${i})"><b>${esc(w[0])}</b> ${esc(w[1])}</div>`}
-if(m.m!=2&&m.ts){const prev=ms[i-1],newDay=!prev||(prev.m!=2&&prev.ts&&sod(prev.ts)!=sod(m.ts));if(newDay){const w=fDiv(m.ts);return `<div class="dv"><b>${esc(w[0])}</b> ${esc(w[1])}</div>`+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${chatImageContent(m)}</div>`}}
-const lab=grp&&m.m==0&&!same(ms[i-1],m)?`<div class="sn2">${esc(ch(m.s).name)}</div>`:'';
-return lab+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${chatImageContent(m)}</div>`}).join('');
-return `<div class="th-h ios-chat-header"><a class="ios-back" aria-label="Voltar para conversas" onclick="cid=null;R()">${BK}</a><div class="tc" onclick="openChatContact()" style="cursor:pointer">${gav(c,48)}<span>${esc(cname(c))}<b class="ios-contact-chevron">›</b></span></div><button class="ios-video-action" aria-label="Detalhes do contato" title="Detalhes do contato" onclick="openChatContact()"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="14" rx="3"/><path d="M17 9l5-3v12l-5-3z"/></svg></button></div><div class="bd ios-chat-body" id="bd"><div id="th">${bs}${l&&l.m==1?'<span class="dl">Delivered</span>':''}</div></div><div class="ios-msg-footer"><div class="ios-glass-menu" id="ios-msg-appstrip" hidden><button type="button" onclick="msgGlassPick(false)">${I('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="8" cy="9" r="1.5"/><path d="m3 17 6-5 4 4 4-5 4 4"/>',23,'none','currentColor')}<span>Photos</span></button><button type="button" onclick="msgGlassPick(true)">${chatOnceIcon()}<span>View once</span></button></div><div class="cmp"><button class="pl" type="button" aria-label="Attachments" aria-expanded="false" onclick="msgToggleApps()">${I('<path d="M12 4v16M4 12h16"/>',24,'none','currentColor',2.1)}</button><div class="pill"><input id="mi" placeholder="iMessage" aria-label="Mensagem" oninput="msgGlassInput(this)" onkeydown="if(event.key==='Enter')send()"><span class="ios-glass-wave" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 11v2M6 8v8M12 3v18M18 8v8M22 11v2"/></svg></span><button class="ios-glass-send" hidden onclick="send()" aria-label="Enviar mensagem">${I('<path d="M12 19V5m-6 6 6-6 6 6"/>',20,'none','currentColor',2.4)}</button></div></div></div>`}
+ const dateLabel=ts=>{const [day,time]=fDiv(ts);return `${esc(day)} at ${esc(time)}`};
+ const bs=ms.map((m,i)=>{
+  if(m.m==2)return `<div class="dv"${readerMode?'':` style="cursor:pointer" onclick="if(ed)del2(${i});else editTime(${i})"`}>${dateLabel(m.ts)}</div>`;
+  const prev=ms[i-1],newDay=m.ts&&(!prev||(prev.m!=2&&prev.ts&&sod(prev.ts)!=sod(m.ts)));
+  const date=newDay?`<div class="dv">${dateLabel(m.ts)}</div>`:'';
+  const lab=grp&&m.m==0&&(newDay||!same(prev,m))?`<div class="sn2">${esc(ch(m.s).name)}</div>`:'';
+  return date+lab+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${chatImageContent(m)}</div>`;
+ }).join('');
+ const avatar=grp||ch(c.mem[0]).photo?gav(c,58):`<span class="msg-glass-avatar" aria-hidden="true">${I('<circle cx="12" cy="8" r="4.5"/><path d="M4 18.5c0-2 3.6-4.2 8-4.2s8 2.2 8 4.2a10.7 10.7 0 0 1-16 0Z"/>',45,'currentColor','none',0)}</span>`;
+ return `<header class="msg-glass-head">
+ <button type="button" class="msg-glass-back msg-glass-surface" aria-label="Voltar para conversas" onclick="cid=null;R()">${I('<path d="m14 5-7 7 7 7"/>',23,'none','currentColor',2.9)}</button>
+ <button type="button" class="msg-glass-contact" ${readerMode?'disabled':'onclick="openChatContact()"'}>${avatar}<span class="msg-glass-name msg-glass-surface"><span>${esc(cname(c))}</span>${I('<path d="m9 5 6 7-6 7"/>',13,'none','currentColor',3.6)}</span></button>
+ </header><div class="bd ios-chat-body" id="bd"><div id="th">${bs}${l&&l.m==1?'<span class="dl">Delivered</span>':''}</div></div>
+ <div class="ios-msg-footer"><div class="ios-glass-menu" id="ios-msg-appstrip" hidden><button type="button" onclick="msgGlassPick(false)">${I('<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="8" cy="9" r="1.5"/><path d="m3 17 6-5 4 4 4-5 4 4"/>',23,'none','currentColor')}<span>Photos</span></button><button type="button" onclick="msgGlassPick(true)">${chatOnceIcon()}<span>View once</span></button></div><div class="cmp"><button class="pl" type="button" aria-label="Attachments" aria-expanded="false" onclick="msgToggleApps()">${I('<path d="M12 4v16M4 12h16"/>',24,'none','currentColor',2.1)}</button><div class="pill"><input id="mi" placeholder="iMessage" aria-label="Mensagem" oninput="msgGlassInput(this)" onkeydown="if(event.key==='Enter')send()"><span class="ios-glass-wave" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M2 11v2M6 8v8M12 3v18M18 8v8M22 11v2"/></svg></span><button class="ios-glass-send" hidden onclick="send()" aria-label="Enviar mensagem">${I('<path d="M12 19V5m-6 6 6-6 6 6"/>',20,'none','currentColor',2.4)}</button></div></div></div>`}
 return nv('<a>Edit</a>',plus('addChat()'))+'<div class="lg">Messages</div><div class="sbar">🔍 Search</div><div class="bd">'+(S.chats.map((c,i)=>({c,i,t:cts(c)})).sort((a,b)=>b.t-a.t).map(({c,i,t})=>{const l=[...c.msgs].reverse().find(m=>m.m!=2),pre=l?(l.m==0&&c.mem.length>1?ch(l.s).name+': ':'')+l.t:'No messages';return `<div class="r2" onclick="if(ed)del('chats',${i});else{cid=${c.id};who=0;S.chats[${i}].unread=false;save();R()}">${c.unread?'<span class="dot ud"></span>':''}${gav(c,50)}<div class="x"><div class="l1"><b>${esc(cname(c))}</b><em>${esc(fList(t))} ›</em></div><p>${esc(pre)}</p></div></div>`}).join('')||'<div class="mb2"><p class="m">Tap ＋ to start a conversation.</p></div>')+'</div>'}
 /* Mail */
 const mailF=(m={})=>[{k:'from',l:'From',v:m.from||''},{k:'subj',l:'Subject',v:m.subj||''},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(m.ts||nowTs())},{k:'body',l:'Message',t:'area',v:m.body||''},{k:'r',l:'Status',t:'sel',v:m.r?1:0,o:[{v:0,l:'Unread'},{v:1,l:'Read'}]}];
@@ -1148,15 +1310,16 @@ function delP(){pin=pin.slice(0,-1);pdots2()}
 function chkPass(){if(pin==S.pass)doUnlock();else{const d=$('#pdots');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake');setTimeout(()=>{pin='';pdots2()},450)}}
 document.addEventListener('keydown',e=>{if(!$('#pw').classList.contains('on')||/INPUT|TEXTAREA|SELECT/.test((document.activeElement||{}).tagName||''))return;if(/^\d$/.test(e.key))keyP(e.key);else if(e.key=='Backspace')delP();else if(e.key=='Escape')cancelPass()});
 (function(){const lk=$('#lk');let y0=null,ty=0,mv=false;lk.style.touchAction='none';
-lk.addEventListener('pointerdown',e=>{y0=e.clientY;ty=0;mv=false;lk.style.transition='none';lk.setPointerCapture&&lk.setPointerCapture(e.pointerId)});
+ lk.addEventListener('pointerdown',e=>{if(e.target.closest('#nts'))return;y0=e.clientY;ty=0;mv=false;lk.style.transition='none';lk.setPointerCapture&&lk.setPointerCapture(e.pointerId)});
 lk.addEventListener('pointermove',e=>{if(y0==null)return;ty=Math.min(0,e.clientY-y0);if(ty<-4)mv=true;lk.style.transform=`translateY(${ty}px)`});
 lk.addEventListener('pointerup',()=>{if(y0==null)return;lk.style.transition='';const shouldOpen=ty<-90&&mv;y0=null;if(shouldOpen)unlock();else lk.style.transform=''});
-lk.addEventListener('click',()=>{if(!lk.classList.contains('up')&&!$('#pw').classList.contains('on')&&locked)unlock()})})();
+ lk.addEventListener('pointercancel',()=>{y0=null;lk.style.transition='';lk.style.transform=''});
+ lk.addEventListener('click',e=>{if(!e.target.closest('#nts')&&!lk.classList.contains('up')&&!$('#pw').classList.contains('on')&&locked)unlock()})})();
 function extraSync(){const f=[['so_name',S.owner.name],['so_wifi',S.st.wifi],['so_bt',S.st.bt],['so_batt',S.st.batt],['ppass',S.pass]];for(const [i,v] of f)if(document.activeElement.id!=i)$('#'+i).value=v;const ord=$('#pord');if(ord)ord.value=S.ord;$('#ordDescBtn')?.classList.toggle('on',S.ord==='desc');$('#ordAscBtn')?.classList.toggle('on',S.ord==='asc');const edt=$('#editModeToggle');if(edt&&document.activeElement!==edt)edt.checked=!!ed;syncWeatherPanelFields();
 const ps=$('#passStatus');if(ps)ps.textContent=hasPass()?'Senha ativa: '+S.pass:(S.pass?'Digite de 4 a 6 dígitos':'Sem senha definida');
 $('#meSel').innerHTML=S.profiles.map(p=>`<option value="${p.id}">@${esc(p.user)}</option>`).join('');if(me())$('#meSel').value=me().id;
 $('#bf').setAttribute('width',Math.max(2,19*(+S.st.batt||0)/100));
-$('#cul').innerHTML=activeChatsFor(cur).map((c,i)=>`<div class="cr"><span>${esc(cname(c))}</span><a class="read-toggle" onclick="activeChatsFor(cur)[${i}].unread=!activeChatsFor(cur)[${i}].unread;save();R()">${c.unread?'Unread':'Read'}</a></div>`).join('')||'<div class="cr empty"><span>Nenhuma conversa ainda.</span></div>';
+$('#cul').innerHTML=activeChatsFor(cur).map((c,i)=>`<div class="cr"><span>${esc(cname(c))}</span><button type="button" class="read-toggle" onclick="toggleChatRead(${i})">${c.unread?'Não lida':'Lida'}</button></div>`).join('')||'<div class="cr empty"><span>Nenhuma conversa ainda.</span></div>';
 document.querySelectorAll('.car').forEach(e=>{e.scrollLeft=(+e.dataset.ci||0)*e.clientWidth})}
 /* ---- v7: columns, popups, story slots, weather ---- */
 (function(){const L=document.createElement('div'),Rr=document.createElement('div');L.className=Rr.className='col';document.body.insertBefore(L,$('.ph'));document.body.appendChild(Rr);document.querySelectorAll('.pn .pc').forEach(e=>(e.classList.contains('L')?L:Rr).appendChild(e));$('.pn').remove();
@@ -1214,7 +1377,8 @@ async function getStoryShareUrl(id=IDX.cur){
   let data;
   if(id===IDX.cur){await flushS();data=S}else data=await kvGet('story:'+id);
   if(!data)throw new Error('Não foi possível carregar esta história');
-  const payload={app:'iphone-story',name:meta.name,data};
+  const {planner:privatePlanner,...readerData}=data;
+  const payload={app:'iphone-story',name:meta.name,data:readerData};
   const raw=new TextEncoder().encode(JSON.stringify(payload));
   let token;
   if(typeof CompressionStream!=='undefined'){
@@ -1249,7 +1413,7 @@ async function exportStory(){await flushS();const txt=JSON.stringify({app:'iphon
 function importStory(inp){if(readerMode)return;const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=async()=>{try{const j=JSON.parse(r.result),d=j.data||j;if(!d||typeof d!=='object'||Array.isArray(d))throw new Error('invalid story data');await flushS();const id='s'+Date.now();await kvSet('story:'+id,d);IDX.list.push({id,name:j.name||'Importada'});IDX.cur=id;S=Object.assign(blank(),d);resetUI();save();await kvSet('index',IDX);renderStories()}catch(e){form('Arquivo inválido',[],()=>{},'#pm')}inp.value=''};r.readAsText(f)}
 /* popups: characters & IG profiles */
 function addChar(){form('Novo personagem',[{k:'n',l:'Nome'},{k:'p',l:'Foto (opcional)',t:'file'}],v=>{if(v.n.trim())S.chars.push({id:Date.now(),name:v.n.trim(),photo:v.p||''})},'#pm')}
-function editChar(i){const c=S.chars[i];form('Editar personagem',[{k:'n',l:'Nome',v:c.name},{k:'p',l:'Nova foto (opcional)',t:'file'}],v=>{if(v.n.trim())c.name=v.n.trim();if(v.p)c.photo=v.p},'#pm')}
+function editChar(i){const c=S.chars[i];form('Editar personagem',[{k:'n',l:'Nome',v:c.name},{k:'p',l:'Nova foto (opcional)',t:'file'}],v=>{if(v.n.trim())c.name=v.n.trim();if(v.p)c.photo=v.p},'#pm',c)}
 function addProf(){form('Novo perfil do Instagram',[{k:'u',l:'Username'},{k:'n',l:'Nome'},{k:'b',l:'Bio (várias linhas)',t:'area'},{k:'l',l:'Link na bio'},{k:'f1',l:'Seguidores',v:'1,204'},{k:'f2',l:'Seguindo',v:'312'},{k:'p',l:'Foto de perfil',t:'file'},{k:'s',l:'Story (opcional)',t:'file'}],v=>{const u=v.u.trim().replace(/\s+/g,'.').toLowerCase();if(!u)return;S.profiles.push({id:Date.now(),user:u,name:v.n.trim()||u,bio:v.b,link:v.l,fol:v.f1||'0',fng:v.f2||'0',photo:v.p,story:v.s})},'#pm')}
 /* Weather */
 const wxCond=c=>/rain|shower|drizzle/i.test(c)?'rain':/snow/i.test(c)?'snow':/partly|mostly/i.test(c)?'partly':/cloud|overcast/i.test(c)?'cloud':'sun';
@@ -1267,7 +1431,7 @@ ${/rain|storm|shower|snow/i.test(d.c)?`<div class="wx-card"><div class="wx-alert
 <div class="wx-card"><div class="wx-card-head"><div><h4>Conditions</h4><p>Temperature (°C)</p></div><div class="wx-seg"><span class="on">${wxIcon(d.k,20)}</span><span>${I('<path d="M12 4v10"/><path d="M8 14a4 4 0 1 0 8 0"/>',20,'none','#fff',2)}</span><span>${I('<path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>',20,'none','#fff',2)}</span></div></div><div class="wx-hours">${hrs}</div></div>
 <div class="wx-card">${dl.map((x,i)=>{const lo=+x[2]||0,hi=+x[3]||0,l=(lo-gmin)/span*100,r=(hi-gmin)/span*100;return `<div class="wx-day"><strong>${esc(x[0])}</strong>${wxIcon(x[1]||'sun',28)}<em>${lo}°</em><div class="wx-track"><i style="left:${l}%;width:${Math.max(12,r-l)}%"></i></div><b>${hi}°</b></div>`}).join('')}</div>
 </div><div class="wx-bottom"><div class="wx-tab">${I('<path d="M4 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14"/>',24,'none','#fff',2)}</div><div class="wx-center">${I('<path d="M12 4 20 8 12 20 10 12 4 10Z"',18,'#fff','none',0)}<div class="wx-dots"><i class="on"></i><i></i><i></i></div></div><div class="wx-tab">${I('<path d="M8 6h10M8 12h10M8 18h10"/><circle cx="5" cy="6" r="1.4" fill="#fff" stroke="none"/><circle cx="5" cy="12" r="1.4" fill="#fff" stroke="none"/><circle cx="5" cy="18" r="1.4" fill="#fff" stroke="none"/>',24,'none','#fff',2)}</div></div>`}
-function togglePersonagens(){personagensOpen=!personagensOpen;const body=$('#personagensBody'),button=$('#personPanelToggle');if(body)body.style.display=personagensOpen?'':'none';if(button)button.textContent=personagensOpen?'Fechar':'Abrir'}function setOrderMode(v){S.ord=v;const sel=$('#pord');if(sel)sel.value=v;const a=$('#ordAscBtn'),d=$('#ordDescBtn');if(d)d.classList.toggle('on',v==='desc');if(a)a.classList.toggle('on',v==='asc');save();R()}
+function togglePersonagens(){personagensOpen=!personagensOpen;animateEditorSection($('#personagensBody'),personagensOpen);const button=$('#personPanelToggle');button.textContent=personagensOpen?'Fechar':'Abrir';button.setAttribute('aria-expanded',String(personagensOpen))}function setOrderMode(v){S.ord=v;const sel=$('#pord');if(sel)sel.value=v;const a=$('#ordAscBtn'),d=$('#ordDescBtn');if(d)d.classList.toggle('on',v==='desc');if(a)a.classList.toggle('on',v==='asc');save();R()}
 function updateWeatherPanelField(el){if(readerMode)return;const d=wxData(),fields=['City','Temp','Cond','High','Low'],vals=[d.city,d.t,d.c,d.H,d.L];const k=fields.findIndex(x=>el.id.startsWith('wx'+x));if(k<0)return;const v=el.value.trim();if(!v||([1,3,4].includes(k)&&!Number.isFinite(Number(v))))return;vals[k]=v.replace(/,/g,' ');S.wx=vals.join(', ');save();R()}
 function setWeatherCondition(v){if(readerMode)return;const d=wxData();S.wx=[d.city,d.t,v,d.H,d.L].join(', ');save();R()}
 function syncWeatherPanelFields(){const d=wxData(),map={wxCityHome:d.city,wxTempHome:d.t,wxCondHome:d.c,wxHighHome:d.H,wxLowHome:d.L,wxCityApp:d.city,wxTempApp:d.t,wxCondApp:d.c,wxHighApp:d.H,wxLowApp:d.L,pwW:S.wx,pw2:S.wx};for(const [id,val] of Object.entries(map)){const el=$('#'+id);if(el&&document.activeElement!==el)el.value=String(val)}for(const id of ['wxQuickSun','wxQuickCloud','wxQuickRain','wxQuickSnow','wxQuickSun2','wxQuickCloud2','wxQuickRain2','wxQuickSnow2'])$('#'+id)?.classList.remove('on');const k=wxCond(d.c);const sel={sun:['wxQuickSun','wxQuickSun2'],cloud:['wxQuickCloud','wxQuickCloud2'],partly:['wxQuickCloud','wxQuickCloud2'],rain:['wxQuickRain','wxQuickRain2'],snow:['wxQuickSnow2']};(sel[k]||[]).forEach(id=>$('#'+id)?.classList.add('on'))}
@@ -1420,19 +1584,66 @@ document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('cont
 }
 let xTab='home',xDetail=null,xQuery='',xFeed='For you';
 const xIcons={home:'<path d="M3 10 12 3l9 7v11h-6v-7H9v7H3z"/>',search:'<circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/>',bell:'<path d="M5 17h14l-2-4V9a5 5 0 0 0-10 0v4zM10 21h4"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/>',profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',reply:'<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.5-5A9 9 0 1 1 21 11z"/>',repost:'<path d="m2 7 4-4 4 4M6 3v13h10m6 1-4 4-4-4m4 4V8H8"/>',heart:'<path d="M12 21 3.5 12.5a5.4 5.4 0 0 1 8.5-6.6 5.4 5.4 0 0 1 8.5 6.6z"/>',views:'<path d="M4 20v-7m5 7V4m5 16v-9m5 9v-5"/>',bookmark:'<path d="M6 3h12v18l-6-4-6 4z"/>',share:'<path d="M12 15V3m-4 4 4-4 4 4M5 12v9h14v-9"/>'};
+const xPostIcons={
+ reply:'M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.488 0 8.125 3.64 8.125 8.129 0 3.01-1.665 5.775-4.335 7.18l-8.426 4.43v-3.752C5.222 17.848 1.75 14.31 1.75 10zm8.005-6c-3.317 0-6.005 2.685-6.005 6s2.688 6 6.005 6h1.73v2.423l5.495-2.89c2.013-1.06 3.266-3.142 3.266-5.404C20.247 6.744 17.505 4 14.122 4z',
+ repost:'M4.75 3.79l4.603 4.3-1.366 1.46L5.75 7.46V16c0 .55.448 1 1 1H13v2H6.75c-1.657 0-3-1.34-3-3V7.46L1.513 9.55.147 8.09 4.75 3.79zm12.5 3.21H11V5h6.25c1.657 0 3 1.34 3 3v8.54l2.237-2.09 1.366 1.46-4.603 4.3-4.603-4.3 1.366-1.46 2.237 2.09V8c0-.55-.448-1-1-1z',
+ heart:'M16.697 5.5c-1.222 0-2.383.579-3.092 1.512L12 9.116l-1.605-2.104C9.686 6.079 8.525 5.5 7.303 5.5 5.214 5.5 3.5 7.2 3.5 9.3c0 1.614 1.04 3.36 2.891 5.24 1.547 1.57 3.516 3.07 5.609 4.58 2.093-1.51 4.062-3.01 5.609-4.58C19.46 12.66 20.5 10.914 20.5 9.3c0-2.1-1.714-3.8-3.803-3.8zM12 5.826c1.087-1.425 2.815-2.326 4.697-2.326 3.196 0 5.803 2.6 5.803 5.8 0 2.386-1.51 4.605-3.466 6.625-1.663 1.717-3.77 3.307-5.891 4.836L12 21.585l-1.143-.824c-2.121-1.53-4.228-3.12-5.891-4.836C3.01 13.905 1.5 11.686 1.5 9.3c0-3.2 2.607-5.8 5.803-5.8 1.882 0 3.61.901 4.697 2.326z',
+ heartFilled:'M12 5.826c1.087-1.425 2.815-2.326 4.697-2.326 3.196 0 5.803 2.6 5.803 5.8 0 2.386-1.51 4.605-3.466 6.625-1.663 1.717-3.77 3.307-5.891 4.836L12 21.585l-1.143-.824c-2.121-1.53-4.228-3.12-5.891-4.836C3.01 13.905 1.5 11.686 1.5 9.3c0-3.2 2.607-5.8 5.803-5.8 1.882 0 3.61.901 4.697 2.326z',
+ views:'M8.75 21V3h2v18h-2zm-5 0V9h2v12h-2zm10 0V8h2v13h-2zm5 0v-9h2v9h-2z',
+ bookmark:'M4 4.5C4 3.12 5.12 2 6.5 2h11C18.88 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5zM6.5 4c-.28 0-.5.22-.5.5v14.56l6-4.29 6 4.29V4.5c0-.28-.22-.5-.5-.5h-11z',
+ bookmarkFilled:'M4 4.5C4 3.12 5.12 2 6.5 2h11C18.88 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5z',
+ share:'M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.29 3.3L6.3 8.29 12 2.59zM4 14h2v5c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-5h2v5c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3v-5z',
+ more:'M5 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z',
+ grok:'M10.4 14.9l7.1-5.2c.35-.25.8.09.68.5l-3.1 8.3a8.42 8.42 0 0 0 4.35-7.38c0-.63-.07-1.25-.21-1.84l2.41-6.34-6.53 4.88a6.1 6.1 0 0 0-8.46 8.52l-4.1 3.06h4.6l3.8-2.8c.35-.26.17-.85-.27-.85h-.27c-.43 0-.61-.56-.26-.82z',
+ lock:'M6 10V7a6 6 0 0 1 12 0v3h.5a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2H6zm2 0h8V7a4 4 0 1 0-8 0v3zm4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z'
+};
+const xPostIcon=(k,n=18)=>I(`<path fill-rule="evenodd" d="${xPostIcons[k]}"/>`,n,'currentColor','none',0);
 const xi=(k,n=23)=>I(xIcons[k]||xIcons.home,n,'none','currentColor',1.8);
 function xData(){if(!Array.isArray(S.xProfiles))S.xProfiles=[];if(!Array.isArray(S.xPosts))S.xPosts=[];if(!Array.isArray(S.xDms))S.xDms=[];return S.xProfiles}
 function xPerson(id){return xData().find(p=>String(p.id)===String(id))||{name:'Unknown',user:'unknown',photo:''}}
 function xSwitch(t){xTab=t;xDetail=null;xQuery='';R()}
 function xOpenProfile(id){xTab='profile';xDetail=String(id);R()}
 function xOpenPost(id){xTab='post';xDetail=String(id);R()}
-function xProfileForm(id){if(readerMode)return;const p=id?xPerson(id):{};form('Perfil do Twitter',[{k:'name',l:'Nome',v:p.name},{k:'user',l:'Username (sem @)',v:p.user},{k:'bio',l:'Bio',t:'area',v:p.bio},{k:'followers',l:'Seguidores',v:p.followers||'0'},{k:'following',l:'Seguindo',v:p.following||'0'},{k:'followed',l:'Seguido pelo dono do iPhone',t:'sel',v:p.followed?'yes':'no',o:[{v:'no',l:'Não'},{v:'yes',l:'Sim'}]},{k:'photo',l:'Foto de perfil',t:'file'},{k:'banner',l:'Capa',t:'file'}],v=>{if(!v.user.trim())return;const q={id:id||String(Date.now()),name:v.name||v.user,user:v.user.replace(/^@/,''),bio:v.bio,followers:v.followers,following:v.following,followed:v.followed==='yes',photo:v.photo||p.photo||'',banner:v.banner||p.banner||''};if(id)Object.assign(p,q);else{xData().push(q);if(!S.xOwner)S.xOwner=q.id}},'#pm')}
-function xPostForm(id,parent){if(readerMode)return;const profiles=xData();if(!profiles.length)return xProfileForm();const p=S.xPosts.find(q=>String(q.id)===String(id))||{};form(parent?'Resposta':'Publicação',[{k:'pid',l:'Autor',t:'sel',v:p.pid||S.xOwner,o:profiles.map(q=>({v:q.id,l:'@'+q.user}))},{k:'text',l:'Texto',t:'area',v:p.text},{k:'time',l:'Horário',v:p.time||'now'},{k:'likes',l:'Curtidas',v:String(p.likes||0)},{k:'reposts',l:'Reposts',v:String(p.reposts||0)},{k:'views',l:'Visualizações',v:String(p.views||0)},{k:'photo',l:'Imagem',t:'file'}],v=>{const q={id:p.id||String(Date.now()),pid:v.pid,text:v.text,time:v.time,likes:Math.max(0,+v.likes||0),reposts:Math.max(0,+v.reposts||0),views:Math.max(0,+v.views||0),photo:v.photo||p.photo||'',parent:p.parent||parent||null};if(p.id)Object.assign(p,q);else S.xPosts.unshift(q)},'#pm')}
+function xProfileForm(id){if(readerMode)return;const p=id?xPerson(id):{},yesNo=[{v:'no',l:'Não'},{v:'yes',l:'Sim'}];form('Perfil do Twitter',[{k:'name',l:'Nome',v:p.name},{k:'user',l:'Username (sem @)',v:p.user},{k:'bio',l:'Bio',t:'area',v:p.bio},{k:'followers',l:'Seguidores',v:p.followers||'0'},{k:'following',l:'Seguindo',v:p.following||'0'},{k:'followed',l:'Seguido pelo dono do iPhone',t:'sel',v:p.followed?'yes':'no',o:yesNo},{k:'protected',l:'Mostrar cadeado ao lado do nome',t:'sel',v:p.protected?'yes':'no',o:yesNo},{k:'photo',l:'Foto de perfil',t:'file'},{k:'banner',l:'Capa',t:'file'}],v=>{if(!v.user.trim())return;const q={id:id||String(Date.now()),name:v.name||v.user,user:v.user.replace(/^@/,''),bio:v.bio,followers:v.followers,following:v.following,followed:v.followed==='yes',protected:v.protected==='yes',photo:v.photo||p.photo||'',banner:v.banner||p.banner||''};if(id)Object.assign(p,q);else{xData().push(q);if(!S.xOwner)S.xOwner=q.id}},'#pm',p)}
+function xPostForm(id,parent){if(readerMode)return;const profiles=xData();if(!profiles.length)return xProfileForm();const p=S.xPosts.find(q=>String(q.id)===String(id))||{};form(parent?'Resposta':'Publicação',[{k:'pid',l:'Autor',t:'sel',v:p.pid||S.xOwner,o:profiles.map(q=>({v:q.id,l:'@'+q.user}))},{k:'text',l:'Texto',t:'area',v:p.text},{k:'time',l:'Horário',v:p.time||'now'},{k:'likes',l:'Curtidas',v:String(p.likes||0)},{k:'reposts',l:'Reposts',v:String(p.reposts||0)},{k:'views',l:'Visualizações',v:String(p.views||0)},{k:'photo',l:'Imagem',t:'file'}],v=>{const q={id:p.id||String(Date.now()),pid:v.pid,text:v.text,time:v.time,likes:Math.max(0,+v.likes||0),reposts:Math.max(0,+v.reposts||0),views:Math.max(0,+v.views||0),photo:v.photo||p.photo||'',parent:p.parent||parent||null};if(p.id)Object.assign(p,q);else S.xPosts.unshift(q)},'#pm',p)}
 function xRemove(type,id){if(readerMode)return;askOk('Excluir este item?',()=>{if(type==='profile'){S.xProfiles=S.xProfiles.filter(p=>String(p.id)!==String(id));S.xPosts=S.xPosts.filter(p=>String(p.pid)!==String(id));if(S.xOwner===id)S.xOwner=S.xProfiles[0]?.id||null}else S.xPosts=S.xPosts.filter(p=>String(p.id)!==String(id)&&String(p.parent)!==String(id));xTab='home';xDetail=null;save();R()})}
 let xLocalLikes=new Set(),xLocalBookmarks=new Set(),xLocalReposts=new Set();
 function xReaction(id,k){const set=k==='heart'?xLocalLikes:k==='bookmark'?xLocalBookmarks:xLocalReposts,key=String(IDX.cur)+':'+id;if(set.has(key))set.delete(key);else set.add(key);R()}
 function xHas(id,k){return (k==='heart'?xLocalLikes:k==='bookmark'?xLocalBookmarks:xLocalReposts).has(String(IDX.cur)+':'+id)}
-function xPost(p,detail=false){const a=xPerson(p.pid),id=esc(String(p.id)),pid=esc(String(a.id)),replies=S.xPosts.filter(q=>String(q.parent)===String(p.id)).length;return `<article class="x-post" onclick="xOpenPost('${id}')"><div onclick="event.stopPropagation();xOpenProfile('${pid}')">${av(a,42)}</div><div class="x-post-copy"><div class="x-post-top"><b onclick="event.stopPropagation();xOpenProfile('${pid}')">${esc(a.name)}</b><span class="x-muted">@${esc(a.user)} · ${esc(p.time||'now')}</span><span style="margin-left:auto">⋯</span></div><div class="x-post-text">${esc(p.text||'')}</div>${p.photo?`<img class="x-post-img" src="${esc(p.photo)}" alt="">`:''}<div class="x-actions">${[['reply',replies],['repost',(p.reposts||0)+(xHas(p.id,'repost')?1:0)],['heart',(p.likes||0)+(xHas(p.id,'heart')?1:0)],['views',p.views||0],['bookmark','']].map(([k,n])=>`<button type="button" aria-label="${k}" style="${['repost','heart','bookmark'].includes(k)&&xHas(p.id,k)?'color:#1d9bf0':''}" onclick="event.stopPropagation();${k==='reply'?`xOpenPost('${id}')`:k==='views'?'void 0':`xReaction('${id}','${k}')`}">${xi(k,17)}${n||''}</button>`).join('')}</div></div></article>`}
+async function xSharePost(id){
+ const p=S.xPosts.find(q=>String(q.id)===String(id));if(!p)return;
+ const text=`@${xPerson(p.pid).user}${p.text?`\n${p.text}`:''}`;
+ try{if(navigator.share)await navigator.share({text});else await navigator.clipboard.writeText(text)}
+ catch(e){if(e.name!=='AbortError')prompt('Copiar publicação',text)}
+}
+function xPost(p){
+ const a=xPerson(p.pid),id=esc(String(p.id)),pid=esc(String(a.id));
+ const replies=S.xPosts.filter(q=>String(q.parent)===String(p.id)).length;
+ const action=(k,label,n=0)=>{
+  const reaction=['repost','heart','bookmark'].includes(k),on=reaction&&xHas(p.id,k);
+  const icon=on&&k!=='repost'?`${k}Filled`:k;
+  const handler=reaction?`xReaction('${id}','${k}')`:k==='reply'?`xOpenPost('${id}')`:k==='share'?`xSharePost('${id}')`:'';
+  return `<button type="button" class="x-${k}${on?' on':''}" aria-label="${label}${n?`, ${n}`:''}"${reaction?` aria-pressed="${on}"`:''} onclick="event.stopPropagation();${handler}">${xPostIcon(icon)}${n?`<span>${esc(n)}</span>`:''}</button>`;
+ };
+ return `<article class="x-post" onclick="xOpenPost('${id}')">
+ <div class="x-post-avatar" onclick="event.stopPropagation();xOpenProfile('${pid}')">${av(a,40)}</div>
+ <div class="x-post-copy">
+  <div class="x-post-top">
+   <b onclick="event.stopPropagation();xOpenProfile('${pid}')">${esc(a.name)}</b>
+   ${a.protected?`<span class="x-post-lock" role="img" aria-label="Protected account">${xPostIcon('lock',14)}</span>`:''}
+   <span class="x-post-meta"><span class="x-post-handle">@${esc(a.user)}</span><span class="x-post-dot">·</span><time>${esc(p.time||'now')}</time></span>
+   <span class="x-post-tools" aria-hidden="true">${xPostIcon('grok',17)}${xPostIcon('more',17)}</span>
+  </div>
+  ${p.text?`<div class="x-post-text">${esc(p.text)}</div>`:''}${p.photo?`<img class="x-post-img" src="${esc(p.photo)}" alt="">`:''}
+  <div class="x-actions">
+   <div class="x-action">${action('reply','Replies',replies)}</div>
+   <div class="x-action">${action('repost','Repost',(+p.reposts||0)+(xHas(p.id,'repost')?1:0))}</div>
+   <div class="x-action">${action('heart','Like',(+p.likes||0)+(xHas(p.id,'heart')?1:0))}</div>
+   <div class="x-action">${action('views','Views',p.views||0)}</div>
+   <div class="x-action-end">${action('bookmark','Bookmark')}${action('share','Share')}</div>
+  </div>
+ </div></article>`;
+}
 function xResults(){const q=xQuery.toLowerCase().trim(),people=xData().filter(p=>(p.name+' '+p.user).toLowerCase().includes(q));return people.map(p=>`<div class="x-post" onclick="xOpenProfile('${esc(String(p.id))}')">${av(p,44)}<div><b>${esc(p.name)}</b><div class="x-muted">@${esc(p.user)}</div></div></div>`).join('')+S.xPosts.filter(p=>!p.parent&&(p.text||'').toLowerCase().includes(q)).map(p=>xPost(p)).join('')}
 function xSearch(v){xQuery=v;$('#x-results').innerHTML=xResults()}
 function xEditor(){const e=$('#x-editor');if(!e)return;const ps=xData();e.innerHTML=`<label>Seu perfil<select onchange="xSetOwner(this.value)"><option value="">Selecione</option>${ps.map(p=>`<option value="${esc(String(p.id))}" ${String(S.xOwner)===String(p.id)?'selected':''}>@${esc(p.user)}</option>`).join('')}</select></label>`+ps.map(p=>`<div class="cr">${av(p,30)}<span onclick="xProfileForm('${esc(String(p.id))}')">@${esc(p.user)}</span><a onclick="xRemove('profile','${esc(String(p.id))}')">×</a></div>`).join('')+`<h2>Publicações</h2>`+S.xPosts.map(p=>`<div class="cr"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" onclick="xPostForm('${esc(String(p.id))}')">${esc(p.text||'Imagem')}</span><a onclick="xRemove('post','${esc(String(p.id))}')">×</a></div>`).join('')}
@@ -1454,12 +1665,13 @@ homeRender(shown,dock);
 $('#dk').innerHTML=dock.map(k=>cell(k,0)).join('');$('#dk').style.display=dock.length?'':'none';
 $('#wg').querySelector('.w1').style.display=shown.includes('cal')?'':'none';$('#wg').querySelector('.w2').style.display=shown.includes('wx')?'':'none';$('#wg').hidden=homePage!==0;
 renderChatAppPanel();xEditor();walletEditor();ytEditor();if(cur==='map')renderMapPinEditor();if(cur==='find')findEditor();
-$('#nts').innerHTML=S.notifs.map(n=>`<div class="nf"><div class="ic" style="width:38px;height:38px;border-radius:9px;flex:none;cursor:default">${iconOf(n.app)}</div><div class="x"><div class="l1"><b>${esc(n.title)}</b><em>${esc(n.time)}</em></div><p>${esc(n.body)}</p></div></div>`).join('');
+renderLockNotices($('#nts'));
 const opt=Object.keys(FN).map(k=>`<option value="${k}">${FN[k]}</option>`).join('');if(!$('#na').innerHTML){$('#na').innerHTML=opt;$('#na').value='msg'}renderNotificationApps();
 const li=(arr,f)=>arr.map((x,i)=>`<div class="cr">${f(x)}<a onclick="del('${arr==S.chars?'chars':arr==S.profiles?'profiles':'notifs'}',${i})">✕</a></div>`).join('');
 $('#cl').innerHTML=li(S.chars,c=>av(c,32)+`<span>${esc(c.name)}</span>`)||'<p>Nenhum personagem ainda.</p>';
 $('#pl2').innerHTML=li(S.profiles,p=>avp(p,32)+`<span>@${esc(p.user)}${p.story?' ◉':''}</span>`)||'<p>Nenhum perfil ainda.</p>';
-$('#nl').innerHTML=li(S.notifs,n=>`<div class="notif-existing"><span class="notif-existing-icon">${iconOf(n.app)}</span><span>${esc(n.title)}</span></div>`);
+$('#nl').innerHTML=S.notifs.map((n,i)=>`<div class="cr"><div class="notif-existing"><span class="notif-existing-icon">${iconOf(n.app)}</span><span>${esc(n.title)}</span></div><button type="button" class="lock-notification-remove" aria-label="Remover notificação ${esc(n.title)}" onclick="del('notifs',${i})">×</button></div>`).reverse().join('')||'<p>Nenhuma notificação adicionada.</p>';
+window.refreshSavedNotices?.();
 const a=$('#app');a.classList.toggle('on',!!cur);a.classList.toggle('ios-weather',cur==='wx');a.classList.toggle('ios-clock',cur==='clk');a.style.background=(cur=='clk'||cur=='wallet')?'#000':cur=='wx'?wxBg():(cur=='saf'||cur=='st'||(cur=='nt'&&nview<2))?'#f2f2f7':'#fff';if(cur){const ob=a.querySelector('.bd'),st=ob?ob.scrollTop:0,key=[cur,cid,mid,JSON.stringify(igv),nview,nid,cmo,cur==='x'?xTab:'',cur==='x'?xDetail:'',cur==='yt'?ytTab:'',cur==='yt'?ytIndex:''].join('|');const igChanged=cur==='ig'&&key!==lastKey; a.classList.toggle('ig-live',cur==='ig');a.classList.remove('ig-soft-enter');if(['map','find'].includes(cur)&&a.querySelector('#vectorMap')){const next=document.createElement('div');next.innerHTML=V[cur]();const sheet=a.querySelector('.globe-sheet'),fresh=next.querySelector('.globe-sheet');if(sheet&&fresh)sheet.replaceWith(fresh);syncMapMarkers();if(!onlineMap&&!mapStarting&&!globeMode&&a.querySelector('#mapNetworkStatus')?.textContent.includes('Starting map'))startOnlineMap()}else{a.innerHTML=V[cur]();if(['map','find'].includes(cur))setupMapDrag()}if(['map','find'].includes(cur)){refreshPinMode();if(!mapReady)drawGlobe()}if(cur==='yt'&&key===lastKey)a.querySelector('.yt-enter')?.classList.remove('yt-enter');a.querySelectorAll('.sbar').forEach(el=>el.innerHTML=nativeSearchIcon()+'<span>Search</span>');if(igChanged){a.classList.add('ig-soft-enter')}const nb=a.querySelector('.bd');if(nb&&key==lastKey)nb.scrollTop=st;lastKey=key;const b=$('#bd');if(b&&cid)b.scrollTop=1e6;}pop=false;noteSync();extraSync();sync7();applyStatusTheme();if(readerMode)readerLock();scTrack();storyEventTrack()}
 applyStatusTheme();
 if(readerMode)document.documentElement.classList.add('reader-mode');
@@ -1511,21 +1723,17 @@ function scData(){return Array.isArray(S.scriptedCalls)?S.scriptedCalls:[]}
 function scPerson(id){return S.chars.find(x=>String(x.id)===String(id))||null}
 function scName(c){return scPerson(c.person)?.name||c.name||'Unknown Caller'}
 function scChats(app){return activeChatsFor(app)||[]}
-function scPanelAllowed(){return !readerMode&&!locked&&(['ph','msg','wa','ka'].includes(cur)||(cur==='ig'&&['inbox','dm','newdm'].includes(igv?.t)))}
-function scSyncVisibility(){const allowed=scPanelAllowed();$('#sc-launch').hidden=!allowed;if(!allowed&&!narrationCalls)scClose();mobileSyncCalls()}
-function scOpen(){if(!scPanelAllowed())return;$('#sc-drawer').hidden=false;scList();if(!scDraft)$('#sc-editor').innerHTML=''}
-function scClose(){narrationCalls=false;$('#sc-drawer').hidden=true}
 function scList(){if(readerMode)return;$('#sc-list').innerHTML=scData().map((c,i)=>`<div class="sc-list-row"><strong>${esc(scName(c))}<br><small style="font-weight:400;color:#777">${esc(({message:'Após mensagem',chat:'Ao abrir conversa',time:'Após tempo',app:'Ao abrir app'})[c.trigger]||'Manual')} · ${c.lines?.length||0} falas</small></strong><button onclick="scEdit(${i})">Editar</button><button onclick="scPreview(${i})">Testar</button><button class="sc-danger" onclick="scRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p class="sc-help">Nenhuma chamada criada.</p>'}
 function scNew(){scDraft={id:'call-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),person:'',name:'',trigger:'message',app:'msg',chat:'',message:0,delay:2,lines:[{speaker:'caller',text:'',seconds:4}]};scEditor()}
 function scEdit(i){const c=scData()[i];if(c){scDraft=JSON.parse(JSON.stringify(c));scEditor()}}
 function scRemove(i){if(readerMode||!confirm('Excluir esta chamada?'))return;const c=scData()[i];if(scDraft?.id===c?.id){scDraft=null;$('#sc-editor').innerHTML=''}S.scriptedCalls.splice(i,1);save();scList()}
 function scEditor(){if(!scDraft)return;const d=scDraft,opts=(arr,v)=>arr.map(([k,n])=>`<option value="${esc(k)}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');const chats=scChats(d.app);const chat=chats.find(c=>String(c.id)===String(d.chat));const msgs=(chat?.msgs||[]).map((m,i)=>[i,m]).filter(([i,m])=>m.m!==2);$('#sc-editor').innerHTML=`<div class="sc-fields"><h3>Configurar chamada</h3><label>Personagem<select onchange="scDraft.person=this.value;scEditor()">${opts([['','Nome personalizado'],...S.chars.map(c=>[c.id,c.name])],d.person)}</select></label>${d.person?'':`<label>Nome de quem liga<input value="${esc(d.name)}" oninput="scDraft.name=this.value" placeholder="Nome do contato"></label>`}<label>Quando tocar<select onchange="scDraft.trigger=this.value;if(scDraft.trigger!=='app'&&!scApps[scDraft.app])scDraft.app='msg';scEditor()">${opts([['message','Após visualizar uma mensagem'],['chat','Ao abrir uma conversa'],['app','Ao abrir um aplicativo'],['time','Após desbloquear o iPhone']],d.trigger)}</select></label>${d.trigger!=='time'?`<label>Aplicativo<select onchange="scDraft.app=this.value;scDraft.chat='';scDraft.message=0;scEditor()">${opts(d.trigger==='app'?[...Object.entries(scApps),['ig','Instagram'],['mail','Mail'],['pho','Photos'],['map','Maps'],['wx','Weather'],['clk','Clock'],['ph','Phone'],['saf','Safari'],['nt','Notes'],['cal','Calendar'],['st','Settings']]:Object.entries(scApps),d.app)}</select></label>`:''}${['message','chat'].includes(d.trigger)?`<label>Conversa<select onchange="scDraft.chat=this.value;scDraft.message=-1;scEditor()">${opts([['','Selecionar conversa'],...chats.map(c=>[c.id,cname(c)])],d.chat)}</select></label>`:''}${d.trigger==='message'?`<label>Mensagem<select onchange="scDraft.message=+this.value">${opts([['-1','Selecionar mensagem'],...msgs.map(([i,m])=>[i,(m.m===1?'Me: ':'Contato: ')+String(m.t||'').slice(0,90)])],msgs.some(([i])=>i===d.message)?d.message:-1)}</select></label><p class="sc-help">A chamada começa quando a mensagem estiver visível na conversa, depois do atraso escolhido.</p>`:''}<label>Atraso (segundos)<input type="number" min="0" max="3600" value="${esc(d.delay)}" oninput="scDraft.delay=+this.value"></label><h3>Roteiro da ligação</h3><p class="sc-help">As legendas aparecem automaticamente. O leitor também pode avançar manualmente.</p>${d.lines.map((l,i)=>`<div class="sc-line"><div class="sc-line-top"><select aria-label="Quem fala" onchange="scDraft.lines[${i}].speaker=this.value">${opts([['caller','Quem liga'],['me','Dono do iPhone']],l.speaker)}</select><input aria-label="Duração em segundos" type="number" min="1" max="120" value="${esc(l.seconds)}" oninput="scDraft.lines[${i}].seconds=+this.value"><span>s</span><button onclick="scDraft.lines.splice(${i},1);scEditor()" aria-label="Remover fala">×</button></div><textarea placeholder="Escreva a fala..." oninput="scDraft.lines[${i}].text=this.value">${esc(l.text)}</textarea></div>`).join('')}<button onclick="scDraft.lines.push({speaker:'caller',text:'',seconds:4});scEditor()">+ Adicionar fala</button><div class="sc-two"><button onclick="scDraft=null;document.querySelector('#sc-editor').innerHTML=''">Cancelar</button><button class="sc-primary" onclick="scCommit()">Salvar chamada</button></div></div>`}
 function scCommit(){if(readerMode||!scDraft)return;const d=scDraft;if(!scPerson(d.person)&&!d.name.trim()){alert('Escolha um personagem ou informe um nome.');return}if(['chat','message'].includes(d.trigger)&&!scChats(d.app).some(c=>String(c.id)===String(d.chat))){alert('Selecione uma conversa.');return}if(d.trigger==='message'){const m=scChats(d.app).find(c=>String(c.id)===String(d.chat))?.msgs?.[d.message];if(!m||m.m===2){alert('Selecione uma mensagem.');return}d.messageText=m.t;d.messageType=m.m;d.messageTs=m.ts||null}d.lines=d.lines.filter(l=>String(l.text).trim()).map(l=>({...l,seconds:Math.max(1,Math.min(120,+l.seconds||4))}));if(!d.lines.length){alert('Adicione pelo menos uma fala.');return}d.delay=Math.max(0,Math.min(3600,+d.delay||0));if(!Array.isArray(S.scriptedCalls))S.scriptedCalls=[];const i=S.scriptedCalls.findIndex(c=>c.id===d.id);if(i<0)S.scriptedCalls.push(d);else S.scriptedCalls[i]=d;scDraft=null;$('#sc-editor').innerHTML='';save();scList()}
-function scReset(){scEpoch++;for(const t of scPending.values())clearTimeout(t);scPending.clear();scSeen.clear();clearInterval(scTimer);scActive=null;scLastView='';scStoryStart=0;scObserver?.disconnect();$('#sc-call').hidden=true;$('#sc-call').innerHTML='';scDraft=null;$('#sc-editor').innerHTML='';if(!readerMode&&!$('#sc-drawer').hidden)scList()}
+function scReset(){scEpoch++;for(const t of scPending.values())clearTimeout(t);scPending.clear();scSeen.clear();clearInterval(scTimer);scActive=null;scLastView='';scStoryStart=0;scObserver?.disconnect();$('#sc-call').hidden=true;$('#sc-call').innerHTML='';scDraft=null;$('#sc-editor').innerHTML='';if(!readerMode&&$('#narration').open)scList()}
 function scSchedule(c){if(!readerMode||!scReady||scSeen.has(c.id)||scPending.has(c.id))return;const epoch=scEpoch;const fire=()=>{if(epoch!==scEpoch)return;if(scActive){scPending.set(c.id,setTimeout(fire,400));return}scPending.delete(c.id);scSeen.add(c.id);scStart(c,false)};scPending.set(c.id,setTimeout(fire,Math.max(0,Math.min(3600,+c.delay||0))*1000))}
 function scTrack(){if(scIdentity!==IDX.cur||scStoryObject!==S){scIdentity=IDX.cur;scStoryObject=S;scReset()}if(!readerMode||!scReady)return;scObserver?.disconnect();if(!locked&&!scStoryStart){scStoryStart=Date.now();scData().filter(c=>c.trigger==='time').forEach(scSchedule)}const view=locked?'locked':String(cur||'home')+':'+String(cid||'');if(view!==scLastView){scLastView=view;if(!locked)scData().forEach(c=>{if(c.app===cur&&(c.trigger==='app'||(c.trigger==='chat'&&String(c.chat)===String(cid))))scSchedule(c)})}if(locked||!isMessenger(cur)||!cid)return;const chat=scChats(cur).find(c=>String(c.id)===String(cid));if(!chat)return;const relevant=scData().filter(c=>c.trigger==='message'&&c.app===cur&&String(c.chat)===String(cid)&&!scSeen.has(c.id)&&!scPending.has(c.id));if(!relevant.length)return;const root=$('#app');const targets=new Map();for(const c of relevant){const matches=m=>m&&m.m===c.messageType&&m.t===c.messageText&&(!c.messageTs||m.ts===c.messageTs);let index=+c.message;if(!matches(chat.msgs[index]))index=chat.msgs.findIndex(matches);const node=root.querySelector(`[data-sc-msg="${index}"]`);if(index>=0&&node){if(!targets.has(node))targets.set(node,[]);targets.get(node).push(c)}}if(!targets.size)return;scObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting&&e.intersectionRatio>=.6){for(const c of targets.get(e.target)||[])scSchedule(c);scObserver?.unobserve(e.target)}},{root,threshold:.6});targets.forEach((v,k)=>scObserver.observe(k))}
 let scStoryObject=null;
-function scPreview(i){if(readerMode)return;const c=scData()[i];if(c&&!scActive){scClose();scStart(c,true)}}
+async function scPreview(i){if(readerMode)return;const c=scData()[i],story=S;if(c&&!scActive){await narrationClose();if(S!==story||scActive)return;if(matchMedia('(max-width:760px)').matches)mobileView('phone');scStart(c,true)}}
 function scStart(c,preview){if(scActive)return;if(ccOpen)closeCC();scActive={c,preview,phase:'ringing',index:0,started:0,deadline:Date.now()+30000};scPaint();clearInterval(scTimer);scTimer=setInterval(scTick,200)}
 function scAccept(){if(scActive?.phase!=='ringing')return;scActive.phase='active';scActive.started=Date.now();scActive.index=0;scActive.deadline=Date.now()+Math.max(1,+scActive.c.lines?.[0]?.seconds||4)*1000;scPaint()}
 function scNext(){if(scActive?.phase!=='active')return;const a=scActive;if(++a.index>=a.c.lines.length){scFinish('in');return}a.deadline=Date.now()+Math.max(1,+a.c.lines[a.index].seconds||4)*1000;scPaint()}
@@ -1540,22 +1748,18 @@ function mobileView(view,scroll=true){
  if(readerMode)return;
  document.body.dataset.mobileView=view;
  document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===view)));
- if(view!=='calls')scClose();
- if(view==='calls'){document.body.dataset.mobileView='phone';scOpen()}
  if(scroll)window.scrollTo(0,0);
  if(view==='phone')requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
 }
-function mobileSyncCalls(){const b=document.querySelector('.mobile-editor-nav [data-view="calls"]');if(b)b.hidden=!scPanelAllowed()}
 if(!readerMode){
  document.body.dataset.mobileView='phone';
  document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.addEventListener('click',()=>mobileView(b.dataset.view)));
- const drawer=$('#sc-drawer');new MutationObserver(()=>{if(drawer.hidden&&document.body.dataset.mobileView==='phone'){document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view==='phone')))}}).observe(drawer,{attributes:true,attributeFilter:['hidden']});
  matchMedia('(max-width:760px)').addEventListener('change',()=>mobileView('phone',false));
 }
 
 
 /* Fictional location and narrative events v6.1 */
-let narrationCalls=false;let locationPick=null, findTab='people', findSelected=-1;
+let locationPick=null, findTab='people', findSelected=-1;
 function storyLocation(){const p=S.storyLocation;return Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)?p:[127.8,36.2]}
 function findPeople(){return Array.isArray(S.findPeople)?S.findPeople:[]}
 function beginLocationPick(kind,index=-1){if(readerMode)return;locationPick={kind,index,story:S};mapPinMode=true;mapPinMove=null;globeOpen=false;if(matchMedia('(max-width:760px)').matches)mobileView('phone');R();refreshPinMode();const hint=$('#mapPinHint');if(hint)hint.firstChild.textContent='Escolha a localização fictícia ';}
@@ -1572,17 +1776,19 @@ function drawStoryMarkersOnline(){if(!onlineMap||!mapReady)return;const dot=docu
 function drawStoryMarkersOffline(g,project){const dot=(xy,color,r)=>{const [x,y]=project(...xy);g.beginPath();g.arc(x,y,r+9,0,Math.PI*2);g.fillStyle=color+'30';g.fill();g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fillStyle=color;g.fill();g.strokeStyle='white';g.lineWidth=3;g.stroke();return [x,y]};dot(storyLocation(),'#168bff',7);if(cur==='find')findPeople().forEach(p=>{if(!Array.isArray(p.xy)||!p.xy.every(Number.isFinite))return;const [x,y]=dot(p.xy,'#30b85a',12);g.font='bold 12px Arial';g.fillStyle='white';g.fillText(findName(p).slice(0,1),x,y)})}
 let narDraft=null,narStory=null,narSeen=new Set(),narTimers=new Map(),narObserver=null,narStarted=false,narBannerTimer=0,narSession=0;
 function storyEvents(){return Array.isArray(S.storyEvents)?S.storyEvents:[]}
-function narrationOpen(){if(readerMode)return;$('#narration').hidden=false;narrationList()}
-function narrationClose(){$('#narration').hidden=true;$('#nar-form').innerHTML='';narDraft=null}
-function scOpenFromNarration(){if(readerMode)return;narrationCalls=true;$('#sc-drawer').hidden=false;scList();if(!scDraft)$('#sc-editor').innerHTML=''}
-function narrationList(){if(readerMode)return;$('#nar-list').innerHTML=storyEvents().map((e,i)=>`<div class="nar-row"><div><b>${e.kind==='message'?'Mensagem':'Notificação'}</b><small>${esc(e.text||e.title)} · ${esc(FN[e.targetApp]||e.targetApp)} · ${e.delay}s</small></div><button onclick="eventForm('${e.kind}',${i})">Editar</button><button onclick="eventRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p>Nenhum evento programado.</p>'}
+function narrationOpen(){const dialog=$('#narration');if(readerMode||dialog.open)return;narrationList();scList();openEditorDialog(dialog)}
+function narrationClose(){return closeEditorDialog($('#narration'))}
+function narrationSection(section){const calls=section==='calls';$('#nar-events').hidden=calls;$('#nar-calls').hidden=!calls;$('#nar-events-tab').setAttribute('aria-pressed',String(!calls));$('#nar-calls-tab').setAttribute('aria-pressed',String(calls))}
+$('#narration').addEventListener('close',()=>{$('#nar-form').innerHTML='';narDraft=null});
+$('#narration').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)narrationClose()});
+function narrationList(){if(readerMode)return;$('#nar-list').innerHTML=storyEvents().map((e,i)=>`<div class="nar-row"><div><b>${e.kind==='message'?'Mensagem':'Notificação'}</b><small>${esc(e.text||e.title)} · ${esc(FN[e.targetApp]||e.targetApp)} · ${e.delay}s</small></div><button onclick="eventForm('${e.kind}',${i})">Editar</button><button onclick="eventRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p class="nar-empty">Nenhum evento programado.</p>'}
 function eventRemove(i){if(readerMode)return;S.storyEvents.splice(i,1);save();narrationList()}
 function eventForm(kind,i=-1){if(readerMode)return;narDraft=i<0?{id:'event-'+Date.now()+'-'+Math.random().toString(36).slice(2),kind,targetApp:'msg',targetChat:'',person:'',text:'',title:'',trigger:'time',app:'msg',chat:'',message:-1,delay:5}:JSON.parse(JSON.stringify(storyEvents()[i]));eventEditor()}
 function eventEditor(){const d=narDraft;if(!d)return;const opts=(a,v)=>a.map(([k,n])=>`<option value="${esc(String(k))}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');const sel=(k,label,a,refresh=true)=>`<label>${label}<select onchange="narDraft.${k}=this.value;${k==='trigger'?"if(['chat','message'].includes(narDraft.trigger)&&!scApps[narDraft.app])narDraft.app='msg';":k==='app'?"narDraft.chat='';narDraft.message=-1;":k==='chat'?"narDraft.message=-1;":k==='targetApp'?"narDraft.targetChat='';narDraft.person='';":k==='targetChat'?"narDraft.person='';":''}${refresh?'eventEditor()':''}">${opts(a,d[k])}</select></label>`;const chats=activeChatsFor(d.app),chat=chats.find(c=>String(c.id)===String(d.chat)),target=activeChatsFor(d.targetApp).find(c=>String(c.id)===String(d.targetChat));$('#nar-form').innerHTML=`<h3>${d.kind==='message'?'Mensagem programada':'Notificação dinâmica'}</h3>${sel('targetApp','Aplicativo de destino',d.kind==='message'?Object.entries(scApps):Object.entries(FN))}${d.kind==='message'?sel('targetChat','Conversa',[['','Selecione'],...activeChatsFor(d.targetApp).map(c=>[c.id,cname(c)])])+sel('person','Remetente',[['','Primeiro participante'],...(target?.mem||[]).map(id=>[id,ch(id).name])],false):`<label>Título<input value="${esc(d.title)}" oninput="narDraft.title=this.value"></label>`}<label>Texto<textarea oninput="narDraft.text=this.value">${esc(d.text)}</textarea></label>${sel('trigger','Quando acontece',[['time','Após desbloquear'],['app','Ao abrir aplicativo'],['chat','Ao abrir conversa'],['message','Após visualizar mensagem']])}${d.trigger!=='time'?sel('app','Aplicativo gatilho',d.trigger==='app'?Object.entries(FN):Object.entries(scApps)):''}${['chat','message'].includes(d.trigger)?sel('chat','Conversa gatilho',[['','Selecione'],...chats.map(c=>[c.id,cname(c)])]):''}${d.trigger==='message'?sel('message','Mensagem gatilho',[[-1,'Selecione'],...(chat?.msgs||[]).map((m,i)=>[i,m]).filter(([i,m])=>m.m!==2).map(([i,m])=>[i,m.t])],false):''}<label>Atraso em segundos<input type="number" min="0" max="3600" value="${esc(String(d.delay))}" oninput="narDraft.delay=+this.value"></label><div class="nar-actions"><button onclick="eventCommit()">Salvar evento</button><button onclick="narDraft=null;document.getElementById('nar-form').innerHTML=''">Cancelar</button></div>`}
 function eventCommit(){const d=narDraft;if(readerMode||!d)return;if(!d.text.trim()||(d.kind==='notification'&&!d.title.trim()))return alert('Preencha o texto e o título quando necessário.');if(d.kind==='message'&&!activeChatsFor(d.targetApp).some(c=>String(c.id)===String(d.targetChat)))return alert('Selecione a conversa de destino.');if(['chat','message'].includes(d.trigger)){const c=activeChatsFor(d.app).find(c=>String(c.id)===String(d.chat));if(!c)return alert('Selecione a conversa gatilho.');if(d.trigger==='message'){const m=c.msgs[+d.message];if(!m||m.m===2)return alert('Selecione a mensagem gatilho.');d.messageText=m.t;d.messageType=m.m;d.messageTs=m.ts||null}}d.delay=Math.max(0,Math.min(3600,+d.delay||0));if(!Array.isArray(S.storyEvents))S.storyEvents=[];const i=S.storyEvents.findIndex(e=>e.id===d.id);if(i<0)S.storyEvents.push(d);else S.storyEvents[i]=d;save();narDraft=null;$('#nar-form').innerHTML='';narrationList()}
 function storyEventReset(){narSession++;narTimers.forEach(clearTimeout);narTimers.clear();narSeen.clear();narStarted=false;narObserver?.disconnect();clearTimeout(narBannerTimer);$('#story-banner').hidden=true}
 function storyEventSchedule(e){if(!readerMode||narSeen.has(e.id)||narTimers.has(e.id))return;const session=narSession;narTimers.set(e.id,setTimeout(()=>{narTimers.delete(e.id);if(session!==narSession)return;narSeen.add(e.id);storyEventFire(e)},Math.max(0,Math.min(3600,+e.delay||0))*1000))}
-function storyEventFire(e){let title=e.title,body=e.text;if(e.kind==='message'){const c=activeChatsFor(e.targetApp).find(c=>String(c.id)===String(e.targetChat));if(!c)return;const sender=c.mem.find(id=>String(id)===String(e.person))??c.mem[0];c.msgs.push({m:0,s:sender,t:e.text,ts:nowTs()});c.unread=!(cur===e.targetApp&&String(cid)===String(c.id));title=ch(sender).name}const n={app:e.targetApp,title:title||FN[e.targetApp],body,time:'now'};S.notifs.unshift(n);R();const banner=$('#story-banner');if(!locked){banner.innerHTML=`<div class="nar-banner-row"><div class="ic">${iconOf(n.app)}</div><div><small>${esc(FN[n.app]||'Notification')} · now</small><p><b>${esc(n.title)}</b></p><p>${esc(n.body)}</p></div></div>`;banner.hidden=false;banner.onclick=()=>{banner.hidden=true;if(visibleApps().includes(n.app)){go(n.app);if(e.kind==='message'){const c=activeChatsFor(n.app).find(c=>String(c.id)===String(e.targetChat));if(c){cid=c.id;c.unread=false;R()}}}};clearTimeout(narBannerTimer);narBannerTimer=setTimeout(()=>banner.hidden=true,6500)}}
+function storyEventFire(e){let title=e.title,body=e.text,contact='';if(e.kind==='message'){const c=activeChatsFor(e.targetApp).find(c=>String(c.id)===String(e.targetChat));if(!c)return;const sender=c.mem.find(id=>String(id)===String(e.person))??c.mem[0];c.msgs.push({m:0,s:sender,t:e.text,ts:nowTs()});c.unread=!(cur===e.targetApp&&String(cid)===String(c.id));title=ch(sender).name;contact=c.mem.length>1?cname(c):title}const n={app:e.targetApp,title:title||FN[e.targetApp],body,time:'now',createdAt:Date.now(),...(contact?{contact}:{})};S.notifs.push(n);R();const banner=$('#story-banner');if(!locked){banner.innerHTML=`<div class="nar-banner-row"><div class="ic">${iconOf(n.app)}</div><div><small>${esc(FN[n.app]||'Notification')} · now</small><p><b>${esc(n.title)}</b></p><p>${esc(n.body)}</p></div></div>`;banner.hidden=false;banner.onclick=()=>{banner.hidden=true;if(visibleApps().includes(n.app)){go(n.app);if(e.kind==='message'){const c=activeChatsFor(n.app).find(c=>String(c.id)===String(e.targetChat));if(c){cid=c.id;c.unread=false;R()}}}};clearTimeout(narBannerTimer);narBannerTimer=setTimeout(()=>banner.hidden=true,6500)}}
 function storyEventTrack(){if(narStory!==S){narStory=S;storyEventReset()}if(!readerMode||!scReady)return;narObserver?.disconnect();if(!locked&&!narStarted){narStarted=true;storyEvents().filter(e=>e.trigger==='time').forEach(storyEventSchedule)}if(locked)return;const targets=new Map();for(const e of storyEvents()){if(narSeen.has(e.id)||narTimers.has(e.id))continue;if(e.app!==cur)continue;if(e.trigger==='app'||(e.trigger==='chat'&&String(e.chat)===String(cid)))storyEventSchedule(e);if(e.trigger==='message'&&isMessenger(cur)&&String(e.chat)===String(cid)){const c=activeChatsFor(cur).find(c=>String(c.id)===String(cid));const matches=m=>m&&m.m===e.messageType&&m.t===e.messageText&&(!e.messageTs||m.ts===e.messageTs);let i=+e.message;if(!matches(c?.msgs[i]))i=c?.msgs.findIndex(matches)??-1;const node=$('#app').querySelector(`[data-sc-msg="${i}"]`);if(i>=0&&node){if(!targets.has(node))targets.set(node,[]);targets.get(node).push(e)}}}if(targets.size){narObserver=new IntersectionObserver(entries=>{for(const en of entries)if(en.isIntersecting&&en.intersectionRatio>=.6){(targets.get(en.target)||[]).forEach(storyEventSchedule);narObserver.unobserve(en.target)}},{root:$('#app'),threshold:.6});targets.forEach((v,k)=>narObserver.observe(k))}}
 
 
@@ -1651,4 +1857,4 @@ function chatPickImage(igId=null,mine=true,viewOnce=false){if(readerMode)return;
 
 if(!readerMode)R();
 boot().then(()=>{scReady=true;scTrack();storyEventTrack()});
-</script></body></html>
+</script><script src="editor-panels.js" defer></script><script src="photo-editor.js" defer></script><script src="story-planner.js" defer></script><script src="form-previews.js" defer></script></body></html>
