@@ -40,7 +40,8 @@ body{display:grid;place-items:center;overflow:hidden;background:radial-gradient(
   function fit(){
     const vw=window.visualViewport?window.visualViewport.width:window.innerWidth;
     const vh=window.visualViewport?window.visualViewport.height:window.innerHeight;
-    const scale=Math.min(1,(vw-32)/390,(vh-32)/844);
+    const margin=vw<=600?12:32;
+    const scale=Math.min(1,(vw-margin)/390,(vh-margin)/844);
     device.style.transform='translate(-50%,-50%) scale('+Math.max(.1,scale)+')';
   }
   addEventListener('resize',fit,{passive:true});

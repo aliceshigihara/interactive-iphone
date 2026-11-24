@@ -421,6 +421,40 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .globe-credit{z-index:12;bottom:7px!important;left:auto!important;right:9px;padding:2px 4px;background:#ffffffdf;border-radius:3px;font-size:9px!important;pointer-events:auto}.globe-credit a{color:#344653;text-decoration:none}.globe-map:has(.globe-recents) .globe-credit{bottom:auto!important;top:48px}
 
 .ofm-vector{position:absolute;inset:0;z-index:1}.ofm-vector .maplibregl-canvas{outline:none}.ofm-vector .maplibregl-ctrl-top-left{top:44px;left:8px;right:8px}.ofm-vector .maplibregl-ctrl-attrib{font-size:10px!important;line-height:15px!important;background:#ffffffe8!important;border-radius:5px!important;margin:0!important;max-width:100%;white-space:normal}.ofm-vector .maplibregl-ctrl-attrib a{color:#273b48!important}.globe-tools,.globe-sheet{z-index:5}.ofm-status{position:absolute;top:67px;left:12px;right:12px;z-index:6;font-size:11px;text-align:center;background:#ffffffe5;padding:5px;border-radius:8px;color:#425363;pointer-events:none}.ofm-status[hidden],.globe-credit[hidden]{display:none!important}.ofm-pin{width:12px;height:12px;background:#087aff;border:2px solid white;border-radius:50%;box-shadow:0 1px 5px #0004}
+
+/* v5.6 — responsive editor; reader and desktop retain their own layout. */
+.mobile-editor-nav,.mobile-panel-heading{display:none}
+@media(max-width:760px){
+ html:not(.reader-mode){overflow-x:hidden}
+ html:not(.reader-mode) body{display:block;max-width:100%;min-height:100dvh;padding:12px 10px calc(92px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+ html:not(.reader-mode) .ph{position:relative;top:auto;margin:0 auto;width:min(390px,100%);height:clamp(620px,calc(100dvh - 110px),844px);min-height:0;border-radius:44px;padding:7px;box-shadow:0 0 0 1px #38383b,0 10px 30px #0003}
+ html:not(.reader-mode) .scr{border-radius:37px}
+ html:not(.reader-mode) .col{display:none;width:100%;max-width:540px;margin:0 auto;gap:12px}
+ html:not(.reader-mode) body[data-mobile-view="edit"] .col{display:flex}
+ html:not(.reader-mode) body[data-mobile-view="edit"] .col+.col{margin-top:12px}
+ html:not(.reader-mode) body[data-mobile-view="edit"] .ph,html:not(.reader-mode) body[data-mobile-view="stories"] .ph{display:none}
+ html:not(.reader-mode) .story-drawer{display:none;position:static;width:100%;max-width:540px;margin:0 auto;filter:none}
+ html:not(.reader-mode) .story-drawer::after{display:none}
+ html:not(.reader-mode) .story-drawer .pc{width:100%;max-height:none;overflow:visible}
+ html:not(.reader-mode) body[data-mobile-view="stories"] .story-drawer{display:block}
+ html:not(.reader-mode) .mobile-editor-nav{position:fixed;z-index:89;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:5px;padding:8px 10px calc(8px + env(safe-area-inset-bottom,0px));background:#f9f9fbed;border-top:1px solid #d8d8df;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+ .mobile-editor-nav button{flex:1;max-width:150px;min-height:51px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:0;background:transparent;color:#62646c;border-radius:17px;font-size:11px;font-weight:650;cursor:pointer}
+ .mobile-editor-nav button[aria-selected="true"]{background:#e3e5ec;color:#15171c}.mobile-editor-nav svg{width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+ html:not(.reader-mode) .pc{min-width:0;max-width:100%;padding:15px;overflow-wrap:anywhere;backdrop-filter:none;-webkit-backdrop-filter:none}
+ html:not(.reader-mode) .pc button,html:not(.reader-mode) .sc-drawer button{min-height:44px;white-space:normal}
+ html:not(.reader-mode) .pc input:not([type=checkbox]):not([type=range]),html:not(.reader-mode) .pc select,html:not(.reader-mode) .pc textarea,.pmod input:not([type=checkbox]),.pmod select,.pmod textarea,.sc-drawer input:not([type=checkbox]),.sc-drawer select,.sc-drawer textarea{max-width:100%;min-width:0;font-size:16px!important;min-height:40px}
+ .pc .input-card{min-width:0}.pc .row2b>*{min-width:0;flex-wrap:wrap}.pc .weather-quick{flex-wrap:wrap}.pc .forecast-edit{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,48px) minmax(0,48px) 28px;gap:4px}.pc .forecast-edit input,.pc .forecast-edit select{padding:4px!important}
+ html:not(.reader-mode) .sc-launch{display:none!important}.mobile-editor-nav button[hidden]{display:none!important}
+ html:not(.reader-mode) .sc-drawer{top:0;bottom:calc(70px + env(safe-area-inset-bottom,0px));width:100%;max-width:540px;left:50%;right:auto;transform:translateX(-50%);z-index:88;border-radius:0 0 22px 22px;padding:16px;overscroll-behavior:contain}
+ html:not(.reader-mode) .pmod{padding:10px;align-items:center}.pmod .mb{max-height:calc(100dvh - 24px);max-width:100%;overscroll-behavior:contain}.pmod .mb button{min-height:44px}
+ html:not(.reader-mode) .scr input:not([type=range]),html:not(.reader-mode) .scr textarea{font-size:16px!important}
+ html:not(.reader-mode) .home .w{height:clamp(116px,20dvh,160px)}
+ html:not(.reader-mode) .home .grid{max-height:calc(100% - 250px);gap:15px 4px}
+ html:not(.reader-mode) .home .ap,html:not(.reader-mode) .home .ic{width:clamp(44px,15vw,60px);height:clamp(44px,15vw,60px)}
+ html:not(.reader-mode) .home .dock{height:80px}
+}
+@media(max-width:370px){html:not(.reader-mode) .sb{padding-left:16px;padding-right:16px}html:not(.reader-mode) .di{width:84px}html:not(.reader-mode) .home{padding-left:10px;padding-right:10px}html:not(.reader-mode) .home .w{padding:10px}.pc .general-grid,.pc .weather-grid{grid-template-columns:minmax(0,1fr)}.pc .forecast-edit{grid-template-columns:1fr 1fr}.pc .forecast-edit button{grid-column:span 2}}
+
 </style></head><body>
 <script>if(new URLSearchParams(location.search).get('reader')==='1')document.documentElement.classList.add('reader-mode');</script>
 <svg width="0" height="0" style="position:absolute"><defs>
@@ -433,6 +467,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6a76"/><stop offset="1" stop-color="#fa2a40"/></linearGradient>
 <radialGradient id="gI" cx=".3" cy="1.05" r="1.15"><stop offset="0" stop-color="#fdf497"/><stop offset=".08" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".95" stop-color="#285aeb"/></radialGradient>
 </defs></svg>
+<nav class="mobile-editor-nav" aria-label="Navegação do editor">
+<button type="button" data-view="phone" aria-selected="true"><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg>iPhone</button>
+<button type="button" data-view="edit" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="8" cy="6" r="2" fill="#f9f9fb"/><circle cx="15" cy="12" r="2" fill="#f9f9fb"/><circle cx="10" cy="18" r="2" fill="#f9f9fb"/></svg>Editar</button>
+<button type="button" data-view="stories" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Histórias</button>
+<button type="button" data-view="calls" hidden aria-selected="false"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>Chamadas</button>
+</nav>
 <div class="ph"><div class="scr" id="scr">
 <div class="di"></div><div class="sb dark" id="statusbar"><span id="t1" style="color:#111!important;-webkit-text-fill-color:#111!important">2:31</span><span id="statusicons" style="color:#111!important"><svg data-status-icon width="18" height="12" viewBox="0 0 18 12"><rect fill="#111" y="8" width="3" height="4" rx="1"/><rect fill="#111" x="5" y="5.5" width="3" height="6.5" rx="1"/><rect fill="#111" x="10" y="3" width="3" height="9" rx="1"/><rect fill="#111" x="15" width="3" height="12" rx="1"/></svg><svg data-status-icon width="16" height="12" viewBox="0 0 16 12"><path fill="#111" d="M8 11.500 10.200 9a3.200 3.200 0 00-4.400 0zM3.600 6.700a6.600 6.600 0 018.800 0l1.300-1.500a8.600 8.600 0 00-11.400 0zM.9 3.700a10.500 10.500 0 0114.200 0L16 2.800a12.400 12.400 0 00-16 0z"/></svg><svg data-status-icon width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="22" height="12" rx="3.500" fill="none" stroke="#111" opacity=".45"/><rect id="bf" x="2" y="2" width="19" height="9" rx="2" fill="#111"/><rect x="24" y="4.500" width="2" height="4" rx="1" fill="#111" opacity=".5"/></svg></span></div>
 <div class="home wp" id="hm"><div class="wgs" id="wg"></div><div class="grid" id="gr"></div><div class="dock" id="dk"></div></div>
@@ -673,7 +713,7 @@ $('#cropCancel').onclick=()=>{host.style.display='none';resolve('')};
 $('#cropOk').onclick=()=>{const result=canvas.toDataURL('image/jpeg',.86);host.style.display='none';resolve(result)};
 };image.src=fr.result};fr.readAsDataURL(file)})
 }
-function form(title,fs,ok,host='#md'){if(readerMode)return;const m=$(host);m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${o.v}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v||'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${o.v}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v||'')}">`}</label>`).join('')}<div class="bt"><button onclick="$('${host}').style.display='none'">${host=='#md'?'Cancel':'Cancelar'}</button><button id="okb">${host=='#md'?'Save':'OK'}</button></div></div>`;m.style.display='flex';
+function form(title,fs,ok,host='#md'){if(readerMode)return;if(host==='#md'&&matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone')host='#pm';const m=$(host);m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${o.v}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v||'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${o.v}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v||'')}">`}</label>`).join('')}<div class="bt"><button onclick="$('${host}').style.display='none'">${host=='#md'?'Cancel':'Cancelar'}</button><button id="okb">${host=='#md'?'Save':'OK'}</button></div></div>`;m.style.display='flex';
 const okb=m.querySelector('#okb');okb.onclick=async()=>{okb.disabled=true;try{const v={},fields=fs.map(f=>[f,m.querySelector('#f_'+f.k)]);for(const [f,e] of fields){if(!e)continue;if(f.t==='file'){if(f.m){v[f.k]=[];for(const file of [...e.files]){const cropped=await cropImageFile(file,cropRatio(f.k),900);if(cropped)v[f.k].push(cropped)}}else v[f.k]=e.files[0]?await cropImageFile(e.files[0],cropRatio(f.k),900):''}else v[f.k]=f.t==='chk'? [...e.querySelectorAll('input:checked')].map(x=>x.value):e.value}await ok(v);m.style.display='none';save();R()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}}}
 const charOpts=()=>S.chars.map(c=>({v:c.id,l:c.name}));
 /* Painel */
@@ -1349,7 +1389,7 @@ function scPerson(id){return S.chars.find(x=>String(x.id)===String(id))||null}
 function scName(c){return scPerson(c.person)?.name||c.name||'Unknown Caller'}
 function scChats(app){return activeChatsFor(app)||[]}
 function scPanelAllowed(){return !readerMode&&!locked&&(['ph','msg','wa','ka'].includes(cur)||(cur==='ig'&&['inbox','dm','newdm'].includes(igv?.t)))}
-function scSyncVisibility(){const allowed=scPanelAllowed();$('#sc-launch').hidden=!allowed;if(!allowed)scClose()}
+function scSyncVisibility(){const allowed=scPanelAllowed();$('#sc-launch').hidden=!allowed;if(!allowed)scClose();mobileSyncCalls()}
 function scOpen(){if(!scPanelAllowed())return;$('#sc-drawer').hidden=false;scList();if(!scDraft)$('#sc-editor').innerHTML=''}
 function scClose(){$('#sc-drawer').hidden=true}
 function scList(){if(readerMode)return;$('#sc-list').innerHTML=scData().map((c,i)=>`<div class="sc-list-row"><strong>${esc(scName(c))}<br><small style="font-weight:400;color:#777">${esc(({message:'Após mensagem',chat:'Ao abrir conversa',time:'Após tempo',app:'Ao abrir app'})[c.trigger]||'Manual')} · ${c.lines?.length||0} falas</small></strong><button onclick="scEdit(${i})">Editar</button><button onclick="scPreview(${i})">Testar</button><button class="sc-danger" onclick="scRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p class="sc-help">Nenhuma chamada criada.</p>'}
@@ -1370,6 +1410,25 @@ function scFinish(dir){const a=scActive;if(!a)return;clearInterval(scTimer);scAc
 function scTick(){const a=scActive;if(!a)return;if(Date.now()>=a.deadline){if(a.phase==='ringing')scFinish('miss');else scNext();return}if(a.phase==='active'){const e=$('#sc-elapsed'),t=Math.floor((Date.now()-a.started)/1000);if(e)e.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
 function scPaint(){const a=scActive,c=a.c,p=scPerson(c.person),name=scName(c),box=$('#sc-call'),ring=a.phase==='ringing',l=c.lines?.[a.index];const round=(label,path,cls='',action='')=>`<button type="button" ${action?`onclick="${action}"`:'disabled'}><span class="sc-round ${cls}">${scIcon(path)}</span>${label}</button>`;box.hidden=false;box.innerHTML=`<div class="sc-top">${esc(S.time)}</div>${p?.photo&&/^data:image\//.test(p.photo)?`<img class="sc-avatar" src="${esc(p.photo)}" alt="">`:`<div class="sc-avatar">${esc(name.trim().charAt(0).toUpperCase())}</div>`}<h2>${esc(name)}</h2><div class="sc-status" id="sc-elapsed">${ring?'Incoming call':'00:00'}</div>${ring?`<div class="sc-actions">${round('Decline',scPhone,'sc-red',"scFinish('miss')")}${round('Accept',scPhone,'sc-green','scAccept()')}</div>`:`<div class="sc-caption" aria-live="polite"><b>${esc(l?.speaker==='me'?(S.owner?.name||'Me'):name)}</b><p>${esc(l?.text||'')}</p><div class="sc-progress">${a.index+1} / ${c.lines.length}</div><button class="sc-next" onclick="scNext()">Next ›</button></div><div class="sc-controls">${round('Mute','<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>','','scToggleControl(this)')}${round('Keypad','<path d="M6 5h.1M12 5h.1M18 5h.1M6 12h.1M12 12h.1M18 12h.1M6 19h.1M12 19h.1M18 19h.1" stroke-width="4"/>')}${round('Speaker','<path d="M3 9h4l5-5v16l-5-5H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/>','','scToggleControl(this)')}</div><div class="sc-actions">${round('End',scPhone,'sc-red',"scFinish('in')")}</div>`}<div class="sc-home"></div>`}
 function scToggleControl(el){el.setAttribute('aria-pressed',String(el.getAttribute('aria-pressed')!=='true'))}
+
+
+/* Mobile editor navigation, without recreating form fields or story state. */
+function mobileView(view,scroll=true){
+ if(readerMode)return;
+ document.body.dataset.mobileView=view;
+ document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===view)));
+ if(view!=='calls')scClose();
+ if(view==='calls'){document.body.dataset.mobileView='phone';scOpen()}
+ if(scroll)window.scrollTo(0,0);
+ if(view==='phone')requestAnimationFrame(()=>window.dispatchEvent(new Event('resize')));
+}
+function mobileSyncCalls(){const b=document.querySelector('.mobile-editor-nav [data-view="calls"]');if(b)b.hidden=!scPanelAllowed()}
+if(!readerMode){
+ document.body.dataset.mobileView='phone';
+ document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.addEventListener('click',()=>mobileView(b.dataset.view)));
+ const drawer=$('#sc-drawer');new MutationObserver(()=>{if(drawer.hidden&&document.body.dataset.mobileView==='phone'){document.querySelectorAll('.mobile-editor-nav [data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view==='phone')))}}).observe(drawer,{attributes:true,attributeFilter:['hidden']});
+ matchMedia('(max-width:760px)').addEventListener('change',()=>mobileView('phone',false));
+}
 
 if(!readerMode)R();
 boot().then(()=>{scReady=true;scTrack()});
