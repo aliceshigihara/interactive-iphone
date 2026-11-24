@@ -47,6 +47,15 @@ const {resolveFormPreview, mountFormPreview} = (() => {
     if (has('handle','subs','ytbanner')) return card('yt', v => `<div class="fp-banner">${photo(v.ytbanner||base.banner)}</div><div class="fp-social-head">${avatar(v.name,v.photo||base.photo,53)}<div><b>${text(v.name,'Nome do canal')}</b><small>@${text(v.handle?.replace(/^@/,''),'username')} · ${text(v.subs,'0')} inscritos</small></div></div><p class="fp-copy">${text(v.bio)}</p>`);
     if (has('name','text','likes')) return card('yt', v => `<div class="fp-social-head">${avatar(v.name,'',35)}<b>${text(v.name,'Nome')}</b></div><p class="fp-copy">${text(v.text,'Comentário')}</p><small>♡ ${text(v.likes,'0')}</small>`);
     if (has('dir','sub','n')) return card('ph', v => `<div class="fp-recents"><div>${PH_I}</div><div><b class="${v.dir==='miss'?'fp-missed':''}">${text(v.name,'Contato')}${+v.n>1?` (${count(v.n)})`:''}</b><small>${text(v.sub,'mobile')}</small></div><small>${text(v.ts ? fList(fromL(v.ts)) : '')}</small></div>`);
+    if (has('favoriteContact')) return card('ph', v => {
+      const p=S.chars.find(c=>String(c.id)===v.favoriteContact);
+      return `<div class="fp-social-head">${avatar(p?.name,p?.photo,39)}<div><b>${text(p?.name,'Contato')}</b><small>${text(p?.phone||p?.email,'Favorite')}</small></div></div>`;
+    });
+    if (has('transcript','personId')) return card('ph', v => {
+      const p=S.chars.find(c=>String(c.id)===v.personId),name=p?.name||v.caller;
+      const poster=PhoneApp.voicemailPoster({...v,poster:base.poster});
+      return `<div class="fp-live-voicemail${poster?' has-poster':''}">${photo(poster)}<div><small>Voicemail</small><h3>${text(name,'Remetente')}</h3></div><p class="fp-copy">${text(v.transcript,'Waiting…')}</p><div class="fp-live-buttons"><span>${p?'Message':'Block'}</span><span>Accept</span></div></div>`;
+    });
     if (has('city','off')) return card('clk', v => {
       const d = new Date(nowTs()); d.setHours(d.getHours()+(Number(v.off)||0));
       return `<div class="fp-recents"><div><b>${text(v.city,'Cidade')}</b><small>${text(v.off,'0')} HRS</small></div><strong>${text(fT(+d))}</strong></div>`;

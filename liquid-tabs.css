@@ -1,0 +1,121 @@
+#app .liquid-tabs {
+  --glass-accent: #087bea;
+  --glass-ink: #16171a;
+  --glass-bg: #ffffffc7;
+  --glass-lens-fill: #e7eaf1b5;
+  --glass-edge: #ffffffec;
+  --glass-shadow: #1b294823;
+  --glass-pad: 5px;
+  display: grid;
+  grid-template-columns: repeat(var(--glass-count),minmax(0,1fr));
+  align-items: stretch;
+  justify-content: normal;
+  isolation: isolate;
+  padding: 4px var(--glass-pad);
+  min-height: 55px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 999px;
+  background: var(--glass-bg);
+  box-shadow: 0 4px 14px var(--glass-shadow), inset 0 1px 2px var(--glass-edge);
+  -webkit-backdrop-filter: blur(20px) saturate(175%);
+  backdrop-filter: blur(20px) saturate(175%);
+  touch-action: pan-y;
+  user-select: none;
+  overflow: visible;
+}
+#app :is(.phone-tabbar,.x-nav,.yt-nav).liquid-tabs {
+  position: relative;
+  flex: none;
+  margin: 0 11px 20px;
+}
+#app .clock-tabs.liquid-tabs {
+  --glass-ink: #f6f5fa;
+  --glass-accent: #ffae32;
+  --glass-bg: #26272bd6;
+  --glass-lens-fill: #424348d6;
+  --glass-edge: #ffffff30;
+  --glass-shadow: #0006;
+}
+#app .third-tabs.liquid-tabs {
+  --glass-accent: #137d48;
+}
+#app .liquid-tabs > button, #app .liquid-tabs .liquid-tabs-copy > span {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  min-width: 0;
+  min-height: 45px;
+  padding: 2px 0;
+  border: 0;
+  border-radius: 30px;
+  background: none;
+  color: var(--glass-ink) !important;
+  font-size: clamp(8px, 1.9cqi, 10px);
+  font-weight: 550;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+#app .liquid-tabs > button:is(:hover,:active) { background: none; transform: none; }
+#app .liquid-tabs > button:focus-visible { outline: 2px solid var(--glass-accent); outline-offset: -2px; z-index: 3; }
+#app .liquid-tabs :is(button,.liquid-tabs-copy) svg { width: 22px; height: 22px; flex: none; }
+#app .liquid-tabs-lens {
+  --glass-lens-width: var(--glass-width);
+  --glass-zoom: 1;
+  position: absolute;
+  z-index: 2;
+  top: 3px;
+  bottom: 3px;
+  left: var(--glass-x);
+  width: var(--glass-lens-width);
+  transform: translateX(-50%);
+  border-radius: 999px;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(160deg,#fff5,transparent 49%),var(--glass-lens-fill);
+  box-shadow: inset 0 1px 2px var(--glass-edge),inset 0 -1px 2px var(--glass-edge),0 1px 4px var(--glass-shadow);
+  transition: width .26s cubic-bezier(.18,.8,.26,1.18), top .26s ease, bottom .26s ease, box-shadow .2s ease;
+}
+#app .liquid-tabs.is-glass-dragging .liquid-tabs-lens {
+  --glass-lens-width: calc(var(--glass-width) * 1.62);
+  --glass-zoom: 1.1;
+  top: -5px;
+  bottom: -5px;
+  box-shadow: inset 0 2px 3px var(--glass-edge),inset 1px 0 4px #79bdff60,inset -1px -1px 4px #dbc0fa70,0 4px 12px var(--glass-shadow);
+  -webkit-backdrop-filter: blur(5px) saturate(155%);
+  backdrop-filter: blur(5px) saturate(155%);
+}
+.liquid-tabs-copy {
+  position: absolute;
+  inset-block: 0;
+  left: calc(50% - var(--glass-x));
+  width: var(--glass-track);
+  padding: 0 var(--glass-pad);
+  display: grid;
+  grid-template-columns: repeat(var(--glass-count),minmax(0,1fr));
+  transform-origin: var(--glass-x) 50%;
+  transform: scale(var(--glass-zoom));
+}
+#app .liquid-tabs .liquid-tabs-copy > span { color: var(--glass-accent) !important; }
+.liquid-tabs-lens::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(169deg,#fff7,transparent 26% 73%,#fff5);
+}
+.is-glass-dragging .liquid-tabs-lens::after {
+  box-shadow: inset 1px 1px 4px #e0f3ff9c,inset -1px -1px 3px #c1aaff62;
+}
+@media(prefers-reduced-motion:reduce) {
+  #app .liquid-tabs-lens { transition: none; }
+  #app .liquid-tabs.is-glass-dragging .liquid-tabs-lens {
+    --glass-zoom: 1;
+    --glass-lens-width: var(--glass-width);
+    top: 3px;
+    bottom: 3px;
+  }
+}

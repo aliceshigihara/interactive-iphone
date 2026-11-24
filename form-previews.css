@@ -78,6 +78,15 @@
 .fp-fields dt { color: #53627a; font-size: 11px; }
 .fp-fields dd { margin: 0; text-align: right; }
 .fp-fields img { display: block; max-width: 60px; max-height: 50px; }
+.fp-live-voicemail { isolation: isolate; position: relative; min-height: 260px; display: grid; grid-template-rows: auto 1fr auto; gap: 12px; overflow: hidden; padding: 19px 14px 14px; border-radius: 12px; color: #fff; background: linear-gradient(165deg,#63676a,#31373b); }
+.fp-live-voicemail > img, .fp-live-voicemail.has-poster::before { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; z-index: -2; }
+.fp-live-voicemail.has-poster::before { content: ''; z-index: -1; background: linear-gradient(180deg,#19253692,transparent 40%,#1d190cef 87%); }
+.fp-live-voicemail > div:first-of-type { text-align: center; }
+.fp-live-voicemail small { color: #e0e2e5; margin-bottom: 3px; }
+.fp-live-voicemail .fp-copy { align-self: end; }
+.fp-live-buttons { display: flex; justify-content: space-between; gap: 6px; font-size: 11px; }
+.fp-live-buttons span { padding: 5px 9px; border-radius: 20px; background: #ffffff24; }
+.fp-live-buttons span:last-child { background: #198b39; }
 .fp-tabs { display: none; }
 
 @media(max-width: 650px) {
