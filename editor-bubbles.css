@@ -1,0 +1,47 @@
+/* Bubble Background from Animate UI (inspired by GlitchWorker), in CSS. */
+html:not(.reader-mode) body { isolation: isolate; }
+.reader-mode .editor-bubbles { display: none; }
+.editor-bubbles {
+  --bubble-1: 103 166 255;
+  --bubble-2: 183 215 255;
+  --bubble-3: 57 130 239;
+  --bubble-4: 241 249 255;
+  --bubble-5: 141 189 255;
+  --orbit: clamp(100px, 25vw, 400px);
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(140deg, #fff, #e5f0ff 54%, #f6faff);
+}
+[data-theme="dark"] .editor-bubbles {
+  --bubble-1: 21 63 139;
+  --bubble-2: 22 85 189;
+  --bubble-3: 19 103 220;
+  --bubble-4: 6 24 58;
+  --bubble-5: 20 49 108;
+  background: linear-gradient(140deg, #061228, #020409 60%, #000);
+}
+.editor-bubbles > svg { position: absolute; }
+.editor-bubble-field { position: absolute; inset: 0; filter: url(#editor-bubble-goo) blur(40px); }
+.editor-bubble-field i { position: absolute; mix-blend-mode: hard-light; }
+.editor-bubble-field i::before {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgb(var(--bubble) / .8), rgb(var(--bubble) / 0) 63%);
+}
+.editor-bubble-field i:nth-child(1) { --bubble: var(--bubble-1); inset: 0 13% 0 -13%; animation: bubble-drift-y 30s ease-in-out infinite; }
+.editor-bubble-field i:nth-child(2) { --bubble: var(--bubble-2); inset: 0; transform-origin: calc(50% - var(--orbit)) 50%; animation: bubble-orbit 20s linear infinite; }
+.editor-bubble-field i:nth-child(3) { --bubble: var(--bubble-3); inset: 10% -14% -10% 14%; transform-origin: calc(50% + var(--orbit)) 40%; animation: bubble-orbit 40s linear infinite; }
+.editor-bubble-field i:nth-child(4) { --bubble: var(--bubble-4); inset: -19% -10% 19% 10%; animation: bubble-drift-x 40s ease-in-out infinite; }
+.editor-bubble-field i:nth-child(5) { --bubble: var(--bubble-5); inset: 18% -26% -34% 26%; transform-origin: calc(50% - var(--orbit) * 2) 70%; animation: bubble-orbit 20s linear infinite; }
+@keyframes bubble-drift-y { 0%, 100% { transform: translateY(-50px); } 50% { transform: translateY(50px); } }
+@keyframes bubble-drift-x { 0%, 100% { transform: translateX(-50px); } 50% { transform: translateX(50px); } }
+@keyframes bubble-orbit { to { transform: rotate(1turn); } }
+.editor-bubbles[data-paused] i { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .editor-bubble-field i:nth-child(n) { animation: none; }
+}

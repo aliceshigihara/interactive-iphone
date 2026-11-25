@@ -1,23 +1,6 @@
 (() => {
   const root = document.documentElement;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const theme = document.querySelector('#theme-toggle');
-  const themeColor = document.querySelector('meta[name="theme-color"]');
-
-  function syncTheme() {
-    const dark = root.dataset.theme === 'dark';
-    theme.setAttribute('aria-pressed', String(dark));
-    theme.title = dark ? 'Ativar modo claro' : 'Ativar modo escuro';
-    themeColor.content = dark ? '#090f22' : '#f4f8ff';
-  }
-  theme.addEventListener('click', () => {
-    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('fablyphone:landing-theme', root.dataset.theme); } catch {}
-    syncTheme();
-    drawScanner();
-  });
-  syncTheme();
-
   // Scanner: a diagonal beam moves across a field of blue interference lines.
   const canvas = document.querySelector('#scanner');
   const ctx = canvas.getContext('2d');
@@ -71,6 +54,7 @@
       ctx.stroke();
     }
   }
+  root.addEventListener('themechange', () => drawScanner());
   function scannerTick(now) {
     scanFrame = 0;
     if (motion.matches || document.hidden || !scanVisible) return;
@@ -208,9 +192,7 @@
     const slots = [...stage.querySelectorAll('.card-swap-slot')];
     const cards = slots.map(slot => slot.querySelector('.tool-card'));
     const shades = slots.map(slot => slot.querySelector('.card-swap-shade'));
-    const label = document.querySelector('#tool-title');
-    const description = document.querySelector('#tool-description');
-    const countLabel = document.querySelector('#tool-count');
+    const status = document.querySelector('#tool-status');
     const count = slots.length;
     const PERSPECTIVE = 900, TAU = Math.PI * 2, STEP = 1 / 240, PAD = 32;
     const AXES = ['x', 'y', 'z', 'r', 'p'];
@@ -444,9 +426,7 @@
     const updateCaption = index => {
       const card = cards[index];
       if (!card) return;
-      label.textContent = card.dataset.title;
-      description.textContent = card.dataset.copy;
-      countLabel.textContent = `${String(index + 1).padStart(2, '0')} / ${String(count).padStart(2, '0')}`;
+      status.textContent = `${card.dataset.title}. ${card.dataset.copy}`;
       cards.forEach((item, position) => {
         if (position === index) item.setAttribute('aria-current', 'true');
         else item.removeAttribute('aria-current');
@@ -686,28 +666,29 @@
     deckRoot.addEventListener('focusout', () => { state.focused = false; schedule(); });
     document.addEventListener('visibilitychange', schedule);
     motion.addEventListener('change', () => { schedule(); wake(); });
-    document.querySelectorAll('.carousel-arrow').forEach(button => button.addEventListener('click', () => shift(Number(button.dataset.step))));
   }
 
-  // Specular highlight eases toward the pointer rather than snapping to it.
+  // Animate UI Ripple Button, with a short lead-in before following the link.
   const start = document.querySelector('#start-link');
-  let specularFrame = 0, spotX = 50, spotY = 0, aimX = 50, aimY = 0;
-  function slideHighlight() {
-    spotX += (aimX-spotX)*.22;
-    spotY += (aimY-spotY)*.22;
-    start.style.setProperty('--spot-x',`${spotX}%`);
-    start.style.setProperty('--spot-y',`${spotY}%`);
-    specularFrame = Math.hypot(aimX-spotX,aimY-spotY) > .4 ? requestAnimationFrame(slideHighlight) : 0;
-  }
-  start.addEventListener('pointermove',event => {
-    if (motion.matches) return;
+  let navigationTimer = 0;
+  start.addEventListener('click', event => {
+    if (!start.animate || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
     const rect = start.getBoundingClientRect();
-    aimX = 100*(event.clientX-rect.left)/rect.width;
-    aimY = 100*(event.clientY-rect.top)/rect.height;
-    if (!specularFrame) specularFrame = requestAnimationFrame(slideHighlight);
-  });
-  start.addEventListener('pointerleave',() => {
-    aimX = 50; aimY = 0;
-    if (!specularFrame && !motion.matches) specularFrame = requestAnimationFrame(slideHighlight);
+    const wave = document.createElement('span');
+    wave.className = 'ripple-wave';
+    wave.setAttribute('aria-hidden', 'true');
+    wave.style.left = `${event.detail ? event.clientX - rect.left : rect.width / 2}px`;
+    wave.style.top = `${event.detail ? event.clientY - rect.top : rect.height / 2}px`;
+    start.append(wave);
+    const animation = wave.animate(
+      [{scale: 1, opacity: .38}, {scale: motion.matches ? 1 : 10, opacity: 0}],
+      {duration: 600, easing: 'ease-out'}
+    );
+    animation.finished.then(() => wave.remove(), () => wave.remove());
+    if (!navigationTimer) navigationTimer = setTimeout(() => {
+      navigationTimer = 0;
+      location.assign(start.href);
+    }, motion.matches ? 90 : 190);
   });
 })();

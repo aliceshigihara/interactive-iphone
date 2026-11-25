@@ -16,20 +16,22 @@
   </script>
   <link rel="preload" href="assets/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="landing.css">
+  <link rel="stylesheet" href="theme-toggle.css">
+  <script src="theme-toggle.js" defer></script>
   <script src="landing.js" defer></script>
 </head>
 <body>
   <div class="scanner" aria-hidden="true"><canvas id="scanner"></canvas></div>
   <header class="site-head">
     <a class="brand" href="./" aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>
-    <nav aria-label="Navegação da página"><button id="theme-toggle" class="theme-toggle" type="button" aria-label="Modo escuro" aria-pressed="false"><svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.4 14.5a8.8 8.8 0 0 1-10.9-10.9 8.8 8.8 0 1 0 10.9 10.9Z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19"/></svg></button></nav>
+    <nav aria-label="Navegação da página"><button id="theme-toggle" class="theme-toggle theme-switch" data-theme-toggle="fablyphone:landing-theme" type="button" aria-label="Modo escuro" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 14.5a8.8 8.8 0 0 1-10.9-10.9 8.8 8.8 0 1 0 10.9 10.9Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19"/></svg></button></nav>
   </header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <h1 id="hero-title" class="pressure">fablyphone</h1>
       <p class="hero-copy">Crie histórias que acontecem na tela de um iPhone.</p>
     </section>
-    <section class="tools" aria-labelledby="tool-title">
+    <section class="tools" aria-label="Prévias do Fablyphone">
       <div id="tool-deck" class="card-swap" role="region" aria-roledescription="carrossel" aria-label="Prévias do Fablyphone" tabindex="0">
         <div class="card-swap-sizer" aria-hidden="true"><span></span></div>
         <div class="card-swap-stage">
@@ -75,13 +77,9 @@
           </div>
         </div>
       </div>
-      <div class="tool-controls">
-        <button type="button" class="carousel-arrow" data-step="-1" aria-label="Ferramenta anterior" aria-controls="tool-deck"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button>
-        <div class="tool-caption" aria-live="polite"><h2 id="tool-title">Redes sociais</h2><p id="tool-description">Crie perfis, posts e conversas fictícias no Instagram e no Twitter.</p><span id="tool-count" aria-hidden="true">01 / 05</span></div>
-        <button type="button" class="carousel-arrow" data-step="1" aria-label="Próxima ferramenta" aria-controls="tool-deck"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button>
-      </div>
+      <span class="sr-only" id="tool-status" aria-live="polite"></span>
     </section>
-    <div class="start"><a class="specular" id="start-link" href="./editor.html"><span>Começar</span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13m-5-5 5 5-5 5"/></svg></a><p>Sem cadastro. Crie direto no navegador.</p></div>
+    <div class="start"><a class="ripple-button" id="start-link" href="./editor.html"><span>Começar</span></a></div>
   </main>
   <footer class="site-foot"><span>Fablyphone</span><span>Um iPhone fictício para as suas histórias.</span></footer>
 </body>

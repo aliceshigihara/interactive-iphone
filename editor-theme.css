@@ -1,7 +1,6 @@
 /* Fablyphone editor palette — shared hues with the landing page. */
 :root {
   --ed-paper: #f4f8ff;
-  --ed-paper-deep: #e7eefb;
   --ed-ink: #101b35;
   --ed-sub: #384a69;
   --ed-muted: #5b6d8e;
@@ -20,7 +19,6 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --ed-paper: #090f22;
-  --ed-paper-deep: #060b18;
   --ed-ink: #f6f8ff;
   --ed-sub: #c1d0eb;
   --ed-muted: #9fb2d6;
@@ -34,6 +32,11 @@
   --ed-input: #0d1830;
   --ed-input-line: #2b3e63;
   --ed-danger: #ff8c95;
+  --ed-surface: #16233c;
+}
+
+/* Theme the editing controls without changing the phone's story or app previews. */
+:root[data-theme="dark"] :is(.col, .story-drawer, .mobile-editor-nav, body > dialog, .pmod, #md) {
   --site-button-blue: #7ea8ff;
   --site-button-blue-shadow: #4f7fe633;
   --site-button-blue-soft: #1a2a4a;
@@ -42,21 +45,12 @@
   --site-panel-blue-surface: #121d33;
 }
 
-html { background: var(--ed-paper); color-scheme: light; }
-:root[data-theme="dark"] html, :root[data-theme="dark"] { color-scheme: dark; }
-body {
-  background:
-    radial-gradient(100% 70% at 16% 0%, #ffffff 0%, #eef4ff 42%, transparent 72%),
-    radial-gradient(80% 70% at 88% 12%, #dee9ff 0%, transparent 58%),
-    linear-gradient(180deg, #f7faff 0%, var(--ed-paper-deep) 100%);
-  color: var(--ed-ink);
+.scr { color-scheme: light; }
+html:not(.reader-mode) {
+  min-height: 100%;
+  background: var(--ed-paper);
 }
-:root[data-theme="dark"] body {
-  background:
-    radial-gradient(100% 70% at 18% 0%, #16264a 0%, #0d1730 40%, transparent 74%),
-    radial-gradient(80% 70% at 88% 12%, #1a3060 0%, transparent 58%),
-    linear-gradient(180deg, #0b1226 0%, var(--ed-paper-deep) 100%);
-}
+html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 
 .pc {
   background: rgba(255, 255, 255, .74);
@@ -65,6 +59,15 @@ body {
   box-shadow: 0 16px 38px #172b6212, inset 0 1px #fff;
 }
 .pc:hover { box-shadow: 0 20px 46px #172b621a, inset 0 1px #fff; }
+.editor-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#editor-theme-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border-radius: 50%; }
+#editor-theme-toggle svg { width: 20px; height: 20px; }
+#editor-theme-toggle:is(:hover,:active) { transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  #editor-theme-toggle { transition: scale .22s cubic-bezier(.2,1.3,.4,1); }
+}
+.editor-reader-link { color: var(--ed-accent-bright); font-size: 13px; text-decoration: none; font-weight: 600; }
+.editor-reader-link:hover { text-decoration: underline; }
 .pc h1, .pc h2, .pc h3, .pc b, .pc strong { color: var(--ed-ink); }
 .pc p, .pc .panel-note, .pc small, .pc .msg-panel-label small { color: var(--ed-muted); }
 .pc label { color: var(--ed-sub); }
@@ -198,7 +201,7 @@ body {
 :root[data-theme="dark"] #narration .nar-row { background: #16233c; }
 :root[data-theme="dark"] #narration .nar-row { border-color: var(--ed-line); }
 #narration .nar-row small, #narration .nar-empty { color: var(--ed-muted); }
-#narration .nar-actions button,
+#narration .nar-actions button:not(.sc-primary),
 #narration .nar-row button,
 #nar-form button { background: var(--site-button-blue-soft); color: var(--ed-ink); }
 #nar-form input, #nar-form select, #nar-form textarea {
@@ -206,7 +209,7 @@ body {
   color: var(--ed-ink);
   border-color: var(--ed-input-line);
 }
-:root[data-theme="dark"] #narration .nar-actions button,
+:root[data-theme="dark"] #narration .nar-actions button:not(.sc-primary),
 :root[data-theme="dark"] #narration .nar-row button,
 :root[data-theme="dark"] #nar-form button { background: var(--site-button-blue-soft); color: var(--ed-ink); }
 
@@ -221,7 +224,7 @@ body {
 .pmod .mb label, #md .mb label { color: var(--ed-muted); }
 .pmod input, .pmod select, .pmod textarea,
 #md input, #md select, #md textarea { background: var(--ed-input); color: var(--ed-ink); border-color: var(--ed-input-line); }
-.pmod .bt button, #md .bt button { background: var(--site-button-blue-soft); color: var(--site-button-blue); }
+.pmod .bt button:not(:last-child), #md .bt button:not(:last-child) { background: var(--site-button-blue-soft); color: var(--site-button-blue); }
 
 .mobile-editor-nav {
   background: rgba(249, 251, 255, .96) !important;
@@ -238,6 +241,67 @@ body {
 }
 :root[data-theme="dark"] .narration-launch,
 :root[data-theme="dark"] .sc-launch { background: #15203c; color: var(--ed-accent); border-color: var(--ed-line); }
+
+/* Surfaces that previously kept their light-only colors. */
+:root[data-theme="dark"] .story-drawer::after {
+  background: var(--ed-surface);
+  color: var(--ed-accent);
+  border: 1px solid var(--ed-line);
+  box-shadow: 4px 4px 12px var(--ed-shadow);
+}
+:root[data-theme="dark"] :is(.pc .mini-panel, .pc .weather-pill, .pc .seg, .guide-stepper-track, .fp-tabs, .lock-notification-tabs) {
+  background: var(--ed-input);
+  border-color: var(--ed-line);
+  color: var(--ed-sub);
+}
+:root[data-theme="dark"] :is(.pc .ck, .pc .chat-primary-label, .story-hold-hint, .lock-preview figcaption, .lock-notification-pagination, .planner-day, .fp-heading, .fp-tabs button, .lock-notification-tabs button) {
+  color: var(--ed-sub);
+}
+:root[data-theme="dark"] #lock-notifications .planner-header p { color: var(--ed-muted); }
+:root[data-theme="dark"] :is(.msg-read-panel, .map-pin-editor-row, #home-organizer .org-row) { border-color: var(--ed-line); }
+:root[data-theme="dark"] #lock-notifications-launch { color: var(--ed-ink); background: var(--ed-input); }
+:root[data-theme="dark"] #lock-notifications-launch:hover { background: var(--ed-surface); }
+:root[data-theme="dark"] .pc .lock-notify-arrow { background: var(--site-button-blue-soft); }
+:root[data-theme="dark"] .pc input[type="date"] { color: var(--ed-ink); -webkit-text-fill-color: var(--ed-ink); }
+:root[data-theme="dark"] :is(.pc input:not([type=file],[type=checkbox]), .pc select, .pc textarea) { border-color: var(--ed-input-line); }
+:root[data-theme="dark"] #md { color-scheme: dark; }
+:root[data-theme="dark"] :is(#md, .pmod) .mb :is(input:not([type=checkbox],[type=range]), select, textarea) {
+  color: var(--ed-ink);
+  -webkit-text-fill-color: var(--ed-ink);
+  background: var(--ed-input);
+  border-color: var(--ed-input-line);
+}
+:root[data-theme="dark"] :is(#md, .pmod) .mb .ck { color: var(--ed-sub); }
+:root[data-theme="dark"] :is(#home-organizer .org-fast, #home-organizer .org-app-chip, .fp-editor, .fp-aside, .planner-day-preview) {
+  background: var(--ed-surface);
+  border-color: var(--ed-line);
+  color: var(--ed-sub);
+}
+:root[data-theme="dark"] :is(.fp-editor > b, #home-organizer .org-app-chip strong) { color: var(--ed-ink); }
+:root[data-theme="dark"] :is(#home-organizer small, #home-organizer .org-fast-title span, #home-organizer .org-app-chip small) { color: var(--ed-muted); }
+:root[data-theme="dark"] .fp-heading span:first-child { color: var(--ed-accent-bright); }
+.fp-device { color-scheme: light; }
+:root[data-theme="dark"] :is(.fp-tabs, .lock-notification-tabs) button[aria-pressed="true"],
+:root[data-theme="dark"] #story-planner .planner-day[aria-pressed="true"] .planner-day-preview {
+  background: var(--site-button-blue-soft-hover);
+  color: var(--ed-accent);
+  border-color: var(--ed-line);
+}
+:root[data-theme="dark"] #editor-guide .story-help-kicker,
+:root[data-theme="dark"] #editor-guide .guide-stepper-segment { color: var(--ed-sub); }
+:root[data-theme="dark"] #editor-guide .guide-stepper-segment[data-status="active"] { color: var(--ed-ink); }
+:root[data-theme="dark"] #editor-guide .guide-stepper-segment:not([aria-current="step"]):hover { background: var(--ed-glass); }
+:root[data-theme="dark"] .guide-stepper-glider {
+  background: var(--ed-surface);
+  box-shadow: inset 0 0 0 1px var(--ed-line), 0 3px 8px var(--ed-shadow);
+}
+:root[data-theme="dark"] :is(.planner-error, .planner-danger) { color: var(--ed-danger); }
+
+/* The light blue accent needs dark lettering when used as a solid fill. */
+:root[data-theme="dark"] .pc button:not(.g,.panel-help-toggle),
+:root[data-theme="dark"] :is(.planner-primary, .story-help-primary, [data-status="complete"] .guide-stepper-badge, .mb .bt button:last-child),
+:root[data-theme="dark"] #narration .sc-primary { color: #071022; }
+:root[data-theme="dark"] :is(.pc.show-help .panel-help-toggle, .pc .seg button.on, .pc .weather-quick button.on, #narration .nar-switch button[aria-pressed="true"]) { color: #071022 !important; }
 
 ::selection { background: #2e57c155; }
 :root[data-theme="dark"] ::selection { background: #86b4ff55; }

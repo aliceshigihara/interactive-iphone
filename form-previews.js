@@ -18,7 +18,7 @@ const {resolveFormPreview, mountFormPreview} = (() => {
     if (has('cap','likes')) return card('ig', v => {
       const a = pf(v.pid || base.pid);
       const imgs = v.imgs?.length ? v.imgs : base.imgs?.length ? base.imgs : [base.img];
-      return `<div class="fp-social-head">${avatar(a.user,a.photo,32)}<b>${text(a.user,'username')}</b><span>⋯</span></div><div class="fp-media">${photo(imgs[0]) || '<span>Foto da publicação</span>'}${imgs.length>1?`<i>1/${imgs.length}</i>`:''}</div><div class="fp-post-actions">${[HRT,CMT,SND,BKM].map(d=>I(d,21)).join('')}</div><b>${count(v.likes)} likes</b><p class="fp-copy"><b>${text(a.user,'username')}</b> ${text(v.cap,'Legenda da publicação')}</p>${v.views ? `<small>${count(v.views)} views</small>` : ''}${v.ts ? `<small>${text(igAgo(fromL(v.ts)))}</small>` : ''}`;
+      return `<div class="fp-social-head">${avatar(a.user,a.photo,32)}<b>${text(a.user,'username')}</b><span>⋯</span></div><div class="fp-media">${photo(imgs[0]) || '<span>Foto da publicação</span>'}${imgs.length>1?`<i>1/${imgs.length}</i>`:''}</div><div class="fp-post-actions">${I(HRT,21)}${I(CMT,21)}${InstagramProfile.dmIcon(21)}${I(BKM,21)}</div><b>${count(v.likes)} likes</b><p class="fp-copy"><b>${text(a.user,'username')}</b> ${text(v.cap,'Legenda da publicação')}</p>${v.views ? `<small>${count(v.views)} views</small>` : ''}${v.ts ? `<small>${text(igAgo(fromL(v.ts)))}</small>` : ''}`;
     });
     if (has('b','f1','f2') || has('bio','fol','fng')) return card('ig', v => {
       const user = (v.u ?? v.user ?? '').trim().replace(/\s+/g,'.').toLowerCase();
