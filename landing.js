@@ -253,9 +253,11 @@
   if (arc) {
     const apps = [...arc.querySelectorAll('.arc-app')];
     const previews = apps.map(app => document.getElementById(app.getAttribute('aria-controls')));
-    let current = 0, lastWheel = -Infinity, capturedWheel = false, swipe = null;
+    const rail = arc.querySelector('.arc-display');
+    const mobileArc = matchMedia('(max-width: 700px), (pointer: coarse) and (max-width: 900px)');
+    let current = 0, lastWheel = -Infinity, capturedWheel = false, scrollFrame = 0;
     arc.classList.add('arc-enhanced');
-    function selectApp(next) {
+    function selectApp(next, moveRail = true, behavior = motion.matches ? 'instant' : 'smooth') {
       if (next < 0 || next >= apps.length) return false;
       current = next;
       apps.forEach((app,i) => {
@@ -267,14 +269,38 @@
         app.style.setProperty('--arc-x', 3 - Math.abs(slot) ** 1.6);
         app.style.setProperty('--arc-opacity', [1,.87,.72][Math.abs(slot)]);
         app.setAttribute('aria-pressed', String(i === next));
-        previews[i].hidden = i !== next;
+        previews[i].hidden = !mobileArc.matches && i !== next;
       });
+      if (mobileArc.matches && moveRail) {
+        const left = rail.scrollLeft + previews[next].getBoundingClientRect().left - rail.getBoundingClientRect().left;
+        rail.scrollTo({ left, behavior });
+      }
       return true;
     }
-    selectApp(0);
+    function layoutArc() {
+      rail.setAttribute('aria-live', mobileArc.matches ? 'off' : 'polite');
+      if (!mobileArc.matches) rail.scrollLeft = 0;
+      selectApp(current, true, 'instant');
+    }
+    layoutArc();
+    mobileArc.addEventListener('change', layoutArc);
+    rail.addEventListener('scroll', () => {
+      if (!mobileArc.matches || scrollFrame) return;
+      scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        if (!mobileArc.matches) return;
+        const left = rail.getBoundingClientRect().left;
+        let nearest = 0, distance = Infinity;
+        previews.forEach((panel,i) => {
+          const gap = Math.abs(panel.getBoundingClientRect().left - left);
+          if (gap < distance) { distance = gap; nearest = i; }
+        });
+        if (nearest !== current) selectApp(nearest, false);
+      });
+    }, { passive: true });
     apps.forEach((app,i) => app.addEventListener('click', () => selectApp(i)));
     arc.addEventListener('wheel', event => {
-      if (event.ctrlKey || !event.deltaY || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+      if (mobileArc.matches || event.ctrlKey || !event.deltaY || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
       const at = performance.now();
       if (at - lastWheel > 140) capturedWheel = selectApp(current + Math.sign(event.deltaY));
       lastWheel = at;
@@ -287,16 +313,6 @@
       event.preventDefault();
       apps[next].focus({ preventScroll: true });
     });
-    arc.addEventListener('pointerdown', event => {
-      if (event.pointerType === 'touch' && event.isPrimary) swipe = { x: event.clientX, y: event.clientY };
-    });
-    arc.addEventListener('pointerup', event => {
-      if (!swipe || event.pointerType !== 'touch') return;
-      const dx = event.clientX - swipe.x, dy = event.clientY - swipe.y;
-      swipe = null;
-      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.3) selectApp(current - Math.sign(dx));
-    });
-    arc.addEventListener('pointercancel', () => { swipe = null; });
   }
 
   const manifesto = document.querySelector('[data-staggered-text]');
