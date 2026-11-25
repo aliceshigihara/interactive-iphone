@@ -44,9 +44,9 @@
 .lock-notify-arrow { width: 26px; height: 26px; border-radius: 50%; background: #fff; color: #256ac0; }
 
 #lock-notifications {
-  --planner-blue: #086cd4;
-  --planner-ink: #1d2534;
-  --planner-muted: #626b7a;
+  --planner-blue: var(--ed-accent-bright);
+  --planner-ink: var(--ed-ink);
+  --planner-muted: var(--ed-muted);
   position: fixed;
   inset: 0;
   margin: auto;
@@ -68,27 +68,47 @@
 #lock-notifications .planner-header { margin-bottom: 10px; }
 .lock-notifications-layout { display: grid; grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); align-items: start; gap: 18px; }
 .lock-notifications-fields { display: grid; gap: 8px; min-width: 0; }
-#lock-notifications .pc { border: 1px solid #e3eaf4; background: #fff; box-shadow: none; padding: 10px 12px; gap: 5px; }
+#lock-notifications .pc { border: 1px solid var(--ed-line); background: var(--ed-surface, var(--ed-input)); box-shadow: none; padding: 10px 12px; gap: 5px; }
 #lock-notifications .pc h3 { font-size: 16px; }
 #lock-notifications .pc label { font-size: 12px; }
 #lock-notifications .pc label[hidden], #nl .cr[hidden], .lock-notification-pagination[hidden] { display: none !important; }
 .lock-notification-inputs { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 4px 8px; }
 .lock-notification-wide { grid-column: 1 / -1; }
-#lock-notifications .notif-app-grid { grid-template-columns: repeat(7,minmax(0,1fr)); gap: 2px; padding: 0; }
-#lock-notifications .notif-app-choice { min-height: 36px; padding: 2px !important; gap: 2px; }
-#lock-notifications .notif-option-label { font-size: 9px; }
-#lock-notifications .notif-option-icon, #lock-notifications .notif-app-icon { width: 25px; height: 25px; border-radius: 7px; }
-#lock-notifications .notif-add { margin-top: 3px; }
+#lock-notifications .notif-guide { font-size: 12px; font-weight: 700; color: var(--ed-sub); margin: 3px 0 5px; }
+.notif-app-grid { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 3px; }
+#lock-notifications .notif-app-choice {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  min-width: 0; min-height: 44px; padding: 3px 2px; border: 1px solid transparent; border-radius: 11px;
+  background: transparent; color: var(--ed-sub); box-shadow: none;
+}
+#lock-notifications .notif-app-choice:hover { background: var(--site-button-blue-soft); transform: none; }
+#lock-notifications .notif-app-choice:active { transform: scale(.96); }
+#lock-notifications .notif-app-choice[aria-pressed="true"] {
+  background: var(--site-button-blue-soft);
+  border-color: var(--site-button-blue);
+  color: var(--site-button-blue);
+}
+.notif-app-icon {
+  display: block; width: 26px; height: 26px; flex: none; border-radius: 6px;
+  overflow: hidden; background: #f3f3f5; box-shadow: 0 1px 5px #0002;
+}
+/* iconOf uses a radius sized for the phone's larger home-screen icons. */
+.notif-app-icon > :is(img,svg) { display: block; width: 100%; height: 100%; border-radius: 0 !important; }
+.notif-app-label { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 10px; font-weight: 600; }
+#lock-notifications .notif-add {
+  margin-top: 3px; min-height: 40px; border-radius: 11px; font-weight: 700;
+  background: var(--site-button-blue); color: var(--site-on-button-blue);
+}
 #nl .cr { justify-content: space-between; padding: 5px 0; min-width: 0; }
 #nl .notif-existing span:last-child { font-size: 13px; }
-#nl .lock-notification-remove { flex: none; width: 32px; min-height: 32px; padding: 0; background: #ffeff1; color: #aa3944; font-size: 18px; box-shadow: none; }
-.lock-notification-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-size: 12px; color: #526078; }
+#nl .lock-notification-remove { flex: none; width: 32px; min-height: 32px; padding: 0; background: color-mix(in srgb, var(--ed-danger) 12%, transparent); color: var(--ed-danger); font-size: 18px; box-shadow: none; }
+.lock-notification-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-size: 12px; color: var(--ed-sub); }
 .lock-notification-pagination button { min-width: 27px; padding: 3px 7px; cursor: pointer; border: 0; border-radius: 7px; background: var(--site-button-blue-soft); color: var(--site-button-blue); }
 .lock-notification-pagination button:disabled { opacity: .4; }
 .lock-notification-tabs { display: none; }
 
 .lock-preview { text-align: center; min-width: 0; }
-.lock-preview figcaption { margin-bottom: 10px; font-size: 13px; font-weight: 700; color: #506079; }
+.lock-preview figcaption { margin-bottom: 10px; font-size: 13px; font-weight: 700; color: var(--ed-sub); }
 .lock-preview-phone {
   position: relative;
   container-type: inline-size;
@@ -157,6 +177,9 @@
   .lock-notifications-layout:not([data-lock-tab=saved]) .lock-notifications-saved { display: none; }
   #lock-notifications .pc input { font-size: 16px; }
   .lock-preview-phone { width: min(100%, 235px, calc(max(200px, 100dvh - 225px) * .462)); }
+}
+@media (max-width: 420px) {
+  .notif-app-grid { grid-template-columns: repeat(5,minmax(0,1fr)); }
 }
 .story-help-dialog {
   position: fixed;

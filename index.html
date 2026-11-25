@@ -17,19 +17,61 @@
   <link rel="preload" href="assets/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="theme-toggle.css">
+  <link rel="stylesheet" href="site-language.css">
+  <script src="site-language.js"></script>
+  <script src="landing-language.js" defer></script>
   <script src="theme-toggle.js" defer></script>
   <script src="landing.js" defer></script>
 </head>
 <body>
   <div class="scanner" aria-hidden="true"><canvas id="scanner"></canvas></div>
   <header class="site-head">
-    <a class="brand" href="./" aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>
+    <a class="brand" href="./" data-keep-language aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>
+    <div class="site-head-controls">
+      <div class="language-choice" role="group" aria-label="Idioma"><a data-language-choice="pt" href="?lang=pt" lang="pt-BR" aria-label="Português">PT</a><a data-language-choice="en" href="?lang=en" lang="en" aria-label="English">EN</a></div>
     <nav aria-label="Navegação da página"><button id="theme-toggle" class="theme-toggle theme-switch" data-theme-toggle="fablyphone:landing-theme" type="button" aria-label="Modo escuro" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 14.5a8.8 8.8 0 0 1-10.9-10.9 8.8 8.8 0 1 0 10.9 10.9Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19"/></svg></button></nav>
+    </div>
   </header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <h1 id="hero-title" class="pressure">fablyphone</h1>
-      <p class="hero-copy">Crie histórias que acontecem na tela de um iPhone.</p>
+      <p class="hero-copy" data-ghost-type>Crie histórias que acontecem na tela de um iPhone.</p>
+    </section>
+    <section class="app-arc" aria-label="Explore os aplicativos" aria-describedby="arc-hint">
+      <div class="arc-list" role="group" aria-label="Aplicativos">
+        <button type="button" class="arc-app" data-arc-app="instagram" aria-controls="arc-instagram" aria-pressed="true"><img src="assets/iphone-icons/Instagram.png" alt="">Instagram</button>
+        <button type="button" class="arc-app" data-arc-app="messages" aria-controls="arc-messages" aria-pressed="false"><img src="assets/iphone-icons/com.apple.MobileSMS-large.png" alt="">Mensagens</button>
+        <button type="button" class="arc-app" data-arc-app="phone" aria-controls="arc-phone" aria-pressed="false"><img src="assets/iphone-icons/com.apple.mobilephone-large.png" alt="">Telefone</button>
+        <button type="button" class="arc-app" data-arc-app="notes" aria-controls="arc-notes" aria-pressed="false"><img src="assets/iphone-icons/com.apple.mobilenotes-large.png" alt="">Notas</button>
+        <button type="button" class="arc-app" data-arc-app="safari" aria-controls="arc-safari" aria-pressed="false"><img src="assets/iphone-icons/com.apple.mobilesafari-large.png" alt="">Safari</button>
+      </div>
+      <div class="arc-display" aria-live="polite">
+        <article class="arc-preview arc-instagram" id="arc-instagram" aria-label="Instagram">
+          <div class="arc-copy"><span>01 / 05</span><h2>Um perfil que conta histórias.</h2><p>Crie perfis, publicações e conversas para seus personagens.</p></div>
+          <div class="arc-art arc-profile"><img src="assets/landing-instagram.svg" width="390" height="844" alt="Perfil fictício de Zhang no Instagram, com fotos de uma viagem."></div>
+        </article>
+        <article class="arc-preview arc-messages" id="arc-messages" aria-label="Mensagens" hidden>
+          <div class="arc-copy"><span>02 / 05</span><h2>Tudo começa com uma mensagem.</h2><p>Escreva conversas e encaixe pistas entre as falas.</p></div>
+          <div class="arc-art" aria-hidden="true"><div class="arc-chat"><header><i>Z</i>Zhang</header><p>Você recebeu a foto?</p><p>Recebi. Onde é isso?</p><p>É o farol. Te explico quando chegar.</p></div></div>
+        </article>
+        <article class="arc-preview arc-phone" id="arc-phone" aria-label="Telefone" hidden>
+          <div class="arc-copy"><span>03 / 05</span><h2>Uma ligação muda tudo.</h2><p>Escreva o diálogo e escolha a hora certa para o telefone tocar.</p></div>
+          <div class="arc-art" aria-hidden="true"><div class="arc-call"><small>Chamada recebida</small><strong>Zhang</strong><div><i>×</i><i><img src="assets/iphone-icons/com.apple.mobilephone-large.png" alt=""></i></div></div></div>
+        </article>
+        <article class="arc-preview arc-notes" id="arc-notes" aria-label="Notas" hidden>
+          <div class="arc-copy"><span>04 / 05</span><h2>As pistas ficam nas entrelinhas.</h2><p>Monte diários, lembretes e anotações dentro da história.</p></div>
+          <div class="arc-art" aria-hidden="true"><div class="arc-note"><small>Notas</small><strong>O que eu sei até agora</strong><p>1. O farol fecha às 18h.<br>2. Zhang chegou antes do pôr do sol.<br>3. A foto foi tirada à noite.</p></div></div>
+        </article>
+        <article class="arc-preview arc-safari" id="arc-safari" aria-label="Safari" hidden>
+          <div class="arc-copy"><span>05 / 05</span><h2>Dê um site ao seu universo.</h2><p>Inclua páginas fictícias que o leitor pode descobrir pelo navegador.</p></div>
+          <div class="arc-art" aria-hidden="true"><div class="arc-news"><small>jornal-da-costa.example</small><b>JORNAL DA COSTA</b><strong>O farol volta a acender</strong><span>Edição de domingo · 18h00</span></div></div>
+        </article>
+      </div>
+      <p class="arc-hint" id="arc-hint"><span class="arc-wheel-hint">Role sobre a prévia ou escolha um app.</span><span class="arc-touch-hint">Deslize na prévia ou escolha um app.</span></p>
+    </section>
+    <section class="landing-manifesto" aria-label="Crie sem cadastro">
+      <h2 data-staggered-text><span class="stagger-line">Sem criar contas.</span>
+        <span class="stagger-line">Só você e sua imaginação.</span></h2>
     </section>
     <section class="tools" aria-label="Prévias do Fablyphone">
       <div id="tool-deck" class="card-swap" role="region" aria-roledescription="carrossel" aria-label="Prévias do Fablyphone" tabindex="0">
@@ -79,7 +121,7 @@
       </div>
       <span class="sr-only" id="tool-status" aria-live="polite"></span>
     </section>
-    <div class="start"><a class="ripple-button" id="start-link" href="./editor.html"><span>Começar</span></a></div>
+    <div class="start"><a class="ripple-button" id="start-link" href="./editor.html" data-keep-language><span>Começar</span></a></div>
   </main>
   <footer class="site-foot"><span>Fablyphone</span><span>Um iPhone fictício para as suas histórias.</span></footer>
 </body>

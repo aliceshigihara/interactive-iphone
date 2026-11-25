@@ -1,5 +1,6 @@
 :root {
   --site-button-blue: #2e57c1;
+  --site-on-button-blue: #fff;
   --site-button-blue-shadow: #2e57c140;
   --site-button-blue-soft: #eaf1ff;
   --site-button-blue-soft-hover: #dce8ff;
@@ -26,17 +27,12 @@
   background: var(--site-button-blue);
 }
 .pc.show-help .panel-help-toggle,
-.pc .sender-list button.on,
-.pc .notif-add {
+.pc .sender-list button.on {
   background: var(--site-button-blue) !important;
   border-color: var(--site-button-blue) !important;
   box-shadow: 0 3px 10px var(--site-button-blue-shadow);
 }
 .pc .sender-list button.on { box-shadow: 0 3px 10px var(--site-button-blue-shadow) !important; }
-.pc .notif-app-choice.selected {
-  background: var(--site-button-blue-soft) !important;
-  border-color: var(--site-button-blue) !important;
-}
 .native-round.selected,
 #mapPinToggle[aria-pressed="true"] {
   background: var(--site-button-blue-soft);
@@ -90,8 +86,6 @@
   background: var(--site-button-blue-soft-hover) !important;
   border-color: var(--site-button-blue) !important;
 }
-.pc .notif-app-choice.selected { color: var(--site-button-blue) !important; }
-.pc .notif-app-choice.selected .notif-app-icon::after { background: var(--site-button-blue); }
 
 /* Section glyphs share a palette; actual app artwork keeps its original colors. */
 .pc .notification-toggle-icon,

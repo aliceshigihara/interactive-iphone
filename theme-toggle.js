@@ -18,7 +18,9 @@
     animations = [];
     root.dataset.theme = dark ? 'dark' : 'light';
     button.setAttribute('aria-pressed', String(dark));
-    button.title = dark ? 'Ativar modo claro' : 'Ativar modo escuro';
+    const text = window.SiteLanguage?.text || ((pt) => pt);
+    button.setAttribute('aria-label', text('Modo escuro', 'Dark mode'));
+    button.title = dark ? text('Ativar modo claro','Use light mode') : text('Ativar modo escuro','Use dark mode');
     const themeColor = document.querySelector('meta[name="theme-color"]');
     if (themeColor) themeColor.content = dark ? '#090f22' : '#f4f8ff';
     if (animate && dark !== wasDark && moon.animate) {

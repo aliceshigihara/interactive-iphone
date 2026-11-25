@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script src="site-language.js"></script><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
+<link rel="stylesheet" href="site-language.css"><script src="editor-language.js" defer></script>
 <style>
 :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -258,18 +259,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .pc .sender-list button{background:#f2f3f7!important;color:#3c3c43!important;border:1.5px solid #e2e3ea!important;border-radius:18px!important;padding:9px 14px!important;font-weight:600;box-shadow:none!important;transition:background .18s,color .18s,transform .18s,border-color .18s,box-shadow .18s}
 .pc .sender-list button.on{background:linear-gradient(145deg,#39a0ff,#007aff)!important;color:white!important;border-color:#007aff!important;box-shadow:0 3px 10px #007aff45!important}
 .pc .sender-list button:active{transform:scale(.95)}
-.notif-guide{font-size:12px;font-weight:700;color:#70717b;margin:3px 0 7px}
-.notif-app-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px 7px;padding:5px 1px 13px}
-.pc .notif-app-choice{position:relative;min-width:0;padding:5px 2px 7px!important;border:1.5px solid transparent!important;border-radius:15px!important;background:transparent!important;display:flex;flex-direction:column;align-items:center;gap:5px;color:#777!important;box-shadow:none!important;transition:background .2s,transform .18s,border-color .18s}
-.pc .notif-app-choice:active{transform:scale(.91)}
-.pc .notif-app-choice.selected{background:#e9f3ff!important;border-color:#82bbff!important;color:#007aff!important;box-shadow:0 3px 9px #007aff15!important}
-.notif-app-choice .notif-app-icon{display:block;position:relative;width:42px;height:42px;border-radius:11px;overflow:hidden;background:#f3f3f5;box-shadow:0 1px 5px #0001}
-.notif-app-icon svg,.notif-app-icon img{display:block;width:100%;height:100%}
-.notif-app-choice .notif-app-label{display:block;text-align:center;font-size:10px;font-weight:600;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.notif-app-choice.selected .notif-app-icon::after{content:'✓';position:absolute;right:0;bottom:0;display:grid;place-items:center;width:16px;height:16px;background:#007aff;color:#fff;border-radius:50%;font-size:11px;border:1.5px solid white}
-.pc .notif-add{width:100%;background:linear-gradient(120deg,#2797ff,#007aff)!important;color:white!important;font-weight:700;padding:11px!important;border-radius:11px!important;box-shadow:0 4px 12px #007aff35}
 .notif-existing{display:flex;align-items:center;gap:9px;min-width:0}.notif-existing .notif-existing-icon{width:30px;height:30px;flex:none;border-radius:8px;overflow:hidden}.notif-existing .notif-existing-icon img,.notif-existing .notif-existing-icon svg{width:100%;height:100%}.notif-existing span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-@media(max-width:370px){.notif-app-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 /* v2.6 — restore softer classic message bubbles and rebalance contact header */
 .ios-chat-body #th{padding-left:18px;padding-right:18px}
 /* Bring back the original rounded iMessage tail from the earlier versions. */
@@ -289,7 +279,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .notification-details[open] .notification-toggle-chevron{transform:rotate(180deg)}
 .notification-details[open] .notification-toggle{border-bottom:1px solid #ececf1}
 .notification-panel-content{padding:12px 16px 17px;display:flex;flex-direction:column;gap:8px}
-.notification-panel-content .notif-app-grid{padding-bottom:8px}
 .notification-panel-content label{margin-top:3px}
 .notification-panel-content .notif-guide{margin-top:1px}
 @media(prefers-reduced-motion:reduce){.notification-toggle-chevron{transition:none}}
@@ -1056,7 +1045,7 @@ async function addChar(){const n=$('#cn').value.trim();if(!n)return;const f=$('#
 async function addProf(){const u=$('#iu').value.trim().replace(/\s+/g,'.').toLowerCase();if(!u)return;const g=s=>$(s).files[0];S.profiles.push({id:Date.now(),user:u,name:$('#in').value.trim()||u,bio:$('#ib').value,link:$('#il').value,fol:$('#ig1').value||'0',fng:$('#ig2').value||'0',photo:g('#ip')?await img(g('#ip'),320):'',story:g('#is')?await img(g('#is')):''});['iu','in','ib','il'].forEach(k=>$('#'+k).value='');$('#ip').value=$('#is').value='';save();R()}
 function addNot(){if(readerMode)return;const n=notificationDraft();if(!n.title){$('#ntt').focus();return}S.notifs.push({...n,createdAt:Date.now()});$('#ntt').value=$('#nb').value=$('#notification-contact').value='';save();R()}
 function notificationDraft(){const app=$('#na').value||'msg',contact=chatNotificationApps.has(app)?$('#notification-contact').value.trim():'';return {app,title:$('#ntt').value.trim(),body:$('#nb').value.trim(),time:$('#nh').value.trim()||'now',...(contact?{contact}:{})}}
-function selectNotificationApp(key){const select=$('#na');if(!select||!FN[key])return;select.value=key;const grid=$('#notifAppGrid');if(grid)grid.querySelectorAll('button[data-notification-app]').forEach(btn=>{const isSelected=btn.dataset.notificationApp===key;btn.classList.toggle('selected',isSelected);btn.setAttribute('aria-pressed',String(isSelected))});window.refreshNotificationPreview?.()}
+function selectNotificationApp(key){const select=$('#na');if(!select||!FN[key])return;select.value=key;$('#notifAppGrid')?.querySelectorAll('button[data-notification-app]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.notificationApp===key)));window.refreshNotificationPreview?.()}
 function renderNotificationApps(){const grid=$('#notifAppGrid'),select=$('#na');if(!grid||!select)return;const selected=select.value||'msg';if(!grid.children.length)grid.innerHTML=Object.keys(FN).map(key=>`<button type="button" class="notif-app-choice" data-notification-app="${key}" aria-label="${esc(FN[key])}" aria-pressed="false" title="${esc(FN[key])}" onclick="selectNotificationApp('${key}')"><span class="notif-app-icon">${iconOf(key)}</span><span class="notif-app-label">${esc(FN[key])}</span></button>`).join('');selectNotificationApp(selected)}
 const chatNotificationApps=new Set(['msg','wa','ka','ig','x']),lockNoticeState=new WeakMap();
 function lockNotice(n,draft=false){return `<div class="nf${draft?' lock-preview-draft':''}"><div class="ic" style="width:38px;height:38px;border-radius:9px;flex:none;cursor:default">${iconOf(n.app)}</div><div class="x"><div class="l1"><b>${esc(n.title)}</b><em>${esc(n.time)}</em></div><p>${esc(n.body)}</p></div></div>`}
@@ -1326,7 +1315,7 @@ return (sty?vSty():'')+`<div class="igh"><span class="ig-logo"><img src="./asset
 function vSty(){const p=pf(sty);return `<div class="sv" onclick="sty=null;R()"><div class="pg"><i></i></div><div class="sh">${avp(p,32)}${esc(p.user)}</div><div class="si" style="background-image:url(${p.story})"></div></div>`}
 const YL='#e5a400',NG=['Pinned','Today','Yesterday','Previous 7 Days','Previous 30 Days'];
 const CTX={find:'Find My',yt:'YouTube',wallet:'Wallet',bar:'Bank',x:'Twitter',home:'Tela inicial e bloqueio',msg:'Messages',wa:'WhatsApp',ka:'KakaoTalk',mail:'Mail',saf:'Safari',map:'Maps',clk:'Clock',pho:'Photos',ig:'Instagram',nt:'Notes',st:'Settings',ph:'Phone',cal:'Calendar',wx:'Weather'};
-function panelSync(){const c=cur||'home';document.querySelectorAll('.ps').forEach(e=>e.style.display=e.dataset.s==c||(['wa','ka'].includes(c)&&e.dataset.s==='msg')?'':'none');$('#ctx').textContent='Editando: '+CTX[c];$('#narration-fallback').hidden=isMessenger(c);const ac=$('#acFavorite');if(ac)ac.checked=academicData().favorite;const nf=$("#newsFavorite");if(nf)nf.checked=newsData().favorite;barclaysEditor()}
+function panelSync(){const c=cur||'home';document.querySelectorAll('.ps').forEach(e=>e.style.display=e.dataset.s==c||(['wa','ka'].includes(c)&&e.dataset.s==='msg')?'':'none');const en=SiteLanguage.lang==='en';$('#ctx').textContent=(en?'Editing: ':'Editando: ')+(en&&c==='home'?'Home and Lock Screen':CTX[c]);$('#narration-fallback').hidden=isMessenger(c);const ac=$('#acFavorite');if(ac)ac.checked=academicData().favorite;const nf=$("#newsFavorite");if(nf)nf.checked=newsData().favorite;barclaysEditor()}
 function addSearchP(){if(readerMode)return;const v=$('#ps1').value.trim();if(v){S.searches.unshift(v);$('#ps1').value='';save();R()}}
 function addPlaceP(){if(readerMode)return;const v=$('#pp1').value.trim();if(v){S.places.unshift(v);$('#pp1').value='';save();R()}}
 const hdate=()=>`${S.date.split(',').slice(1).join(',').trim()}, 2026 at ${S.time}`;

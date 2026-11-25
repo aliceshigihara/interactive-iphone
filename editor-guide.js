@@ -3,13 +3,19 @@ const EditorGuide = (() => {
   const warning = document.getElementById('story-publish-warning');
   const seenKey = 'iphone-story:editor-guide-v1';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const steps = [
+  const en = SiteLanguage.lang === 'en';
+  const steps = en ? [
+    ['Create a story', 'In Saved stories, click ＋ New and name your story. On mobile, open the Stories tab to find these controls.'],
+    ['Explore the iPhone', 'Swipe up to unlock the simulated iPhone. Open an app to see how it will appear in your story.'],
+    ['Build your scenes', 'Open an app and use its editor panel to make profiles, messages, and more. On mobile, tap Edit. Use Interactive storytelling to schedule events as people read.'],
+    ['Save or share', 'Your draft is saved in this browser. Use Export file to save a backup, or Publish and copy link to share a reading copy. The image limit only applies to published links.']
+  ] : [
     ['Crie uma história', 'Em Histórias salvas, clique em ＋ Nova e dê um nome à sua história. No celular, use a aba Histórias para encontrar esses controles.'],
     ['Explore o iPhone', 'Desbloqueie o iPhone simulado deslizando a tela para cima. Abra um app para ver como ele vai aparecer na história.'],
     ['Monte suas cenas', 'Com um app aberto, use o painel de edição para criar perfis, mensagens e outros conteúdos. No celular, toque em Editar. Use Narração interativa para programar eventos durante a leitura.'],
     ['Salve ou compartilhe', 'Seu rascunho fica salvo neste navegador. Use Exportar arquivo para guardar um backup, ou Publicar e copiar link para enviar uma cópia de leitura. O limite de imagens só se aplica ao link publicado.']
   ];
-  const labels = ['História','iPhone','Cenas','Publicar'];
+  const labels = en ? ['Story','iPhone','Scenes','Publish'] : ['História','iPhone','Cenas','Publicar'];
   const track = $('#editor-guide-track');
   const viewport = guide.querySelector('.guide-stepper-viewport');
   const pane = guide.querySelector('.guide-stepper-pane');
@@ -35,7 +41,7 @@ const EditorGuide = (() => {
     }
     const [title, text] = steps[step];
     track.style.setProperty('--guide-index',step);
-    $('#editor-guide-step').textContent = `Passo ${step + 1} de ${steps.length}`;
+    $('#editor-guide-step').textContent = en ? `Step ${step + 1} of ${steps.length}` : `Passo ${step + 1} de ${steps.length}`;
     indicators.forEach((button,i) => {
       button.dataset.status = i < step ? 'complete' : i === step ? 'active' : 'upcoming';
       if (i === step) button.setAttribute('aria-current','step');
@@ -47,7 +53,7 @@ const EditorGuide = (() => {
     const last = step === steps.length - 1;
     const next = $('#editor-guide-next');
     next.toggleAttribute('data-final',last);
-    next.querySelector('span').textContent = last ? 'Começar' : 'Próximo';
+    next.querySelector('span').textContent = en ? (last ? 'Get started' : 'Next') : (last ? 'Começar' : 'Próximo');
     if (guide.open) $('#editor-guide-title').focus({preventScroll:true});
     if (animate) {
       const after = viewport.getBoundingClientRect().height;
@@ -85,7 +91,7 @@ const EditorGuide = (() => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'guide-stepper-segment';
-      button.setAttribute('aria-label',`Passo ${i + 1}: ${title}`);
+      button.setAttribute('aria-label',`${en ? 'Step' : 'Passo'} ${i + 1}: ${title}`);
       button.innerHTML = `<span class="guide-stepper-badge" aria-hidden="true"><span>${i + 1}</span><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8"/></svg></span><span class="guide-stepper-label" aria-hidden="true">${labels[i]}</span>`;
       button.addEventListener('click',() => goTo(i));
       indicators.push(button);

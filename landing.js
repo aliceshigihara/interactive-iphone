@@ -185,6 +185,142 @@
   motion.addEventListener('change',syncTitleMotion);
   syncTitleMotion();
 
+  // Ghost Type: keep the prefix in place and accept the faint completion at the caret.
+  const subtitle = document.querySelector('[data-ghost-type]');
+  if (subtitle && 'IntersectionObserver' in window) {
+    const text = subtitle.textContent.trim(), prefix = SiteLanguage.text('Crie histórias','Create stories');
+    const original = text.slice(prefix.length);
+    const completions = [SiteLanguage.text(' em mensagens, posts e ligações.', ' through messages, posts, and calls.'), original];
+    const spoken = document.createElement('span');
+    spoken.className = 'sr-only';
+    spoken.textContent = text;
+    const visual = document.createElement('span');
+    visual.className = 'ghost-display';
+    visual.setAttribute('aria-hidden', 'true');
+    for (const completion of completions) {
+      const reserve = document.createElement('span');
+      reserve.className = 'ghost-reserve';
+      reserve.textContent = prefix + completion;
+      visual.append(reserve);
+    }
+    const line = document.createElement('span');
+    const typed = document.createElement('span'), guess = document.createElement('span');
+    const caret = document.createElement('span');
+    caret.className = 'ghost-caret';
+    guess.className = 'ghost-completion';
+    line.append(typed, caret, guess);
+    visual.append(line);
+    subtitle.replaceChildren(spoken, visual);
+    let timer = 0, visible = false;
+    const render = (completion, length, typing) => {
+      typed.textContent = prefix + completion.slice(0,length);
+      caret.hidden = !typing;
+      guess.textContent = typing ? completion.slice(length) : '';
+    };
+    function synchronizeGhost() {
+      clearTimeout(timer);
+      render(original, original.length, false);
+      if (!visible || document.hidden || motion.matches) return;
+      const tick = (index, length, removing = false) => {
+        const completion = completions[index];
+        render(completion, length, true);
+        if (removing) {
+          if (length) timer = setTimeout(() => tick(index,length - 1,true),17);
+          else timer = setTimeout(() => tick(index + 1,0),140);
+        } else if (length < completion.length) {
+          timer = setTimeout(() => tick(index,length + 1),length === 0 ? 360 : 30);
+        } else if (index < completions.length - 1) {
+          timer = setTimeout(() => tick(index,length - 1,true),1030);
+        } else {
+          timer = setTimeout(() => render(original,original.length,false),700);
+        }
+      };
+      tick(0,0);
+    }
+    new IntersectionObserver(([entry]) => {
+      const next = entry.intersectionRatio >= .4;
+      if (next === visible) return;
+      visible = next;
+      synchronizeGhost();
+    }, { threshold: .4 }).observe(subtitle);
+    document.addEventListener('visibilitychange', synchronizeGhost);
+    window.addEventListener('pageshow', event => { if (event.persisted) synchronizeGhost(); });
+    motion.addEventListener('change', synchronizeGhost);
+    synchronizeGhost();
+  }
+
+  const arc = document.querySelector('.app-arc');
+  if (arc) {
+    const apps = [...arc.querySelectorAll('.arc-app')];
+    const previews = apps.map(app => document.getElementById(app.getAttribute('aria-controls')));
+    let current = 0, lastWheel = -Infinity, capturedWheel = false, swipe = null;
+    arc.classList.add('arc-enhanced');
+    function selectApp(next) {
+      if (next < 0 || next >= apps.length) return false;
+      current = next;
+      apps.forEach((app,i) => {
+        const half = Math.floor(apps.length / 2);
+        const slot = (i - next + half + apps.length) % apps.length - half;
+        const prior = Number(app.style.getPropertyValue('--arc-slot') || slot);
+        app.classList.toggle('arc-jump', Math.abs(prior - slot) > 2);
+        app.style.setProperty('--arc-slot', slot);
+        app.style.setProperty('--arc-x', 3 - Math.abs(slot) ** 1.6);
+        app.style.setProperty('--arc-opacity', [1,.87,.72][Math.abs(slot)]);
+        app.setAttribute('aria-pressed', String(i === next));
+        previews[i].hidden = i !== next;
+      });
+      return true;
+    }
+    selectApp(0);
+    apps.forEach((app,i) => app.addEventListener('click', () => selectApp(i)));
+    arc.addEventListener('wheel', event => {
+      if (event.ctrlKey || !event.deltaY || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+      const at = performance.now();
+      if (at - lastWheel > 140) capturedWheel = selectApp(current + Math.sign(event.deltaY));
+      lastWheel = at;
+      if (capturedWheel && event.cancelable) event.preventDefault();
+    }, { passive: false });
+    arc.addEventListener('keydown', event => {
+      const dir = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[event.key];
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? apps.length - 1 : current + dir;
+      if (!Number.isInteger(next) || !selectApp(next)) return;
+      event.preventDefault();
+      apps[next].focus({ preventScroll: true });
+    });
+    arc.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'touch' && event.isPrimary) swipe = { x: event.clientX, y: event.clientY };
+    });
+    arc.addEventListener('pointerup', event => {
+      if (!swipe || event.pointerType !== 'touch') return;
+      const dx = event.clientX - swipe.x, dy = event.clientY - swipe.y;
+      swipe = null;
+      if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.3) selectApp(current - Math.sign(dx));
+    });
+    arc.addEventListener('pointercancel', () => { swipe = null; });
+  }
+
+  const manifesto = document.querySelector('[data-staggered-text]');
+  if (manifesto && 'IntersectionObserver' in window) {
+    let index = 0;
+    manifesto.querySelectorAll('.stagger-line').forEach(line => {
+      const tokens = line.textContent.trim().split(/(\s+)/u);
+      line.replaceChildren(...tokens.map(text => {
+        if (!text.trim()) return text;
+        const word = document.createElement('span');
+        word.className = 'stagger-word';
+        word.textContent = text;
+        word.style.setProperty('--stagger-at', `${index++ * 77}ms`);
+        return word;
+      }));
+    });
+    manifesto.classList.add('stagger-pending');
+    const reveal = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio >= .25) manifesto.classList.replace('stagger-pending', 'stagger-in');
+      else if (!entry.isIntersecting) manifesto.classList.replace('stagger-in', 'stagger-pending');
+    }, { threshold: [0,.25] });
+    reveal.observe(manifesto);
+  }
+
   // Card Swap: a 3D deck that sends the front card to the back on a timer or a fling.
   const deckRoot = document.querySelector('#tool-deck');
   if (deckRoot) {
@@ -263,7 +399,7 @@
 
     const state = {
       order: deck.map(card => card.index), raf: 0, last: 0, timer: 0, queue: [],
-      layers: 0, scale: 1, hovered: false, overCard: false, inView: true,
+      layers: 0, scale: 1, hovered: false, overCard: false, inView: false,
       drag: null, spread: 0, spreadV: 0, px: 0, py: 0, pvx: 0, pvy: 0,
       tx: 0, ty: 0, dragged: false, focused: false
     };
@@ -629,17 +765,7 @@
     updateCaption(0);
     deckRoot.classList.add('is-ready');
 
-    if (!motion.matches) {
-      const now = performance.now();
-      deck.forEach(card => {
-        card.from = 0;
-        card.hold = now + (card.pos * 70) / settings.speed;
-      });
-      stage.animate?.([{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: 'ease-out' });
-    } else {
-      deck.forEach(card => Object.assign(card, slot(card.pos)));
-    }
-
+    deck.forEach(card => Object.assign(card, slot(card.pos)));
     fit();
     writeStage(settings);
     deck.forEach(card => write(card, settings));
@@ -647,10 +773,25 @@
     schedule();
 
     new ResizeObserver(fit).observe(deckRoot);
+    let introPlayed = false;
     new IntersectionObserver(entries => {
-      state.inView = entries[entries.length - 1]?.isIntersecting ?? true;
+      state.inView = entries[entries.length - 1]?.intersectionRatio >= .25;
+      if (state.inView && !introPlayed) {
+        introPlayed = true;
+        if (!motion.matches && state.order.every((index, pos) => index === pos)) {
+          const now = performance.now();
+          deck.forEach(card => {
+            Object.assign(card, slot(0));
+            card.from = 0;
+            card.hold = now + (card.pos * 70) / settings.speed;
+            write(card, settings);
+          });
+          stage.animate?.([{ opacity: 0 }, { opacity: 1 }], { duration: 420, easing: 'ease-out' });
+          wake();
+        }
+      }
       schedule();
-    }).observe(deckRoot);
+    }, { threshold: .25 }).observe(deckRoot);
 
     deckRoot.addEventListener('pointermove', onMove);
     deckRoot.addEventListener('pointerleave', onLeave);
@@ -670,6 +811,20 @@
 
   // Animate UI Ripple Button, with a short lead-in before following the link.
   const start = document.querySelector('#start-link');
+  start.addEventListener('pointerenter', event => {
+    if (event.pointerType === 'mouse') start.classList.add('is-hovered');
+  });
+  start.addEventListener('pointermove', event => {
+    if (event.pointerType !== 'mouse' || motion.matches) return;
+    const box = start.getBoundingClientRect();
+    start.style.setProperty('--cta-x', `${(event.clientX - box.left) / box.width * 100}%`);
+    start.style.setProperty('--cta-y', `${(event.clientY - box.top) / box.height * 100}%`);
+  });
+  start.addEventListener('pointerleave', () => {
+    start.classList.remove('is-hovered');
+    start.style.removeProperty('--cta-x');
+    start.style.removeProperty('--cta-y');
+  });
   let navigationTimer = 0;
   start.addEventListener('click', event => {
     if (!start.animate || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

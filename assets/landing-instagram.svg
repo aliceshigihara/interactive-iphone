@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844">
+  <style>.en{display:none}#en:target ~ g .en{display:inline}#en:target ~ g .pt{display:none}</style>
+  <g id="en"/>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#638eaa"/><stop offset="1" stop-color="#f3c99f"/>
+    </linearGradient>
+    <linearGradient id="sunset" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#8e89b8"/><stop offset=".65" stop-color="#f7ba95"/><stop offset="1" stop-color="#f9ddb5"/>
+    </linearGradient>
+    <linearGradient id="water" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#51868b"/><stop offset="1" stop-color="#214c63"/>
+    </linearGradient>
+    <radialGradient id="portrait">
+      <stop stop-color="#fae2c8"/><stop offset="1" stop-color="#c58778"/>
+    </radialGradient>
+    <pattern id="waves" width="26" height="16" patternUnits="userSpaceOnUse">
+      <path d="M2 4h12m5 8h6" stroke="#fff" stroke-opacity=".18" stroke-linecap="round"/>
+    </pattern>
+    <symbol id="coast" viewBox="0 0 130 172">
+      <path fill="url(#sky)" d="M0 0h130v172H0z"/>
+      <circle cx="103" cy="45" r="17" fill="#f9dbac"/>
+      <path fill="url(#water)" d="M0 89h130v83H0z"/>
+      <path fill="url(#waves)" d="M0 89h130v83H0z"/>
+      <path fill="#74827b" d="M0 63 19 74l19 13 27-5 23 10 19 9 23 1v9H0z"/>
+      <path fill="#385951" d="M0 79l27 13 10 18 25 9 10 24 37 29H0z"/>
+      <path fill="#233d39" d="M0 106l27 17 16 17 27 9 29 23H0z"/>
+      <path fill="#fff0ca" d="M38 100v-8h8v8m4 3v-6h6v6m-26-6v-8h7v9"/>
+      <path d="M38 92l4-4 4 4m4 5 3-3 3 3m-26-8 3.5-4 3.5 4" fill="#b05e53"/>
+    </symbol>
+    <symbol id="light" viewBox="0 0 130 172">
+      <path fill="url(#sunset)" d="M0 0h130v172H0z"/>
+      <circle cx="40" cy="72" r="22" fill="#ffdfa8"/>
+      <path fill="#7c8297" d="M0 112h130v60H0z"/>
+      <path fill="url(#waves)" d="M0 113h130v59H0z"/>
+      <path fill="#594e5e" d="m18 172 20-19 35-7 21-14 36 9v31z"/>
+      <path fill="#fff0d3" d="m88 137 3-45h10l4 47z"/>
+      <path fill="#a75b58" d="M90 93v-9h12v9zm-1-9 7-8 7 8zm1 22h12l1 9H89z"/>
+      <path d="M96 85h4v5h-4z" fill="#ffe69a"/>
+    </symbol>
+    <symbol id="street" viewBox="0 0 130 172">
+      <path fill="url(#sky)" d="M0 0h130v172H0z"/>
+      <path fill="#f7d6a7" d="M0 33h34l28 29v110H0z"/>
+      <path fill="#a66f65" d="M0 22h31l9 11H0z"/>
+      <path fill="#f6a98d" d="m130 42-20-4-32 31v103h52z"/>
+      <path fill="#db9172" d="M25 79h29v62H25z"/>
+      <path fill="#776775" d="M0 145l64-26 66 23v30H0z"/>
+      <path d="M18 58v14m15-4v12m-15 19v15m72-38v11m15-25v17m15-26v14m-14 38v16" stroke="#66566a" stroke-width="6"/>
+      <path d="M0 171l64-44m57 45-57-45" stroke="#e6b6a6" opacity=".6"/>
+      <path d="M42 44q24 13 49 5" fill="none" stroke="#594e5e"/>
+    </symbol>
+    <g id="avatar">
+      <circle cx="0" cy="0" r="38" fill="url(#portrait)"/>
+      <path d="M-34 16c6-15 16-19 25-14 7-6 15-10 22-8 7 2 14 11 20 21a37 37 0 0 1-67 1z" fill="#77495e" opacity=".73"/>
+      <text x="0" y="12" text-anchor="middle" font-family="system-ui,sans-serif" font-size="34" font-weight="650" fill="#fff">Z</text>
+    </g>
+  </defs>
+  <path fill="#fff" d="M0 0h390v844H0z"/>
+  <g fill="#10151b" font-family="system-ui, sans-serif">
+    <text x="33" y="35" font-size="15" font-weight="700">9:41</text>
+    <path d="M279 34h3v-5h-3zm5 0h3v-8h-3zm5 0h3V23h-3zm5 0h3V20h-3zm12-2 3 3 3-3a5 5 0 0 0-6 0z" transform="translate(9 0)"/>
+    <path d="M311 26q7-5 14 0m-12 3q5-3 10 0" fill="none" stroke="#10151b" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="331" y="23" width="23" height="12" rx="3" fill="none" stroke="#10151b" opacity=".55"/>
+    <rect x="333" y="25" width="19" height="8" rx="1.5"/><path d="M356 27v4" stroke="#10151b" stroke-width="2"/>
+    <text x="195" y="90" font-size="23" text-anchor="middle" font-weight="750">zhang</text>
+    <path d="m235 80 4 4 4-4M25 73v16m-8-8h16m324-6h17m-17 6h17m-17 6h17" fill="none" stroke="#10151b" stroke-width="2" stroke-linecap="round"/>
+    <use href="#avatar" x="55" y="153"/>
+    <circle cx="55" cy="153" r="42" fill="none" stroke="#d98791" stroke-width="1.5"/>
+    <text x="110" y="135" font-size="15" font-weight="750">Zhang</text>
+    <g font-size="16" font-weight="750"><text x="110" y="162">6</text><text x="195" y="162">184</text><text x="287" y="162">78</text></g>
+    <g font-size="12" class="pt"><text x="110" y="178">publicações</text><text x="195" y="178">seguidores</text><text x="287" y="178">seguindo</text></g>
+    <g font-size="12" class="en"><text x="110" y="178">posts</text><text x="195" y="178">followers</text><text x="287" y="178">following</text></g>
+    <text x="17" y="215" font-size="14" font-weight="700" class="pt">Diário da viagem</text>
+    <text x="17" y="215" font-size="14" font-weight="700" class="en">Travel journal</text>
+    <text x="17" y="235" font-size="14" class="pt">Onde a estrada encontra o mar.</text>
+    <text x="17" y="235" font-size="14" class="en">Where the road meets the sea.</text>
+    <g fill="#eef1f3"><rect x="16" y="251" width="175" height="34" rx="7"/><rect x="198" y="251" width="176" height="34" rx="7"/></g>
+    <g font-size="13" font-weight="700" text-anchor="middle" class="pt"><text x="103" y="273">Seguindo</text><text x="286" y="273">Mensagem</text></g>
+    <g font-size="13" font-weight="700" text-anchor="middle" class="en"><text x="103" y="273">Following</text><text x="286" y="273">Message</text></g>
+    <g stroke="#d9dee2" fill="none" stroke-width="2">
+      <circle cx="48" cy="325" r="29"/><circle cx="119" cy="325" r="29"/><circle cx="190" cy="325" r="29"/>
+    </g>
+    <circle cx="48" cy="325" r="25" fill="#527e88"/><circle cx="119" cy="325" r="25" fill="#d4a18f"/><circle cx="190" cy="325" r="25" fill="#9d87ab"/>
+    <path d="m30 332 11-16 8 9 7-12 10 19m42 4v-17l11-7 11 7v17m48-2h24m-22-3v-4a10 10 0 0 1 20 0v4" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <g font-size="11" text-anchor="middle" class="pt"><text x="48" y="371">Costa</text><text x="119" y="371">Cidades</text><text x="190" y="371">Fim de tarde</text></g>
+    <g font-size="11" text-anchor="middle" class="en"><text x="48" y="371">Coast</text><text x="119" y="371">Towns</text><text x="190" y="371">Sunset</text></g>
+    <path d="M0 387h390" stroke="#eef0f1"/>
+    <path d="M55 400h20v18H55zm6 0v18m7-18v18m-13-12h20m-20 6h20m110-10h18v14h-18zm7 4 5 3-5 3zM316 417v-15h17v15zm5-9a3 3 0 1 0 6 0 3 3 0 0 0-6 0zm-3 8q7-10 13 0" fill="none" stroke="#162026" stroke-width="1.4"/>
+    <path d="M46 430h38" stroke="#162026" stroke-width="2"/>
+    <use href="#coast" x="0" y="432" width="129" height="172"/>
+    <use href="#street" x="130.5" y="432" width="129" height="172"/>
+    <use href="#light" x="261" y="432" width="129" height="172"/>
+    <use href="#light" x="0" y="605" width="129" height="172"/>
+    <use href="#coast" x="130.5" y="605" width="129" height="172"/>
+    <use href="#street" x="261" y="605" width="129" height="172"/>
+    <path fill="#fff" d="M0 773h390v71H0z"/><path stroke="#eceef1" d="M0 773h390"/>
+    <g fill="none" stroke="#10151b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m29 797 10-8 10 8v10h-7v-7h-6v7h-7zm160-7h18l-10 18-3-8-5-10zm5 10 10-8"/>
+      <rect x="108" y="789" width="19" height="19" rx="5"/><path d="m115 794 6 4-6 4z"/>
+      <circle cx="273" cy="797" r="8"/><path d="m279 803 5 5"/>
+    </g>
+    <use href="#avatar" transform="translate(351 798) scale(.27)"/>
+    <rect x="126" y="830" width="138" height="5" rx="2.5"/>
+  </g>
+</svg>

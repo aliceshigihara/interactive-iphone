@@ -38,6 +38,7 @@
 /* Theme the editing controls without changing the phone's story or app previews. */
 :root[data-theme="dark"] :is(.col, .story-drawer, .mobile-editor-nav, body > dialog, .pmod, #md) {
   --site-button-blue: #7ea8ff;
+  --site-on-button-blue: #071022;
   --site-button-blue-shadow: #4f7fe633;
   --site-button-blue-soft: #1a2a4a;
   --site-button-blue-soft-hover: #22365c;
@@ -60,6 +61,8 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 }
 .pc:hover { box-shadow: 0 20px 46px #172b621a, inset 0 1px #fff; }
 .editor-panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.editor-panel-heading .language-choice { margin-inline-start: auto; }
+:lang(en) .story-drawer::after { content: "Stories"; }
 #editor-theme-toggle { display: grid; place-items: center; flex: none; width: 44px; height: 44px; padding: 0; border-radius: 50%; }
 #editor-theme-toggle svg { width: 20px; height: 20px; }
 #editor-theme-toggle:is(:hover,:active) { transform: none; }
@@ -136,7 +139,8 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 :root[data-theme="dark"] .story-help-dialog,
 :root[data-theme="dark"] #lock-notifications,
 :root[data-theme="dark"] #story-planner,
-:root[data-theme="dark"] #editor-guide {
+:root[data-theme="dark"] #editor-guide,
+:root[data-theme="dark"] :is(.photo-crop, .story-connection-dialog) {
   background: #111c34;
   color: var(--ed-ink);
   border: 1px solid var(--ed-line-strong);
@@ -174,7 +178,7 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 :root[data-theme="dark"] .sc-drawer { background: #101a30; color: var(--ed-ink); box-shadow: -14px 0 50px #0007; }
 :root[data-theme="dark"] .sc-drawer h2 { color: var(--ed-ink); }
 :root[data-theme="dark"] .sc-drawer button { background: var(--site-button-blue-soft); color: var(--ed-ink); }
-:root[data-theme="dark"] .sc-drawer .sc-primary { background: var(--site-button-blue); color: #071022; }
+:root[data-theme="dark"] .sc-drawer .sc-primary { background: var(--site-button-blue); color: var(--site-on-button-blue); }
 :root[data-theme="dark"] .sc-drawer label { color: var(--ed-muted); }
 :root[data-theme="dark"] .sc-drawer input,
 :root[data-theme="dark"] .sc-drawer select,
@@ -254,10 +258,9 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
   border-color: var(--ed-line);
   color: var(--ed-sub);
 }
-:root[data-theme="dark"] :is(.pc .ck, .pc .chat-primary-label, .story-hold-hint, .lock-preview figcaption, .lock-notification-pagination, .planner-day, .fp-heading, .fp-tabs button, .lock-notification-tabs button) {
+:root[data-theme="dark"] :is(.pc .ck, .pc .chat-primary-label, .story-hold-hint, .planner-day, .fp-heading, .fp-tabs button, .lock-notification-tabs button) {
   color: var(--ed-sub);
 }
-:root[data-theme="dark"] #lock-notifications .planner-header p { color: var(--ed-muted); }
 :root[data-theme="dark"] :is(.msg-read-panel, .map-pin-editor-row, #home-organizer .org-row) { border-color: var(--ed-line); }
 :root[data-theme="dark"] #lock-notifications-launch { color: var(--ed-ink); background: var(--ed-input); }
 :root[data-theme="dark"] #lock-notifications-launch:hover { background: var(--ed-surface); }
@@ -297,11 +300,37 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 }
 :root[data-theme="dark"] :is(.planner-error, .planner-danger) { color: var(--ed-danger); }
 
+:root[data-theme="dark"] :is(.photo-crop-head small, .story-ref-chevron) { color: var(--ed-accent-bright); }
+:root[data-theme="dark"] :is(.photo-crop-head p, .photo-crop-position, .story-picker-filters label, .story-link-source, .story-ref-empty, .story-ref-heading p, .story-picker-item small, .story-ref-open small, .story-connected-identity small) {
+  color: var(--ed-sub);
+}
+:root[data-theme="dark"] .photo-crop button:not([data-action="apply"]) {
+  background: var(--site-button-blue-soft);
+  color: var(--ed-accent);
+}
+:root[data-theme="dark"] .story-connection-dialog {
+  --planner-blue: var(--ed-accent-bright);
+  --planner-muted: var(--ed-muted);
+}
+:root[data-theme="dark"] .story-connection-dialog :is(input,select) {
+  background: var(--ed-input); border-color: var(--ed-input-line); color: var(--ed-ink);
+}
+:root[data-theme="dark"] :is(.story-picker-item, .story-participant, .story-ref-row, .ac-edit-card) {
+  background: var(--ed-surface); border-color: var(--ed-line); color: var(--ed-ink);
+}
+:root[data-theme="dark"] :is(.story-picker-item:hover, .story-participant:hover, .story-ref-row:has(.story-ref-open:enabled:hover)) {
+  background: var(--site-button-blue-soft-hover);
+}
+:root[data-theme="dark"] .story-ref-open { color: var(--ed-ink); }
+:root[data-theme="dark"] .story-ref-open .story-ref-warning { color: #ffcb85; }
+:root[data-theme="dark"] .story-ref-remove { background: color-mix(in srgb, var(--ed-danger) 12%, transparent); color: var(--ed-danger); }
+:root[data-theme="dark"] .story-ref-section { border-color: var(--ed-line); }
+
 /* The light blue accent needs dark lettering when used as a solid fill. */
 :root[data-theme="dark"] .pc button:not(.g,.panel-help-toggle),
-:root[data-theme="dark"] :is(.planner-primary, .story-help-primary, [data-status="complete"] .guide-stepper-badge, .mb .bt button:last-child),
-:root[data-theme="dark"] #narration .sc-primary { color: #071022; }
-:root[data-theme="dark"] :is(.pc.show-help .panel-help-toggle, .pc .seg button.on, .pc .weather-quick button.on, #narration .nar-switch button[aria-pressed="true"]) { color: #071022 !important; }
+:root[data-theme="dark"] :is(.planner-primary, .story-help-primary, [data-status="complete"] .guide-stepper-badge, .mb .bt button:last-child, .ac-editor .ac-primary),
+:root[data-theme="dark"] #narration .sc-primary { color: var(--site-on-button-blue); }
+:root[data-theme="dark"] :is(.pc.show-help .panel-help-toggle, .pc .seg button.on, .pc .weather-quick button.on, #narration .nar-switch button[aria-pressed="true"]) { color: var(--site-on-button-blue) !important; }
 
 ::selection { background: #2e57c155; }
 :root[data-theme="dark"] ::selection { background: #86b4ff55; }
