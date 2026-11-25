@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(145deg, #319bff, #0675f4);
+  background: var(--site-button-blue);
   font-weight: 650;
 }
 
@@ -47,12 +47,12 @@
   border-radius: 11px;
   padding: 9px 12px;
   min-height: 40px;
-  color: var(--planner-blue);
-  background: #eaf2ff;
+  color: var(--site-button-blue);
+  background: var(--site-button-blue-soft);
   font-size: 13px;
   font-weight: 650;
 }
-.planner-primary { color: #fff; background: linear-gradient(145deg, #208cf8, #046ee9); }
+.planner-primary { color: #fff; background: var(--site-button-blue); }
 .planner-icon { flex: none; display: grid; place-items: center; width: 40px; padding: 0; line-height: 1; font-size: 24px; }
 #planner-close { background: #e9edf4; color: #404a5c; font-weight: 400; }
 #story-planner label { display: grid; gap: 5px; color: #525d70; font-size: 12px; font-weight: 600; min-width: 0; }
@@ -147,7 +147,7 @@
 .planner-id-head p { margin: 2px 0 5px; font-size: 11px; }
 .planner-link, #story-planner .planner-photo-label { position: relative; display: inline-block; cursor: pointer; border: 0; padding: 4px 0; background: transparent; color: var(--planner-blue); font-size: 12px; font-weight: 650; }
 .planner-photo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-#story-planner .planner-photo-label, .planner-photo-actions .planner-link { padding: 6px 9px; border-radius: 8px; background: #eaf2ff; }
+#story-planner .planner-photo-label, .planner-photo-actions .planner-link { padding: 6px 9px; border-radius: 8px; background: var(--site-button-blue-soft); color: var(--site-button-blue); }
 .planner-photo-actions .planner-link { color: #9d323d; background: #fdf0f1; }
 #story-planner .planner-photo-label:focus-within { outline: 2px solid #398eff; outline-offset: 2px; }
 .planner-photo-label input { position: absolute; inset: 0; width: 100%; opacity: 0; cursor: pointer; }

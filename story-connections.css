@@ -53,14 +53,14 @@
 .planner-day-referenced .planner-day-dot { box-shadow: 0 0 0 3px #e0edff; }
 .planner-day-referenced .planner-day-preview { border-color: #a8caff; }
 
-.pc .story-character-connections, .scr .story-contact-pill {
+.pc button.story-character-connections:not(.g), .scr .story-contact-pill {
   flex: none;
   max-width: 100%;
   padding: 4px 7px;
   border: 0;
   border-radius: 8px;
-  background: #e6f0ff;
-  color: #116ac9;
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
   font-size: 11px;
   font-weight: 650;
   text-align: left;
@@ -69,7 +69,7 @@
 .scr .story-contact-pill { display: inline-block; margin: 4px 3px 0 0; }
 .story-ci-connections .story-contact-pill { align-self: flex-start; }
 .story-chat-link { display: flex; width: min(100%, 220px); gap: 3px; align-items: stretch; margin: 3px 0; white-space: normal; }
-.story-chat-link > button:first-child { flex: 1; min-width: 0; display: flex; gap: 6px; align-items: center; border: 0; border-radius: 9px; padding: 5px 6px; background: #f3f8ff; color: #173f6b; text-align: left; cursor: pointer; }
+.story-chat-link > button:first-child { flex: 1; min-width: 0; display: flex; gap: 6px; align-items: center; border: 0; border-radius: 9px; padding: 5px 6px; background: var(--site-button-blue-soft); color: var(--site-button-blue); text-align: left; cursor: pointer; }
 .story-chat-link b, .story-chat-link small { display: block; line-height: 1.2; overflow-wrap: anywhere; }
 .story-chat-link b { font-size: 12px; }
 .story-chat-link small { font-size: 10px; color: #51708f; }

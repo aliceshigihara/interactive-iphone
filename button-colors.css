@@ -1,0 +1,122 @@
+:root {
+  --site-button-blue: #2e57c1;
+  --site-button-blue-shadow: #2e57c140;
+  --site-button-blue-soft: #eaf1ff;
+  --site-button-blue-soft-hover: #dce8ff;
+  --site-button-blue-border: #c3d5f5;
+  --site-panel-blue-surface: #f5f8ff;
+}
+
+/* Blue actions inside the simulator, without recoloring app content or icons. */
+.pill button,
+.map-card button.go,
+.bs button.bl,
+.x-fab,
+.x-fab-plus,
+.ios-msg-footer .pill button,
+.ios-msg-footer .pill .ios-glass-send,
+.ac-editor button.ac-primary,
+.pc .narration-entry,
+#narration .sc-primary,
+.cc-connect button.on,
+.cc-tile.on,
+.cc-connect-btn.is-active,
+.cc-connect-btn.cc-blue,
+#control-center .cc-connect-btn.is-active {
+  background: var(--site-button-blue);
+}
+.pc.show-help .panel-help-toggle,
+.pc .sender-list button.on,
+.pc .notif-add {
+  background: var(--site-button-blue) !important;
+  border-color: var(--site-button-blue) !important;
+  box-shadow: 0 3px 10px var(--site-button-blue-shadow);
+}
+.pc .sender-list button.on { box-shadow: 0 3px 10px var(--site-button-blue-shadow) !important; }
+.pc .notif-app-choice.selected {
+  background: var(--site-button-blue-soft) !important;
+  border-color: var(--site-button-blue) !important;
+}
+.native-round.selected,
+#mapPinToggle[aria-pressed="true"] {
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
+}
+
+/* The editor keeps secondary actions lighter than its solid-blue primary buttons. */
+.pc button.g,
+.pmod .bt button:not(:last-child),
+#md .bt button:not(:last-child),
+.story-help-secondary,
+#narration button:not(.sc-primary,.sc-danger),
+#home-organizer button:not(.org-app-chip),
+.ac-editor button:not(.ac-primary) {
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
+}
+.pc button.g:enabled:hover,
+.pmod .bt button:not(:last-child):enabled:hover,
+#md .bt button:not(:last-child):enabled:hover,
+.story-help-secondary:enabled:hover,
+#narration button:not(.sc-primary,.sc-danger):enabled:hover,
+#home-organizer button:not(.org-app-chip):enabled:hover,
+.ac-editor button:not(.ac-primary):enabled:hover {
+  background: var(--site-button-blue-soft-hover);
+}
+.pc .panel-help-toggle,
+.pc .seg button,
+.pc .weather-quick button,
+.pc .forecast-edit button {
+  background: var(--site-button-blue-soft) !important;
+  color: var(--site-button-blue) !important;
+  border-color: var(--site-button-blue-border) !important;
+}
+.pc.show-help .panel-help-toggle,
+.pc .seg button.on,
+.pc .weather-quick button.on,
+#narration .nar-switch button[aria-pressed="true"] {
+  background: var(--site-button-blue) !important;
+  color: #fff !important;
+  border-color: var(--site-button-blue) !important;
+}
+#narration .nar-switch button:not([aria-pressed="true"]) { box-shadow: none; }
+.nar-switch { background: var(--site-button-blue-soft); }
+.pc .chat-app-row {
+  background: var(--site-panel-blue-surface) !important;
+  border-color: var(--site-button-blue-border) !important;
+}
+.pc .chat-app-row.selected {
+  background: var(--site-button-blue-soft-hover) !important;
+  border-color: var(--site-button-blue) !important;
+}
+.pc .notif-app-choice.selected { color: var(--site-button-blue) !important; }
+.pc .notif-app-choice.selected .notif-app-icon::after { background: var(--site-button-blue); }
+
+/* Section glyphs share a palette; actual app artwork keeps its original colors. */
+.pc .notification-toggle-icon,
+.pc .chat-panel-symbol,
+.pc .lock-notify-icon {
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
+}
+.pc .notification-toggle-chevron,
+.pc .lock-notify-arrow,
+.pc .msg-read-panel summary > svg {
+  color: var(--site-button-blue);
+}
+.pc .notification-toggle:hover .notification-toggle-icon,
+#lock-notifications-launch:hover .lock-notify-icon {
+  background: var(--site-button-blue-soft-hover);
+}
+.mobile-editor-nav button { color: var(--site-button-blue); }
+.mobile-editor-nav button[aria-selected="true"] {
+  background: var(--site-button-blue-soft);
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
+  color: var(--site-button-blue);
+}
+:is(.pc,.pmod,#home-organizer,#narration,.mobile-editor-nav) :is(button,summary):focus-visible {
+  outline: 2px solid var(--site-button-blue);
+  outline-offset: 2px;
+}

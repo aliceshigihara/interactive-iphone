@@ -68,7 +68,7 @@
 .ig-profile-music > button { color: #55616b; }
 .ig-profile-actions { display: flex; align-items: stretch; gap: 5px; margin-top: 11px; }
 .ig-profile-actions button { flex: 1; display: grid; place-items: center; min-height: 33px; padding: 4px; border-radius: 8px; background: #eef1f3; font-size: 13px; font-weight: 650; }
-.ig-profile-actions .ig-follow { color: #fff; background: #1679ed; }
+.ig-profile-actions .ig-follow { color: #fff; background: var(--site-button-blue); }
 .ig-profile-actions .ig-profile-discover { flex: none; width: 33px; }
 .ig-profile-highlights {
   display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none;

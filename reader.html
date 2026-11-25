@@ -31,7 +31,7 @@ body{display:grid;place-items:center;overflow:hidden;background:radial-gradient(
   const params=new URLSearchParams(location.hash.slice(1));
   const story=params.get('story');
   const id=new URLSearchParams(location.search).get('id');
-  const appUrl=new URL('index.html?reader=1',location.href);
+  const appUrl=new URL('editor.html?reader=1',location.href);
   if(story)appUrl.hash=new URLSearchParams({story}).toString();
   if(id)appUrl.searchParams.set('id',id);
   screen.src=appUrl.href;

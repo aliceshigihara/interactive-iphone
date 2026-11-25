@@ -17,8 +17,8 @@
   gap: 6px;
   padding: 8px 10px;
   border-radius: 8px;
-  background: #e5f0ff;
-  color: #0d63c5;
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
   font-size: 12px;
   font-weight: 700;
 }
@@ -35,7 +35,7 @@
   pointer-events: none;
 }
 .photo-picker { cursor: pointer; }
-.photo-picker:hover .photo-picker-button { background: #d8eaff; }
+.photo-picker:hover .photo-picker-button { background: var(--site-button-blue-soft-hover); }
 .photo-picker:focus-within { outline: 2px solid #368eff; outline-offset: 2px; }
 .photo-picker:has(input:disabled) { opacity: .65; }
 
@@ -92,7 +92,7 @@
 .photo-crop button:focus-visible, .photo-crop input:focus-visible, .photo-crop canvas:focus-visible { outline: 2px solid #398eff; outline-offset: 2px; }
 .photo-crop .photo-crop-close { width: 36px; flex: none; font-size: 22px; font-weight: 400; padding: 0; }
 .photo-crop-position { margin-right: auto; }
-.photo-crop-footer button[data-action="apply"] { color: #fff; background: linear-gradient(145deg, #248ffc, #0869e2); }
+.photo-crop-footer button[data-action="apply"] { color: #fff; background: var(--site-button-blue); }
 
 @media (max-width: 520px) {
   .photo-crop { padding: 14px; border-radius: 20px; }
