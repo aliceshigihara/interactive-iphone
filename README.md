@@ -4,7 +4,7 @@ Este projeto foi desenvolvido com fins de entretenimento, portanto sem fins come
 
 interactive-phone (ou fablyphone) é um iPhone interativo sem necessidade de autenticação, com exportação/importação JSON para histórias pessoais ou links públicos para o compartilhamento (sujeito a limites de otimização).
 
-### Acesse o site por: [fablyphone.vercel.app](fablyphone.vercel.app) (sujeito a manutenções)
+### Acesse o site por: [fablyphone.vercel.app](https://fablyphone.vercel.app/) (sujeito a manutenções)
 
 #### Versão atual: v1.0:
 - Aplicativos interativos (Instagram, Twitter, Maps...)
