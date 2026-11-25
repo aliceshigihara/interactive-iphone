@@ -825,41 +825,16 @@
     motion.addEventListener('change', () => { schedule(); wake(); });
   }
 
-  // Animate UI Ripple Button, with a short lead-in before following the link.
+  // Tactile rocker: preserve native link behavior for modified clicks and reduced motion.
   const start = document.querySelector('#start-link');
-  start.addEventListener('pointerenter', event => {
-    if (event.pointerType === 'mouse') start.classList.add('is-hovered');
-  });
-  start.addEventListener('pointermove', event => {
-    if (event.pointerType !== 'mouse' || motion.matches) return;
-    const box = start.getBoundingClientRect();
-    start.style.setProperty('--cta-x', `${(event.clientX - box.left) / box.width * 100}%`);
-    start.style.setProperty('--cta-y', `${(event.clientY - box.top) / box.height * 100}%`);
-  });
-  start.addEventListener('pointerleave', () => {
-    start.classList.remove('is-hovered');
-    start.style.removeProperty('--cta-x');
-    start.style.removeProperty('--cta-y');
-  });
   let navigationTimer = 0;
-  start.addEventListener('click', event => {
-    if (!start.animate || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  start?.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || motion.matches) return;
     event.preventDefault();
-    const rect = start.getBoundingClientRect();
-    const wave = document.createElement('span');
-    wave.className = 'ripple-wave';
-    wave.setAttribute('aria-hidden', 'true');
-    wave.style.left = `${event.detail ? event.clientX - rect.left : rect.width / 2}px`;
-    wave.style.top = `${event.detail ? event.clientY - rect.top : rect.height / 2}px`;
-    start.append(wave);
-    const animation = wave.animate(
-      [{scale: 1, opacity: .38}, {scale: motion.matches ? 1 : 10, opacity: 0}],
-      {duration: 600, easing: 'ease-out'}
-    );
-    animation.finished.then(() => wave.remove(), () => wave.remove());
-    if (!navigationTimer) navigationTimer = setTimeout(() => {
-      navigationTimer = 0;
-      location.assign(start.href);
-    }, motion.matches ? 90 : 190);
+    if (navigationTimer) return;
+    start.classList.add('is-pressed');
+    navigationTimer = setTimeout(() => start.classList.remove('is-pressed'), 105);
+    setTimeout(() => { navigationTimer = 0; location.assign(start.href); }, 240);
   });
+  window.addEventListener('pageshow', () => { start?.classList.remove('is-pressed'); });
 })();

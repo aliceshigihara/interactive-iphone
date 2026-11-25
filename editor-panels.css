@@ -18,31 +18,6 @@
   @keyframes editor-shade-out { from { opacity: 1; } to { opacity: 0; } }
 }
 
-#lock-notifications-launch {
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto minmax(0,1fr) auto;
-  gap: 11px;
-  align-items: center;
-  padding: 12px 14px;
-  border: 0;
-  border-radius: inherit;
-  background: var(--site-button-blue-soft);
-  color: #192e49;
-  text-align: left;
-  box-shadow: none;
-  transform: none;
-}
-#lock-notifications-launch:hover { background: var(--site-button-blue-soft-hover); }
-#lock-notifications-launch:active { filter: brightness(.97); }
-#lock-notifications-launch:focus-visible { outline: 2px solid #368eff; outline-offset: -3px; }
-.lock-notify-icon, .lock-notify-arrow { display: grid; place-items: center; }
-.lock-notify-icon { width: 38px; height: 38px; border-radius: 12px; background: var(--site-button-blue); color: #fff; box-shadow: inset 0 1px 2px #ffffff60; }
-.lock-notify-copy strong, .lock-notify-copy small { display: block; }
-.lock-notify-copy strong { font-size: 14px; line-height: 1.25; }
-.lock-notify-copy small { margin-top: 3px; color: #536680; font-size: 11px; line-height: 1.25; }
-.lock-notify-arrow { width: 26px; height: 26px; border-radius: 50%; background: #fff; color: #256ac0; }
-
 #lock-notifications {
   --planner-blue: var(--ed-accent-bright);
   --planner-ink: var(--ed-ink);

@@ -229,7 +229,8 @@ svg { display: block; }
   font-weight: 735; letter-spacing: -.06em; line-height: 1.08;
 }
 .stagger-line { display: block; text-wrap: balance; }
-.stagger-line + .stagger-line { margin-top: .14em; color: var(--accent-bright); }
+.stagger-line + .stagger-line { margin-top: .14em; }
+.stagger-line:last-child { color: var(--accent-bright); }
 .stagger-word { display: inline-block; white-space: nowrap; }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -347,28 +348,31 @@ svg { display: block; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .start { display: grid; justify-items: center; padding: clamp(54px,7vw,86px) 16px clamp(58px,8vw,94px); }
-.ripple-button {
-  position: relative; isolation: isolate; overflow: hidden; display: inline-grid; place-items: center;
-  padding: 16px 34px; min-width: min(100%,224px); border-radius: 15px;
-  background: #2e57c1; color: #fff; box-shadow: 0 7px 22px #2146b24d;
-  font-size: 18px; font-weight: 770;
-  transition: translate .24s ease, scale .22s cubic-bezier(.2,1.3,.4,1), box-shadow .24s ease;
+/* Tactile rocker: recessed well, glass cap and illuminated bead. */
+.tactile-button {
+  display: inline-grid; width: min(100%, 254px); padding: 6px;
+  border-radius: 23px; perspective: 500px; touch-action: manipulation;
+  background: linear-gradient(155deg,#a7b9d8,#dce6f5 55%,#f9fbff);
+  border: 1px solid #9baec9; box-shadow: inset 0 3px 8px #253e7055, 0 12px 26px #233f7026, 0 1px 0 #fff;
+  -webkit-tap-highlight-color: transparent;
 }
-.ripple-button::before {
-  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none; opacity: 0;
-  background: radial-gradient(ellipse at var(--cta-x,50%) var(--cta-y,15%),#bdd9ff6b 0%,#6da2ff36 37%,transparent 76%);
-  transition: opacity .24s ease;
+.tactile-cap {
+  position: relative; isolation: isolate; display: grid; grid-template-columns: 12px 1fr 20px; align-items: center; gap: 14px;
+  min-height: 59px; padding: 12px 18px; border-radius: 17px; color: #fff;
+  background: linear-gradient(180deg,#7198ec 0%,#436ed2 42%,#2549a3 100%);
+  border: 1px solid #ffffff70; font-size: 18px; font-weight: 720; text-align: center;
+  text-shadow: 0 1px 2px #18316b66;
+  box-shadow: inset 0 2px 2px #ffffff8c,inset 0 -3px 5px #152c7670,0 4px 0 #1b397e,0 7px 9px #1c397c66;
+  transform: translateY(-2px) rotateX(0deg); transform-origin: 50% 15%;
+  transition: transform .46s cubic-bezier(.25,1.35,.45,1),box-shadow .2s ease,filter .2s ease;
 }
-.ripple-button:focus-visible { box-shadow: 0 10px 28px #2146b27a; }
-.ripple-button:focus-visible::before { opacity: 1; }
-.ripple-button.is-hovered { translate: 0 -4px; box-shadow: 0 14px 30px #2146b26b; }
-.ripple-button.is-hovered::before { opacity: 1; }
-.ripple-button.is-hovered:active { translate: 0 -1px; }
-.ripple-button:active { scale: .97; }
-.ripple-wave {
-  position: absolute; z-index: -1; width: 20px; height: 20px; border-radius: 50%;
-  translate: -50% -50%; background: #fff; pointer-events: none;
-}
+.tactile-cap::before { content: ""; position: absolute; inset: 2px 3px 48%; border-radius: 14px 14px 9px 9px; background: linear-gradient(#ffffff48,#ffffff08); pointer-events: none; z-index: -1; }
+.tactile-led { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 25%,#e7f5ff,#7d9edb 55%,#2d4c90); box-shadow: inset 0 0 0 1px #17367155,0 1px 1px #ffffff55; transition: background .18s,box-shadow .18s; }
+.tactile-button:is(:hover,:focus-visible,.is-pressed) .tactile-led { background: radial-gradient(circle at 35% 25%,#fff,#a9e6ff 42%,#38bdf8 75%); box-shadow: 0 0 9px #7de2ff,0 0 18px #3acbff; }
+.tactile-button:is(:hover,:focus-visible) .tactile-cap { filter: brightness(1.06); }
+.tactile-button:is(:active,.is-pressed) .tactile-cap { transform: translateY(3px) rotateX(-12deg) scale(.985); box-shadow: inset 0 2px 4px #18316b55,inset 0 -1px 2px #ffffff24,0 1px 0 #1b397e; transition-duration: .13s; }
+:root[data-theme="dark"] .tactile-button { background: linear-gradient(155deg,#080f20,#253754 60%,#344865); border-color:#52698e; box-shadow: inset 0 3px 9px #0009,0 12px 26px #0005; }
+:root[data-theme="dark"] .tactile-cap { background: linear-gradient(180deg,#527fcf,#345cae 45%,#213d83); }
 .site-foot { border-top: 1px solid var(--border); color: var(--muted); padding: 13px 0 16px; font-size: 11px; gap: 9px; }
 .site-foot span:first-child { font-weight: 750; color: var(--sub); }
 
@@ -397,7 +401,6 @@ svg { display: block; }
   html { scroll-behavior: auto; }
   .pressure.is-reactive { display: block; }
   .pressure span { font-variation-settings: "wght" 570, "wdth" 92; }
-  .ripple-button, .ripple-button::before { transition: none; }
-  .ripple-button.is-hovered { translate: none; }
-  .ripple-button:active { scale: 1; }
+  .tactile-cap, .tactile-led { transition: none; }
+  .tactile-button:is(:active,.is-pressed) .tactile-cap { transform: none; }
 }

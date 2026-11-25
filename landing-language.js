@@ -40,6 +40,7 @@ Role sobre a prévia ou escolha um app.|Scroll over the preview or choose an app
 Deslize na prévia ou escolha um app.|Swipe the preview or choose an app.
 Crie sem cadastro|Create without signing up
 Sem criar contas.|No accounts to create.
+Sem pagar nada.|Completely free.
 Só você e sua imaginação.|Just you and your imagination.
 Prévias do Fablyphone|Fablyphone previews
 carrossel|carousel

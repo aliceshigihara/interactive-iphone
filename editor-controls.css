@@ -1,0 +1,392 @@
+/* Shared controls for authoring surfaces only; the simulated apps keep their own UI. */
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog, .story-help-dialog, .photo-crop)
+  button:where(:not(.panel-help-toggle, .panel-pin, .panel-collapse, .notif-app-choice, .lock-notification-remove, .planner-icon, .org-app-chip, .theme-switch, [hidden])) {
+  min-height: 38px;
+  border-radius: 12px;
+  font-weight: 650;
+  line-height: 1.25;
+}
+.pc button:not(.g,.panel-help-toggle,.forecast-edit button):where(:not([aria-pressed], [data-action])) {
+  box-shadow: inset 0 1px #ffffff26, 0 2px 5px var(--site-button-blue-shadow);
+}
+.pc button.g:enabled:hover { box-shadow: inset 0 0 0 1px var(--site-button-blue-border); }
+#editor-panel-content .pc button:where(:not([class], [aria-pressed], .cr button, .seg button, .weather-quick button, .forecast-edit button)),
+#editor-panel-content .pc button.g {
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  text-wrap: balance;
+}
+#editor-panel-content .pc button:where(:not([class], [aria-pressed], .cr button, .seg button, .weather-quick button, .forecast-edit button)) {
+  background: linear-gradient(155deg, color-mix(in srgb,var(--site-button-blue) 86%,#fff), var(--site-button-blue));
+  color: var(--site-on-button-blue);
+  box-shadow: 0 2px 4px var(--site-button-blue-shadow);
+}
+#editor-panel-content .pc button.g {
+  border-color: var(--ed-line);
+  background: var(--ed-input);
+  color: var(--ed-accent);
+  box-shadow: none;
+}
+#editor-panel-content .pc button.g:enabled:hover { background: var(--site-button-blue-soft); box-shadow: none; }
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog, .story-help-dialog, .photo-crop) button:focus-visible {
+  outline: 2px solid var(--ed-accent-bright);
+  outline-offset: 2px;
+}
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog, .story-help-dialog, .photo-crop) button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+  select:where(:not([hidden], [multiple], [size])) {
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m5 7.5 5 5 5-5' fill='none' stroke='%2341577a' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  appearance: none;
+  -webkit-appearance: none;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 42px;
+  padding: 8px 36px 8px 12px;
+  border: 1px solid var(--ed-input-line);
+  border-radius: 12px;
+  background-color: var(--ed-input);
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 18px;
+  color: var(--ed-ink);
+  -webkit-text-fill-color: var(--ed-ink);
+  font-weight: 540;
+  cursor: pointer;
+  transition: border-color .18s, box-shadow .18s;
+}
+:root[data-theme="dark"]:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+  select:where(:not([hidden], [multiple], [size])) {
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m5 7.5 5 5 5-5' fill='none' stroke='%23afc9fb' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: var(--select-chevron);
+}
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+  select:where(:not([hidden], [multiple], [size])):is(:hover,:focus-visible) {
+  border-color: var(--ed-accent-bright);
+}
+html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+  select:where(:not([hidden], [multiple], [size])):focus-visible {
+  outline: 2px solid var(--ed-accent-bright);
+  outline-offset: 2px;
+}
+html:not(.reader-mode) select:disabled { cursor: not-allowed; }
+
+/* Native interactive picker underneath: keyboard, input events, form submission and fallback all stay intact. */
+@supports (appearance: base-select) and selector(select::picker(select)) {
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size])),
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size]))::picker(select) {
+    appearance: base-select;
+  }
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size]))::picker(select) {
+    max-width: calc(100vw - 24px);
+    max-height: min(320px,50dvh);
+    margin-block: 5px;
+    padding: 5px;
+    border: 1px solid var(--ed-line-strong);
+    border-radius: 14px;
+    background: var(--ed-input);
+    color: var(--ed-ink);
+    box-shadow: 0 12px 32px var(--ed-shadow);
+  }
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size]))::picker-icon { display: none; }
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size])) option {
+    min-height: 38px;
+    padding: 8px 10px;
+    border-radius: 9px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog)
+    select:where(:not([hidden], [multiple], [size])) option:is(:checked,:enabled:hover,:focus-visible) {
+    background: color-mix(in srgb,var(--ed-accent-bright) 14%,transparent);
+    color: var(--ed-ink);
+  }
+}
+
+/* Quiet action rows, shared by the notification launcher and Twitter's creation tools. */
+#editor-panel-content .x-editor-create {
+  grid-template-columns: minmax(0,1fr);
+  gap: 4px;
+  margin: 0;
+}
+#editor-panel-content button.panel-action,
+#editor-panel-content #lock-notifications-launch.panel-action {
+  display: grid;
+  width: auto;
+  min-height: 46px;
+  grid-template-columns: auto minmax(0,1fr) auto;
+  align-items: center;
+  justify-content: normal;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--ed-ink);
+  box-shadow: none;
+  text-align: start;
+  transform: none;
+}
+#editor-panel-content #lock-notifications-launch.panel-action { margin: 0 16px 12px; }
+#editor-panel-content button.panel-action:is(:hover,:focus-visible),
+#editor-panel-content #lock-notifications-launch.panel-action:is(:hover,:focus-visible) {
+  background: var(--site-button-blue-soft);
+  border-color: var(--ed-line);
+  box-shadow: none;
+  filter: none;
+}
+#editor-panel-content button.panel-action:active { background: var(--site-button-blue-soft-hover); }
+#editor-panel-content button.panel-action::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-inline-end: 3px;
+  transform: rotate(-45deg);
+  border-right: 1.6px solid var(--ed-muted);
+  border-bottom: 1.6px solid var(--ed-muted);
+}
+.panel-action-icon {
+  display: block;
+  width: 19px;
+  height: 19px;
+  color: var(--ed-accent-bright);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.65;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.panel-action-copy { display: grid; gap: 2px; min-width: 0; }
+#editor-panel-content button.panel-action strong { font-size: 14px; font-weight: 690; color: var(--ed-ink); }
+#editor-panel-content button.panel-action small { font-size: 12px; font-weight: 450; color: var(--ed-muted); }
+
+#lock-notifications .lock-notification-inputs { gap: 8px 10px; }
+#lock-notifications .lock-notification-inputs :is(label,input) { min-width: 0; width: 100%; }
+#lock-notifications .notif-app-choice { min-height: 48px; justify-content: center; }
+#lock-notifications .lock-notification-tabs button:focus-visible { outline-offset: -2px; }
+#lock-notifications .lock-notification-remove:focus-visible { outline-offset: 0; }
+#lock-preview-notices .nf em { flex: 0 1 auto; max-width: 38%; }
+#lock-preview-notices .nf b { min-width: 0; }
+@media (max-width:350px) {
+  #lock-notifications .notif-app-grid { grid-template-columns: repeat(4,minmax(0,1fr)); }
+}
+
+/* Modern button refresh for editor panels: closer to the Twitter panel style, with more breathing room. */
+#editor-panel-content {
+  --panel-btn-spring: cubic-bezier(.25, 1.35, .45, 1);
+  --panel-btn-smooth: cubic-bezier(.22, 1, .36, 1);
+}
+
+#editor-panel-content .pc :is(button, .panel-photo-action) {
+  transition:
+    transform .38s var(--panel-btn-spring),
+    box-shadow .24s ease,
+    border-color .24s ease,
+    background-color .24s ease,
+    background .24s ease,
+    color .24s ease,
+    filter .24s ease;
+}
+
+#editor-panel-content .pc button:enabled:hover {
+  transform: translateY(-1px);
+}
+#editor-panel-content .pc button:enabled:active {
+  transform: translateY(0) scale(.985);
+}
+
+#editor-panel-content .pc button:where(:not([class], [aria-pressed], .cr button, .seg button, .weather-quick button, .forecast-edit button)),
+#editor-panel-content .pc button.g,
+#editor-panel-content .pc .narration-entry,
+#editor-panel-content .pc .planner-launch {
+  min-height: 46px;
+  padding: 10px 14px;
+  border-radius: 16px;
+}
+
+#editor-panel-content .pc button:where(:not([class], [aria-pressed], .cr button, .seg button, .weather-quick button, .forecast-edit button)) {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--site-button-blue) 83%, #fff), var(--site-button-blue));
+  box-shadow: inset 0 1px #ffffff33, 0 10px 24px color-mix(in srgb, var(--site-button-blue-shadow) 88%, transparent);
+}
+#editor-panel-content .pc button:where(:not([class], [aria-pressed], .cr button, .seg button, .weather-quick button, .forecast-edit button)):enabled:hover {
+  filter: saturate(1.04) brightness(1.02);
+  box-shadow: inset 0 1px #ffffff45, 0 14px 28px color-mix(in srgb, var(--site-button-blue-shadow) 98%, transparent);
+}
+
+#editor-panel-content .pc button.g {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ed-input) 82%, #fff), color-mix(in srgb, var(--site-button-blue-soft) 55%, var(--ed-input)));
+  box-shadow: inset 0 1px #fff, 0 8px 18px #172b620f;
+}
+#editor-panel-content .pc button.g:enabled:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 45%, #fff), color-mix(in srgb, var(--site-button-blue-soft-hover) 88%, #fff));
+  box-shadow: inset 0 1px #fff, 0 12px 24px #172b6214;
+}
+
+#editor-panel-content .pc .row2b {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+#editor-panel-content .pc .row2b button {
+  width: 100%;
+}
+#editor-panel-content .pc .panel-actions,
+#editor-panel-content .x-editor-create {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+#editor-panel-content .pc .panel-actions + :is(p, label, div),
+#editor-panel-content .x-editor-create + :is(p, label, div) {
+  margin-top: 8px;
+}
+
+#editor-panel-content button.panel-action,
+#editor-panel-content #lock-notifications-launch.panel-action {
+  min-height: 58px;
+  padding: 11px 12px;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--site-button-blue-border) 72%, var(--ed-line));
+  border-radius: 16px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ed-input) 95%, #fff), color-mix(in srgb, var(--site-button-blue-soft) 42%, #fff));
+  box-shadow: inset 0 1px #fff, 0 10px 22px #172b6210;
+}
+#editor-panel-content #lock-notifications-launch.panel-action { margin: 0 16px 14px; }
+#editor-panel-content button.panel-action:is(:hover,:focus-visible),
+#editor-panel-content #lock-notifications-launch.panel-action:is(:hover,:focus-visible) {
+  transform: translateY(-1px);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 22%, #fff), color-mix(in srgb, var(--site-button-blue-soft-hover) 76%, #fff));
+  border-color: color-mix(in srgb, var(--ed-accent-bright) 38%, var(--site-button-blue-border));
+  box-shadow: inset 0 1px #fff, 0 14px 28px #172b6218;
+}
+#editor-panel-content button.panel-action:active,
+#editor-panel-content #lock-notifications-launch.panel-action:active {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 36%, #fff), color-mix(in srgb, var(--site-button-blue-soft-hover) 90%, #fff));
+}
+#editor-panel-content button.panel-action::after,
+#editor-panel-content #lock-notifications-launch.panel-action::after {
+  width: 8px;
+  height: 8px;
+  margin-inline-end: 4px;
+  border-right-width: 1.8px;
+  border-bottom-width: 1.8px;
+  transition: transform .38s var(--panel-btn-spring), border-color .24s ease;
+}
+#editor-panel-content button.panel-action:is(:hover,:focus-visible)::after,
+#editor-panel-content #lock-notifications-launch.panel-action:is(:hover,:focus-visible)::after {
+  transform: translateX(2px) rotate(-45deg);
+  border-color: var(--ed-accent-bright);
+}
+.panel-action-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 7px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 55%, #fff), var(--site-button-blue-soft));
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border), 0 6px 14px #172b620e;
+}
+#editor-panel-content button.panel-action:is(:hover,:focus-visible) .panel-action-icon,
+#editor-panel-content #lock-notifications-launch.panel-action:is(:hover,:focus-visible) .panel-action-icon {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft-hover) 75%, #fff), var(--site-button-blue-soft-hover));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--site-button-blue) 22%, var(--site-button-blue-border)), 0 8px 18px #172b6214;
+}
+.panel-action-copy { gap: 3px; }
+#editor-panel-content button.panel-action strong,
+#editor-panel-content #lock-notifications-launch.panel-action strong {
+  font-size: 14px;
+  font-weight: 700;
+}
+#editor-panel-content button.panel-action small,
+#editor-panel-content #lock-notifications-launch.panel-action small {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+#editor-panel-content .panel-photo-action {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  min-height: 58px;
+  padding: 14px 15px;
+  border: 1px dashed color-mix(in srgb, var(--site-button-blue-border) 82%, var(--ed-line));
+  border-radius: 16px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ed-input) 92%, #fff), color-mix(in srgb, var(--site-button-blue-soft) 34%, #fff));
+  color: var(--ed-ink);
+  box-shadow: inset 0 1px #fff, 0 8px 18px #172b620d;
+  cursor: pointer;
+}
+#editor-panel-content .panel-photo-action:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--ed-accent-bright) 36%, var(--site-button-blue-border));
+  box-shadow: inset 0 1px #fff, 0 12px 22px #172b6215;
+}
+#editor-panel-content .panel-photo-action::after {
+  content: "Selecionar imagem";
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 33px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: var(--site-button-blue-soft);
+  color: var(--site-button-blue);
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
+  font-size: 12px;
+  font-weight: 650;
+}
+#editor-panel-content .panel-photo-action input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+:root[data-theme="dark"] #editor-panel-content .pc button.g {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ed-input) 86%, #203457), color-mix(in srgb, var(--site-button-blue-soft) 78%, var(--ed-input)));
+  box-shadow: inset 0 1px #ffffff10, 0 8px 18px #0004;
+}
+:root[data-theme="dark"] #editor-panel-content button.panel-action,
+:root[data-theme="dark"] #editor-panel-content #lock-notifications-launch.panel-action,
+:root[data-theme="dark"] #editor-panel-content .panel-photo-action {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ed-input) 88%, #1b2947), color-mix(in srgb, var(--site-button-blue-soft) 40%, var(--ed-input)));
+  box-shadow: inset 0 1px #ffffff10, 0 12px 24px #0004;
+}
+:root[data-theme="dark"] #editor-panel-content button.panel-action:is(:hover,:focus-visible),
+:root[data-theme="dark"] #editor-panel-content #lock-notifications-launch.panel-action:is(:hover,:focus-visible),
+:root[data-theme="dark"] #editor-panel-content .panel-photo-action:hover {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 24%, var(--ed-input)), color-mix(in srgb, var(--site-button-blue-soft-hover) 75%, var(--ed-input)));
+  box-shadow: inset 0 1px #ffffff14, 0 16px 28px #0006;
+}
+:root[data-theme="dark"] #editor-panel-content .panel-action-icon {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--site-button-blue-soft) 85%, #16233c), var(--site-button-blue-soft));
+  box-shadow: inset 0 0 0 1px var(--site-button-blue-border), 0 6px 14px #0004;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #editor-panel-content .pc :is(button, .panel-photo-action),
+  #editor-panel-content button.panel-action::after,
+  #editor-panel-content #lock-notifications-launch.panel-action::after {
+    transition: none;
+  }
+  #editor-panel-content .pc :is(button, .panel-photo-action):hover,
+  #editor-panel-content .pc :is(button, .panel-photo-action):active {
+    transform: none;
+  }
+}

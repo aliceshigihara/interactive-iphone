@@ -1,0 +1,168 @@
+.site-menu-button,
+.site-menu-dialog {
+  --menu-ink: var(--ed-ink, var(--ink));
+  --menu-muted: var(--ed-muted, var(--muted));
+  --menu-accent: var(--ed-accent-bright, var(--accent-bright));
+  --menu-border: var(--ed-line, var(--border));
+  --menu-surface: var(--ed-paper, var(--paper));
+  color: var(--menu-ink);
+}
+[data-site-menu-slot] { display: inline-flex; }
+.site-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 40px;
+  padding: 4px 10px;
+  border: 1px solid var(--menu-border);
+  border-radius: 999px;
+  background: var(--ed-glass, var(--glass));
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.site-menu-button svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+.site-menu-button:hover { color: var(--menu-accent); }
+.site-menu-editor {
+  position: fixed;
+  z-index: 82;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+}
+.site-menu-editor .site-menu-button {
+  padding-inline: 13px;
+  background: var(--ed-glass-strong);
+  box-shadow: 0 4px 14px var(--ed-shadow);
+}
+@media (max-width:760px) {
+  .site-menu-editor { display: none; }
+}
+@media (min-width:761px) and (max-width:1340px) {
+  body:has(> .site-menu-editor) #editor-panel-content { margin-top: 44px; top: 62px; }
+}
+@media (min-width:1280px) and (max-width:1690px) {
+  body:has(> .site-menu-editor) #editor-panel-content[data-two-columns] { margin-top: 44px; top: 62px; }
+}
+@media (min-width:761px) and (max-width:1690px) {
+  body:has(> .site-menu-editor) #editor-panel-content .panel-detail-stack { max-height: calc(100dvh - 92px); }
+}
+@media (max-width:350px) {
+  .site-head-controls { gap: 5px; }
+  .site-head-controls .site-menu-button { padding-inline: 7px; }
+  .site-head-controls .language-choice a { min-width: 25px; }
+  .site-head-controls .theme-toggle { width: 34px; height: 34px; }
+}
+
+/* Compact floating navigation, with spring-like expansion and a moving selection. */
+html:has(.site-menu-dialog[open]) { overflow: hidden; }
+.site-menu-dialog {
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none;
+  padding: 0; margin: 0; border: 0; background: transparent; overflow: hidden;
+  --menu-ease: cubic-bezier(.22,1.18,.36,1);
+}
+.site-menu-dialog::backdrop { background: #070e2238; backdrop-filter: blur(3px); }
+.site-menu-sheet {
+  position: absolute; top: var(--menu-top, 16px); right: var(--menu-right, 16px);
+  width: min(310px, calc(100vw - 24px)); max-height: calc(100dvh - 32px);
+  overflow: auto; overscroll-behavior: contain; padding: 12px;
+  border: 1px solid var(--menu-border); border-radius: 24px;
+  background: var(--menu-surface); box-shadow: 0 20px 65px #080e2738;
+  transform-origin: top right; transform: translateY(-8px) scale(.92); opacity: 0;
+  transition: transform .34s var(--menu-ease), opacity .19s ease;
+}
+.site-menu-dialog[data-active] .site-menu-sheet { transform: none; opacity: 1; }
+.site-menu-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding: 2px 4px 10px; color:var(--menu-muted); font-weight:750; font-size:14px; }
+.site-menu-close { min-height:34px; padding: 4px 9px; }
+.site-menu-close svg { rotate:45deg; }
+.site-menu-links { position:relative; isolation:isolate; list-style:none; padding:3px; margin:0; display:grid; gap:5px; }
+.site-menu-highlight { position:absolute; z-index:-1; left:3px; right:3px; top:0; height:0; opacity:0; border-radius:13px; background:color-mix(in srgb,var(--menu-accent) 11%,transparent); border:1px solid var(--menu-border); pointer-events:none; transition:translate .35s var(--menu-ease),height .35s var(--menu-ease),opacity .18s ease; }
+.site-menu-links a { display:grid; grid-template-columns:24px minmax(0,1fr) 16px; gap:12px; align-items:center; padding:12px; min-height:48px; border-radius:13px; color:var(--menu-ink); text-decoration:none; font-size:15px; font-weight:650; opacity:0; transform:translateY(7px); transition:opacity .18s,transform .3s var(--menu-ease),color .18s; }
+.site-menu-dialog[data-active] .site-menu-links a { opacity:1; transform:none; transition-delay:calc(var(--item) * 23ms); }
+.site-menu-links a svg { width:20px; height:20px; stroke:var(--menu-accent); fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.site-menu-links a::after { content:''; width:6px; height:6px; border-top:1.5px solid var(--menu-muted); border-right:1.5px solid var(--menu-muted); rotate:45deg; justify-self:center; }
+.site-menu-links a[aria-current="page"] { color:var(--menu-accent); }
+.site-menu-links a:active { scale:.97; }
+.site-menu-dialog :focus-visible,.site-menu-button:focus-visible,.site-menu-mobile:focus-visible { outline:2px solid var(--menu-accent,var(--ed-accent-bright)); outline-offset:-2px; }
+@media(max-width:760px) { .site-menu-sheet { top:auto; bottom:var(--menu-bottom,16px); transform-origin:bottom right; transform:translateY(8px) scale(.92); } }
+@media(prefers-reduced-motion:reduce) { .site-menu-dialog *, .site-menu-dialog[data-active] .site-menu-links a { transition:none; } }
+/* Refined navigation: one motion for the sheet, one for the selection. */
+.site-menu-dialog { --menu-ease: cubic-bezier(.2,.75,.25,1); }
+.site-menu-dialog::backdrop { background: transparent; backdrop-filter: blur(0); transition: background .22s ease, backdrop-filter .22s ease; }
+.site-menu-dialog[data-active]::backdrop { background: #070e2226; backdrop-filter: blur(3px); }
+.site-menu-sheet { width:min(650px,calc(100vw - 24px)); padding:16px; border-radius:24px; transform:translateY(-6px) scale(.985); transition:transform .22s var(--menu-ease),opacity .18s ease; max-height:calc(100dvh - 32px); }
+.site-menu-links { grid-template-columns:repeat(6,minmax(0,1fr)); gap:6px; padding:4px; }
+.site-menu-links a { display:flex; flex-direction:column; justify-content:center; text-align:center; gap:7px; padding:12px 5px; min-height:72px; border-radius:16px; font-size:12px; line-height:1.2; position:relative; z-index:1; opacity:1; transform:none; transition:color .16s ease,scale .16s ease; }
+.site-menu-dialog[data-active] .site-menu-links a { transition-delay:0s; }
+.site-menu-links a::after { display:none; }
+.site-menu-links a svg { width:22px; height:22px; }
+.site-menu-highlight { left:0; right:auto; top:0; width:0; border-radius:16px; background:color-mix(in srgb,var(--menu-accent) 12%,var(--menu-surface)); border:1px solid color-mix(in srgb,var(--menu-accent) 18%,var(--menu-border)); z-index:0; transition:transform .26s var(--menu-ease),width .26s var(--menu-ease),height .26s var(--menu-ease),opacity .14s ease; }
+.site-menu-links a:hover { color:var(--menu-accent); }
+@media(max-width:760px) { .site-menu-sheet { width:min(400px,calc(100vw - 24px)); top:auto; bottom:var(--menu-bottom,16px); transform:translateY(6px) scale(.985); } .site-menu-links { grid-template-columns:repeat(3,minmax(0,1fr)); } .site-menu-links a { min-height:68px; } }
+@media(prefers-reduced-motion:reduce) { .site-menu-dialog::backdrop,.site-menu-sheet,.site-menu-highlight,.site-menu-links a { transition:none; } }
+
+/* Liquid Glass — translucent navigation, specular edges and a floating lens. */
+html:not(.reader-mode) {
+  --nav-glass: rgba(244,248,255,.69);
+  --nav-glass-solid: #f4f8ff;
+  --nav-glass-edge: rgba(255,255,255,.88);
+  --nav-glass-shade: rgba(30,58,138,.14);
+  --nav-lens: rgba(255,255,255,.48);
+  --nav-lens-tint: rgba(79,125,221,.13);
+  --nav-glass-shadow: 0 14px 40px rgba(23,43,98,.15), 0 3px 8px rgba(23,43,98,.08);
+}
+html[data-theme="dark"]:not(.reader-mode) {
+  --nav-glass: rgba(18,29,53,.76);
+  --nav-glass-solid: #17233f;
+  --nav-glass-edge: rgba(218,231,255,.23);
+  --nav-glass-shade: rgba(0,0,0,.42);
+  --nav-lens: rgba(171,198,255,.13);
+  --nav-lens-tint: rgba(112,157,255,.14);
+  --nav-glass-shadow: 0 18px 48px rgba(0,0,0,.38), 0 3px 10px rgba(0,0,0,.22);
+}
+html:not(.reader-mode) :is(.site-menu-sheet,.site-menu-button,.site-menu-editor .site-menu-button,.site-head-controls .language-choice,.site-head-controls .theme-toggle) {
+  background: linear-gradient(155deg,var(--nav-lens),transparent 55%),var(--nav-glass-solid);
+  border: 1px solid var(--nav-glass-edge);
+  box-shadow: inset 0 1px 1px var(--nav-glass-edge),inset 0 -1px 1px var(--nav-glass-shade),var(--nav-glass-shadow);
+}
+html:not(.reader-mode) .site-menu-sheet { border-radius:28px; }
+html:not(.reader-mode) .site-menu-highlight {
+  background: linear-gradient(145deg,var(--nav-lens),transparent 70%),var(--nav-lens-tint);
+  border:1px solid var(--nav-glass-edge);
+  box-shadow: inset 0 1px 2px var(--nav-glass-edge),inset 0 -1px 2px var(--nav-glass-shade),0 4px 12px var(--nav-glass-shade);
+  border-radius:19px;
+}
+html:not(.reader-mode) .site-menu-dialog[data-active]::backdrop { background:#070e221a; backdrop-filter:blur(2px); }
+html[data-theme="dark"]:not(.reader-mode) .site-menu-dialog[data-active]::backdrop { background:#03071342; }
+html:not(.reader-mode) .site-head-controls .language-choice a[aria-current="true"] {
+  background:linear-gradient(145deg,var(--nav-lens),var(--nav-lens-tint));
+  box-shadow:inset 0 1px 1px var(--nav-glass-edge),0 2px 5px var(--nav-glass-shade);
+}
+html:not(.reader-mode) .mobile-editor-nav {
+  background:var(--nav-glass-solid)!important;
+  border-top-color:var(--nav-glass-edge)!important;
+  box-shadow:0 -8px 26px var(--nav-glass-shade),inset 0 1px 1px var(--nav-glass-edge);
+}
+html:not(.reader-mode) .mobile-editor-nav button[aria-selected="true"] {
+  background:linear-gradient(145deg,var(--nav-lens),var(--nav-lens-tint));
+  box-shadow:inset 0 1px 1px var(--nav-glass-edge),0 3px 8px var(--nav-glass-shade);
+}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  html:not(.reader-mode) :is(.site-menu-sheet,.site-menu-button,.site-menu-editor .site-menu-button,.site-head-controls .language-choice,.site-head-controls .theme-toggle) {
+    background:linear-gradient(155deg,var(--nav-lens),transparent 55%),var(--nav-glass);
+    -webkit-backdrop-filter:blur(22px) saturate(155%);
+    backdrop-filter:blur(22px) saturate(155%);
+  }
+  html:not(.reader-mode) .mobile-editor-nav {
+    background:var(--nav-glass)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(155%);
+    backdrop-filter:blur(24px) saturate(155%);
+  }
+}

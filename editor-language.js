@@ -16,6 +16,7 @@ Editar|Edit
 Narração|Narration
 Histórias|Stories
 Narração interativa|Interactive storytelling
+Gerenciar histórias|Manage stories
 Categoria da narração|Narration category
 Programe o que acontece no iPhone durante a leitura. Cada evento ocorre uma vez por sessão.|Schedule what happens on the iPhone as someone reads. Each event runs once per session.
 Mensagens e notificações|Messages and notifications
@@ -93,6 +94,7 @@ Resetar início|Reset Home Screen
 Resetar bloqueio|Reset Lock Screen
 Notificações|Notifications
 Tela de bloqueio · prévia ao vivo|Lock Screen · live preview
+Editar notificações|Edit notifications
 Personagens|Characters
 Eles viram contatos e grupos nas conversas. Para criar uma conversa, use o ＋ no app.|Characters become contacts and groups in conversations. To create a conversation, use ＋ in the app.
 Fechar|Close
@@ -161,6 +163,11 @@ Foto|Photo
 Bateria (%) — também muda a barra de status|Battery (%) — also updates the status bar
 Dentro do app, "Edit" apaga ligações e o ⓘ edita. A bolinha vermelha do ícone conta as perdidas.|In the app, “Edit” removes calls and ⓘ edits them. The red badge shows how many calls were missed.
 Registrar ligação|Log a call
+Criar voicemail|Create voicemail
+Crie um recado de voz com transcrição|Create a voice message with a transcript
+País inicial do Maps|Maps starting country
+Escolha o país que aparece ao abrir Maps|Choose the country shown when Maps opens
+País ou território|Country or territory
 Chamadas interativas|Interactive calls
 Toque num dia no app e adicione eventos pelo ＋. Toque num evento para editar. Eventos de hoje aparecem no widget.|Tap a day and use ＋ to add events. Tap an event to edit it. Today’s events appear in the widget.
 Novo evento|New event
@@ -308,7 +315,7 @@ Música do perfil|Profile music
 Nome da música|Song title
 Artista|Artist
 `);
-  const ignored = '#nl .notif-existing, #stl .cr > span, #lock-preview-notices, .fp-device, input, textarea, [contenteditable], .story-connected-identity, .story-ref-row, .story-picker-item';
+  const ignored = '#nl .notif-existing, #stl .cr > span, #stl .collection-name, #lock-preview-notices, .fp-device, input, textarea, [contenteditable], .story-connected-identity, .story-ref-row, .story-picker-item';
   const fixedOptions = `#pord, #nar-form select[onchange^="narDraft.trigger="], #sc-editor select[onchange^="scDraft.trigger="], #sc-editor select[aria-label="Quem fala"], #sc-editor select[aria-label="Speaker"]`;
   const canTranslate = (element, node) => Boolean(element &&
     !element.closest('script,style,svg') &&

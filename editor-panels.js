@@ -148,6 +148,7 @@ const {openEditorDialog, closeEditorDialog, closeEditorForm, animateEditorSectio
       refreshSavedNotices();
     });
     $('#lock-notifications-close').addEventListener('click', () => closeEditorDialog(dialog));
+    $('#ntt').addEventListener('input', event => event.target.setCustomValidity(''));
     $('#lock-notifications-form').addEventListener('input', refreshNotificationPreview);
     dialog.addEventListener('click', event => {
       if (event.target !== dialog) return;

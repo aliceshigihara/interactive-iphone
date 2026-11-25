@@ -8,7 +8,6 @@
   --site-panel-blue-surface: #f5f8ff;
 }
 
-/* Blue actions inside the simulator, without recoloring app content or icons. */
 .pill button,
 .map-card button.go,
 .bs button.bl,
@@ -39,7 +38,6 @@
   color: var(--site-button-blue);
 }
 
-/* The editor keeps secondary actions lighter than its solid-blue primary buttons. */
 .pc button.g,
 .pmod .bt button:not(:last-child),
 #md .bt button:not(:last-child),
@@ -89,19 +87,16 @@
 
 /* Section glyphs share a palette; actual app artwork keeps its original colors. */
 .pc .notification-toggle-icon,
-.pc .chat-panel-symbol,
-.pc .lock-notify-icon {
+.pc .chat-panel-symbol {
   background: var(--site-button-blue-soft);
   color: var(--site-button-blue);
   box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
 }
 .pc .notification-toggle-chevron,
-.pc .lock-notify-arrow,
 .pc .msg-read-panel summary > svg {
   color: var(--site-button-blue);
 }
-.pc .notification-toggle:hover .notification-toggle-icon,
-#lock-notifications-launch:hover .lock-notify-icon {
+.pc .notification-toggle:hover .notification-toggle-icon {
   background: var(--site-button-blue-soft-hover);
 }
 .mobile-editor-nav button { color: var(--site-button-blue); }

@@ -18,7 +18,9 @@
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="theme-toggle.css">
   <link rel="stylesheet" href="site-language.css">
+  <link rel="stylesheet" href="site-menu.css">
   <script src="site-language.js"></script>
+  <script src="site-menu.js" defer></script>
   <script src="landing-language.js" defer></script>
   <script src="theme-toggle.js" defer></script>
   <script src="landing.js" defer></script>
@@ -29,7 +31,8 @@
     <a class="brand" href="./" data-keep-language aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>
     <div class="site-head-controls">
       <div class="language-choice" role="group" aria-label="Idioma"><a data-language-choice="pt" href="?lang=pt" lang="pt-BR" aria-label="Português">PT</a><a data-language-choice="en" href="?lang=en" lang="en" aria-label="English">EN</a></div>
-    <nav aria-label="Navegação da página"><button id="theme-toggle" class="theme-toggle theme-switch" data-theme-toggle="fablyphone:landing-theme" type="button" aria-label="Modo escuro" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 14.5a8.8 8.8 0 0 1-10.9-10.9 8.8 8.8 0 1 0 10.9 10.9Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19m0-14-1.5 1.5m-11 11L5 19"/></svg></button></nav>
+    <nav aria-label="Navegação da página"><button id="theme-toggle" class="theme-toggle theme-switch" data-theme-toggle="fablyphone:landing-theme" type="button" aria-label="Modo escuro" aria-pressed="false"></button></nav>
+      <span data-site-menu-slot></span>
     </div>
   </header>
   <main>
@@ -71,6 +74,7 @@
     </section>
     <section class="landing-manifesto" aria-label="Crie sem cadastro">
       <h2 data-staggered-text><span class="stagger-line">Sem criar contas.</span>
+        <span class="stagger-line">Sem pagar nada.</span>
         <span class="stagger-line">Só você e sua imaginação.</span></h2>
     </section>
     <section class="tools" aria-label="Prévias do Fablyphone">
@@ -121,7 +125,7 @@
       </div>
       <span class="sr-only" id="tool-status" aria-live="polite"></span>
     </section>
-    <div class="start"><a class="ripple-button" id="start-link" href="./editor.html" data-keep-language><span>Começar</span></a></div>
+    <div class="start"><a class="tactile-button" id="start-link" href="./editor.html" data-keep-language><span class="tactile-cap"><span class="tactile-led" aria-hidden="true"></span><span>Começar</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a></div>
   </main>
   <footer class="site-foot"><span>Fablyphone</span><span>Um iPhone fictício para as suas histórias.</span></footer>
 </body>

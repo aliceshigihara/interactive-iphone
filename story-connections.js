@@ -352,7 +352,7 @@ const StoryConnections = (() => {
     // Panels and app views are rebuilt by R(); decorations don't belong in the data model.
     if(!readerMode){
       const tools=$('#mqa .conv-section:last-child');
-      if(tools&&isMessenger(cur)&&cid)tools.insertAdjacentHTML('afterbegin','<button type="button" class="conv-row" data-story-attach>↗ Anexar link entre apps</button>');
+      if(tools&&isMessenger(cur)&&cid)tools.querySelector('h3')?.insertAdjacentHTML('afterend','<button type="button" class="conv-row" data-story-attach>↗ Anexar link entre apps</button>');
       if(cur==='msg'&&cid)app.querySelector('.ios-glass-menu')?.insertAdjacentHTML('beforeend','<button type="button" data-story-attach><span aria-hidden="true">↗</span><span>Link entre apps</span></button>');
       if((cur==='wa'||cur==='ka')&&cid)app.querySelector('.third-compose')?.insertAdjacentHTML('afterbegin','<button type="button" class="third-icon-btn" data-story-attach aria-label="Anexar link entre apps" title="Anexar link entre apps">↗</button>');
     }
@@ -373,7 +373,7 @@ const StoryConnections = (() => {
       const rows=[...app.querySelectorAll('.cr2')];
       if(calls.length)rows.slice(-calls.length).forEach((row,n)=>{
         row.dataset.storyRecordIndex=calls[n].i;
-        addOwnerPills(row.querySelector('.x'),'call',calls[n].c);
+        // Keep the record association without adding a redundant contact badge.
       });
     }else if(cur==='cal'){
       const indices=S.events.map((e,i)=>({e,i})).filter(({e})=>e.y==cy_&&e.m==cmo&&e.d==csel);

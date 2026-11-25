@@ -359,5 +359,5 @@ const PhoneApp = (() => {
       digit(event.key);
     }
   });
-  return {reset,render,voicemailPoster};
+  return {reset,render,voicemailPoster,createVoicemail:()=>{if(!readerMode)editVoicemail()}};
 })();

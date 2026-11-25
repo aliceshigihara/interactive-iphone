@@ -1,20 +1,26 @@
 .theme-switch {
+  position: relative;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
+  line-height: 1;
   transition: scale .22s cubic-bezier(.2,1.3,.4,1);
 }
 .theme-switch:active { scale: .97; }
 .theme-switch svg {
-  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  transform-origin: center;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.theme-switch .theme-sun,
-[data-theme="dark"] .theme-switch .theme-moon { opacity: 0; }
-[data-theme="dark"] .theme-switch .theme-sun { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .theme-switch { transition: none; }
   .theme-switch:active { scale: 1; }

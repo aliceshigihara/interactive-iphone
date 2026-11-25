@@ -116,14 +116,12 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 :root[data-theme="dark"] .pc .chat-panel-preview { background: #0f1b33; color: var(--ed-sub); }
 :root[data-theme="dark"] .pc .conv-current { background: #0f1b33; }
 :root[data-theme="dark"] .pc .notification-toggle-icon,
-:root[data-theme="dark"] .pc .chat-panel-symbol,
-:root[data-theme="dark"] .pc .lock-notify-icon {
+:root[data-theme="dark"] .pc .chat-panel-symbol {
   background: var(--site-button-blue-soft);
   color: var(--site-button-blue);
   box-shadow: inset 0 0 0 1px var(--site-button-blue-border);
 }
-:root[data-theme="dark"] .pc .notification-toggle:hover .notification-toggle-icon,
-:root[data-theme="dark"] .pc #lock-notifications-launch:hover .lock-notify-icon {
+:root[data-theme="dark"] .pc .notification-toggle:hover .notification-toggle-icon {
   background: var(--site-button-blue-soft-hover);
 }
 
@@ -262,9 +260,6 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
   color: var(--ed-sub);
 }
 :root[data-theme="dark"] :is(.msg-read-panel, .map-pin-editor-row, #home-organizer .org-row) { border-color: var(--ed-line); }
-:root[data-theme="dark"] #lock-notifications-launch { color: var(--ed-ink); background: var(--ed-input); }
-:root[data-theme="dark"] #lock-notifications-launch:hover { background: var(--ed-surface); }
-:root[data-theme="dark"] .pc .lock-notify-arrow { background: var(--site-button-blue-soft); }
 :root[data-theme="dark"] .pc input[type="date"] { color: var(--ed-ink); -webkit-text-fill-color: var(--ed-ink); }
 :root[data-theme="dark"] :is(.pc input:not([type=file],[type=checkbox]), .pc select, .pc textarea) { border-color: var(--ed-input-line); }
 :root[data-theme="dark"] #md { color-scheme: dark; }
