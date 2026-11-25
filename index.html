@@ -501,6 +501,110 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .x-actions button{gap:4px;padding:0;min-height:28px;font-size:13px;line-height:16px;white-space:nowrap}
 .x-actions svg{flex:none;display:block}
 .x-actions .x-repost.on{color:#00ba7c}.x-actions .x-heart.on{color:#f91880}.x-actions .x-bookmark.on{color:#1d9bf0}
+.x-view-head { display:grid;grid-template-columns:36px minmax(0,1fr) 36px;text-align:center;padding:0 10px;height:46px }
+.x-view-head h2 { font-size:17px;font-weight:750;line-height:1.2 }
+.x-view-head > button { width:36px;height:40px;display:grid;place-items:center }
+.x-avatar-button,.x-main-author,.x-post-menu button,#x-drawer button { border:0;background:none;color:inherit;cursor:pointer }
+.x-avatar-button { display:grid;place-items:center;padding:0 }
+.x-head:has(.x-drawer-trigger) { display:grid;grid-template-columns:36px 1fr 36px }
+.x-post-top { overflow:visible }
+.x-post-top b { min-width:0 }
+.x-verified,.x-post-lock { display:inline-flex;align-items:center;vertical-align:middle;flex:none }
+.x-verified { color:#1d9bf0 }
+.x-post-tools { padding-left:0 }
+.x-post-menu { position:relative;flex:none;text-align:left }
+.x-post-menu summary { display:grid;place-items:center;min-width:24px;min-height:24px;list-style:none;cursor:pointer }
+.x-post-menu summary::-webkit-details-marker { display:none }
+.x-post-menu > div { position:absolute;right:0;top:100%;z-index:4;min-width:135px;padding:4px;background:#fff;box-shadow:0 3px 18px #0f141933;border-radius:10px }
+.x-post-menu button { display:block;width:100%;padding:8px;text-align:left;white-space:nowrap;font-size:13px }
+.x-post-menu button:hover { background:#eff3f4 }
+.x-actions :disabled { color:#a9b6be;opacity:.55;cursor:not-allowed }
+.x-views { display:inline-flex;align-items:center;gap:4px;font-size:13px;white-space:nowrap }
+.x-thread-body { padding-bottom:8px;touch-action:pan-y }
+.x-main-post { padding:14px 12px 5px;border-bottom:1px solid #e4eaed;color:#0f1419 }
+.x-main-author { display:flex;align-items:center;gap:9px;padding:0;text-align:left;max-width:100%;margin-bottom:14px }
+.x-main-author > span { display:grid;min-width:0;gap:2px;overflow-wrap:anywhere;line-height:1.2 }
+.x-main-author strong { font-size:16px }
+.x-main-author .x-muted { font-size:14px }
+.x-main-post .x-post-text { font-size:17px;line-height:1.4 }
+.x-main-meta { font-size:13px;color:#536471;margin-top:22px;overflow-wrap:anywhere }
+.x-main-meta b { color:#0f1419 }
+.x-detail-actions { justify-content:space-between;margin-top:9px;min-height:38px }
+.x-detail-actions .x-action { flex:initial }
+.x-detail-actions .x-action-end { display:contents }
+.x-thread-row { padding:11px 12px 7px;border-bottom:0;gap:8px }
+.x-thread-row .x-post-avatar { position:relative;width:42px;align-self:stretch }
+.x-thread-line .x-post-avatar::after { content:'';position:absolute;left:calc(50% - 1px);top:46px;bottom:-13px;width:2px;border-radius:2px;background:#cfd9de;pointer-events:none }
+.x-thread-row .x-post-top,.x-thread-row .x-post-text { line-height:19px }
+.x-thread-row .x-actions { margin-top:4px }
+.x-thread-row .x-actions .x-action-end { gap:9px }
+.x-reply-footer { flex:none;padding:8px 11px 6px;border-top:1px solid #e4eaed }
+.x-reply-footer button { width:100%;text-align:left;border:0;border-radius:99px;padding:9px 12px;background:#edf2f4;color:#536471;font-size:14px;cursor:pointer }
+#app:has(.x-nav),#app:has(.x-nav) .x-body { touch-action:pan-y }
+.x-view-shell {display:flex;flex-direction:column;flex:1;min-height:0;position:relative;background:#fff}
+#app:has(#x-drawer) {--x-drawer-width:82%}
+#app:has(#x-drawer) .x-view-shell {margin-top:-48px;padding-top:48px}
+#app:has(#x-drawer.x-drawer-open) .x-view-shell {transform:translateX(var(--x-drawer-width));border-radius:44px 0 0 44px;overflow:hidden;box-shadow:-7px 0 22px #0f141918}
+#scr:has(#x-drawer.x-drawer-open) #statusbar {opacity:0}
+#x-drawer {position:absolute;inset:0;z-index:15;visibility:hidden;pointer-events:none;touch-action:pan-y}
+#x-drawer.x-drawer-open {visibility:visible;pointer-events:auto}
+#x-drawer .x-drawer-backdrop {position:absolute;inset:0 0 0 var(--x-drawer-width);background:#ffffff72;opacity:0}
+#x-drawer.x-drawer-open .x-drawer-backdrop {opacity:1}
+.x-drawer-panel {height:100%;width:var(--x-drawer-width);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;background:#fff;color:#0f1419;padding:clamp(44px,7vh,58px) clamp(18px,7.8%,34px) 23px;transform:translateX(-100%)}
+#x-drawer.x-drawer-open .x-drawer-panel {transform:none}
+.x-drawer-account {display:grid;gap:5px;padding-bottom:18px}
+.x-drawer-account-top {display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
+.x-drawer-account-top button {min-width:32px;min-height:32px;display:grid;place-items:center}
+.x-drawer-account-top button:disabled {cursor:default}
+.x-drawer-account > strong {font-size:17px}
+.x-drawer-account .x-muted {font-size:14px;overflow-wrap:anywhere}
+.x-profile-counts {display:flex;flex-wrap:wrap;gap:6px 11px;color:#536471;font-size:13px}
+.x-profile-counts b {color:#0f1419}
+.x-drawer-account .x-profile-counts {margin-top:8px}
+#x-drawer .x-drawer-row {min-height:48px;display:grid;grid-template-columns:23px minmax(0,1fr);align-items:center;gap:19px;width:100%;padding:6px 0;text-align:left;border-radius:8px}
+.x-drawer-row > span {display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:clamp(15px,5vw,20px);font-weight:750;line-height:1.15}
+.x-drawer-row:hover {background:#f7f9fa!important}
+.x-drawer-secondary {border-top:1px solid #eff3f4;margin-top:24px;padding-top:21px}
+.x-drawer-secondary .x-drawer-row > span {font-size:14px;font-weight:550}
+.x-menu-content {padding:14px 12px}
+#app:has(.x-profile-page) {padding-top:0}
+.x-profile-page {padding-bottom:20px;background:#fff}
+.x-profile-banner {position:relative;height:auto;aspect-ratio:2.5;flex:none;background:linear-gradient(155deg,#506774,#25343d)}
+.x-profile-banner img {width:100%;height:100%;object-fit:cover;display:block}
+.x-profile-banner::after {content:'';position:absolute;inset:0;background:linear-gradient(#0007,transparent 80%);pointer-events:none}
+.x-profile-controls {position:absolute;top:48px;left:14px;right:14px;z-index:3;display:flex;justify-content:space-between;pointer-events:none}
+.x-profile-controls button {width:39px;height:39px;display:grid;place-items:center;background:#0f1419b9;color:white;border:0;border-radius:50%;cursor:pointer;pointer-events:auto;backdrop-filter:blur(8px)}
+.x-profile-controls svg {stroke:currentColor}
+.x-view-shell:has(.x-profile-past-cover)::before {content:'';position:absolute;inset:0 0 auto;height:48px;background:linear-gradient(#fff,#fffffff5 65%,#ffffffb0);z-index:2;pointer-events:none}
+.x-profile-summary {position:relative;padding:0 11px 8px;margin-top:-17px;color:#0f1419}
+.x-profile-avatar {display:inline-grid;place-items:center;border:3px solid white;border-radius:50%;background:white}
+.x-profile-name {display:flex;align-items:center;gap:5px 8px;flex-wrap:wrap;margin:10px 0 2px;font-size:22px;line-height:1.15}
+.x-profile-summary > .x-muted {font-size:14px}
+.x-profile-bio {font-size:15px;line-height:1.35;white-space:pre-wrap;overflow-wrap:anywhere;margin:15px 0 0}
+.x-profile-meta {display:flex;flex-wrap:wrap;gap:9px 13px;margin-top:11px;color:#536471;font-size:13px}
+.x-profile-meta span,.x-profile-meta a {min-width:0;display:inline-flex;align-items:center;gap:4px;overflow-wrap:anywhere}
+.x-profile-meta .x-joined {flex-basis:100%}
+.x-profile-meta svg {flex:none}
+.x-profile-meta a {color:#087ab9;text-decoration:none}
+.x-profile-summary .x-profile-counts {margin-top:13px}
+.x-profile-pill {display:flex;justify-content:center;align-items:center;gap:5px;border:1px solid #dce2e5;border-radius:99px;background:#fff;color:#0f1419;font-weight:650;min-height:37px;cursor:pointer}
+.x-profile-pill:hover {background:#f7f9f9}
+.x-verify-pill {font-size:12px;min-height:24px;padding:3px 9px}
+.x-profile-ctas {display:flex;gap:8px;margin-top:15px}
+.x-profile-ctas button {flex:1;min-width:0;font-size:14px;padding:5px}
+.x-profile-tabs {display:grid;grid-template-columns:1.6fr repeat(3,1fr);border-bottom:1px solid #eff3f4}
+.x-profile-tabs button {border:0;background:none;color:#536471;min-height:46px;display:flex;align-items:center;justify-content:center;gap:6px;position:relative;font-size:14px;font-weight:700;cursor:pointer}
+.x-profile-tabs button[aria-pressed=true] {color:#0f1419}
+.x-profile-tabs button[aria-pressed=true]::after {content:'';position:absolute;inset:auto 12px 0;height:2px;border-radius:4px;background:#0f1419}
+.x-profile-search {padding:7px 11px}
+.x-profile-search input {margin:0;width:100%}
+.x-profile-page .x-empty {padding:21px 12px}
+@media(prefers-reduced-motion:no-preference){
+ .x-view-shell,.x-drawer-panel {transition:transform .28s cubic-bezier(.2,.8,.25,1)}
+ #x-drawer {transition:visibility 0s linear .28s}
+ #x-drawer.x-drawer-open {transition-delay:0s}
+ #x-drawer .x-drawer-backdrop {transition:opacity .23s ease}
+}
 /* Messages: floating iOS-style conversation controls and editor tools */
 #app:has(.msg-glass-head){--msg-paper:#fafcfb;background:var(--msg-paper)!important}
 .msg-glass-head{position:relative;z-index:2;flex:none;min-height:96px;padding:0 15px 8px;display:grid;justify-items:center;color:#121316}
@@ -548,7 +652,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
  #narration .sc-list-row strong{flex-basis:100%}
  #narration .sc-two{grid-template-columns:minmax(0,1fr)}
 }
-</style><link rel="stylesheet" href="story-planner.css"><link rel="stylesheet" href="photo-editor.css"><link rel="stylesheet" href="editor-panels.css"><link rel="stylesheet" href="form-previews.css"><link rel="stylesheet" href="story-connections.css"><link rel="stylesheet" href="phone-app.css"><link rel="stylesheet" href="scripted-call-ui.css"><link rel="stylesheet" href="liquid-tabs.css"></head><body>
+</style><link rel="stylesheet" href="story-planner.css"><link rel="stylesheet" href="photo-editor.css"><link rel="stylesheet" href="editor-panels.css"><link rel="stylesheet" href="form-previews.css"><link rel="stylesheet" href="story-connections.css"><link rel="stylesheet" href="phone-app.css"><link rel="stylesheet" href="scripted-call-ui.css"><link rel="stylesheet" href="liquid-tabs.css"><link rel="stylesheet" href="twitter-extra.css"><link rel="stylesheet" href="instagram-profile.css"></head><body>
 <script>if(new URLSearchParams(location.search).get('reader')==='1'){document.documentElement.classList.add('reader-mode');if(window.parent!==window)document.documentElement.classList.add('reader-embedded')}document.addEventListener('dragstart',e=>{if(e.target.closest?.('img,svg'))e.preventDefault()});</script>
 <svg width="0" height="0" style="position:absolute"><defs>
 <linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#67f27f"/><stop offset="1" stop-color="#0fb92f"/></linearGradient>
@@ -670,7 +774,19 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 <div class="msg-panel-actions"><button onclick="addChar()">＋ Adicionar personagem</button></div>
 <div class="msg-panel-actions"><button type="button" class="narration-entry" aria-haspopup="dialog" onclick="narrationOpen()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16M8 3v4M16 10v4M8 17v4"/></svg>Narração interativa</button></div>
 <details class="msg-read-panel"><summary><span><b>Conversas</b><small>Marcar como lida ou não lida</small></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div id="cul" class="person-list"></div></details></div></div>
-<div class="pc ps" data-s="yt"><h2>YouTube</h2><button onclick="ytChannelForm()">＋ Criar canal</button><button class="g" onclick="ytVideoForm()">＋ Adicionar vídeo</button><div id="yt-editor"></div></div><div class="pc ps" data-s="wallet"><h2>Wallet</h2><p>Cartões fictícios para a história. Não utilize dados bancários reais.</p><button onclick="walletForm()">＋ Adicionar cartão</button><div id="wallet-editor"></div><p class="barclays-panel-note">O Internet Banking fictício agora fica em um app separado: <b>Bank</b>.</p></div><div class="pc ps" data-s="bar"><h2>Bank</h2><p>App de Internet Banking fictício, chique, minimalista e com suporte a várias moedas.</p><button onclick="barclaysSettings()">Configurar conta</button><button class="g" onclick="barclaysTransaction()">＋ Adicionar transação</button><div id="barclays-editor" class="barclays-panel-list"></div></div><div class="pc ps" data-s="x"><h2>Twitter</h2><button onclick="xProfileForm()">＋ Criar perfil</button><button class="g" onclick="xPostForm()">＋ Publicar</button><div id="x-editor"></div></div><div class="pc ps" data-s="ig"><h2>Perfis do Instagram</h2><p>Independentes dos personagens. Para postar, use o ＋ na barra do app.</p>
+<div class="pc ps" data-s="yt"><h2>YouTube</h2><button onclick="ytChannelForm()">＋ Criar canal</button><button class="g" onclick="ytVideoForm()">＋ Adicionar vídeo</button><div id="yt-editor"></div></div><div class="pc ps" data-s="wallet"><h2>Wallet</h2><p>Cartões fictícios para a história. Não utilize dados bancários reais.</p><button onclick="walletForm()">＋ Adicionar cartão</button><div id="wallet-editor"></div><p class="barclays-panel-note">O Internet Banking fictício agora fica em um app separado: <b>Bank</b>.</p></div><div class="pc ps" data-s="bar"><h2>Bank</h2><p>App de Internet Banking fictício, chique, minimalista e com suporte a várias moedas.</p><button onclick="barclaysSettings()">Configurar conta</button><button class="g" onclick="barclaysTransaction()">＋ Adicionar transação</button><div id="barclays-editor" class="barclays-panel-list"></div></div>
+<div class="pc ps" data-s="x">
+ <h2>Twitter</h2><p>O que você quer criar?</p>
+ <div class="x-editor-create">
+  <button type="button" onclick="xProfileForm()"><b>Perfil</b><small>Nome, foto e biografia</small></button>
+  <button type="button" onclick="xPostForm()"><b>Publicação</b><small>Texto, imagem e métricas</small></button>
+  <button type="button" onclick="TwitterExtra.exploreForm()"><b>Notícia</b><small>Categoria e destaque em Explore</small></button>
+  <button type="button" onclick="TwitterExtra.likeForm()"><b>Notificação</b><small>Curtida em um post da história</small></button>
+  <button type="button" onclick="TwitterExtra.dmForm()"><b>Conversa</b><small>Mensagem direta fictícia</small></button>
+ </div>
+ <p>Edite posts e crie respostas na tela do próprio post.</p><div id="x-editor"></div>
+</div>
+<div class="pc ps" data-s="ig"><h2>Perfis do Instagram</h2><p>Independentes dos personagens. Para postar, use o ＋ no topo do perfil.</p>
 <label>Seu perfil (dono do iPhone)<select id="meSel" onchange="S.meId=+this.value;save();R()"></select></label>
 <div id="pl2"></div>
 <button onclick="addProf()">＋ Criar perfil</button></div>
@@ -800,7 +916,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
  <div id="story-contact-content"></div>
 </dialog>
 <div id="story-link-feedback" role="status" hidden></div>
-<script src="story-connections.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script>
+<script src="story-connections.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script><script src="twitter-extra.js"></script><script src="instagram-profile.js"></script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const readerMode=new URLSearchParams(location.search).get('reader')==='1';
@@ -867,13 +983,13 @@ const av=(c,s=44)=>{const ini=String(c.name||'?').replace(/[{}]/g,'').trim().cha
 const del=(a,i)=>{if(readerMode)return;S[a].splice(i,1);save();R()};
 function go(a,el,prepare){const app=$('#app');if(a)homeCloseFolder();
 if(a){if(!visibleApps().includes(a))return;if(a==='map'||a==='find'){if(cur!==a){locationPick=null;mapPinMode=false;mapPinMove=null;if(onlineMap||mapStarting)disposeOnlineMap();}if(cur!==a&&$('#app').querySelector('#vectorMap'))$('#app').innerHTML='';globeMode=false;globeLon=127.8;globeLat=36.2;mZoom=20;mSelected=-1;mapQuery='';globeOpen=false;}if(a==='saf'){academicView='start';newsPage=null}if(a==='wallet')walletSelected=-1;if(a==='bar'){barclaysShowAll=false;barclaysSearchOpen=false;barclaysQuery=''}if(a==='yt'){ytTab='home';ytIndex=-1;ytQuery='';ytPlaying=false}if(a==='x'){xTab='home';xDetail=null;xQuery='';}if(isMessenger(a)){messengerSearch='';messengerTab='chats';messengerFilter='all'}cur=a;cid=mid=igv=sty=null;nview=1;nid=null;cmo=null;cinfo=false;cy_=YR;cedit=false;cflt=0;if(el){const r=el.getBoundingClientRect(),s=$('#scr').getBoundingClientRect();app.style.transformOrigin=`${r.left-s.left+r.width/2}px ${r.top-s.top+r.height/2}px`}
- if(a==='ph')PhoneApp.reset();if(prepare)prepare();app.className='pre on';R();void app.offsetWidth;app.classList.remove('pre');$('#hm').classList.add('away')}
+ if(a==='ph')PhoneApp.reset();if(a==='x')xReset();if(prepare)prepare();app.className='pre on';R();void app.offsetWidth;app.classList.remove('pre');$('#hm').classList.add('away')}
 else if(cur){app.classList.add('pre');$('#hm').classList.remove('away');setTimeout(()=>{cur=null;R()},360)}}
 function lockIt(){cur=null;cid=null;cinfo=false;$('#app').classList.remove('on');$('#hm').classList.remove('away');locked=true;pin='';$('#pw').classList.remove('on');$('#lk').classList.remove('up');lkReset();pdots2();if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();R()}
 function img(file,max=700){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>{const i=new Image();i.onload=()=>{const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*k;c.height=i.height*k;const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);ctx.drawImage(i,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.8))};i.src=fr.result};fr.readAsDataURL(file)})}
 function cropRatio(key=''){const k=String(key||'').toLowerCase();
 if(k==='wph'||k==='wpl'||k==='wallpaper'||k==='wp')return 370/824;
- if(k==='s'||k==='story'||k==='i'||k==='cover'||k==='vmposter')return 9/16;
+ if(k==='s'||k==='story'||k==='i'||k==='cover'||k==='vmposter'||k==='ighighlight')return 9/16;
 if(k==='image'||k==='ytthumb')return 16/9;if(k==='ytbanner')return 3/1;
 if(k==='imgs'||k==='post'||k==='carousel')return 4/5;
 return 1}
@@ -1129,27 +1245,32 @@ function igComposePhoto(){if(readerMode)return;const id=igv.id;if(id==null)retur
 function igScrollChat(){const x=$('#ig-chat-scroll');if(x)x.scrollTop=x.scrollHeight}
 function vIgReels(){const p=S.posts.find(x=>x.views);return `<div class="ig-dm-head"><a onclick="igBack()">${BK}</a><b>Reels</b><span>▷</span></div><div class="bd ig-reels"><div class="ig-reels-placeholder">${p?.img?`<img src="${p.img}">`:''}<span>Reels</span><small>${p?esc(p.cap):'Create a post with views to show a reel here.'}</small></div></div>${TABS()}`}
 function vIgActivity(){return `<div class="ig-dm-head"><a onclick="igBack()">${BK}</a><b>Notifications</b><span></span></div><div class="bd"><div class="ig-result-title">Activity</div>${S.posts.filter(p=>p.likes).map(p=>`<div class="ig-account">${avp(pf(p.pid),45)}<div><b>${esc(pf(p.pid).user)}</b><small>${num(p.likes)} likes · ${esc(p.cap)}</small></div></div>`).join('')||'<div class="ig-dm-empty">No recent activity</div>'}</div>`}
-function vIgPost(i){const p=S.posts[i];if(!p)return vIgSearch();const u=pf(p.pid);return `<div class="ig-dm-head"><a onclick="igv={t:'search'};R()">${BK}</a><b>Post</b></div><div class="bd"><div class="ig-account" onclick="igv={t:'prof',id:${u.id}};R()">${avp(u,36)}<b>${esc(u.user)}</b></div>${pimg(p,i)}<div class="ig-post-actions"><button onclick="like(${i})">${I(HRT,24,p.liked?'#ff3040':'none',p.liked?'#ff3040':'#000')}</button><button onclick="igv={t:'com',i:${i}};R()">${I(CMT,24)}</button></div><p style="padding:12px">${esc(p.cap)}</p></div>${TABS()}`}
+function vIgPost(i){const p=S.posts[i];if(!p)return vIgSearch();const u=pf(p.pid);return `<div class="ig-dm-head"><button type="button" aria-label="Back" onclick="InstagramProfile.fromPost(igv.id,igv.tab)">${BK}</button><b>Post</b>${readerMode?'<span></span>':`<button type="button" aria-label="Edit post" onclick="editPost(${i})">⋯</button>`}</div><div class="bd"><div class="ig-account" onclick="igv={t:'prof',id:${u.id}};R()">${avp(u,36)}<b>${esc(u.user)}</b></div>${pimg(p,i)}<div class="ig-post-actions"><button onclick="like(${i})">${I(HRT,24,p.liked?'#ff3040':'none',p.liked?'#ff3040':'#000')}</button><button onclick="igv={...igv,t:'com',postBack:true};R()">${I(CMT,24)}</button></div><p style="padding:12px">${esc(p.cap)}</p></div>${TABS()}`}
 
 /* Instagram */
 const num=n=>(+n||0).toLocaleString('en-US');
 const pf=id=>S.profiles.find(p=>p.id==id)||{id:0,user:'unknown',name:'Unknown',photo:'',fol:'0',fng:'0',bio:''};
 const avp=(p,s)=>av({name:p.user,photo:p.photo},s);
 const HRT='<path d="M12 21s-8-5.200-8-11a4.600 4.600 0 018-3 4.600 4.600 0 018 3c0 5.800-8 11-8 11z"/>',CMT='<path d="M20 12a8 8 0 01-11.700 7L4 20l1.200-4.200A8 8 0 1120 12z"/>',SND='<path d="M21 3L3 10.500l7 2.500 2.500 7zM10 13l11-10"/>',BKM='<path d="M6 3h12v18l-6-4.500L6 21z"/>';
-function addPost(){if(!S.profiles.length)return form('Create an Instagram profile in the side panel first.',[],()=>{});form('New post',[{k:'pid',l:'Author',t:'sel',o:S.profiles.map(p=>({v:p.id,l:p.user}))},{k:'imgs',l:'Photos (select several for a carousel)',t:'file',m:1},{k:'cap',l:'Caption',t:'area'},{k:'likes',l:'Likes',t:'number',v:'1024'},{k:'views',l:'Views (optional; marks it as a video/reel)',t:'number'},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(nowTs())}],v=>S.posts.unshift({...v,ts:fromL(v.ts),img:(v.imgs||[])[0]||'',pid:+v.pid,likes:+v.likes||0,liked:0,saved:0,comments:[]}))}
-function editPost(i){const p=S.posts[i];if(ed)return del('posts',i);form('Edit post',[{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())}],v=>Object.assign(p,{cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts)}),'#md',p)}
+function addPost(id){if(readerMode)return;if(!S.profiles.length)return form('Create an Instagram profile in the side panel first.',[],()=>{});form('New post',[{k:'pid',l:'Author',t:'sel',v:id??me()?.id,o:S.profiles.map(p=>({v:p.id,l:p.user}))},{k:'imgs',l:'Photos (select several for a carousel)',t:'file',m:1},{k:'cap',l:'Caption',t:'area'},{k:'likes',l:'Likes',t:'number',v:'1024'},{k:'views',l:'Views (optional; marks it as a video/reel)',t:'number'},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(nowTs())}],v=>S.posts.unshift({...v,ts:fromL(v.ts),img:(v.imgs||[])[0]||'',pid:+v.pid,likes:+v.likes||0,liked:0,saved:0,comments:[]}))}
+function editPost(i){
+ if(readerMode)return;const p=S.posts[i];if(ed){if(igv?.t==='post')igv=igv.id!=null?{t:'prof',id:igv.id,tab:igv.tab}:{t:'search'};return del('posts',i)}
+ const profiles=[{v:'',l:'Nenhum'},...S.profiles.map(p=>({v:p.id,l:'@'+p.user}))];
+ form('Edit post',[{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())},{k:'igTagged',l:'Perfil marcado',t:'sel',v:p.igTagged||'',o:profiles},{k:'igRepost',l:'Republicado por',t:'sel',v:p.igRepost||'',o:profiles}],v=>Object.assign(p,{cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts),igTagged:v.igTagged||null,igRepost:v.igRepost||null}),'#md',p)
+}
 function like(i){if(readerMode)return;const p=S.posts[i];p.liked=!p.liked;p.likes=Math.max(0,(+p.likes||0)+(p.liked?1:-1));save();R()}
 function dbl(i){if(readerMode)return;if(!S.posts[i].liked)like(i);const e=document.querySelector(`[data-i="${i}"]`);e&&e.insertAdjacentHTML('beforeend','<b class="hb">❤</b>')}
 function sav(i){if(readerMode)return;S.posts[i].saved=!S.posts[i].saved;save();R()}
 function openSty(id){sty=id;R();setTimeout(()=>{if(sty==id){sty=null;R()}},5000)}
 function addStory(id){form('Add story',[{k:'i',l:'Image',t:'file'}],v=>{if(v.i)pf(id).story=v.i})}
 function addCom(i){if(readerMode)return;const t=$('#ci').value.trim();if(!t)return;const ps=S.profiles;S.posts[i].comments.push({pid:ps[cas%ps.length].id,text:t});save();R();$('#ci').focus()}
-const TABS=()=>`<div class="tab"><a onclick="igv=null;R()">${I('<path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/>',26,'#000')}</a><a onclick="igv={t:'search'};R()" aria-label="Search">${I('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',26)}</a><a onclick="addPost()">${I('<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/>',26)}</a><a onclick="igv={t:'reels'};R()" aria-label="Reels">${I('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8l6 4-6 4z"/>',26)}</a><a onclick="goMe()">${me()?avp(me(),26):I('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/>',26)}</a></div>`;
+const TABS=()=>InstagramProfile.nav();
+function igBackFromComments(){igv=igv?.postBack?{...igv,t:'post',postBack:false}:null;R()}
 function vCom(i){const p=S.posts[i],a=pf(p.pid),ps=S.profiles,me=ps[cas%ps.length]||pf(0);
-return `<div class="nv"><a onclick="igv=null;R()">${BK}</a><b style="color:#000">Comments</b><span style="width:26px"></span></div><div class="bd"><div class="cm">${avp(a,34)}<div><b>${esc(a.user)}</b> ${esc(p.cap)}</div></div>${p.comments.map((c,j)=>{const u=pf(c.pid);return `<div class="cm" onclick="if(ed){S.posts[${i}].comments.splice(${j},1);save();R()}">${avp(u,34)}<div><b>${esc(u.user)}</b> ${esc(c.text)}</div>${I(HRT,14,'none','#8e8e93')}</div>`}).join('')}</div><div class="cmp"><a onclick="cas++;R()">${avp(me,32)}</a><div class="pill"><input id="ci" placeholder="Comment as ${esc(me.user)}…" onkeydown="if(event.key==='Enter')addCom(${i})"><button onclick="addCom(${i})">↑</button></div></div>`}
-function vIg(){if(igv&&igv.t=='newdm')return vIgNewDm();if(igv&&igv.t=='post')return vIgPost(igv.i);if(igv&&igv.t=='activity')return vIgActivity();if(igv&&igv.t=='search')return vIgSearch();if(igv&&igv.t=='inbox')return vIgInbox();if(igv&&igv.t=='dm')return vIgDm(igv.id);if(igv&&igv.t=='reels')return vIgReels();if(igv&&igv.t=='com')return vCom(igv.i);if(igv&&igv.t=='prof')return vProf(igv.id)+(sty?vSty():'');
-return (sty?vSty():'')+`<div class="igh"><span class="ig-logo"><img src="./assets/iphone-icons/Instagram_Thumbnail.png" alt="Instagram" draggable="false"></span><span style="display:flex;gap:16px"><a aria-label="Likes" onclick="igv={t:'activity'};R()">${I(HRT)}</a><a aria-label="Direct messages" onclick="igv={t:'inbox'};R()">${I(SND)}</a></span></div><div class="bd"><div class="sts">${S.profiles.map(p=>`<div class="st" onclick="${p.story?`openSty(${p.id})`:`igv={t:'prof',id:${p.id}};R()`}"><div class="ring${p.story?'':' no'}">${avp(p,58)}</div><br>${esc(p.user)}</div>`).join('')}</div>`+
-(S.posts.map((p,i)=>({p,i})).sort((x,y)=>y.p.ts-x.p.ts).map(({p,i})=>{const a=pf(p.pid),n=p.comments.length;return `<div class="po"><div class="h"><div class="ring${a.story?'':' no'}" style="margin:0" onclick="igv={t:'prof',id:${a.id}};R()">${avp(a,30)}</div><u onclick="igv={t:'prof',id:${a.id}};R()">${esc(a.user)}</u><span onclick="editPost(${i})">⋯</span></div>${pimg(p,i)}<div class="ac">${pdots(p)}<a onclick="like(${i})">${I(HRT,26,p.liked?'#ff3040':'none',p.liked?'#ff3040':'#000')}</a><a onclick="igv={t:'com',i:${i}};R()">${I(CMT,26)}</a>${I(SND,26)}<a onclick="sav(${i})">${I(BKM,26,p.saved?'#000':'none')}</a></div><p><b>${num(p.likes)} likes</b></p><p><b>${esc(a.user)}</b> ${esc(p.cap)}</p><p class="g" onclick="igv={t:'com',i:${i}};R()">${n?`View all ${n} comment${n>1?'s':''}`:'Add a comment…'}</p><p class="w">${esc(igAgo(p.ts))}</p></div>`}).join('')||`<div class="mb2"><p class="m">${S.profiles.length?'Tap ＋ below to create a post.':'Create a profile in the side panel to start posting.'}</p></div>`)+`</div>`+TABS()}
+return `<div class="nv"><a onclick="igBackFromComments()">${BK}</a><b style="color:#000">Comments</b><span style="width:26px"></span></div><div class="bd"><div class="cm">${avp(a,34)}<div><b>${esc(a.user)}</b> ${esc(p.cap)}</div></div>${p.comments.map((c,j)=>{const u=pf(c.pid);return `<div class="cm" onclick="if(ed){S.posts[${i}].comments.splice(${j},1);save();R()}">${avp(u,34)}<div><b>${esc(u.user)}</b> ${esc(c.text)}</div>${I(HRT,14,'none','#8e8e93')}</div>`}).join('')}</div><div class="cmp"><a onclick="cas++;R()">${avp(me,32)}</a><div class="pill"><input id="ci" placeholder="Comment as ${esc(me.user)}…" onkeydown="if(event.key==='Enter')addCom(${i})"><button onclick="addCom(${i})">↑</button></div></div>`}
+function vIg(){if(igv&&igv.t=='newdm')return vIgNewDm();if(igv&&igv.t=='post')return vIgPost(igv.i);if(igv&&igv.t=='activity')return vIgActivity();if(igv&&igv.t=='search')return vIgSearch();if(igv&&igv.t=='inbox')return vIgInbox();if(igv&&igv.t=='dm')return vIgDm(igv.id);if(igv&&igv.t=='reels')return vIgReels();if(igv&&igv.t=='com')return vCom(igv.i);if(igv&&igv.t=='highlight')return InstagramProfile.highlightView();if(igv&&igv.t=='prof')return vProf(igv.id)+(sty?vSty():'');
+return (sty?vSty():'')+`<div class="igh"><span class="ig-logo"><img src="./assets/iphone-icons/Instagram_Thumbnail.png" alt="Instagram" draggable="false"></span><span style="display:flex;gap:16px">${readerMode?'':`<button type="button" class="ig-create-feed" aria-label="Create post" onclick="addPost()">${I('<path d="M12 4v16M4 12h16"/>',24)}</button>`}<a aria-label="Likes" onclick="igv={t:'activity'};R()">${I(HRT)}</a><a aria-label="Direct messages" onclick="igv={t:'inbox'};R()">${InstagramProfile.dmIcon()}</a></span></div><div class="bd"><div class="sts">${S.profiles.map(p=>`<div class="st" onclick="${p.story?`openSty(${p.id})`:`igv={t:'prof',id:${p.id}};R()`}"><div class="ring${p.story?'':' no'}">${avp(p,58)}</div><br>${esc(p.user)}</div>`).join('')}</div>`+
+(S.posts.map((p,i)=>({p,i})).sort((x,y)=>y.p.ts-x.p.ts).map(({p,i})=>{const a=pf(p.pid),n=p.comments.length;return `<div class="po"><div class="h"><div class="ring${a.story?'':' no'}" style="margin:0" onclick="igv={t:'prof',id:${a.id}};R()">${avp(a,30)}</div><u onclick="igv={t:'prof',id:${a.id}};R()">${esc(a.user)}</u><span onclick="editPost(${i})">⋯</span></div>${pimg(p,i)}<div class="ac">${pdots(p)}<a onclick="like(${i})">${I(HRT,26,p.liked?'#ff3040':'none',p.liked?'#ff3040':'#000')}</a><a onclick="igv={t:'com',i:${i}};R()">${I(CMT,26)}</a>${I(SND,26)}<a onclick="sav(${i})">${I(BKM,26,p.saved?'#000':'none')}</a></div><p><b>${num(p.likes)} likes</b></p><p><b>${esc(a.user)}</b> ${esc(p.cap)}</p><p class="g" onclick="igv={t:'com',i:${i}};R()">${n?`View all ${n} comment${n>1?'s':''}`:'Add a comment…'}</p><p class="w">${esc(igAgo(p.ts))}</p></div>`}).join('')||`<div class="mb2"><p class="m">${readerMode?'No posts yet.':S.profiles.length?'Tap ＋ above to create a post.':'Create a profile in the side panel to start posting.'}</p></div>`)+`</div>`+TABS()}
 function vSty(){const p=pf(sty);return `<div class="sv" onclick="sty=null;R()"><div class="pg"><i></i></div><div class="sh">${avp(p,32)}${esc(p.user)}</div><div class="si" style="background-image:url(${p.story})"></div></div>`}
 const YL='#e5a400',NG=['Pinned','Today','Yesterday','Previous 7 Days','Previous 30 Days'];
 const CTX={find:'Find My',yt:'YouTube',wallet:'Wallet',bar:'Bank',x:'Twitter',home:'Tela inicial e bloqueio',msg:'Messages',wa:'WhatsApp',ka:'KakaoTalk',mail:'Mail',saf:'Safari',map:'Maps',clk:'Clock',pho:'Photos',ig:'Instagram',nt:'Notes',st:'Settings',ph:'Phone',cal:'Calendar',wx:'Weather'};
@@ -1217,10 +1338,11 @@ const has=d=>S.events.some(e=>e.y==cy_&&e.m==cmo&&e.d==d),isT=d=>cy_==YR&&cmo==T
 let rows='';for(let i=0;i<cs.length;i+=7)rows+=`<div class="rw">${cs.slice(i,i+7).map((d,j)=>d?`<div class="cd2" onclick="csel=${d};R()"><i class="${d==csel?(isT(d)?'sel t':'sel'):isT(d)?'t0':(j==0||j==6)?'wk':''}">${d}</i><s class="${has(d)?'dt':''}"></s></div>`:'<div></div>').join('')}</div>`;
 return `<div class="nv" style="color:${R_}"><a>${I('<path d="M15 5l-7 7 7 7"/>',26,'none',R_,2.4)} ${cy_}</a><a onclick="addEvent()">${I('<path d="M12 5v14M5 12h14"/>',26,'none',R_,2.2)}</a></div><div class="cmh"><b>${MN[cmo]}</b><span><a onclick="cm(-1)">‹</a><a onclick="cm(1)">›</a></span></div><div class="cwd">${'SMTWTFS'.split('').map(x=>`<span>${x}</span>`).join('')}</div><div>${rows}</div><div class="bd cev">${evs.map(({e,i})=>`<div class="ev2" onclick="editEv(${i})"><u style="background:${e.c}"></u><span>${esc(e.title)}</span><em>${esc(e.time)}</em></div>`).join('')||'<div class="mb2" style="text-align:center"><p class="m">No Events</p></div>'}</div><div class="ctb"><a onclick="cmo=null;cy_=YR;R()">Today</a><a>Calendars</a><a>Inbox</a></div>`}
 /* Instagram: profile */
-function editProf(id){const p=pf(id);form('Edit profile',[{k:'name',l:'Name',v:p.name},{k:'user',l:'Username',v:p.user},{k:'bio',l:'Bio (multiple lines allowed)',t:'area',v:p.bio},{k:'link',l:'Link',v:p.link||''},{k:'fol',l:'Followers',v:p.fol},{k:'fng',l:'Following',v:p.fng},{k:'photo',l:'Change photo',t:'file'}],v=>{const ph=v.photo;delete v.photo;Object.assign(p,v);if(ph)p.photo=ph},'#md',p)}
-function vProf(id){const p=pf(id),ps=S.posts.filter(x=>x.pid==id),mine=me()&&me().id==id,K1='none',bl='#000';
-const PL='<path d="M8 5v14l11-7z"/>';
-return `<div class="nv" style="color:#000"><span style="display:flex;align-items:center;gap:14px;font-size:20px;font-weight:700"><a onclick="igv=null;R()">${I('<path d="M15 5l-7 7 7 7"/>',26,K1,bl,2.2)}</a>${esc(p.user)}</span><span style="display:flex;gap:16px;align-items:center">${mine?I('<path d="M6 17V11a6 6 0 0112 0v6l2 2H4zM10 21h4"/>',24):''}${I('<path d="M5 12h.01M12 12h.01M19 12h.01" stroke-width="3"/>',24)}</span></div><div class="bd"><div class="pr"><div class="ring${p.story?'':' no'}" style="margin:0;padding:3px" onclick="${p.story?`openSty(${id})`:mine?`addStory(${id})`:''}">${avp(p,82)}</div><div class="sts2"><div><b>${ps.length}</b>posts</div><div><b>${esc(p.fol)}</b>followers</div><div><b>${esc(p.fng)}</b>following</div></div></div><div class="pbio"><div style="white-space:pre-wrap">${esc(p.bio)}</div>${p.link?`<div class="lnk">${I('<path d="M10 14a4 4 0 005.700 0l3-3a4 4 0 00-5.700-5.700l-1 1M14 10a4 4 0 00-5.700 0l-3 3a4 4 0 005.700 5.700l1-1"/>',14,K1,'#00376b',2)} ${esc(p.link)}</div>`:''}</div><div class="bs">${mine?`<button onclick="editProf(${id})">Edit profile</button><button>Share profile</button>`:`<button class="${p.f?'':'bl'}" onclick="pf(${id}).f=!pf(${id}).f;save();R()">${p.f?'Following':'Follow'}</button><button onclick="igv={t:'dm',id:${id}};R()">Message</button>`}<button class="ic1">${I('<circle cx="10" cy="8" r="4"/><path d="M2 21a8 8 0 0116 0M19 8v6M16 11h6"/>',20)}</button></div><div class="ptab"><span class="on">${I('<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>',24)}</span><span>${I('<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 8l6 4-6 4z"/>',24,K1,'#8e8e93')}</span><span>${I('<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="10" r="3"/><path d="M6 19a6 6 0 0112 0"/>',24,K1,'#8e8e93')}</span></div><div class="p4 p3 pgd">${ps.map(x=>`<div style="${x.img?`background-image:url(${x.img})`:'background:linear-gradient(135deg,#c9ccd6,#9aa0b0)'}">${x.imgs&&x.imgs.length>1?'<i class="vi" style="color:#fff;font-style:normal;font-size:14px">❐</i>':''}${x.views?`<i class="vi">${I(PL,14,'#fff','none',0)}</i><span class="vw">▷ ${num(x.views)}</span>`:''}</div>`).join('')}</div></div>`+TABS()}
+function editProf(id){
+ if(readerMode)return;const p=pf(id);
+ form('Edit profile',[{k:'name',l:'Name',v:p.name},{k:'user',l:'Username',v:p.user},{k:'bio',l:'Bio (multiple lines allowed)',t:'area',v:p.bio},{k:'link',l:'Link',v:p.link||''},{k:'fol',l:'Followers',v:p.fol},{k:'fng',l:'Following',v:p.fng},...InstagramProfile.fields(p),{k:'photo',l:'Change photo',t:'file'}],({photo,private:locked,...v})=>Object.assign(p,{...v,private:locked==='yes',photo:photo||p.photo}),'#md',p);
+}
+function vProf(id){return InstagramProfile.render(id)}
 /* ---- v6: time hierarchy, passcode, replies, carousel ---- */
 const sod=t=>{const d=new Date(t);return new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime()};
 const WDN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
@@ -1235,7 +1357,7 @@ const fFull=t=>{const d=new Date(t);return `${MN[d.getMonth()]} ${d.getDate()}, 
 const toL=t=>{const d=new Date(t),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`};
 const fromL=s=>s?new Date(s).getTime():nowTs();
 const sT=()=>S.time.replace(/\s*[ap]\.?m\.?/i,'').trim();
-const igAgo=t=>{const m=Math.round((nowTs()-t)/6e4);if(m<1)return 'JUST NOW';if(m<60)return m+' MINUTE'+(m>1?'S':'')+' AGO';const h=Math.round(m/60);if(h<24)return h+' HOUR'+(h>1?'S':'')+' AGO';const d=Math.round(h/24);if(d<7)return d+' DAY'+(d>1?'S':'')+' AGO';const x=new Date(t);return MN[x.getMonth()].toUpperCase()+' '+x.getDate()+(x.getFullYear()!=YR?', '+x.getFullYear():'')};
+const igAgo=t=>{if(!t||!Number.isFinite(+t))return '';const m=Math.round((nowTs()-t)/6e4);if(m<1)return 'JUST NOW';if(m<60)return m+' MINUTE'+(m>1?'S':'')+' AGO';const h=Math.round(m/60);if(h<24)return h+' HOUR'+(h>1?'S':'')+' AGO';const d=Math.round(h/24);if(d<7)return d+' DAY'+(d>1?'S':'')+' AGO';const x=new Date(+t);return (MN[x.getMonth()]||'').toUpperCase()+' '+x.getDate()+(x.getFullYear()!=YR?', '+x.getFullYear():'')};
 const ordS=(a,b)=>S.ord=='asc'?a-b:b-a;
 let lastKey='',rep=null,pin='';
 function migrate(){const n=nowTs();
@@ -1574,7 +1696,7 @@ function vYT(){ytData();const nav=`<nav class="yt-nav">${[['home','Home'],['shor
 const V={find:vFind,yt:vYT,wallet:vWallet,bar:vBarclays,x:vX,wx:vWx,st:vSet,ph:vPhone,cal:vCal,nt:vNotes,msg:vMsg34,wa:vThirdPartyChat,ka:vThirdPartyChat,mail:vMail34,saf:vSaf,map:vMap,clk:vClk34,pho:vPho,ig:vIg};
 function applyStatusTheme(){
 const sb=$('.sb');if(!sb)return;
- const light=!$('#sc-call').hidden||locked||(!cur&&!locked)||(cur=='wx'||cur=='clk'||cur=='wallet')||!!sty||(cur==='ph'&&!!$('#app .phone-live-voicemail'));
+ const light=!$('#sc-call').hidden||locked||(!cur&&!locked)||(cur=='wx'||cur=='clk'||cur=='wallet')||!!sty||(cur==='ph'&&!!$('#app .phone-live-voicemail'))||(cur==='x'&&!!$('#app .x-profile-page:not(.x-profile-past-cover)'));
 const color=light?'#fff':'#111';
 sb.className='sb '+(light?'light':'dark');
 sb.style.setProperty('color',color,'important');
@@ -1607,7 +1729,26 @@ if(el.id==='mapSearch'||el.classList.contains('native-search-input'))return;el.r
 });
 document.querySelectorAll('[contenteditable]').forEach(el=>el.setAttribute('contenteditable','false'));
 }
-let xTab='home',xDetail=null,xQuery='',xFeed='For you';
+let xTab='home',xDetail=null,xQuery='',xFeed='For you',xHistory=[],xProfileTab='posts',xProfileQuery=null;
+const xDrawerIcons={
+ account:'<circle cx="10" cy="11" r="3"/><path d="M4 20a6 6 0 0 1 12 0M19 12a9 9 0 1 1-9-9h1m7-1v7m-3.5-3.5h7"/>',
+ subscription:'<path d="m12 2 3 2 3 .5 1 3 2 2.5-1 3 .2 3.3-2.8 1.6-2 2.6-3.4-.8-3.4.8-2-2.6-2.8-1.6.2-3.3-1-3 2-2.5 1-3L9 4z"/><path d="m8.3 11.5 2.4 2.4 5-5"/>',
+ calls:'<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>',
+ communities:'<circle cx="8" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M2 21v-2a6 6 0 0 1 8-5.6m1 7.6v-2a6 6 0 0 1 12 0v2H2"/>',
+ lists:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 9h8m-8 5h6"/>',
+ spaces:'<rect x="7" y="2" width="10" height="15" rx="5"/><path d="M3 12a9 9 0 0 0 18 0m-11-4v3m4-4v5"/>',
+ requests:'<circle cx="9" cy="6.5" r="3.5"/><path d="M2 21v-1a7 7 0 0 1 11-5.7m1 6.7H2m14-3h7m-7 0 3-3m-3 3 3 3"/>',
+ studio:'<path d="M13 4c2-1.5 5-2 8-1.5.5 3-.1 6-1.5 8l-5 5-6-6zM8.5 9.5 4 9l-2 5 6.5.5m6-1 1 6-5 2-1-6.5M7 17l-4 4"/><circle cx="15.8" cy="7.7" r="1.6"/>',
+ settings:'<path d="m9 3 1-2h4l1 2 2 1 2-.2 2 3-1 2v3l1 2-2 3-2-.2-2 1-1 2h-4l-1-2-2-1-2 .2-2-3 1-2v-3l-1-2 2-3 2 .2z" transform="translate(0 1)"/><circle cx="12" cy="12" r="3"/>',
+ help:'<circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 1 1 5.1 2.1c-1.1 1-2.1 1.4-2.1 3m0 2.7h.01"/>',
+ media:'<rect x="3" y="7" width="18" height="14" rx="3"/><path d="M6 3h12m-8 8 5 3-5 3z"/>',
+ pin:'<path d="M19 10c0 4.6-7 10-7 10S5 14.6 5 10a7 7 0 0 1 14 0z"/><circle cx="12" cy="10" r="2.5"/>',
+ link:'<path d="m10 13 4-4m-5 6-2 2a3 3 0 0 1-4-4l5-5a3 3 0 0 1 4 0m3 1 2-2a3 3 0 0 1 4 4l-5 5a3 3 0 0 1-4 0"/>',
+ calendar:'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4m8-4v4M4 10h16"/>',
+ back:'<path d="m14 5-7 7 7 7"/>'
+};
+const xDrawerIcon=(k,n=22)=>xDrawerIcons[k]?I(xDrawerIcons[k],n,'none','currentColor',1.8):xi(k,n);
+const xMenuEntries=[['profile','Profile','profile'],['subscription','Subscription','subscription'],['history','History','bookmark'],['calls','Calls','calls'],['communities','Communities','communities'],['lists','Lists','lists'],['spaces','Spaces','spaces'],['requests','Follower requests','requests'],['studio','Creator Studio','studio'],['settings','Settings and privacy','settings'],['help','Help Center','help']];
 const xIcons={home:'<path d="M3 10 12 3l9 7v11h-6v-7H9v7H3z"/>',search:'<circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/>',bell:'<path d="M5 17h14l-2-4V9a5 5 0 0 0-10 0v4zM10 21h4"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3 7 9 6 9-6"/>',profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',reply:'<path d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.8L3 21l1.5-5A9 9 0 1 1 21 11z"/>',repost:'<path d="m2 7 4-4 4 4M6 3v13h10m6 1-4 4-4-4m4 4V8H8"/>',heart:'<path d="M12 21 3.5 12.5a5.4 5.4 0 0 1 8.5-6.6 5.4 5.4 0 0 1 8.5 6.6z"/>',views:'<path d="M4 20v-7m5 7V4m5 16v-9m5 9v-5"/>',bookmark:'<path d="M6 3h12v18l-6-4-6 4z"/>',share:'<path d="M12 15V3m-4 4 4-4 4 4M5 12v9h14v-9"/>'};
 const xPostIcons={
  reply:'M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.488 0 8.125 3.64 8.125 8.129 0 3.01-1.665 5.775-4.335 7.18l-8.426 4.43v-3.752C5.222 17.848 1.75 14.31 1.75 10zm8.005-6c-3.317 0-6.005 2.685-6.005 6s2.688 6 6.005 6h1.73v2.423l5.495-2.89c2.013-1.06 3.266-3.142 3.266-5.404C20.247 6.744 17.505 4 14.122 4z',
@@ -1619,61 +1760,336 @@ const xPostIcons={
  bookmarkFilled:'M4 4.5C4 3.12 5.12 2 6.5 2h11C18.88 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5z',
  share:'M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.29 3.3L6.3 8.29 12 2.59zM4 14h2v5c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-5h2v5c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3v-5z',
  more:'M5 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z',
- grok:'M10.4 14.9l7.1-5.2c.35-.25.8.09.68.5l-3.1 8.3a8.42 8.42 0 0 0 4.35-7.38c0-.63-.07-1.25-.21-1.84l2.41-6.34-6.53 4.88a6.1 6.1 0 0 0-8.46 8.52l-4.1 3.06h4.6l3.8-2.8c.35-.26.17-.85-.27-.85h-.27c-.43 0-.61-.56-.26-.82z',
+ verified:'M12 1.5l3 2.1 3.6.5 1.3 3.4 2.6 2.5-.8 3.6.1 3.6-3.2 1.7-2.1 2.9-3.5-.8-3.5.8-2.1-2.9-3.2-1.7.1-3.6-.8-3.6 2.6-2.5 1.3-3.4 3.6-.5L12 1.5zm4.5 7.8-1.3-1.2-4.5 4.7-2-2-1.3 1.3 3.4 3.4 5.7-6.2z',
  lock:'M6 10V7a6 6 0 0 1 12 0v3h.5a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2H6zm2 0h8V7a4 4 0 1 0-8 0v3zm4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z'
 };
 const xPostIcon=(k,n=18)=>I(`<path fill-rule="evenodd" d="${xPostIcons[k]}"/>`,n,'currentColor','none',0);
 const xi=(k,n=23)=>I(xIcons[k]||xIcons.home,n,'none','currentColor',1.8);
 function xData(){if(!Array.isArray(S.xProfiles))S.xProfiles=[];if(!Array.isArray(S.xPosts))S.xPosts=[];if(!Array.isArray(S.xDms))S.xDms=[];return S.xProfiles}
 function xPerson(id){return xData().find(p=>String(p.id)===String(id))||{name:'Unknown',user:'unknown',photo:''}}
-function xSwitch(t){xTab=t;xDetail=null;xQuery='';R()}
-function xOpenProfile(id){xTab='profile';xDetail=String(id);R()}
-function xOpenPost(id){xTab='post';xDetail=String(id);R()}
-function xProfileForm(id){if(readerMode)return;const p=id?xPerson(id):{},yesNo=[{v:'no',l:'Não'},{v:'yes',l:'Sim'}];form('Perfil do Twitter',[{k:'name',l:'Nome',v:p.name},{k:'user',l:'Username (sem @)',v:p.user},{k:'bio',l:'Bio',t:'area',v:p.bio},{k:'followers',l:'Seguidores',v:p.followers||'0'},{k:'following',l:'Seguindo',v:p.following||'0'},{k:'followed',l:'Seguido pelo dono do iPhone',t:'sel',v:p.followed?'yes':'no',o:yesNo},{k:'protected',l:'Mostrar cadeado ao lado do nome',t:'sel',v:p.protected?'yes':'no',o:yesNo},{k:'photo',l:'Foto de perfil',t:'file'},{k:'banner',l:'Capa',t:'file'}],v=>{if(!v.user.trim())return;const q={id:id||String(Date.now()),name:v.name||v.user,user:v.user.replace(/^@/,''),bio:v.bio,followers:v.followers,following:v.following,followed:v.followed==='yes',protected:v.protected==='yes',photo:v.photo||p.photo||'',banner:v.banner||p.banner||''};if(id)Object.assign(p,q);else{xData().push(q);if(!S.xOwner)S.xOwner=q.id}},'#pm',p)}
-function xPostForm(id,parent){if(readerMode)return;const profiles=xData();if(!profiles.length)return xProfileForm();const p=S.xPosts.find(q=>String(q.id)===String(id))||{};form(parent?'Resposta':'Publicação',[{k:'pid',l:'Autor',t:'sel',v:p.pid||S.xOwner,o:profiles.map(q=>({v:q.id,l:'@'+q.user}))},{k:'text',l:'Texto',t:'area',v:p.text},{k:'time',l:'Horário',v:p.time||'now'},{k:'likes',l:'Curtidas',v:String(p.likes||0)},{k:'reposts',l:'Reposts',v:String(p.reposts||0)},{k:'views',l:'Visualizações',v:String(p.views||0)},{k:'photo',l:'Imagem',t:'file'}],v=>{const q={id:p.id||String(Date.now()),pid:v.pid,text:v.text,time:v.time,likes:Math.max(0,+v.likes||0),reposts:Math.max(0,+v.reposts||0),views:Math.max(0,+v.views||0),photo:v.photo||p.photo||'',parent:p.parent||parent||null};if(p.id)Object.assign(p,q);else S.xPosts.unshift(q)},'#pm',p)}
-function xRemove(type,id){if(readerMode)return;askOk('Excluir este item?',()=>{if(type==='profile'){S.xProfiles=S.xProfiles.filter(p=>String(p.id)!==String(id));S.xPosts=S.xPosts.filter(p=>String(p.pid)!==String(id));if(S.xOwner===id)S.xOwner=S.xProfiles[0]?.id||null}else S.xPosts=S.xPosts.filter(p=>String(p.id)!==String(id)&&String(p.parent)!==String(id));xTab='home';xDetail=null;save();R()})}
+function xReset(){xTab='home';xDetail=null;xQuery='';xHistory=[];xProfileTab='posts';xProfileQuery=null;TwitterExtra.reset()}
+function xSwitch(t){xHistory=[];xDetail=null;xQuery='';xProfileTab='posts';xProfileQuery=null;xTab=t;R()}
+function xVisit(t,id){if(t===xTab&&String(id)===xDetail)return;xHistory.push([xTab,xDetail,xQuery,$('#app .bd')?.scrollTop||0,xProfileTab,xProfileQuery]);xTab=t;xDetail=String(id);if(t==='profile'){xProfileTab='posts';xProfileQuery=null}R()}
+function xBack(){const previous=xHistory.pop();if(!previous)return xSwitch('home');[xTab,xDetail,xQuery,,xProfileTab,xProfileQuery]=previous;R();const bd=$('#app .bd');if(bd)bd.scrollTop=previous[3]}
+function xOpenProfile(id){xVisit('profile',id)}
+function xFindPost(id){return S.xPosts.find(p=>String(p.id)===String(id))}
+function xCanSee(a){return !a.protected||!!a.followed||String(a.id)===String(S.xOwner)}
+const xRecentlyViewed=new WeakMap();
+function xOpenPost(id){
+ const p=xFindPost(id);if(!p||!xCanSee(xPerson(p.pid)))return;
+ const key=String(id),recent=xRecentlyViewed.get(S)||[];
+ xRecentlyViewed.set(S,[key,...recent.filter(k=>k!==key)].slice(0,40));xVisit('post',id);
+}
+const xArg=v=>esc(JSON.stringify(String(v)));
+function xProfileForm(id){
+ if(readerMode)return;
+ const p=id!=null?xPerson(id):{},yesNo=[{v:'no',l:'Não'},{v:'yes',l:'Sim'}];
+ form('Perfil do Twitter',[
+  {k:'name',l:'Nome',v:p.name},{k:'user',l:'Username (sem @)',v:p.user},{k:'bio',l:'Bio',t:'area',v:p.bio},
+  {k:'location',l:'Localização (opcional)',v:p.location},{k:'website',l:'Site (opcional)',v:p.website},{k:'joined',l:'Entrou em (ex.: May 2026)',v:p.joined},
+  {k:'followers',l:'Seguidores',v:p.followers||'0'},{k:'following',l:'Seguindo',v:p.following||'0'},
+  {k:'followed',l:'Seguido pelo dono do iPhone',t:'sel',v:p.followed?'yes':'no',o:yesNo},
+  {k:'protected',l:'Proteger publicações (cadeado)',t:'sel',v:p.protected?'yes':'no',o:yesNo},
+  {k:'verified',l:'Mostrar selo de verificação',t:'sel',v:p.verified?'yes':'no',o:yesNo},{k:'photo',l:'Foto de perfil',t:'file'},{k:'banner',l:'Capa',t:'file'}
+ ],v=>{
+  if(!v.user.trim())return;
+  const q={id:id??(globalThis.crypto?.randomUUID?.()||String(Date.now())),name:v.name||v.user,user:v.user.replace(/^@/,''),bio:v.bio,
+   location:v.location,website:v.website,joined:v.joined,followers:v.followers,following:v.following,followed:v.followed==='yes',protected:v.protected==='yes',
+   verified:v.verified==='yes',photo:v.photo||p.photo||'',banner:v.banner||p.banner||''};
+  if(id!=null)Object.assign(p,q);else{xData().push(q);if(S.xOwner==null)S.xOwner=q.id}
+ },'#pm',p);
+}
+function xPostForm(id,parent){
+ if(readerMode)return;
+ const profiles=xData();if(!profiles.length)return xProfileForm();
+ const p=id==null?null:xFindPost(id),parentId=p?.parent??parent??null,target=parentId!=null?xFindPost(parentId):null;
+ if(!p&&parentId!=null&&!target)return;
+ form(parentId!=null?(target?`Resposta a @${xPerson(target.pid).user}`:'Resposta'):'Publicação',[
+  {k:'pid',l:'Autor',t:'sel',v:p?.pid??S.xOwner,o:profiles.map(q=>({v:q.id,l:'@'+q.user}))},
+  {k:'text',l:'Texto',t:'area',v:p?.text},{k:'time',l:'Horário',v:p?.time||'now'},{k:'date',l:'Data (opcional)',v:p?.date},
+  {k:'likes',l:'Curtidas',v:String(p?.likes||0)},{k:'reposts',l:'Reposts',v:String(p?.reposts||0)},{k:'views',l:'Visualizações',v:String(p?.views||0)},{k:'photo',l:'Imagem',t:'file'}
+ ],v=>{
+  const photo=v.photo||p?.photo||'';
+  if(!v.text.trim()&&!photo){alert('Escreva um texto ou adicione uma imagem.');return false}
+  const q={id:p?.id??(globalThis.crypto?.randomUUID?.()||String(Date.now())),ts:p?.ts??(Number(p?.id)||Date.now()),pid:v.pid,text:v.text,time:v.time,date:v.date,likes:Math.max(0,+v.likes||0),reposts:Math.max(0,+v.reposts||0),views:Math.max(0,+v.views||0),photo,parent:parentId};
+  if(p)Object.assign(p,q);else S.xPosts.unshift(q);
+ },'#pm',p||{});
+}
+function xRemove(type,id){
+ if(readerMode)return;
+ const isProfile=type==='profile',roots=isProfile?S.xPosts.filter(p=>String(p.pid)===String(id)).map(p=>String(p.id)):[String(id)];
+ const hasReplies=S.xPosts.some(p=>p.parent!=null&&roots.includes(String(p.parent)));
+ askOk(hasReplies?'Excluir este item e as respostas vinculadas?':'Excluir este item?',()=>{
+  const children=new Map(),removed=new Set(roots);
+  for(const p of S.xPosts){if(p.parent==null)continue;const key=String(p.parent);if(!children.has(key))children.set(key,[]);children.get(key).push(String(p.id))}
+  for(const key of removed)for(const child of children.get(key)||[])removed.add(child);
+  S.xPosts=S.xPosts.filter(p=>!removed.has(String(p.id)));
+  if(isProfile){S.xProfiles=S.xProfiles.filter(p=>String(p.id)!==String(id));if(String(S.xOwner)===String(id))S.xOwner=S.xProfiles[0]?.id??null}
+  save();xSwitch('home');
+ });
+}
 let xLocalLikes=new Set(),xLocalBookmarks=new Set(),xLocalReposts=new Set();
-function xReaction(id,k){const set=k==='heart'?xLocalLikes:k==='bookmark'?xLocalBookmarks:xLocalReposts,key=String(IDX.cur)+':'+id;if(set.has(key))set.delete(key);else set.add(key);R()}
+function xReaction(id,k){const p=xFindPost(id);if(!p||!['heart','bookmark','repost'].includes(k))return;const a=xPerson(p.pid);if(!xCanSee(a)||(k==='repost'&&a.protected))return;const set=k==='heart'?xLocalLikes:k==='bookmark'?xLocalBookmarks:xLocalReposts,key=String(IDX.cur)+':'+id;if(set.has(key))set.delete(key);else set.add(key);R()}
 function xHas(id,k){return (k==='heart'?xLocalLikes:k==='bookmark'?xLocalBookmarks:xLocalReposts).has(String(IDX.cur)+':'+id)}
 async function xSharePost(id){
- const p=S.xPosts.find(q=>String(q.id)===String(id));if(!p)return;
+ const p=xFindPost(id);if(!p||xPerson(p.pid).protected)return;
  const text=`@${xPerson(p.pid).user}${p.text?`\n${p.text}`:''}`;
  try{if(navigator.share)await navigator.share({text});else await navigator.clipboard.writeText(text)}
  catch(e){if(e.name!=='AbortError')prompt('Copiar publicação',text)}
 }
-function xPost(p){
- const a=xPerson(p.pid),id=esc(String(p.id)),pid=esc(String(a.id));
- const replies=S.xPosts.filter(q=>String(q.parent)===String(p.id)).length;
+function xChildren(id){return S.xPosts.filter(q=>q.parent!=null&&String(q.parent)===String(id)&&xCanSee(xPerson(q.pid)))}
+function xBadges(a){return `${a.verified?`<span class="x-verified" role="img" aria-label="Verified account">${xPostIcon('verified',14)}</span>`:''}${a.protected?`<span class="x-post-lock" role="img" aria-label="Protected account">${xPostIcon('lock',13)}</span>`:''}`}
+function xPostActions(p,detail=false,thread=false){
+ const id=xArg(p.id),locked=xPerson(p.pid).protected,replies=xChildren(p.id).length;
  const action=(k,label,n=0)=>{
-  const reaction=['repost','heart','bookmark'].includes(k),on=reaction&&xHas(p.id,k);
+  const unavailable=locked&&(k==='repost'||k==='share');
+  const reaction=['repost','heart','bookmark'].includes(k),on=reaction&&!unavailable&&xHas(p.id,k);
   const icon=on&&k!=='repost'?`${k}Filled`:k;
-  const handler=reaction?`xReaction('${id}','${k}')`:k==='reply'?`xOpenPost('${id}')`:k==='share'?`xSharePost('${id}')`:'';
-  return `<button type="button" class="x-${k}${on?' on':''}" aria-label="${label}${n?`, ${n}`:''}"${reaction?` aria-pressed="${on}"`:''} onclick="event.stopPropagation();${handler}">${xPostIcon(icon)}${n?`<span>${esc(n)}</span>`:''}</button>`;
+  const handler=reaction?`xReaction(${id},'${k}')`:k==='reply'?(detail||(thread&&!readerMode)?`xReplyTo(${id})`:`xOpenPost(${id})`):`xSharePost(${id})`;
+  if(k==='views')return `<span class="x-views" aria-label="${n} Views">${xPostIcon(k)}${n?`<span>${esc(n)}</span>`:''}</span>`;
+  return `<button type="button" class="x-${k}${on?' on':''}" aria-label="${label}${unavailable?' — Protected post':n?`, ${n}`:''}"${reaction?` aria-pressed="${on}"`:''}${unavailable?' disabled title="Protected post"':''} onclick="event.stopPropagation();${handler}">${xPostIcon(icon,detail?21:18)}${!unavailable&&n?`<span>${esc(n)}</span>`:''}</button>`;
  };
- return `<article class="x-post" onclick="xOpenPost('${id}')">
- <div class="x-post-avatar" onclick="event.stopPropagation();xOpenProfile('${pid}')">${av(a,40)}</div>
+ return `<div class="x-actions${detail?' x-detail-actions':''}">
+  <div class="x-action">${action('reply','Replies',replies)}</div>
+  <div class="x-action">${action('repost','Repost',(+p.reposts||0)+(xHas(p.id,'repost')?1:0))}</div>
+  <div class="x-action">${action('heart','Like',(+p.likes||0)+(xHas(p.id,'heart')?1:0))}</div>
+  ${detail?'':`<div class="x-action">${action('views','Views',+p.views||0)}</div>`}
+  <div class="x-action-end">${action('bookmark','Bookmark')}${action('share','Share')}</div>
+ </div>`;
+}
+function xReplyTo(id){
+ const p=xFindPost(id);if(!p||!xCanSee(xPerson(p.pid)))return;
+ if(!readerMode)xPostForm(null,id);
+ else $('.x-thread-replies')?.scrollIntoView({block:'nearest'});
+}
+function xPostMenu(p){
+ const id=xArg(p.id);
+ const items=[!readerMode?`<button type="button" onclick="this.closest('details').open=false;xPostForm(${id})">Edit ${p.parent?'reply':'post'}</button><button type="button" onclick="this.closest('details').open=false;xRemove('post',${id})">Delete</button>`:'',
+ !xPerson(p.pid).protected?`<button type="button" onclick="this.closest('details').open=false;xSharePost(${id})">Share post</button>`:''].join('');
+ return items?`<details class="x-post-menu" onclick="event.stopPropagation()"><summary aria-label="Post options">${xPostIcon('more',19)}</summary><div>${items}</div></details>`:'';
+}
+function xPostContent(p){return `${p.text?`<div class="x-post-text">${esc(p.text)}</div>`:''}${p.photo?`<img class="x-post-img" src="${esc(p.photo)}" alt="">`:''}`}
+function xPost(p,{thread=false,line=false,replyingTo=null}={}){
+ const a=xPerson(p.pid),id=xArg(p.id),pid=xArg(a.id);
+ if(!xCanSee(a))return '';
+ return `<article class="x-post${thread?' x-thread-row':''}${line?' x-thread-line':''}" onclick="xOpenPost(${id})">
+ <div class="x-post-avatar"><button type="button" class="x-avatar-button" aria-label="Open profile" onclick="event.stopPropagation();xOpenProfile(${pid})">${av(a,42)}</button></div>
  <div class="x-post-copy">
   <div class="x-post-top">
-   <b onclick="event.stopPropagation();xOpenProfile('${pid}')">${esc(a.name)}</b>
-   ${a.protected?`<span class="x-post-lock" role="img" aria-label="Protected account">${xPostIcon('lock',14)}</span>`:''}
+   <b onclick="event.stopPropagation();xOpenProfile(${pid})">${esc(a.name)}</b>${xBadges(a)}
    <span class="x-post-meta"><span class="x-post-handle">@${esc(a.user)}</span><span class="x-post-dot">·</span><time>${esc(p.time||'now')}</time></span>
-   <span class="x-post-tools" aria-hidden="true">${xPostIcon('grok',17)}${xPostIcon('more',17)}</span>
+   <span class="x-post-tools">${xPostMenu(p)}</span>
   </div>
-  ${p.text?`<div class="x-post-text">${esc(p.text)}</div>`:''}${p.photo?`<img class="x-post-img" src="${esc(p.photo)}" alt="">`:''}
-  <div class="x-actions">
-   <div class="x-action">${action('reply','Replies',replies)}</div>
-   <div class="x-action">${action('repost','Repost',(+p.reposts||0)+(xHas(p.id,'repost')?1:0))}</div>
-   <div class="x-action">${action('heart','Like',(+p.likes||0)+(xHas(p.id,'heart')?1:0))}</div>
-   <div class="x-action">${action('views','Views',p.views||0)}</div>
-   <div class="x-action-end">${action('bookmark','Bookmark')}${action('share','Share')}</div>
-  </div>
+  ${replyingTo?`<div class="x-replying-to">Replying to <button type="button" onclick="event.stopPropagation();xOpenProfile(${xArg(replyingTo.id)})">@${esc(replyingTo.user)}</button></div>`:''}
+  ${xPostContent(p)}${xPostActions(p,false,thread)}
  </div></article>`;
 }
-function xResults(){const q=xQuery.toLowerCase().trim(),people=xData().filter(p=>(p.name+' '+p.user).toLowerCase().includes(q));return people.map(p=>`<div class="x-post" onclick="xOpenProfile('${esc(String(p.id))}')">${av(p,44)}<div><b>${esc(p.name)}</b><div class="x-muted">@${esc(p.user)}</div></div></div>`).join('')+S.xPosts.filter(p=>!p.parent&&(p.text||'').toLowerCase().includes(q)).map(p=>xPost(p)).join('')}
-function xSearch(v){xQuery=v;$('#x-results').innerHTML=xResults()}
-function xEditor(){const e=$('#x-editor');if(!e)return;const ps=xData();e.innerHTML=`<label>Seu perfil<select onchange="xSetOwner(this.value)"><option value="">Selecione</option>${ps.map(p=>`<option value="${esc(String(p.id))}" ${String(S.xOwner)===String(p.id)?'selected':''}>@${esc(p.user)}</option>`).join('')}</select></label>`+ps.map(p=>`<div class="cr">${av(p,30)}<span onclick="xProfileForm('${esc(String(p.id))}')">@${esc(p.user)}</span><a onclick="xRemove('profile','${esc(String(p.id))}')">×</a></div>`).join('')+`<h2>Publicações</h2>`+S.xPosts.map(p=>`<div class="cr"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" onclick="xPostForm('${esc(String(p.id))}')">${esc(p.text||'Imagem')}</span><a onclick="xRemove('post','${esc(String(p.id))}')">×</a></div>`).join('')}
+function xThread(p){
+ const a=xPerson(p.pid),pid=xArg(a.id),seen=new Set([String(p.id)]),parents=[];
+ for(let q=p.parent!=null&&xFindPost(p.parent);q&&!seen.has(String(q.id))&&xCanSee(xPerson(q.pid));q=q.parent!=null&&xFindPost(q.parent)){
+  seen.add(String(q.id));parents.unshift(xPost(q,{thread:true,line:true}));
+ }
+ const rows=[],stack=xChildren(p.id).slice();
+ while(stack.length){
+  const q=stack.pop(),id=String(q.id);if(seen.has(id))continue;seen.add(id);
+  const children=xChildren(id).filter(c=>!seen.has(String(c.id)));
+  rows.push(xPost(q,{thread:true,line:children.length>0}));
+  for(const child of children)stack.push(child);
+ }
+ return `${parents.length?`<section aria-label="Earlier posts">${parents.join('')}</section>`:''}<article class="x-main-post">
+  <button type="button" class="x-main-author" onclick="xOpenProfile(${pid})">${av(a,44)}<span><strong>${esc(a.name)} ${xBadges(a)}</strong><span class="x-muted">@${esc(a.user)}</span></span></button>
+  ${xPostContent(p)}
+  <div class="x-main-meta">${[p.time,p.date].filter(Boolean).map(esc).join(' · ')}${p.time||p.date?' · ':''}<span><b>${esc(+p.views||0)}</b> Views</span></div>
+  ${xPostActions(p,true)}</article>
+  ${rows.length?`<section class="x-thread-replies" aria-label="Replies">${rows.join('')}</section>`:''}`;
+}
+function xResults(){const q=xQuery.toLowerCase().trim(),people=xData().filter(p=>(p.name+' '+p.user).toLowerCase().includes(q));return people.map(p=>`<div class="x-post" onclick="xOpenProfile(${xArg(p.id)})">${av(p,44)}<div><b>${esc(p.name)} ${xBadges(p)}</b><div class="x-muted">@${esc(p.user)}</div></div></div>`).join('')+S.xPosts.filter(p=>!p.parent&&(p.text||'').toLowerCase().includes(q)).map(p=>xPost(p)).join('')}
+function xSearch(v){xQuery=v;$('#x-results').innerHTML=TwitterExtra.exploreRows()}
+function xEditor(){
+ const e=$('#x-editor');if(!e)return;const ps=xData(),open=e.querySelector('details')?.open;
+ e.innerHTML=`<label>Seu perfil<select onchange="xSetOwner(this.value)"><option value="">Selecione</option>${ps.map(p=>`<option value="${esc(p.id)}" ${String(S.xOwner)===String(p.id)?'selected':''}>@${esc(p.user)}</option>`).join('')}</select></label>${ps.length?`<details class="x-editor-profiles"${open?' open':''}><summary>Gerenciar perfis (${ps.length})</summary>${ps.map(p=>`<div class="cr">${av(p,28)}<button type="button" onclick="xProfileForm(${xArg(p.id)})">@${esc(p.user)}</button><button type="button" aria-label="Excluir perfil" onclick="xRemove('profile',${xArg(p.id)})">×</button></div>`).join('')}</details>`:''}`;
+}
 function xSetOwner(id){if(readerMode)return;S.xOwner=id;save();R()}
-function vX(){const ps=xData(),owner=xPerson(S.xOwner),nav=`<div class="x-nav">${['home','search','bell','mail','profile'].map(k=>`<button aria-label="${k}" class="${xTab===k?'on':''}" onclick="xSwitch('${k}')">${xi(k,25)}</button>`).join('')}</div>`,head=`<div class="x-head"><button onclick="xOpenProfile('${esc(String(S.xOwner||''))}')">${av(owner,30)}</button><span class="x-logo"><img src="./assets/iphone-icons/TwitterBird.png" alt="Twitter"></span><button onclick="xSwitch('home')">${xi('home',19)}</button></div>`,fab=readerMode?'':`<button class="x-fab" aria-label="New post" onclick="xPostForm()">${I('<path d="M12 5v14M5 12h14"/>',27,'none','#fff')}</button>`;let body='';if(xTab==='search')return head+`<input class="x-search native-search-input" placeholder="Search" value="${esc(xQuery)}" oninput="xSearch(this.value)"><div class="bd x-body" id="x-results">${xResults()}</div>`+nav;if(xTab==='profile'){const p=xPerson(xDetail||S.xOwner);body=`<div class="x-profile-banner" style="${p.banner?'background-image:url('+esc(p.banner)+')':''}"></div><div class="x-profile-info">${av(p,65)}<h2>${esc(p.name)}</h2><div class="x-muted">@${esc(p.user)}</div><p>${esc(p.bio||'')}</p><span class="x-muted"><b>${esc(p.following||'0')}</b> Following　<b>${esc(p.followers||'0')}</b> Followers</span></div><div class="x-tabs"><button class="on">Posts</button><button onclick="xSwitch('search')">Search</button></div>`+S.xPosts.filter(q=>String(q.pid)===String(p.id)&&!q.parent).map(q=>xPost(q)).join('')}else if(xTab==='post'){const p=S.xPosts.find(q=>String(q.id)===String(xDetail));body=p?xPost(p,true)+S.xPosts.filter(q=>String(q.parent)===String(p.id)).map(q=>xPost(q)).join('')+(readerMode?'':`<div style="padding:15px"><button onclick="xPostForm(null,'${esc(String(p.id))}')">Add reply</button></div>`):''}else if(xTab==='bell')body='<div class="x-empty">No notifications yet</div>';else if(xTab==='mail')body='<div class="x-empty">Messages are not available in this version.</div>';else body=S.xPosts.filter(p=>!p.parent&&(xFeed==='For you'||String(p.pid)===String(S.xOwner)||xPerson(p.pid).followed)).map(p=>xPost(p)).join('')||'<div class="x-empty">Your timeline is empty.</div>';return head+(xTab==='home'?`<div class="x-tabs">${['For you','Following'].map(t=>`<button class="${xFeed===t?'on':''}" onclick="xFeed='${t}';R()">${t}</button>`).join('')}</div>`:xTab==='post'||xTab==='profile'?`<div class="x-head"><button onclick="xSwitch('home')">${BK}</button><b>${xTab==='post'?'Post':'Profile'}</b><span></span></div>`:`<div class="native-heading">${xTab==='bell'?'Notifications':'Messages'}</div>`)+`<div class="bd x-body">${body}</div>`+(xTab==='home'?fab:'')+nav}
+function xCounts(p){
+ return `<div class="x-profile-counts"><span><b>${esc(p.following||'0')}</b> Following</span><span><b>${esc(p.followers||'0')}</b> Followers</span></div>`;
+}
+function xMenuVisit(key){
+ const owner=xPerson(S.xOwner);xDrawer(false);
+ if(key==='profile'){if(owner.id!=null)xOpenProfile(owner.id);else if(!readerMode)xProfileForm();return}
+ if(key==='settings'&&!readerMode&&owner.id!=null){xProfileForm(owner.id);return}
+ xVisit('menu',key);
+}
+function xDrawerContent(owner){
+ const row=([key,label,icon])=>`<button type="button" class="x-drawer-row" onclick="xMenuVisit('${key}')">${xDrawerIcon(icon)}<span>${label}</span></button>`;
+ return `<div id="x-drawer" aria-hidden="true" inert><button type="button" class="x-drawer-backdrop" tabindex="-1" aria-label="Close account menu" onclick="xDrawer(false)"></button>
+ <aside class="x-drawer-panel" role="dialog" aria-modal="true" aria-label="Account menu" tabindex="-1">
+  <div class="x-drawer-account"><div class="x-drawer-account-top">${av(owner,37)}<button type="button" ${readerMode?'disabled':''} aria-label="Create a profile" onclick="xDrawer(false);xProfileForm()">${xDrawerIcon('account',23)}</button></div>
+  <strong>${esc(owner.name)} ${xBadges(owner)}</strong><span class="x-muted">@${esc(owner.user)}</span>${xCounts(owner)}</div>
+  <nav aria-label="Account destinations">${xMenuEntries.slice(0,9).map(row).join('')}</nav>
+  <nav class="x-drawer-secondary" aria-label="Other account destinations">${xMenuEntries.slice(9).map(row).join('')}</nav>
+ </aside></div>`;
+}
+const xProfileTabs=[['posts','Posts','lists'],['replies','Replies','reply'],['reposts','Reposts','repost'],['media','Media','media']];
+const xProfileIndex=key=>Math.max(0,xProfileTabs.findIndex(([id])=>id===key));
+function xProfilePosts(p){
+ if(!xCanSee(p))return '<div class="x-empty">These posts are protected.</div>';
+ const own=String(p.id)===String(S.xOwner),query=(xProfileQuery||'').trim().toLowerCase();
+ const posts=S.xPosts.filter(q=>{
+  if(query&&!String(q.text||'').toLowerCase().includes(query))return false;
+  if(xProfileTab==='reposts')return own&&xHas(q.id,'repost')&&!xPerson(q.pid).protected;
+  if(String(q.pid)!==String(p.id))return false;
+  return xProfileTab==='replies'?q.parent!=null:xProfileTab==='media'?!!q.photo:q.parent==null;
+ });
+ return posts.map(q=>xPost(q)).join('')||`<div class="x-empty">${query?'No matching posts.':`No ${xProfileTab} yet.`}</div>`;
+}
+function xProfileFilter(next){
+ if(xTab!=='profile'||xProfileTab===next||!xProfileTabs.some(([id])=>id===next))return;
+ const dir=Math.sign(xProfileIndex(next)-xProfileIndex(xProfileTab));
+ xProfileTab=next;
+ const tabs=$('.x-profile-tabs'),pager=$('.x-profile-pager'),list=$('#x-profile-posts');
+ tabs.style.setProperty('--x-profile-index',xProfileIndex(next));
+ tabs.querySelectorAll('button').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.section===next)));
+ pager.querySelector('.x-profile-outgoing')?.remove();
+ pager.style.minHeight='';
+ list.getAnimations().forEach(a=>a.cancel());
+ const old=document.createElement('div');old.className='x-profile-outgoing';old.inert=true;old.setAttribute('aria-hidden','true');
+ const animated=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(animated){pager.style.minHeight=`${list.offsetHeight}px`;old.append(...list.childNodes);pager.append(old)}
+ list.innerHTML=xProfilePosts(xPerson(xDetail));
+ if(animated){
+  const timing={duration:260,easing:'cubic-bezier(.22,.75,.3,1)'};
+  old.animate([{transform:'translateX(0)'},{transform:`translateX(${-dir*100}%)`}],timing).finished.catch(()=>{}).finally(()=>{
+   if(old.isConnected){old.remove();pager.style.minHeight=''}
+  });
+  list.animate([{transform:`translateX(${dir*100}%)`},{transform:'translateX(0)'}],timing);
+ }
+}
+let xProfileGesture=null;
+document.addEventListener('pointerdown',e=>{
+ const pager=e.target.closest?.('.x-profile-pager');
+ if(e.pointerType==='touch'&&e.isPrimary&&pager)xProfileGesture={pager,id:e.pointerId,x:e.clientX,y:e.clientY,moved:false};
+});
+document.addEventListener('pointermove',e=>{
+ const g=xProfileGesture;if(!g||g.id!==e.pointerId||g.moved||!g.pager.isConnected)return;
+ const dx=Math.abs(e.clientX-g.x),dy=Math.abs(e.clientY-g.y);
+ if(dx>12&&dx>dy*1.4){g.moved=true;g.pager.setPointerCapture(e.pointerId)}
+});
+for(const type of ['pointercancel','pointerup'])document.addEventListener(type,e=>{
+ const g=xProfileGesture;if(!g||g.id!==e.pointerId)return;xProfileGesture=null;
+ const dx=e.clientX-g.x;
+ if(type!=='pointerup'||!g.moved||!g.pager.isConnected||Math.abs(dx)<45||Math.abs(dx)<Math.abs(e.clientY-g.y)*1.4)return;
+ const tab=xProfileTabs[xProfileIndex(xProfileTab)+(dx<0?1:-1)];
+ if(tab)xProfileFilter(tab[0]);
+});
+function xProfileSearch(value){
+ if(xTab!=='profile')return;
+ xProfileQuery=value;$('#x-profile-posts').innerHTML=xProfilePosts(xPerson(xDetail));
+}
+function xProfileSearchToggle(){
+ if(xTab!=='profile')return;
+ xProfileQuery=xProfileQuery===null?'':null;R();
+ if(xProfileQuery!==null)$('#x-profile-query')?.focus();
+}
+document.addEventListener('scroll',e=>{
+ const page=e.target;if(!page.classList?.contains('x-profile-page'))return;
+ const pastCover=page.scrollTop>=page.querySelector('.x-profile-banner').offsetHeight-42;
+ if(pastCover!==page.classList.contains('x-profile-past-cover')){page.classList.toggle('x-profile-past-cover',pastCover);applyStatusTheme()}
+},true);
+function xWebsite(value){
+ const raw=String(value||'').trim();if(!raw)return '';
+ try{const u=new URL(/^[a-z][\w+.-]*:/i.test(raw)?raw:`https://${raw}`);return ['https:','http:'].includes(u.protocol)?u.href:''}catch{return ''}
+}
+async function xShareProfile(id){
+ const p=xData().find(q=>String(q.id)===String(id));if(!p)return;
+ const text=`${p.name} (@${p.user})`;
+ try{if(navigator.share)await navigator.share({text});else await navigator.clipboard.writeText(text)}
+ catch(e){if(e.name!=='AbortError')prompt('Copiar perfil',text)}
+}
+function xProfileView(p){
+ const own=p.id!=null&&String(p.id)===String(S.xOwner),id=xArg(p.id),url=xWebsite(p.website);
+ const meta=[p.location?`<span>${xDrawerIcon('pin',15)}${esc(p.location)}</span>`:'',url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${xDrawerIcon('link',15)}${esc(String(p.website).replace(/^https?:\/\//i,''))}</a>`:'',p.joined?`<span class="x-joined">${xDrawerIcon('calendar',15)}Joined ${esc(p.joined)}</span>`:''].join('');
+ return `<div class="x-profile-banner">${chatValidImage(p.banner)?`<img src="${esc(p.banner)}" alt="">`:''}</div>
+  <section class="x-profile-summary"><div class="x-profile-avatar">${av(p,76)}</div>
+  <h2 class="x-profile-name">${esc(p.name)} ${xBadges(p)}${own&&!p.verified?`<button type="button" class="x-profile-pill x-verify-pill" onclick="${readerMode?"xVisit('menu','subscription')":`xProfileForm(${id});document.getElementById('f_verified')?.focus()`}"><span class="x-verified">${xPostIcon('verified',14)}</span>Get verified</button>`:''}</h2>
+  <div class="x-muted">@${esc(p.user)}</div>${p.bio?`<p class="x-profile-bio">${esc(p.bio)}</p>`:''}${meta?`<div class="x-profile-meta">${meta}</div>`:''}
+  ${xCounts(p)}
+  <div class="x-profile-ctas"><button type="button" class="x-profile-pill" onclick="xShareProfile(${id})">Share Profile</button>${own&&!readerMode?`<button type="button" class="x-profile-pill" onclick="xProfileForm(${id})">Edit Profile</button>`:''}</div></section>
+  <nav class="x-profile-tabs" aria-label="Profile sections" style="--x-profile-index:${xProfileIndex(xProfileTab)}">${xProfileTabs.map(([k,label,icon])=>`<button type="button" data-section="${k}" aria-label="${label}" aria-pressed="${xProfileTab===k}" onclick="xProfileFilter('${k}')">${icon==='repost'?xPostIcon(icon,21):xDrawerIcon(icon,21)}<span aria-hidden="true">${label}</span></button>`).join('')}<i aria-hidden="true"></i></nav>
+  ${xProfileQuery!==null?`<div class="x-profile-search"><input type="search" id="x-profile-query" class="x-search native-search-input" placeholder="Search posts" aria-label="Search profile posts" value="${esc(xProfileQuery)}" oninput="xProfileSearch(this.value)"></div>`:''}
+  <div class="x-profile-pager"><div id="x-profile-posts">${xProfilePosts(p)}</div></div>`;
+}
+function xDrawer(open){
+ const drawer=$('#x-drawer'),trigger=$('.x-drawer-trigger'),surface=$('.x-view-shell');if(!drawer||drawer.classList.contains('x-drawer-open')===open)return;
+ drawer.classList.toggle('x-drawer-open',open);
+ if(open){drawer.inert=false;drawer.setAttribute('aria-hidden','false');drawer.querySelector('.x-drawer-panel')?.focus({preventScroll:true})}
+ surface.inert=open;
+ trigger?.setAttribute('aria-expanded',String(open));
+ if(!open){trigger?.focus({preventScroll:true});drawer.inert=true;drawer.setAttribute('aria-hidden','true')}
+}
+document.addEventListener('keydown',e=>{
+ const drawer=$('#x-drawer.x-drawer-open');if(!drawer)return;
+ if(e.key==='Escape'){e.preventDefault();xDrawer(false)}
+ if(e.key==='Tab'){
+  const buttons=[...drawer.querySelectorAll('.x-drawer-panel button:enabled')],first=buttons[0],last=buttons.at(-1);
+  if(!buttons.includes(document.activeElement)||(e.shiftKey?document.activeElement===first:document.activeElement===last)){e.preventDefault();(e.shiftKey?last:first)?.focus()}
+ }
+});
+let xEdgeGesture=null;
+document.addEventListener('pointerdown',e=>{
+ xEdgeGesture=null;
+ if(e.pointerType!=='touch'||!e.isPrimary||!e.target.closest('#app')||cur!=='x')return;
+ const drawer=$('#x-drawer');if(!drawer)return;
+ const open=drawer.classList.contains('x-drawer-open');
+ if(open||e.clientX-$('#app').getBoundingClientRect().left<24)xEdgeGesture={id:e.pointerId,x:e.clientX,y:e.clientY,open};
+});
+document.addEventListener('pointercancel',()=>{xEdgeGesture=null});
+document.addEventListener('pointerup',e=>{
+ const g=xEdgeGesture;if(!g||g.id!==e.pointerId)return;xEdgeGesture=null;
+ const dx=e.clientX-g.x,dy=e.clientY-g.y;
+ if(Math.abs(dx)>Math.abs(dy)*1.5&&(g.open?dx<-48:dx>48))xDrawer(!g.open);
+});
+function vX(){
+ xData();
+ const owner=xPerson(S.xOwner),dest=[['home','Home','home'],['search','Search','search'],['bell','Notifications','bell'],['mail','Direct Messages','reply']];
+ const selected=dest.some(([k])=>k===xTab)?xTab:xHistory[0]?.[0]||'home';
+ const nav=`<nav class="x-nav" aria-label="Twitter">${dest.map(([k,label,icon])=>`<button type="button" aria-label="${label}" class="${selected===k?'on':''}"${xTab===k?' aria-current="page"':''} onclick="xSwitch('${k}')">${xi(icon,25)}</button>`).join('')}</nav>`;
+ const homeHead=`<header class="x-head"><button type="button" class="x-drawer-trigger x-avatar-button" aria-label="Open account menu" aria-controls="x-drawer" aria-expanded="false" onclick="xDrawer(true)">${av(owner,32)}</button><span class="x-logo"><img src="./assets/iphone-icons/TwitterBird.png" alt="Twitter"></span><span></span></header>`;
+ const heading=(title,back=false,options='')=>`<header class="x-head x-view-head">${back?`<button type="button" aria-label="Back" onclick="xBack()">${BK}</button>`:xTab==='home'?'':'<span></span>'}<h2>${title}</h2>${options||'<span></span>'}</header>`;
+ const compose=()=>`<button class="x-fab" aria-label="New post" onclick="xPostForm()">${I('<path d="M12 5v14M5 12h14"/>',27,'none','#fff')}</button>`;
+ let head=homeHead,body='',footer='',bodyClass='';
+ if(xTab==='post'){
+  const p=xFindPost(xDetail),visible=p&&xCanSee(xPerson(p.pid));
+  head=heading('Post',true,visible?xPostMenu(p):'');
+  body=visible?xThread(p):'<div class="x-empty">This post is unavailable.</div>';
+  if(visible&&!readerMode)footer=`<div class="x-reply-footer"><button type="button" onclick="xReplyTo(${xArg(p.id)})">${String(p.pid)===String(S.xOwner)?'Add another post':'Post your reply'}</button></div>`;
+ }else if(xTab==='profile'){
+  head=`<div class="x-profile-controls"><button type="button" aria-label="Back" onclick="xBack()">${xDrawerIcon('back',23)}</button><button type="button" aria-label="Search profile posts" aria-pressed="${xProfileQuery!==null}" onclick="xProfileSearchToggle()">${xi('search',21)}</button></div>`;
+  body=xProfileView(xPerson(xDetail??S.xOwner));bodyClass=' x-profile-page';
+  if(!readerMode)footer=compose();
+ }else if(xTab==='menu'){
+  const title=xMenuEntries.find(([key])=>key===xDetail)?.[1]||(['Explore','Notifications'].includes(xDetail)?`${xDetail} settings`:'Account');
+  head=heading(title,true);
+  if(xDetail==='history'){
+   const rendered=(xRecentlyViewed.get(S)||[]).map(xFindPost).filter(Boolean).map(p=>xPost(p)).join('');
+   body=rendered||'<div class="x-empty">Posts you open will appear here.</div>';
+  }else if(xDetail==='help')body='<div class="x-menu-content">Tap a post to read its replies. Use the profile menu to see your profile or your recently opened posts.</div>';
+  else if(xDetail==='requests')body='<div class="x-empty">No follower requests</div>';
+  else body='<div class="x-menu-content x-muted">This feature is not available in the story simulator.</div>';
+ }else if(['search','bell','mail'].includes(xTab)){
+  const avatar=`<button type="button" class="x-drawer-trigger x-avatar-button" aria-label="Open account menu" aria-controls="x-drawer" aria-expanded="false" onclick="xDrawer(true)">${av(owner,32)}</button>`;
+  ({head,body,footer}=TwitterExtra[{search:'explore',bell:'notifications',mail:'mail'}[xTab]](avatar));
+  bodyClass=' x-extra-body';
+ }else if(xTab==='news'){
+  head=heading('News',true);body=TwitterExtra.story(xDetail);bodyClass=' x-extra-body';
+ }else if(xTab==='dm'){
+  const view=TwitterExtra.thread(xDetail);head=heading(view.title,true);body=view.body;footer=view.footer;bodyClass=' x-dm-body';
+ }else{
+  head+=`<div class="x-tabs">${['For you','Following'].map(t=>`<button class="${xFeed===t?'on':''}" onclick="xFeed='${t}';R()">${t}</button>`).join('')}</div>`;
+  body=S.xPosts.filter(p=>!p.parent&&(xFeed==='For you'||String(p.pid)===String(S.xOwner)||xPerson(p.pid).followed)).map(p=>xPost(p)).join('')||'<div class="x-empty">Your timeline is empty.</div>';
+  if(!readerMode)footer=compose();
+ }
+ return `<div class="x-view-shell">${head}<div class="bd x-body${xTab==='post'?' x-thread-body':bodyClass}"${xTab==='search'?' id="x-results"':''}>${body}</div>${footer}${nav}</div>${['post','profile','menu','news','dm'].includes(xTab)?'':xDrawerContent(owner)}`;
+}
 
 function R(){if(!['map','find'].includes(cur)){mapPinMode=false;mapPinMove=null;locationPick=null;if(onlineMap||mapStarting)disposeOnlineMap();if($('#app')?.querySelector('#vectorMap'))$('#app').innerHTML=''}if(!S.v6)migrate();panelSync();const back=!locked&&cur;
 $('#t1').innerHTML=esc(sT());

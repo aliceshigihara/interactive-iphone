@@ -1,0 +1,103 @@
+.ig-profile-top,.ig-native-nav {
+  color: #0b1014;
+  background: #fff;
+  flex: none;
+}
+.ig-profile-top {
+  display: grid;
+  grid-template-columns: 36px minmax(0,1fr) 36px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 13px;
+  min-height: 48px;
+  position: relative;
+  z-index: 3;
+}
+.ig-profile-top button,.ig-profile-page button,.ig-native-nav button,.ig-create-feed,.ig-dm-head > button {
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.ig-profile-top > button,.ig-profile-menu summary { display: grid; place-items: center; min-height: 38px; padding: 0; }
+.ig-profile-top.has-threads { grid-template-columns: 60px minmax(0,1fr) 60px; }
+.ig-profile-top.has-threads > button { justify-self: start; width: 36px; }
+.ig-profile-tools { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.ig-profile-tools a { display: grid; place-items: center; color: inherit; }
+.ig-profile-picker,.ig-profile-menu { position: relative; min-width: 0; }
+.ig-profile-picker summary,.ig-profile-title {
+  display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 0;
+}
+.ig-profile-picker summary,.ig-profile-menu summary { list-style: none; cursor: pointer; }
+.ig-profile-top summary::-webkit-details-marker { display: none; }
+.ig-profile-top svg { flex: none; }
+.ig-profile-picker strong,.ig-profile-title strong {
+  font-size: clamp(16px,5.4vw,21px);
+  letter-spacing: -.025em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ig-profile-picker > div,.ig-profile-menu > div {
+  position: absolute; top: calc(100% + 4px); min-width: 155px; max-width: 250px; max-height: 245px; overflow: auto;
+  border: 1px solid #e5e9ea; border-radius: 13px; background: #fff; box-shadow: 0 4px 20px #101b2422; padding: 5px;
+}
+.ig-profile-picker > div { left: 50%; transform: translateX(-50%); }
+.ig-profile-menu > div { right: 0; }
+.ig-profile-top details div button { display: flex; align-items: center; gap: 8px; padding: 8px; width: 100%; font-size: 13px; text-align: left; border-radius: 8px; }
+.ig-profile-top details div button:hover { background: #f0f3f4; }
+.ig-profile-top details div button span { overflow: hidden; text-overflow: ellipsis; }
+.ig-profile-page { background: #fff; color: #0b1014; }
+.ig-profile-summary { padding: 10px 14px 0; }
+.ig-profile-person { display: grid; grid-template-columns: 76px minmax(0,1fr); gap: clamp(10px,5vw,22px); align-items: center; }
+.ig-profile-photo { position: relative; width: 76px; height: 76px; }
+.ig-profile-story-avatar { display: grid; place-items: center; padding: 0; border-radius: 50%; outline: 2px solid #df4284; outline-offset: 2px; }
+.ig-profile-page .ig-profile-add-story {
+  position: absolute; display: grid; place-items: center; right: -2px; bottom: -1px; width: 24px; height: 24px;
+  border-radius: 50%; background: #212832; border: 2px solid #fff; color: #fff; padding: 0;
+}
+.ig-profile-stats h2 { font-size: 14px; font-weight: 680; margin: 0 0 8px; overflow-wrap: anywhere; }
+.ig-profile-stats > div { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+.ig-profile-stats span { display: grid; gap: 1px; font-size: clamp(10px,3.15vw,14px); overflow-wrap: anywhere; }
+.ig-profile-stats b { font-size: clamp(13px,3.9vw,17px); font-weight: 680; }
+.ig-profile-bio { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.35; margin: 12px 0 0; }
+.ig-profile-link { display: inline-block; margin-top: 5px; color: #155a9c; font-size: 13px; overflow-wrap: anywhere; }
+.ig-profile-music { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 11px 0 0; }
+.ig-profile-music > span,.ig-profile-music > button {
+  max-width: 100%; display: inline-flex; align-items: center; gap: 4px; border: 1px solid #dce2e5;
+  border-radius: 20px; padding: 4px 8px; font-size: 12px; overflow-wrap: anywhere;
+}
+.ig-profile-music svg { flex: none; }
+.ig-profile-music > button { color: #55616b; }
+.ig-profile-actions { display: flex; align-items: stretch; gap: 5px; margin-top: 11px; }
+.ig-profile-actions button { flex: 1; display: grid; place-items: center; min-height: 33px; padding: 4px; border-radius: 8px; background: #eef1f3; font-size: 13px; font-weight: 650; }
+.ig-profile-actions .ig-follow { color: #fff; background: #1679ed; }
+.ig-profile-actions .ig-profile-discover { flex: none; width: 33px; }
+.ig-profile-highlights {
+  display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none;
+  margin: 13px -14px 0; padding: 3px 14px 8px;
+}
+.ig-profile-highlights button { flex: none; width: 62px; display: grid; justify-items: center; gap: 5px; padding: 0; font-size: 12px; }
+.ig-profile-highlights button > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ig-highlight-cover { width: 61px; aspect-ratio: 1; border: 2px solid #dce2e5; border-radius: 50%; display: grid; place-items: center; padding: 3px; }
+.ig-highlight-cover.is-new { border-color: #e2e6e9; }
+.ig-highlight-cover img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.ig-profile-tabs { position: sticky; z-index: 1; top: 0; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); background: #fff; margin-top: 6px; }
+.ig-profile-tabs button { position: relative; min-height: 44px; display: grid; place-items: center; color: #68747c; }
+.ig-profile-tabs button[aria-pressed=true] { color: #0b1014; }
+.ig-profile-tabs button[aria-pressed=true]::after { content: ''; position: absolute; bottom: 0; width: 42%; height: 2px; background: currentColor; }
+.ig-profile-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; }
+.ig-profile-grid .ig-profile-tile {
+  position: relative; display: grid; place-items: center; aspect-ratio: 3/4; width: 100%; padding: 0;
+  background: #edf0f3; color: #20252b; overflow: hidden; text-align: center;
+}
+.ig-profile-tile img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; }
+.ig-profile-tile i { position: absolute; right: 6px; top: 6px; color: #fff; filter: drop-shadow(0 1px 2px #0009); }
+.ig-grid-caption { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; font-size: 12px; padding: 5px; overflow-wrap: anywhere; }
+.ig-profile-empty { padding: 28px 12px; color: #626d75; text-align: center; font-size: 13px; }
+.ig-highlight-top strong { text-align: center; overflow-wrap: anywhere; }
+.ig-highlight-screen { display: grid; place-items: center; background: #10141a; }
+.ig-highlight-screen img { height: 100%; max-height: 100%; width: 100%; object-fit: contain; min-height: 0; }
+.ig-native-nav { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); padding: 3px 0 21px; border-top: 1px solid #eef0f2; }
+.ig-native-nav button { position: relative; min-height: 40px; display: grid; place-items: center; }
+.ig-native-nav button[aria-current=page] svg { stroke-width: 2.5; }
+.ig-native-nav button[aria-current=page] .av { outline: 1.5px solid #0b1014; outline-offset: 2px; }
+.ig-native-nav .ig-nav-dot { position: absolute; bottom: 8px; left: calc(50% + 8px); background: #ff2c54; border: 1px solid #fff; border-radius: 50%; width: 8px; height: 8px; }
+#app :is(.ig-profile-page,.ig-native-nav,.ig-profile-top) :focus-visible { outline: 2px solid #1679ed; outline-offset: -2px; }
