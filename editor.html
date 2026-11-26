@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script src="site-language.js"></script><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
-<link rel="stylesheet" href="site-language.css"><script src="editor-language.js" defer></script>
-<link rel="stylesheet" href="editor-panel-list.css">
-<link rel="stylesheet" href="date-wheel.css"><script src="date-wheel.js" defer></script>
-<link rel="stylesheet" href="message-call-log.css">
-<link rel="stylesheet" href="playback-speed.css">
-<link rel="stylesheet" href="notification-stack.css">
-<link rel="stylesheet" href="editor-undo.css">
-<link rel="stylesheet" href="site-menu.css"><script src="site-menu.js" defer></script>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script src="js/site-language.js"></script><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
+<link rel="stylesheet" href="css/site-language.css"><script src="js/editor-language.js" defer></script>
+<link rel="stylesheet" href="css/editor-panel-list.css">
+<link rel="stylesheet" href="css/date-wheel.css"><script src="js/date-wheel.js" defer></script>
+<link rel="stylesheet" href="css/message-call-log.css">
+<link rel="stylesheet" href="css/playback-speed.css">
+<link rel="stylesheet" href="css/notification-stack.css">
+<link rel="stylesheet" href="css/editor-undo.css">
+<link rel="stylesheet" href="css/site-menu.css"><script src="js/site-menu.js" defer></script>
 <style>
 :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *{box-sizing:border-box;margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;-webkit-tap-highlight-color:transparent}
@@ -653,7 +653,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
  #narration .sc-list-row strong{flex-basis:100%}
  #narration .sc-two{grid-template-columns:minmax(0,1fr)}
 }
-</style><link rel="stylesheet" href="story-planner.css"><link rel="stylesheet" href="photo-editor.css"><link rel="stylesheet" href="editor-panels.css"><link rel="stylesheet" href="form-previews.css"><link rel="stylesheet" href="story-connections.css"><link rel="stylesheet" href="phone-app.css"><link rel="stylesheet" href="scripted-call-ui.css"><link rel="stylesheet" href="liquid-tabs.css"><link rel="stylesheet" href="twitter-extra.css"><link rel="stylesheet" href="instagram-profile.css"><link rel="stylesheet" href="button-colors.css"><link rel="stylesheet" href="editor-theme.css"><link rel="stylesheet" href="theme-toggle.css"><link rel="stylesheet" href="editor-bubbles.css"><link rel="stylesheet" href="editor-controls.css"><link rel="stylesheet" href="story-collection.css"><script src="story-collection.js"></script></head><body>
+</style><link rel="stylesheet" href="css/story-planner.css"><link rel="stylesheet" href="css/photo-editor.css"><link rel="stylesheet" href="css/editor-panels.css"><link rel="stylesheet" href="css/form-previews.css"><link rel="stylesheet" href="css/story-connections.css"><link rel="stylesheet" href="css/phone-app.css"><link rel="stylesheet" href="css/scripted-call-ui.css"><link rel="stylesheet" href="css/liquid-tabs.css"><link rel="stylesheet" href="css/twitter-extra.css"><link rel="stylesheet" href="css/instagram-profile.css"><link rel="stylesheet" href="css/button-colors.css"><link rel="stylesheet" href="css/editor-theme.css"><link rel="stylesheet" href="css/theme-toggle.css"><link rel="stylesheet" href="css/editor-bubbles.css"><link rel="stylesheet" href="css/editor-controls.css"><link rel="stylesheet" href="css/story-collection.css"><script src="js/story-collection.js"></script></head><body>
 <script>if(new URLSearchParams(location.search).get('reader')==='1'){document.documentElement.classList.add('reader-mode');if(window.parent!==window)document.documentElement.classList.add('reader-embedded')}document.addEventListener('dragstart',e=>{if(e.target.closest?.('img,svg'))e.preventDefault()});</script>
 <div class="editor-bubbles" aria-hidden="true">
  <svg width="0" height="0"><defs><filter id="editor-bubble-goo"><feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur"/><feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo"/><feBlend in="SourceGraphic" in2="goo"/></filter></defs></svg>
@@ -978,13 +978,13 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
  <div id="story-contact-content"></div>
 </dialog>
 <div id="story-link-feedback" role="status" hidden></div>
-<script src="playback-speed.js"></script>
-<script src="chat-time.js"></script>
-<script src="editor-undo.js"></script>
-<script src="notification-stack.js"></script>
-<script src="story-connections.js"></script><script src="message-call-log.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script><script src="twitter-extra.js"></script><script src="instagram-profile.js"></script>
-<script src="chat-editing.js"></script>
-<script src="weather-navigation.js"></script>
+<script src="js/playback-speed.js"></script>
+<script src="js/chat-time.js"></script>
+<script src="js/editor-undo.js"></script>
+<script src="js/notification-stack.js"></script>
+<script src="js/story-connections.js"></script><script src="js/message-call-log.js"></script><script src="js/phone-app.js"></script><script src="js/scripted-call-ui.js"></script><script src="js/liquid-tabs.js"></script><script src="js/twitter-extra.js"></script><script src="js/instagram-profile.js"></script>
+<script src="js/chat-editing.js"></script>
+<script src="js/weather-navigation.js"></script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const readerMode=new URLSearchParams(location.search).get('reader')==='1';
@@ -1686,7 +1686,7 @@ async function boot(){
       let payload;
       if(publishedId){
         if(!/^[A-Za-z0-9]{20}$/.test(publishedId))throw new Error('ID da história inválido');
-        const {readPublishedStory}=await import('./firebase-stories.js');
+        const {readPublishedStory}=await import('./js/firebase-stories.js');
         const result=await readPublishedStory(publishedId);
         payload=await decodeSharedStory(result.payload);
       }else payload=await decodeSharedStory(sharedToken);
@@ -1731,7 +1731,7 @@ async function getStoryShareUrl(id=IDX.cur){
     try{token='gz.'+bytesToB64Url(await transformBytes(raw,'gzip'))}
     catch(e){token='raw.'+bytesToB64Url(raw)}
   }else token='raw.'+bytesToB64Url(raw);
-  const {publishStory}=await import('./firebase-stories.js');
+  const {publishStory}=await import('./js/firebase-stories.js');
   const docId=await publishStory(token,meta.name);
   const url=new URL('reader.html',location.href);
   url.searchParams.set('id',docId);
@@ -2678,4 +2678,4 @@ function chatPickImage(igId=null,mine=true,viewOnce=false){if(readerMode)return;
 
 if(!readerMode)R();
 boot().then(()=>{scReady=true;scTrack();storyEventTrack()});
-</script><script src="editor-panels.js" defer></script><script src="photo-editor.js" defer></script><script src="story-planner.js" defer></script><script src="form-previews.js" defer></script><script src="editor-panel-list.js" defer></script><script src="editor-guide.js" defer></script><script src="story-hold-delete.js" defer></script><script src="theme-toggle.js" defer></script><script src="editor-select.js" defer></script></body></html>
+</script><script src="js/editor-panels.js" defer></script><script src="js/photo-editor.js" defer></script><script src="js/story-planner.js" defer></script><script src="js/form-previews.js" defer></script><script src="js/editor-panel-list.js" defer></script><script src="js/editor-guide.js" defer></script><script src="js/story-hold-delete.js" defer></script><script src="js/theme-toggle.js" defer></script><script src="js/editor-select.js" defer></script></body></html>
