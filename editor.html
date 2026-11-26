@@ -1,6 +1,9 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script src="site-language.js"></script><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
 <link rel="stylesheet" href="site-language.css"><script src="editor-language.js" defer></script>
 <link rel="stylesheet" href="editor-panel-list.css">
+<link rel="stylesheet" href="message-call-log.css">
+<link rel="stylesheet" href="playback-speed.css">
+<link rel="stylesheet" href="notification-stack.css">
 <link rel="stylesheet" href="site-menu.css"><script src="site-menu.js" defer></script>
 <style>
 :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -705,7 +708,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
   <div id="nar-list"></div><div id="nar-form"></div>
  </section>
  <section id="nar-calls" class="nar-section" aria-labelledby="nar-calls-tab" hidden>
-  <button type="button" class="sc-primary" onclick="scNew()">+ Nova chamada</button><div id="sc-list"></div><div id="sc-editor"></div>
+  <button type="button" class="sc-primary" id="sc-new" onclick="scNew()">+ Nova chamada</button><div id="sc-list"></div><div id="sc-editor"></div>
 </section>
 </dialog>
 <dialog id="editor-guide" class="story-help-dialog" aria-labelledby="editor-guide-title" aria-describedby="editor-guide-text">
@@ -880,9 +883,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
   <div class="lock-notifications-fields">
    <form id="lock-notifications-form" class="pc" onsubmit="event.preventDefault();addNot()">
     <h3>Nova notificação</h3>
-    <div class="notif-guide">Escolha o aplicativo</div><div class="notif-app-grid" id="notifAppGrid" role="group" aria-label="Aplicativo da notificação"></div>
-    <select id="na" hidden aria-hidden="true" tabindex="-1"></select>
-    <div class="lock-notification-inputs"><label>Título<input type="text" id="ntt" placeholder="Ex.: Nome do contato" required></label>
+    <label class="notif-guide">Escolha o aplicativo<select id="na"></select></label>
+    <div class="lock-notification-inputs">
+    <label class="lock-notification-wide" id="lock-notification-title-contact" hidden>Contato para o título<select id="notification-title-contact"></select></label>
+    <label>Título<input type="text" id="ntt" placeholder="Ex.: Nome do contato" required></label>
     <label>Horário exibido<input type="text" id="nh" placeholder="now, 5m ago…" value="now"></label>
     <label class="lock-notification-wide">Mensagem<input type="text" id="nb" placeholder="O que vai aparecer na tela?"></label>
     <label class="lock-notification-wide" id="lock-notification-contact">Contato ou grupo (opcional)<input type="text" id="notification-contact" placeholder="Se diferente do título"></label></div>
@@ -954,12 +958,20 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
  <div class="story-picker-filters"><label>Tipo de conteúdo<select id="story-item-kind"></select></label><label>Pesquisar<input id="story-item-query" type="search" placeholder="Nome, título ou app" autofocus></label></div>
  <div id="story-item-results" class="story-item-results"></div>
 </dialog>
+<dialog id="message-call-details" aria-labelledby="message-call-title">
+ <header><span class="message-call-symbol" aria-hidden="true"></span><button type="button" aria-label="Close" autofocus>×</button></header>
+ <p>Call details</p><h2 id="message-call-title"></h2>
+ <dl></dl>
+ <button type="button" class="message-call-play" hidden>Play conversation</button>
+</dialog>
 <dialog id="story-contact-dialog" class="story-connection-dialog" aria-labelledby="story-contact-title">
  <header class="planner-header"><div><span class="planner-kicker">Contatos conectados</span><h2 id="story-contact-title"></h2><p id="story-contact-hint"></p></div><button type="button" class="planner-icon" data-story-dialog-close aria-label="Fechar">×</button></header>
  <div id="story-contact-content"></div>
 </dialog>
 <div id="story-link-feedback" role="status" hidden></div>
-<script src="story-connections.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script><script src="twitter-extra.js"></script><script src="instagram-profile.js"></script>
+<script src="playback-speed.js"></script>
+<script src="notification-stack.js"></script>
+<script src="story-connections.js"></script><script src="message-call-log.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script><script src="twitter-extra.js"></script><script src="instagram-profile.js"></script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const readerMode=new URLSearchParams(location.search).get('reader')==='1';
@@ -1036,19 +1048,19 @@ if(k==='wph'||k==='wpl'||k==='wallpaper'||k==='wp')return 370/824;
 if(k==='image'||k==='ytthumb')return 16/9;if(k==='ytbanner')return 3/1;
 if(k==='imgs'||k==='post'||k==='carousel')return 4/5;
 return 1}
-function form(title,fs,ok,host='#md',existing={}){
+function form(title,fs,ok,host='#md',existing={},afterSave){
  if(readerMode)return;
  const preview=resolveFormPreview(title,fs,cur,existing),insidePhone=host==='#md';
  if(preview||(insidePhone&&matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone'))host='#pm';
  const m=$(host);
- m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${esc(o.v)}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v??'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${esc(o.v)}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v??'')}">`}</label>`).join('')}<div class="bt"><button type="button">${insidePhone?'Cancel':'Cancelar'}</button><button type="button" id="okb">${insidePhone?'Save':'OK'}</button></div></div>`;
+ m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t==='speed'?PlaybackSpeed.markup(f.l,f.v,`f_${f.k}`):f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${esc(o.v)}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v??'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${esc(o.v)}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v??'')}">`}</label>`).join('')}<div class="bt"><button type="button">${insidePhone?'Cancel':'Cancelar'}</button><button type="button" id="okb">${insidePhone?'Save':'OK'}</button></div></div>`;
  const panel=m.querySelector('.mb'),okb=panel.querySelector('#okb'),fields=fs.map(f=>[f,panel.querySelector('#f_'+f.k)]),photos=new Map();
  let pending=0,updatePreview=()=>{};
  function readForm(){return Object.fromEntries(fields.filter(([,e])=>e).map(([f,e])=>[f.k,f.t==='file'?photos.get(e).value():f.t==='chk'?[...e.querySelectorAll('input:checked')].map(x=>x.value):e.value]))}
  panel.querySelector('.bt button').onclick=()=>closeEditorForm(m,panel);
  for(const [f,e] of fields)if(e&&f.t==='file')photos.set(e,photoPicker(e,{ratio:cropRatio(f.k),onBusy:busy=>{pending+=busy?1:-1;okb.disabled=pending>0;if(!busy)updatePreview()}}));
  if(preview)updatePreview=mountFormPreview(panel,preview,readForm);
- okb.onclick=async()=>{okb.disabled=true;try{if(await ok(readForm())===false){okb.disabled=false;return}await closeEditorForm(m,panel);save();R()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}};
+ okb.onclick=async()=>{okb.disabled=true;try{if(await ok(readForm())===false){okb.disabled=false;return}await closeEditorForm(m,panel);save();R();afterSave?.()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}};
  m.style.display='flex';
  return m;
 }
@@ -1057,16 +1069,19 @@ const charOpts=()=>S.chars.map(c=>({v:c.id,l:c.name}));
 async function setWp(k,inp){if(readerMode)return;const story=S;const [photo]=await cropPhotoSelection(inp,370/824);if(photo&&S===story){S[k]=photo;save();R()}}
 async function addChar(){const n=$('#cn').value.trim();if(!n)return;const f=$('#cp').files[0];S.chars.push({id:Date.now(),name:n,photo:f?await img(f,320):''});$('#cn').value='';$('#cp').value='';save();R()}
 async function addProf(){const u=$('#iu').value.trim().replace(/\s+/g,'.').toLowerCase();if(!u)return;const g=s=>$(s).files[0];S.profiles.push({id:Date.now(),user:u,name:$('#in').value.trim()||u,bio:$('#ib').value,link:$('#il').value,fol:$('#ig1').value||'0',fng:$('#ig2').value||'0',photo:g('#ip')?await img(g('#ip'),320):'',story:g('#is')?await img(g('#is')):''});['iu','in','ib','il'].forEach(k=>$('#'+k).value='');$('#ip').value=$('#is').value='';save();R()}
-function addNot(){if(readerMode)return;const title=$('#ntt'),n=notificationDraft();if(!n.title){title.setCustomValidity(SiteLanguage.text('Escreva um título para a notificação.','Enter a title for the notification.'));title.reportValidity();return}S.notifs.push({...n,createdAt:Date.now()});title.value=$('#nb').value=$('#notification-contact').value='';save();R()}
-function notificationDraft(){const app=$('#na').value||'msg',contact=chatNotificationApps.has(app)?$('#notification-contact').value.trim():'';return {app,title:$('#ntt').value.trim(),body:$('#nb').value.trim(),time:$('#nh').value.trim()||'now',...(contact?{contact}:{})}}
-function selectNotificationApp(key){const select=$('#na');if(!select||!FN[key])return;select.value=key;$('#notifAppGrid')?.querySelectorAll('button[data-notification-app]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.notificationApp===key)));window.refreshNotificationPreview?.()}
-function renderNotificationApps(){const grid=$('#notifAppGrid'),select=$('#na');if(!grid||!select)return;const selected=select.value||'msg';if(!grid.children.length)grid.innerHTML=Object.keys(FN).map(key=>`<button type="button" class="notif-app-choice" data-notification-app="${key}" aria-label="${esc(FN[key])}" aria-pressed="false" title="${esc(FN[key])}" onclick="selectNotificationApp('${key}')"><span class="notif-app-icon">${iconOf(key)}</span><span class="notif-app-label">${esc(FN[key])}</span></button>`).join('');selectNotificationApp(selected)}
+function addNot(){if(readerMode)return;const title=$('#ntt'),n=notificationDraft();if(!n.title){title.setCustomValidity(SiteLanguage.text('Escreva um título para a notificação.','Enter a title for the notification.'));title.reportValidity();return}S.notifs.push({...n,createdAt:Date.now()});title.value=$('#nb').value=$('#notification-contact').value=$('#notification-title-contact').value='';save();R()}
+function notificationDraft(){
+ const app=$('#na').value||'msg',choice=$('#notification-title-contact').selectedOptions[0];
+ const contact=chatNotificationApps.has(app)?$('#notification-contact').value.trim()||(choice?.value?choice.textContent:''):'';
+ return {app,title:$('#ntt').value.trim(),body:$('#nb').value.trim(),time:$('#nh').value.trim()||'now',...(contact?{contact}:{})};
+}
 const chatNotificationApps=new Set(['msg','wa','ka','ig','x']),lockNoticeState=new WeakMap();
 function lockNotice(n,draft=false){return `<div class="nf${draft?' lock-preview-draft':''}"><div class="ic" style="width:38px;height:38px;border-radius:9px;flex:none;cursor:default">${iconOf(n.app)}</div><div class="x"><div class="l1"><b>${esc(n.title)}</b><em>${esc(n.time)}</em></div><p>${esc(n.body)}</p></div></div>`}
 function renderLockNotices(target,draft){
+ const records=S.notifs.map((n,i)=>({n,i})).sort((a,b)=>(Number(b.n.createdAt)||0)-(Number(a.n.createdAt)||0)||b.i-a.i).map(({n})=>n);
+ if(target.id==='nts'){NotificationStack.render(target,S,records,lockNotice);return}
  let state=lockNoticeState.get(target);
  if(!state||state.story!==S){state={story:S,expanded:new Set()};lockNoticeState.set(target,state)}
- const records=S.notifs.map((n,i)=>({n,i})).sort((a,b)=>(Number(b.n.createdAt)||0)-(Number(a.n.createdAt)||0)||b.i-a.i).map(({n})=>n);
  if(draft)records.unshift(draft);
  const groups=new Map();
  records.forEach((n,i)=>{
@@ -1448,6 +1463,7 @@ const same=(a,b)=>a&&b&&a.m==b.m&&a.s==b.s;
   if(m.m==2)return `<div class="dv"${readerMode?'':` style="cursor:pointer" onclick="if(ed)del2(${i});else editTime(${i})"`}>${dateLabel(m.ts)}</div>`;
   const prev=ms[i-1],newDay=m.ts&&(!prev||(prev.m!=2&&prev.ts&&sod(prev.ts)!=sod(m.ts)));
   const date=newDay?`<div class="dv">${dateLabel(m.ts)}</div>`:'';
+  if(m.callLog)return date+MessageCallLog.render(m,i);
   const lab=grp&&m.m==0&&(newDay||!same(prev,m))?`<div class="sn2">${esc(ch(m.s).name)}</div>`:'';
   return date+lab+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${chatImageContent(m)}</div>`;
  }).join('');
@@ -1657,10 +1673,10 @@ function removeForecast(i){if(readerMode)return;const rows=forecastRows();rows.s
 function addForecastDay(){if(readerMode)return;const rows=forecastRows();if(rows.length>=10)return;rows.push(['Day','sun','14','24']);saveForecast(rows)}
 function sync7(){LiquidTabs.sync($('#app'),locked?null:cur);renderStories();
 const c=isMessenger(cur)&&cid?activeChatsFor(cur).find(x=>x.id==cid):null,q=$('#mqa');
-if(q)q.innerHTML=c?`<div class="conv-action"><div class="conv-current"><b>${esc(cname(c))}</b><span>${c.msgs.length} mensagem${c.msgs.length==1?'':'s'} nesta conversa</span></div><div class="conv-section"><h3>Enviar próxima mensagem como</h3><div class="sender-list">${snd(c).map((s,k)=>`<button type="button" aria-pressed="${k==who%snd(c).length}" class="${k==who%snd(c).length?'on':''}" onclick="who=${k};R()">${esc(s.n)}</button>`).join('')}</div></div><div class="conv-section"><h3>Ferramentas da conversa</h3><button class="conv-row" onclick="addTime()">Adicionar data e hora</button>${cur!=='msg'?`<button class="conv-row" onclick="thirdToggleFavorite()">${c.favorite?'Remover dos favoritos':'Adicionar aos favoritos'}</button>`:''}<button class="conv-row warn" onclick="markUnread()">Marcar como não lida</button></div></div>`:'<div class="mb2"><p class="m">Abra uma conversa para editar suas ações.</p></div>';
+if(q)q.innerHTML=c?`<div class="conv-action"><div class="conv-current"><b>${esc(cname(c))}</b><span>${c.msgs.length} item${c.msgs.length===1?'':'s'} nesta conversa</span></div><div class="conv-section"><h3>Enviar próxima mensagem como</h3><div class="sender-list">${snd(c).map((s,k)=>`<button type="button" aria-pressed="${k==who%snd(c).length}" class="${k==who%snd(c).length?'on':''}" onclick="who=${k};R()">${esc(s.n)}</button>`).join('')}</div></div><div class="conv-section"><h3>Ferramentas da conversa</h3><button type="button" data-panel-action="clock" onclick="addTime()">Adicionar data e hora</button>${cur!=='msg'?`<button type="button" data-panel-action="star" onclick="thirdToggleFavorite()">${c.favorite?'Remover dos favoritos':'Adicionar aos favoritos'}</button>`:''}<button type="button" data-panel-action="mail" onclick="markUnread()">Marcar como não lida</button></div></div>`:'<div class="mb2"><p class="m">Abra uma conversa para editar suas ações.</p></div>';
 $('#cl').innerHTML=S.chars.map((c,i)=>`<div class="cr">${av(c,32)}<span style="cursor:pointer" onclick="editChar(${i})">${esc(c.name)}</span><button type="button" class="story-character-connections" data-story-person="${esc(c.id)}" aria-label="Conexões de ${esc(c.name)}">Conexões</button><a onclick="del('chars',${i})" aria-label="Remover personagem">✕</a></div>`).join('')||'<div class="cr empty"><span>Nenhum personagem ainda.</span></div>';
 $('#pl2').innerHTML=S.profiles.map((p,i)=>`<div class="cr">${avp(p,32)}<span style="cursor:pointer" onclick="editProf(${p.id})">@${esc(p.user)}${p.story?' ◉':''}</span><a onclick="del('profiles',${i})">✕</a></div>`).join('')||'<p>Nenhum perfil ainda.</p>';
- for(const [id,v] of [['pw2',S.wx],['pwl',S.wxl]])if(document.activeElement.id!=id&&$('#'+id))$('#'+id).value=v;syncWeatherPanelFields();renderForecastEditor();StoryConnections.decorateApp()}
+ for(const [id,v] of [['pw2',S.wx],['pwl',S.wxl]])if(document.activeElement.id!=id&&$('#'+id))$('#'+id).value=v;syncWeatherPanelFields();renderForecastEditor();StoryConnections.decorateApp();MessageCallLog.decorate();window.EditorPanelList?.decorateActions(q)}
 
 /* v3 — conversation applications and independent story data */
 const isMessenger=k=>['msg','wa','ka'].includes(k);
@@ -1788,6 +1804,7 @@ if(el.id==='mapSearch'&&a.name==='onkeydown')return; if(mut.test(code))el.remove
 });
 });
 document.querySelectorAll('input,textarea,select').forEach(el=>{
+if(el.id==='phone-live-pace'&&el.closest('#app'))return;
 const t=(el.getAttribute('type')||'').toLowerCase();
 if(el.tagName==='SELECT'||['checkbox','radio','file','range','color','submit','button'].includes(t)){el.disabled=true;return}
 if(el.id==='mapSearch'||el.classList.contains('native-search-input'))return;el.readOnly=true;el.tabIndex=-1;
@@ -1826,7 +1843,7 @@ const xPostIcons={
  share:'M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.29 3.3L6.3 8.29 12 2.59zM4 14h2v5c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-5h2v5c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3v-5z',
  more:'M5 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z',
  verified:'M12 1.5l3 2.1 3.6.5 1.3 3.4 2.6 2.5-.8 3.6.1 3.6-3.2 1.7-2.1 2.9-3.5-.8-3.5.8-2.1-2.9-3.2-1.7.1-3.6-.8-3.6 2.6-2.5 1.3-3.4 3.6-.5L12 1.5zm4.5 7.8-1.3-1.2-4.5 4.7-2-2-1.3 1.3 3.4 3.4 5.7-6.2z',
- lock:'M6 10V7a6 6 0 0 1 12 0v3h.5a2 2 0 0 1 2 2v7.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2H6zm2 0h8V7a4 4 0 1 0-8 0v3zm4 3a2 2 0 1 0 0 4 2 2 0 0 0 0-4z'
+ lock:'M12 1.5a5 5 0 0 0-5 5v2.1a5 5 0 0 0-4 4.9v4a5 5 0 0 0 5 5h8a5 5 0 0 0 5-5v-4a5 5 0 0 0-4-4.9V6.5a5 5 0 0 0-5-5zM9 8.5v-2a3 3 0 0 1 6 0v2zM10.5 14.5h3a1 1 0 0 1 0 2h-3a1 1 0 0 1 0-2z'
 };
 const xPostIcon=(k,n=18)=>I(`<path fill-rule="evenodd" d="${xPostIcons[k]}"/>`,n,'currentColor','none',0);
 const xi=(k,n=23)=>I(xIcons[k]||xIcons.home,n,'none','currentColor',1.8);
@@ -1903,7 +1920,7 @@ async function xSharePost(id){
  catch(e){if(e.name!=='AbortError')prompt('Copiar publicação',text)}
 }
 function xChildren(id){return S.xPosts.filter(q=>q.parent!=null&&String(q.parent)===String(id)&&xCanSee(xPerson(q.pid)))}
-function xBadges(a){return `${a.verified?`<span class="x-verified" role="img" aria-label="Verified account">${xPostIcon('verified',14)}</span>`:''}${a.protected?`<span class="x-post-lock" role="img" aria-label="Protected account">${xPostIcon('lock',13)}</span>`:''}`}
+function xBadges(a){return `${a.verified?`<span class="x-verified" role="img" aria-label="Verified account">${xPostIcon('verified',14)}</span>`:''}${a.protected?`<span class="x-post-lock" role="img" aria-label="Protected account">${xPostIcon('lock',18)}</span>`:''}`}
 function xPostActions(p,detail=false,thread=false){
  const id=xArg(p.id),locked=xPerson(p.pid).protected,replies=xChildren(p.id).length;
  const action=(k,label,n=0)=>{
@@ -1934,7 +1951,14 @@ function xPostMenu(p){
  return items?`<details class="x-post-menu" onclick="event.stopPropagation()"><summary aria-label="Post options">${xPostIcon('more',19)}</summary><div>${items}</div></details>`:'';
 }
 function xPostContent(p){return `${p.text?`<div class="x-post-text">${esc(p.text)}</div>`:''}${p.photo?`<img class="x-post-img" src="${esc(p.photo)}" alt="">`:''}`}
-function xPost(p,{thread=false,line=false,replyingTo=null}={}){
+function xReplyContext(p){
+ const parent=p.parent!=null?xFindPost(p.parent):null;
+ if(!parent||parent===p)return '';
+ const author=xPerson(parent.pid);
+ if(author.id==null)return '';
+ return `<div class="x-replying-to">${SiteLanguage.text('Respondendo a','Replying to')} <button type="button" onclick="event.stopPropagation();xOpenProfile(${xArg(author.id)})">@${esc(author.user)}</button></div>`;
+}
+function xPost(p,{thread=false,line=false}={}){
  const a=xPerson(p.pid),id=xArg(p.id),pid=xArg(a.id);
  if(!xCanSee(a))return '';
  return `<article class="x-post${thread?' x-thread-row':''}${line?' x-thread-line':''}" onclick="xOpenPost(${id})">
@@ -1945,8 +1969,7 @@ function xPost(p,{thread=false,line=false,replyingTo=null}={}){
    <span class="x-post-meta"><span class="x-post-handle">@${esc(a.user)}</span><span class="x-post-dot">·</span><time>${esc(p.time||'now')}</time></span>
    <span class="x-post-tools">${xPostMenu(p)}</span>
   </div>
-  ${replyingTo?`<div class="x-replying-to">Replying to <button type="button" onclick="event.stopPropagation();xOpenProfile(${xArg(replyingTo.id)})">@${esc(replyingTo.user)}</button></div>`:''}
-  ${xPostContent(p)}${xPostActions(p,false,thread)}
+   ${xReplyContext(p)}${xPostContent(p)}${xPostActions(p,false,thread)}
  </div></article>`;
 }
 function xThread(p){
@@ -1963,7 +1986,7 @@ function xThread(p){
  }
  return `${parents.length?`<section aria-label="Earlier posts">${parents.join('')}</section>`:''}<article class="x-main-post">
   <button type="button" class="x-main-author" onclick="xOpenProfile(${pid})">${av(a,44)}<span><strong>${esc(a.name)} ${xBadges(a)}</strong><span class="x-muted">@${esc(a.user)}</span></span></button>
-  ${xPostContent(p)}
+   ${xReplyContext(p)}${xPostContent(p)}
   <div class="x-main-meta">${[p.time,p.date].filter(Boolean).map(esc).join(' · ')}${p.time||p.date?' · ':''}<span><b>${esc(+p.views||0)}</b> Views</span></div>
   ${xPostActions(p,true)}</article>
   ${rows.length?`<section class="x-thread-replies" aria-label="Replies">${rows.join('')}</section>`:''}`;
@@ -2172,7 +2195,7 @@ $('#dk').innerHTML=dock.map(k=>cell(k,0)).join('');$('#dk').style.display=dock.l
 $('#wg').querySelector('.w1').style.display=shown.includes('cal')?'':'none';$('#wg').querySelector('.w2').style.display=shown.includes('wx')?'':'none';$('#wg').hidden=homePage!==0;
 renderChatAppPanel();xEditor();walletEditor();ytEditor();if(cur==='map')renderMapPinEditor();if(cur==='find')findEditor();
 renderLockNotices($('#nts'));
-const opt=Object.keys(FN).map(k=>`<option value="${k}">${FN[k]}</option>`).join('');if(!$('#na').innerHTML){$('#na').innerHTML=opt;$('#na').value='msg'}renderNotificationApps();
+const notificationApp=$('#na');if(!notificationApp.options.length){notificationApp.innerHTML=Object.keys(FN).map(k=>`<option value="${k}">${FN[k]}</option>`).join('');notificationApp.value='msg'}window.refreshNotificationPreview?.();
 const li=(arr,f)=>arr.map((x,i)=>`<div class="cr">${f(x)}<a onclick="del('${arr==S.chars?'chars':arr==S.profiles?'profiles':'notifs'}',${i})">✕</a></div>`).join('');
 $('#cl').innerHTML=li(S.chars,c=>av(c,32)+`<span>${esc(c.name)}</span>`)||'<p>Nenhum personagem ainda.</p>';
 $('#pl2').innerHTML=li(S.profiles,p=>avp(p,32)+`<span>@${esc(p.user)}${p.story?' ◉':''}</span>`)||'<p>Nenhum perfil ainda.</p>';
@@ -2225,24 +2248,117 @@ let scDraft=null,scActive=null,scSeen=new Set(),scPending=new Map(),scEpoch=0,sc
 const scPhone='<path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/>';
 const scIcon=(d)=>`<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`;
 const scApps={msg:'Messages',wa:'WhatsApp',ka:'KakaoTalk'};
+const scSeconds=new Intl.NumberFormat(SiteLanguage.lang==='en'?'en':'pt-BR',{maximumFractionDigits:1});
 function scData(){return Array.isArray(S.scriptedCalls)?S.scriptedCalls:[]}
 function scPerson(id){return S.chars.find(x=>String(x.id)===String(id))||null}
 function scName(c){return scPerson(c.person)?.name||c.name||'Unknown Caller'}
 function scChats(app){return activeChatsFor(app)||[]}
 function scList(){if(readerMode)return;$('#sc-list').innerHTML=scData().map((c,i)=>`<div class="sc-list-row"><strong>${esc(scName(c))}<br><small style="font-weight:400;color:#777">${esc(({message:'Após mensagem',chat:'Ao abrir conversa',time:'Após tempo',app:'Ao abrir app'})[c.trigger]||'Manual')} · ${c.lines?.length||0} falas</small></strong><button onclick="scEdit(${i})">Editar</button><button onclick="scPreview(${i})">Testar</button><button class="sc-danger" onclick="scRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p class="sc-help">Nenhuma chamada criada.</p>'}
-function scNew(){scDraft={id:'call-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),person:'',name:'',trigger:'message',app:'msg',chat:'',message:0,delay:2,lines:[{speaker:'caller',text:'',seconds:4}]};scEditor()}
+function scNew(){scDraft={id:'call-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),person:'',name:'',trigger:'message',app:'msg',chat:'',message:0,delay:2,lines:[{speaker:'caller',text:''}]};scEditor()}
+function scSubtitle(text,speed){
+ const fragments=String(text||'').match(/\s+|\S+/g)||[];
+ const words=fragments.filter(fragment=>/\S/.test(fragment)).length;
+ const pace=PlaybackSpeed.limit(speed);
+ const intervals=Math.max(0,words-1);
+ const step=Math.min(240,118000/Math.max(1,intervals))/pace;
+ const fade=Math.round(180/pace);
+ let wordIndex=0;
+ const html=fragments.map(fragment=>/\S/.test(fragment)
+  ?`<span class="sc-paced-word" style="--sc-word-delay:${Math.round(wordIndex++*step)}ms;--sc-word-fade:${fade}ms">${esc(fragment)}</span>`
+  :esc(fragment)).join('');
+ return {html,duration:intervals*step+1500/pace};
+}
+function scPreviewText(d){
+ return d.lines.find(line=>typeof line?.text==='string'&&line.text.trim())?.text.trim()
+  || SiteLanguage.text('Oi! Consegue falar por um minuto? Preciso te contar uma coisa.','Hi! Do you have a minute? I need to tell you something.');
+}
+function scPreviewDuration(ms){
+ return `${SiteLanguage.text('Tempo estimado','Estimated time')}: ${scSeconds.format(ms/1000)} s`;
+}
+function scUpdateSpeedPreview(animate){
+ const sample=$('#sc-speed-sample');
+ if(!sample||!scDraft)return;
+ const text=scPreviewText(scDraft);
+ const subtitle=scSubtitle(text,scDraft.speed);
+ if(animate)sample.innerHTML=subtitle.html;
+ else sample.textContent=text;
+ $('#sc-speed-duration').textContent=scPreviewDuration(subtitle.duration);
+}
+function scLineFields(d){
+ const opts=(arr,v)=>arr.map(([k,n])=>`<option value="${esc(k)}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');
+ const tr=SiteLanguage.text;
+ const speed=PlaybackSpeed.markup(tr('Velocidade das legendas','Subtitle speed'),d.speed,'sc-playback-speed');
+ const example=scPreviewText(d);
+ const estimate=scPreviewDuration(scSubtitle(example,d.speed).duration);
+ const preview=`<div class="sc-speed-preview"><div class="sc-speed-preview-head"><strong>${tr('Prévia da legenda','Subtitle preview')}</strong><button type="button" onclick="scUpdateSpeedPreview(true)">${tr('Repetir','Replay')}</button></div><p id="sc-speed-sample">${esc(example)}</p><small id="sc-speed-duration">${estimate}</small></div>`;
+ const lines=d.lines.map((l,i)=>`<div class="sc-line"><div class="sc-line-top"><select aria-label="Quem fala" onchange="scDraft.lines[${i}].speaker=this.value">${opts([['caller','Quem liga'],['me','Dono do iPhone']],l.speaker)}</select><button type="button" onclick="scDraft.lines.splice(${i},1);scEditor()" aria-label="Remover fala">×</button></div><textarea data-sc-line-text="${i}" placeholder="Escreva a fala...">${esc(l.text)}</textarea></div>`).join('');
+ return `<h3>Roteiro da ligação</h3><p class="sc-help">${tr('A velocidade vale para todas as falas. O tempo de leitura é calculado pelo texto, e o leitor pode avançar manualmente.','One speed applies to every line. Reading time is based on the text, and the reader can advance manually.')}</p>${speed}${preview}${lines}<button onclick="scDraft.lines.push({speaker:'caller',text:''});scEditor()">+ Adicionar fala</button><div class="sc-two"><button onclick="scCancelDraft()">Cancelar</button><button class="sc-primary" onclick="scCommit()">Salvar chamada</button></div>`;
+}
+$('#sc-editor').addEventListener('input',event=>{
+ if(!scDraft)return;
+ const field=event.target;
+ if(field.id==='sc-playback-speed'){
+  scDraft.speed=field.valueAsNumber;
+  scUpdateSpeedPreview(true);
+ }else if(field.hasAttribute('data-sc-line-text')){
+  scDraft.lines[field.dataset.scLineText].text=field.value;
+  scUpdateSpeedPreview(false);
+ }
+});
+function scCancelDraft(closePast=true){
+ const past=Boolean(scDraft?.onSave);
+ scDraft=null;$('#sc-editor').innerHTML='';$('#sc-list').hidden=false;$('#sc-new').hidden=false;
+ $('#narration').removeAttribute('data-past-call');
+ if(past&&closePast)narrationClose();
+}
+function scEditPast({name,ts,speed=1,lines=[{speaker:'caller',text:''}]},onSave){
+ if(readerMode||$('#narration').open)return;
+ scDraft={name,ts:toL(ts),speed,lines,onSave};
+ narrationOpen('calls');
+ $('#narration').setAttribute('data-past-call','');
+ $('#sc-list').hidden=true;$('#sc-new').hidden=true;scEditor();
+ $('#narration').addEventListener('close',()=>{if(scDraft?.onSave)scCancelDraft(false)},{once:true});
+}
+function scPastFields(d){
+ return `<div class="sc-fields"><h3>Chamada passada</h3><label>Nome de quem liga<input value="${esc(d.name)}" oninput="scDraft.name=this.value"></label><label>Data e hora<input type="datetime-local" value="${esc(d.ts)}" oninput="scDraft.ts=this.value"></label>${scLineFields(d)}</div>`;
+}
+function scCleanLines(lines){
+ return (Array.isArray(lines)?lines:[]).filter(l=>typeof l?.text==='string'&&l.text.trim())
+    .map(l=>({speaker:l.speaker==='me'?'me':'caller',text:l.text.trim()}));
+}
+function scSavePast(d){
+ const name=d.name.trim(),ts=fromL(d.ts),lines=scCleanLines(d.lines);
+ if(!name||!d.ts||!Number.isFinite(ts)||!lines.length){
+  alert(SiteLanguage.text('Informe o nome, a data e pelo menos uma fala.','Enter a name, a date, and at least one line.'));
+  return;
+ }
+ if(d.onSave({name,ts,lines,speed:PlaybackSpeed.limit(d.speed)})) scCancelDraft(true);
+}
 function scEdit(i){const c=scData()[i];if(c){scDraft=JSON.parse(JSON.stringify(c));scEditor()}}
 function scRemove(i){if(readerMode||!confirm('Excluir esta chamada?'))return;const c=scData()[i];if(scDraft?.id===c?.id){scDraft=null;$('#sc-editor').innerHTML=''}S.scriptedCalls.splice(i,1);save();scList()}
-function scEditor(){if(!scDraft)return;const d=scDraft,opts=(arr,v)=>arr.map(([k,n])=>`<option value="${esc(k)}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');const chats=scChats(d.app);const chat=chats.find(c=>String(c.id)===String(d.chat));const msgs=(chat?.msgs||[]).map((m,i)=>[i,m]).filter(([i,m])=>m.m!==2);$('#sc-editor').innerHTML=`<div class="sc-fields"><h3>Configurar chamada</h3><label>Personagem<select onchange="scDraft.person=this.value;scEditor()">${opts([['','Nome personalizado'],...S.chars.map(c=>[c.id,c.name])],d.person)}</select></label>${d.person?'':`<label>Nome de quem liga<input value="${esc(d.name)}" oninput="scDraft.name=this.value" placeholder="Nome do contato"></label>`}<label>Quando tocar<select onchange="scDraft.trigger=this.value;if(scDraft.trigger!=='app'&&!scApps[scDraft.app])scDraft.app='msg';scEditor()">${opts([['message','Após visualizar uma mensagem'],['chat','Ao abrir uma conversa'],['app','Ao abrir um aplicativo'],['time','Após desbloquear o iPhone']],d.trigger)}</select></label>${d.trigger!=='time'?`<label>Aplicativo<select onchange="scDraft.app=this.value;scDraft.chat='';scDraft.message=0;scEditor()">${opts(d.trigger==='app'?[...Object.entries(scApps),['ig','Instagram'],['mail','Mail'],['pho','Photos'],['map','Maps'],['wx','Weather'],['clk','Clock'],['ph','Phone'],['saf','Safari'],['nt','Notes'],['cal','Calendar'],['st','Settings']]:Object.entries(scApps),d.app)}</select></label>`:''}${['message','chat'].includes(d.trigger)?`<label>Conversa<select onchange="scDraft.chat=this.value;scDraft.message=-1;scEditor()">${opts([['','Selecionar conversa'],...chats.map(c=>[c.id,cname(c)])],d.chat)}</select></label>`:''}${d.trigger==='message'?`<label>Mensagem<select onchange="scDraft.message=+this.value">${opts([['-1','Selecionar mensagem'],...msgs.map(([i,m])=>[i,(m.m===1?'Me: ':'Contato: ')+String(m.t||'').slice(0,90)])],msgs.some(([i])=>i===d.message)?d.message:-1)}</select></label><p class="sc-help">A chamada começa quando a mensagem estiver visível na conversa, depois do atraso escolhido.</p>`:''}<label>Atraso (segundos)<input type="number" min="0" max="3600" value="${esc(d.delay)}" oninput="scDraft.delay=+this.value"></label><h3>Roteiro da ligação</h3><p class="sc-help">As legendas aparecem automaticamente. O leitor também pode avançar manualmente.</p>${d.lines.map((l,i)=>`<div class="sc-line"><div class="sc-line-top"><select aria-label="Quem fala" onchange="scDraft.lines[${i}].speaker=this.value">${opts([['caller','Quem liga'],['me','Dono do iPhone']],l.speaker)}</select><input aria-label="Duração em segundos" type="number" min="1" max="120" value="${esc(l.seconds)}" oninput="scDraft.lines[${i}].seconds=+this.value"><span>s</span><button onclick="scDraft.lines.splice(${i},1);scEditor()" aria-label="Remover fala">×</button></div><textarea placeholder="Escreva a fala..." oninput="scDraft.lines[${i}].text=this.value">${esc(l.text)}</textarea></div>`).join('')}<button onclick="scDraft.lines.push({speaker:'caller',text:'',seconds:4});scEditor()">+ Adicionar fala</button><div class="sc-two"><button onclick="scDraft=null;document.querySelector('#sc-editor').innerHTML=''">Cancelar</button><button class="sc-primary" onclick="scCommit()">Salvar chamada</button></div></div>`}
-function scCommit(){if(readerMode||!scDraft)return;const d=scDraft;if(!scPerson(d.person)&&!d.name.trim()){alert('Escolha um personagem ou informe um nome.');return}if(['chat','message'].includes(d.trigger)&&!scChats(d.app).some(c=>String(c.id)===String(d.chat))){alert('Selecione uma conversa.');return}if(d.trigger==='message'){const m=scChats(d.app).find(c=>String(c.id)===String(d.chat))?.msgs?.[d.message];if(!m||m.m===2){alert('Selecione uma mensagem.');return}d.messageText=m.t;d.messageType=m.m;d.messageTs=m.ts||null}d.lines=d.lines.filter(l=>String(l.text).trim()).map(l=>({...l,seconds:Math.max(1,Math.min(120,+l.seconds||4))}));if(!d.lines.length){alert('Adicione pelo menos uma fala.');return}d.delay=Math.max(0,Math.min(3600,+d.delay||0));if(!Array.isArray(S.scriptedCalls))S.scriptedCalls=[];const i=S.scriptedCalls.findIndex(c=>c.id===d.id);if(i<0)S.scriptedCalls.push(d);else S.scriptedCalls[i]=d;scDraft=null;$('#sc-editor').innerHTML='';save();scList()}
-function scReset(){scEpoch++;for(const t of scPending.values())clearTimeout(t);scPending.clear();scSeen.clear();clearInterval(scTimer);scActive=null;scLastView='';scStoryStart=0;scObserver?.disconnect();scHide();scDraft=null;$('#sc-editor').innerHTML='';if(!readerMode&&$('#narration').open)scList()}
-function scSchedule(c){if(!readerMode||!scReady||scSeen.has(c.id)||scPending.has(c.id))return;const epoch=scEpoch;const fire=()=>{if(epoch!==scEpoch)return;if(scActive){scPending.set(c.id,setTimeout(fire,400));return}scPending.delete(c.id);scSeen.add(c.id);scStart(c,false)};scPending.set(c.id,setTimeout(fire,Math.max(0,Math.min(3600,+c.delay||0))*1000))}
+function scEditor(){
+ const d=scDraft;if(!d)return;
+ const editor=$('#sc-editor');
+ if(d.onSave){editor.innerHTML=scPastFields(d);return}
+ const opts=(arr,v)=>arr.map(([k,n])=>`<option value="${esc(k)}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');
+ const chats=scChats(d.app),chat=chats.find(c=>String(c.id)===String(d.chat));
+ const msgs=(chat?.msgs||[]).map((m,i)=>[i,m]).filter(([i,m])=>m.m!==2&&!m.callLog);
+ editor.innerHTML=`<div class="sc-fields"><h3>Configurar chamada</h3><label>Personagem<select onchange="scDraft.person=this.value;scEditor()">${opts([['','Nome personalizado'],...S.chars.map(c=>[c.id,c.name])],d.person)}</select></label>${d.person?'':`<label>Nome de quem liga<input value="${esc(d.name)}" oninput="scDraft.name=this.value" placeholder="Nome do contato"></label>`}<label>Quando tocar<select onchange="scDraft.trigger=this.value;if(scDraft.trigger!=='app'&&!scApps[scDraft.app])scDraft.app='msg';scEditor()">${opts([['message','Após visualizar uma mensagem'],['chat','Ao abrir uma conversa'],['app','Ao abrir um aplicativo'],['time','Após desbloquear o iPhone']],d.trigger)}</select></label>${d.trigger!=='time'?`<label>Aplicativo<select onchange="scDraft.app=this.value;scDraft.chat='';scDraft.message=0;scEditor()">${opts(d.trigger==='app'?[...Object.entries(scApps),['ig','Instagram'],['mail','Mail'],['pho','Photos'],['map','Maps'],['wx','Weather'],['clk','Clock'],['ph','Phone'],['saf','Safari'],['nt','Notes'],['cal','Calendar'],['st','Settings']]:Object.entries(scApps),d.app)}</select></label>`:''}${['message','chat'].includes(d.trigger)?`<label>Conversa<select onchange="scDraft.chat=this.value;scDraft.message=-1;scEditor()">${opts([['','Selecionar conversa'],...chats.map(c=>[c.id,cname(c)])],d.chat)}</select></label>`:''}${d.trigger==='message'?`<label>Mensagem<select onchange="scDraft.message=+this.value">${opts([['-1','Selecionar mensagem'],...msgs.map(([i,m])=>[i,(m.m===1?'Me: ':'Contato: ')+String(m.t||'').slice(0,90)])],msgs.some(([i])=>i===d.message)?d.message:-1)}</select></label><p class="sc-help">A chamada começa quando a mensagem estiver visível na conversa, depois do atraso escolhido.</p>`:''}<label>Atraso (segundos)<input type="number" min="0" max="3600" value="${esc(d.delay)}" oninput="scDraft.delay=+this.value"></label>${scLineFields(d)}</div>`;
+}
+function scCommit(){if(readerMode||!scDraft)return;const d=scDraft;if(d.onSave){scSavePast(d);return}if(!scPerson(d.person)&&!d.name.trim()){alert('Escolha um personagem ou informe um nome.');return}if(['chat','message'].includes(d.trigger)&&!scChats(d.app).some(c=>String(c.id)===String(d.chat))){alert('Selecione uma conversa.');return}if(d.trigger==='message'){const m=scChats(d.app).find(c=>String(c.id)===String(d.chat))?.msgs?.[d.message];if(!m||m.m===2||m.callLog){alert('Selecione uma mensagem.');return}d.messageText=m.t;d.messageType=m.m;d.messageTs=m.ts||null}d.lines=scCleanLines(d.lines);if(!d.lines.length){alert('Adicione pelo menos uma fala.');return}d.delay=Math.max(0,Math.min(3600,+d.delay||0));if(!Array.isArray(S.scriptedCalls))S.scriptedCalls=[];const i=S.scriptedCalls.findIndex(c=>c.id===d.id);if(i<0)S.scriptedCalls.push(d);else S.scriptedCalls[i]=d;scCancelDraft();save();scList()}
+function scReset(){scEpoch++;for(const t of scPending.values())clearTimeout(t);scPending.clear();scSeen.clear();clearInterval(scTimer);scActive=null;scLastView='';scStoryStart=0;scObserver?.disconnect();scHide();scCancelDraft(false);if(!readerMode&&$('#narration').open)scList()}
+function scSchedule(c){if(!readerMode||!scReady||scSeen.has(c.id)||scPending.has(c.id))return;const epoch=scEpoch;const fire=()=>{if(epoch!==scEpoch)return;if(scActive||$('#message-call-details').open){scPending.set(c.id,setTimeout(fire,400));return}scPending.delete(c.id);scSeen.add(c.id);scStart(c,false)};scPending.set(c.id,setTimeout(fire,Math.max(0,Math.min(3600,+c.delay||0))*1000))}
 function scTrack(){if(scIdentity!==IDX.cur||scStoryObject!==S){scIdentity=IDX.cur;scStoryObject=S;scReset()}if(!readerMode||!scReady)return;scObserver?.disconnect();if(!locked&&!scStoryStart){scStoryStart=Date.now();scData().filter(c=>c.trigger==='time').forEach(scSchedule)}const view=locked?'locked':String(cur||'home')+':'+String(cid||'');if(view!==scLastView){scLastView=view;if(!locked)scData().forEach(c=>{if(c.app===cur&&(c.trigger==='app'||(c.trigger==='chat'&&String(c.chat)===String(cid))))scSchedule(c)})}if(locked||!isMessenger(cur)||!cid)return;const chat=scChats(cur).find(c=>String(c.id)===String(cid));if(!chat)return;const relevant=scData().filter(c=>c.trigger==='message'&&c.app===cur&&String(c.chat)===String(cid)&&!scSeen.has(c.id)&&!scPending.has(c.id));if(!relevant.length)return;const root=$('#app');const targets=new Map();for(const c of relevant){const matches=m=>m&&m.m===c.messageType&&m.t===c.messageText&&(!c.messageTs||m.ts===c.messageTs);let index=+c.message;if(!matches(chat.msgs[index]))index=chat.msgs.findIndex(matches);const node=root.querySelector(`[data-sc-msg="${index}"]`);if(index>=0&&node){if(!targets.has(node))targets.set(node,[]);targets.get(node).push(c)}}if(!targets.size)return;scObserver=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting&&e.intersectionRatio>=.6){for(const c of targets.get(e.target)||[])scSchedule(c);scObserver?.unobserve(e.target)}},{root,threshold:.6});targets.forEach((v,k)=>scObserver.observe(k))}
 let scStoryObject=null;
 async function scPreview(i){if(readerMode)return;const c=scData()[i],story=S;if(c&&!scActive){await narrationClose();if(S!==story||scActive)return;if(matchMedia('(max-width:760px)').matches)mobileView('phone');scStart(c,true)}}
-function scStart(c,preview){if(scActive)return;if(ccOpen)closeCC();scActive={c,preview,phase:'ringing',index:0,started:0,deadline:Date.now()+30000};scPaint();clearInterval(scTimer);scTimer=setInterval(scTick,200)}
-function scAccept(){if(scActive?.phase!=='ringing')return;scActive.phase='active';scActive.started=Date.now();scActive.index=0;scActive.deadline=Date.now()+Math.max(1,+scActive.c.lines?.[0]?.seconds||4)*1000;scPaint()}
-function scNext(){if(scActive?.phase!=='active')return;const a=scActive;if(++a.index>=a.c.lines.length){scFinish('in');return}a.deadline=Date.now()+Math.max(1,+a.c.lines[a.index].seconds||4)*1000;scPaint()}
+function scStart(c,preview,replay=false){if(scActive)return;if(ccOpen)closeCC();scActive={c,preview,phase:'ringing',index:0,started:0,deadline:Date.now()+30000};if(replay)scAccept();else scPaint();clearInterval(scTimer);scTimer=setInterval(scTick,200)}
+function scPlayLine(active){
+ active.subtitle=scSubtitle(active.c.lines?.[active.index]?.text,active.c.speed);
+ active.deadline=Date.now()+active.subtitle.duration;
+ scPaint();
+}
+function scAccept(){if(scActive?.phase!=='ringing')return;scActive.phase='active';scActive.started=Date.now();scActive.index=0;scPlayLine(scActive)}
+function scNext(){if(scActive?.phase!=='active')return;const a=scActive;if(++a.index>=a.c.lines.length){scFinish('in');return}scPlayLine(a)}
 function scFinish(dir){const a=scActive;if(!a)return;clearInterval(scTimer);scActive=null;scHide();if(!a.preview){S.calls.unshift({name:scName(a.c),dir,sub:'mobile',n:1,ts:nowTs()});R()}}
 function scTick(){const a=scActive;if(!a)return;if(Date.now()>=a.deadline){if(a.phase==='ringing')scFinish('miss');else scNext();return}if(a.phase==='active'){const e=$('#sc-elapsed'),t=Math.floor((Date.now()-a.started)/1000);if(e)e.textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
 let scCovered,scPreviousFocus;
@@ -2264,7 +2380,7 @@ function scPaint(){
  const t=ring?0:Math.max(0,Math.floor((Date.now()-a.started)/1000));
  box.classList.toggle('sc-is-active',!ring);
  box.hidden=false;
- box.innerHTML=`<header class="sc-heading">${chatValidImage(p?.photo)?`<img class="sc-avatar" src="${esc(p.photo)}" alt="">`:''}<h2>${esc(name)}</h2><div class="sc-status" id="sc-elapsed">${ring?'Chamada recebida':String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}</div></header>${ring?ScriptedCallUI.markup():`<div class="sc-active-content"><div class="sc-caption" aria-live="polite"><b>${esc(l?.speaker==='me'?(S.owner?.name||'Me'):name)}</b><p>${esc(l?.text||'')}</p><div class="sc-caption-footer"><span class="sc-progress">${a.index+1} / ${c.lines.length}</span><button type="button" class="sc-next" onclick="scNext()">Next ›</button></div></div></div><footer class="sc-active-footer"><div class="sc-controls">${round('Mute','<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>','','scToggleControl(this)')}${round('Keypad','<path d="M6 5h.1M12 5h.1M18 5h.1M6 12h.1M12 12h.1M18 12h.1M6 19h.1M12 19h.1M18 19h.1" stroke-width="4"/>')}${round('Speaker','<path d="M3 9h4l5-5v16l-5-5H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/>','','scToggleControl(this)')}</div><div class="sc-actions">${round('End',scPhone,'sc-red',"scFinish('in')")}</div></footer>`}<div class="sc-home" aria-hidden="true"></div>`;
+  box.innerHTML=`<header class="sc-heading">${chatValidImage(p?.photo)?`<img class="sc-avatar" src="${esc(p.photo)}" alt="">`:''}<h2>${esc(name)}</h2><div class="sc-status" id="sc-elapsed">${ring?'Chamada recebida':String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}</div></header>${ring?ScriptedCallUI.markup():`<div class="sc-active-content"><div class="sc-caption" aria-live="polite"><b>${esc(l?.speaker==='me'?(S.owner?.name||'Me'):name)}</b><p>${a.subtitle.html}</p><div class="sc-caption-footer"><span class="sc-progress">${a.index+1} / ${c.lines.length}</span><button type="button" class="sc-next" onclick="scNext()">Next ›</button></div></div></div><footer class="sc-active-footer"><div class="sc-controls">${round('Mute','<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>','','scToggleControl(this)')}${round('Keypad','<path d="M6 5h.1M12 5h.1M18 5h.1M6 12h.1M12 12h.1M18 12h.1M6 19h.1M12 19h.1M18 19h.1" stroke-width="4"/>')}${round('Speaker','<path d="M3 9h4l5-5v16l-5-5H3zM16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/>','','scToggleControl(this)')}</div><div class="sc-actions">${round('End',scPhone,'sc-red',"scFinish('in')")}</div></footer>`}<div class="sc-home" aria-hidden="true"></div>`;
  applyStatusTheme();
  if(ring){
   const grip=ScriptedCallUI.mount(box,()=>{if(scActive===a)scAccept()},()=>{if(scActive===a&&a.phase==='ringing')scFinish('miss')});
@@ -2377,7 +2493,7 @@ function homeMoveApp(k,v){if(!Object.hasOwn(FN,k))return;homeChange(l=>{l.loc[k]
 
 /* Chat attachments v6.10: data URLs stay inside the story payload. */
 function chatValidImage(v){return typeof v==='string'&&/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(v)}
-function chatPreview(m,ig=false){if(m.viewOnce&&chatValidImage(m.image))return "View once photo";return (ig?m.text:m.t)|| (chatValidImage(m.image)?'Photo':StoryConnections.messageTitle(m))}
+function chatPreview(m,ig=false){if(m.callLog)return MessageCallLog.label(m);if(m.viewOnce&&chatValidImage(m.image))return "View once photo";return (ig?m.text:m.t)|| (chatValidImage(m.image)?'Photo':StoryConnections.messageTitle(m))}
 const chatOnceSeen=new WeakMap();
 function chatOnceIcon(){return '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke-dasharray="3 2"/><path d="M10 9l2-2v10"/></svg>'}
 function chatOnceOpened(m){return !!chatOnceSeen.get(S)?.has(m.onceId||m)}
@@ -2389,4 +2505,4 @@ function chatPickImage(igId=null,mine=true,viewOnce=false){if(readerMode)return;
 
 if(!readerMode)R();
 boot().then(()=>{scReady=true;scTrack();storyEventTrack()});
-</script><script src="editor-panels.js" defer></script><script src="photo-editor.js" defer></script><script src="story-planner.js" defer></script><script src="form-previews.js" defer></script><script src="editor-panel-list.js" defer></script><script src="editor-guide.js" defer></script><script src="story-hold-delete.js" defer></script><script src="theme-toggle.js" defer></script></body></html>
+</script><script src="editor-panels.js" defer></script><script src="photo-editor.js" defer></script><script src="story-planner.js" defer></script><script src="form-previews.js" defer></script><script src="editor-panel-list.js" defer></script><script src="editor-guide.js" defer></script><script src="story-hold-delete.js" defer></script><script src="theme-toggle.js" defer></script><script src="editor-select.js" defer></script></body></html>

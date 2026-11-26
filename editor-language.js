@@ -100,6 +100,9 @@ Eles viram contatos e grupos nas conversas. Para criar uma conversa, use o ＋ n
 Fechar|Close
 Abrir|Open
 ＋ Adicionar personagem|＋ Add character
+Adicionar personagem|Add character
+Nome e foto do personagem|Character name and photo
+Programe eventos durante a leitura|Schedule events for the reader
 Conversas|Conversations
 Marcar como lida ou não lida|Mark as read or unread
 Não lida|Unread
@@ -107,12 +110,21 @@ Lida|Read
 Nenhuma conversa ainda.|No conversations yet.
 ＋ Criar canal|＋ Create channel
 ＋ Adicionar vídeo|＋ Add video
+Criar canal|Create channel
+Adicionar vídeo|Add video
+Nome, foto e banner do canal|Channel name, photo, and banner
+Título, capa e detalhes do vídeo|Video title, thumbnail, and details
 Cartões fictícios para a história. Não utilize dados bancários reais.|Fictional cards for your story. Do not use real banking information.
 ＋ Adicionar cartão|＋ Add card
+Adicionar cartão|Add card
+Configure um cartão fictício|Set up a fictional card
 O Internet Banking fictício agora fica em um app separado:|Fictional online banking now lives in a separate app:
 App de Internet Banking fictício, chique, minimalista e com suporte a várias moedas.|A clean, fictional banking app with support for multiple currencies.
 Configurar conta|Set up account
 ＋ Adicionar transação|＋ Add transaction
+Adicionar transação|Add transaction
+Titular, saldo e moeda|Account holder, balance, and currency
+Adicione um movimento ao extrato|Add an entry to the statement
 O que você quer criar?|What would you like to create?
 Perfil|Profile
 Nome, foto e biografia|Name, photo, and bio
@@ -129,6 +141,25 @@ Perfis do Instagram|Instagram profiles
 Independentes dos personagens. Para postar, use o ＋ no topo do perfil.|Profiles are separate from characters. To create a post, use ＋ at the top of the profile.
 Seu perfil (dono do iPhone)|Your profile (iPhone owner)
 ＋ Criar perfil|＋ Create profile
+Criar perfil|Create profile
+Remetente, assunto e mensagem|Sender, subject, and message
+Edite as informações do portal fictício|Edit the fictional portal’s information
+Crie ou edite as notícias do site|Create or edit the site’s news
+Escolha onde o dono do iPhone está|Choose where the iPhone owner is
+Marque um lugar da história|Pin a place in the story
+Inclua alguém no mapa da história|Add someone to the story map
+Adicione outra cidade ao relógio|Add another city to the clock
+Configure horário e nome|Set the time and name
+Adicione uma entrada ao histórico|Add an entry to the call history
+Programe uma chamada durante a leitura|Schedule a call for the reader
+Adicione um compromisso ao calendário|Add an appointment to the calendar
+Adicionar dia|Add day
+Inclua mais um dia na previsão|Add another day to the forecast
+Adicionar data e hora|Add date and time
+Remover dos favoritos|Remove from favorites
+Adicionar aos favoritos|Add to favorites
+Marcar como não lida|Mark as unread
+Anexar link entre apps|Attach a link between apps
 Nota aberta|Open note
 Abra uma nota para editar a data e fixá-la.|Open a note to edit its date or pin it.
 Data e hora da nota (define a seção automaticamente)|Note date and time (sets the section automatically)
@@ -180,6 +211,7 @@ Adicionadas|Saved
 Nova notificação|New notification
 Escolha o aplicativo|Choose an app
 Título|Title
+Contato para o título|Contact for the title
 Horário exibido|Displayed time
 Mensagem|Message
 Contato ou grupo (opcional)|Contact or group (optional)
@@ -292,6 +324,7 @@ Selecionar mensagem|Select a message
 A chamada começa quando a mensagem estiver visível na conversa, depois do atraso escolhido.|The call begins after the selected delay once the message is visible in the conversation.
 Atraso (segundos)|Delay (seconds)
 Roteiro da ligação|Call script
+Chamada passada|Past call
 As legendas aparecem automaticamente. O leitor também pode avançar manualmente.|Captions appear automatically. The reader can also advance them manually.
 Quem fala|Speaker
 Quem liga|Caller
@@ -318,7 +351,7 @@ Artista|Artist
   const ignored = '#nl .notif-existing, #stl .cr > span, #stl .collection-name, #lock-preview-notices, .fp-device, input, textarea, [contenteditable], .story-connected-identity, .story-ref-row, .story-picker-item';
   const fixedOptions = `#pord, #nar-form select[onchange^="narDraft.trigger="], #sc-editor select[onchange^="scDraft.trigger="], #sc-editor select[aria-label="Quem fala"], #sc-editor select[aria-label="Speaker"]`;
   const canTranslate = (element, node) => Boolean(element &&
-    !element.closest('script,style,svg') &&
+    !element.closest('script,style,svg,.editor-select-trigger,.editor-select-list,#sc-speed-sample') &&
     !(node && element.closest(ignored)) &&
     !(element.matches('option') && !element.closest(fixedOptions) &&
       !element.matches('#narration option[value=""], #narration option[value="-1"]')));

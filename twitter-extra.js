@@ -59,7 +59,7 @@ const TwitterExtra = (() => {
       const byReply=p.parent!=null&&xOwner(xFindPost(p.parent)?.pid);
       const byMention=(String(p.text||'').match(/@[A-Za-z0-9_]+/g)||[]).some(m=>m.slice(1).toLowerCase()===String(owner.user).toLowerCase());
       return byReply||byMention;
-    }).map(p=>({post:p,reply:p.parent!=null&&xOwner(xFindPost(p.parent)?.pid),stamp:+p.ts||Number(p.id)||0}));
+    }).map(p=>({post:p,stamp:+p.ts||Number(p.id)||0}));
     const likes=new Map();
     if(activity==='All')for(const a of items('xActivity')){
       const p=xFindPost(a.post);if(!p||!xOwner(p.pid)||!profileExists(a.pid))continue;
@@ -67,8 +67,8 @@ const TwitterExtra = (() => {
       likes.get(key).people.add(String(a.pid));
     }
     const rows=[...mentions,...likes.values()].sort((a,b)=>b.stamp-a.stamp);
-    return rows.map(({post,reply,like,people})=>{
-      if(post)return xPost(post,{replyingTo:reply?owner:null});
+    return rows.map(({post,like,people})=>{
+      if(post)return xPost(post);
       const p=xFindPost(like.post),a=xPerson(like.pid);
       const avatars=[...people].slice(0,3).map(id=>`<button type="button" class="x-avatar-button" aria-label="${esc(xPerson(id).name)}" onclick="xOpenProfile(${xArg(id)})">${av(xPerson(id),32)}</button>`).join('');
       const others=people.size-1;
@@ -106,7 +106,7 @@ const TwitterExtra = (() => {
   function filterDM(value){dmQuery=value;const list=$('#x-chat-list');if(list)list.innerHTML=chatsRows()}
   function pickInbox(t){if(['All','Unread'].includes(t)){inbox=t;R()}}
   function mail(avatar){
-    const options=`<details class="x-chat-filter"><summary>${inbox}${I('<path d="m6 9 6 6 6-6"/>',16,'none','currentColor',2.4)}</summary><div>${['All','Unread'].map(t=>`<button type="button" onclick="TwitterExtra.pickInbox('${t}')">${t}</button>`).join('')}</div></details>`;
+    const options=`<div class="x-chat-filter"><select id="x-inbox-filter" aria-label="Filter chats" onchange="TwitterExtra.pickInbox(this.value)">${['All','Unread'].map(t=>`<option${t===inbox?' selected':''}>${t}</option>`).join('')}</select></div>`;
     return {head:header(avatar,'<h2>Chat</h2>',options)+`<div class="x-chat-search">${searchBox(dmQuery,'TwitterExtra.filterDM','Search chats')}</div>`,
       body:`<div id="x-chat-list">${chatsRows()}</div>`,footer:fab('New chat','TwitterExtra.dmForm()',`${xi('reply',27)}<span class="x-fab-plus" aria-hidden="true">+</span>`)};
   }

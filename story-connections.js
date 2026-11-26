@@ -183,13 +183,16 @@ const StoryConnections = (() => {
     if(readerMode||picker.open)return;
     const available=Object.keys(kinds).filter(kind=>
       (options.mode!=='contact'||contactKinds.has(kind))&&
+      (!options.kind||kind===options.kind)&&
       (options.mode!=='message'||visibleApps().includes(kinds[kind][0]))&&items(kind).length
     );
     pickerState={...options,story:S};
     byId('story-item-title').textContent=options.title;
     byId('story-item-hint').textContent=options.hint||'Escolha um registro que já existe nesta história.';
     byId('story-item-context').innerHTML=options.context||'';
-    byId('story-item-kind').innerHTML=available.map(kind=>`<option value="${kind}">${esc(kinds[kind][1])}</option>`).join('')||'<option value="">Nenhum conteúdo</option>';
+    const kindField = byId('story-item-kind');
+    kindField.closest('label').hidden = Boolean(options.kind);
+    kindField.innerHTML=available.map(kind=>`<option value="${kind}">${esc(kinds[kind][1])}</option>`).join('')||'<option value="">Nenhum conteúdo</option>';
     byId('story-item-query').value='';
     pickerResults();
     openEditorDialog(picker);
@@ -306,7 +309,7 @@ const StoryConnections = (() => {
     const {thread,input,ig}=ctx;
     const text=input?.value.trim()||'', draft=input?.value||'', app=cur;
     const sender=ig?null:snd(thread)[who%snd(thread).length];
-    const available=thread.msgs.filter(m=>m.m!==2&&!m.viewOnce).slice(-30).reverse();
+    const available=thread.msgs.filter(m=>m.m!==2&&!m.callLog&&!m.viewOnce).slice(-30).reverse();
     const label=m=>firstLine((ig?m.text:m.t)||messageTitle(m))||(m.image?'Foto':'Mensagem');
     const context=`<label class="story-link-source">Onde colocar o link<select id="story-item-source"><option value="new">Nova mensagem${text?' com o texto digitado':''}</option>${available.map((m,i)=>`<option value="${i}">${esc(`${ig?(m.mine?'Me':'Contato'):(m.m===1?'Me':ch(m.s).name)} · ${label(m)}`)}</option>`).join('')}</select></label>`;
     openPicker({mode:'message',title:'Anexar link entre apps',context,onSelect:(ref,choice)=>{
@@ -352,7 +355,7 @@ const StoryConnections = (() => {
     // Panels and app views are rebuilt by R(); decorations don't belong in the data model.
     if(!readerMode){
       const tools=$('#mqa .conv-section:last-child');
-      if(tools&&isMessenger(cur)&&cid)tools.querySelector('h3')?.insertAdjacentHTML('afterend','<button type="button" class="conv-row" data-story-attach>↗ Anexar link entre apps</button>');
+      if(tools&&isMessenger(cur)&&cid)tools.querySelector('h3')?.insertAdjacentHTML('afterend','<button type="button" data-panel-action="link" data-story-attach>Anexar link entre apps</button>');
       if(cur==='msg'&&cid)app.querySelector('.ios-glass-menu')?.insertAdjacentHTML('beforeend','<button type="button" data-story-attach><span aria-hidden="true">↗</span><span>Link entre apps</span></button>');
       if((cur==='wa'||cur==='ka')&&cid)app.querySelector('.third-compose')?.insertAdjacentHTML('afterbegin','<button type="button" class="third-icon-btn" data-story-attach aria-label="Anexar link entre apps" title="Anexar link entre apps">↗</button>');
     }
@@ -429,5 +432,6 @@ const StoryConnections = (() => {
     }
   },true);
 
-  return {openPicker,openContact,openParticipants,decorateApp,messageTitle,messageMarkup,renamePlace,removePlace,refList,same,resolve,availability,open,dateLabel};
+  return {openPicker,openContact,openParticipants,decorateApp,messageTitle,messageMarkup,renamePlace,removePlace,refList,same,resolve,availability,open,dateLabel,
+    callReference:record=>snapshot(description('call',record,S.calls.indexOf(record)))};
 })();

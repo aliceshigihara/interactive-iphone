@@ -102,11 +102,29 @@ const {openEditorDialog, closeEditorDialog, closeEditorForm, animateEditorSectio
     const notices = document.getElementById('lock-preview-notices');
     const layout = dialog.querySelector('.lock-notifications-layout');
     const tabs = [...dialog.querySelectorAll('[data-lock-view]')];
+    const contactChoice = $('#notification-title-contact'), title = $('#ntt'), appChoice = $('#na');
     let savedPage = 0;
     const shortcuts = $('#lk .lk2').cloneNode(true);
     shortcuts.querySelector('span')?.remove();
     shortcuts.setAttribute('aria-hidden', 'true');
     $('#lock-preview-wallpaper').append(shortcuts);
+    function refreshTitleContacts() {
+      const app = appChoice.value;
+      const contacts = S.chars.map(person => [`contact:${person.id}`,person.name]);
+      if (isMessenger(app)) {
+        for (const chat of activeChatsFor(app)) {
+          if (chat.mem.length > 1) contacts.push([`${app}:${chat.id}`,cname(chat)]);
+        }
+      }
+      const options = contacts.filter(([,name]) => typeof name === 'string' && name.trim());
+      const selected = contactChoice.value;
+      contactChoice.replaceChildren(
+        new Option(SiteLanguage.text('Escrever um título','Write a title'),''),
+        ...options.map(([id,name])=>new Option(name.trim(),id))
+      );
+      contactChoice.value = options.some(([id])=>id===selected)?selected:'';
+      contactChoice.closest('label').hidden = !options.length;
+    }
     window.refreshNotificationPreview = () => {
       if (!dialog.open) return;
       $('#lock-preview-date').textContent = S.date;
@@ -137,6 +155,7 @@ const {openEditorDialog, closeEditorDialog, closeEditorForm, animateEditorSectio
     launch.addEventListener('click', () => {
       savedPage = 0;
       showTab('edit');
+      refreshTitleContacts();
       openEditorDialog(dialog);
       refreshNotificationPreview();
       refreshSavedNotices();
@@ -148,7 +167,12 @@ const {openEditorDialog, closeEditorDialog, closeEditorForm, animateEditorSectio
       refreshSavedNotices();
     });
     $('#lock-notifications-close').addEventListener('click', () => closeEditorDialog(dialog));
-    $('#ntt').addEventListener('input', event => event.target.setCustomValidity(''));
+    appChoice.addEventListener('input',refreshTitleContacts);
+    contactChoice.addEventListener('input', () => {
+      if (contactChoice.value) title.value = contactChoice.selectedOptions[0].textContent;
+      title.setCustomValidity('');
+    });
+    title.addEventListener('input', event => event.target.setCustomValidity(''));
     $('#lock-notifications-form').addEventListener('input', refreshNotificationPreview);
     dialog.addEventListener('click', event => {
       if (event.target !== dialog) return;

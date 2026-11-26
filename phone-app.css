@@ -155,13 +155,17 @@
 .scr .phone-live-info-menu button:hover { background: #ffffff1c; }
 .scr .phone-live-info-menu button:disabled { opacity: .5; cursor: default; }
 .scr .phone-live-info-menu .phone-live-danger { color: #ffa8ac; }
-.phone-live-pace > div { display: grid; grid-template-columns: 30px 1fr 30px; align-items: center; gap: 3px; padding: 0 4px 5px; }
-.phone-live-pace output { text-align: center; color: #fff; font-size: 11px; white-space: nowrap; }
-.scr .phone-live-info-menu .phone-live-pace button { padding: 4px 0; text-align: center; font-size: 17px; background: #ffffff1c; }
 .phone-live-body { min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 5px; }
 .phone-live-words { max-height: 100%; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
 #phone-live-transcript { padding-bottom: 1px; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: clamp(18px, 6.2cqw, 24px); font-weight: 500; line-height: 1.27; letter-spacing: -.018em; }
 #phone-live-transcript.is-waiting { color: #dde1e5; }
+@media (prefers-reduced-motion: no-preference) {
+  .phone-transcript-word { animation: phone-transcript-fade 220ms ease-out both; }
+  @keyframes phone-transcript-fade {
+    from { opacity: .1; filter: blur(2px); }
+    to { opacity: 1; filter: blur(0); }
+  }
+}
 .phone-live-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .scr .phone-live-skip { align-self: flex-start; border: 0; background: none; color: #e3e7ec; padding: 5px 0; cursor: pointer; font-size: 11px; }
 .phone-live-skip[hidden] { display: none; }

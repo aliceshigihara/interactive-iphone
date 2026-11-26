@@ -18,12 +18,7 @@ const PhoneApp = (() => {
   const dialDigits = value => String(value ?? '').replace(/[^\d*#+]/g,'');
   const readInSession = new WeakSet();
   const blockedInSession = new WeakMap();
-  const voicemailPaces = [
-    {v:250,l:'Rápida · 0,25 s'},
-    {v:450,l:'Normal · 0,45 s'},
-    {v:700,l:'Lenta · 0,70 s'},
-    {v:950,l:'Muito lenta · 0,95 s'}
-  ];
+  const normalInterval = 450;
   const keyPresses = new WeakMap();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let tab='recents', contact=null, voicemail=null, liveSession=null, query='', number='', call=null, keyTimer, longZero=false, transcriptRun=null, transcriptTimer;
@@ -143,16 +138,20 @@ const PhoneApp = (() => {
   function currentVoicemail() { return messages().find(m=>m.id===voicemail); }
   function voicemailKey(v) { return norm(v.caller)||String(v.id); }
   function isBlocked(v) { return !!blockedInSession.get(S)?.has(voicemailKey(v)); }
-  function paceFor(value) { return voicemailPaces.find(p=>p.v===Number(value))||voicemailPaces[1]; }
+  function intervalFor(value) { return Number(value) >= 225 && Number(value) <= 950 ? Number(value) : normalInterval; }
+  function intervalForSpeed(speed) { return Math.round(normalInterval / PlaybackSpeed.limit(speed)); }
   function accepted(v) { return liveSession?.voicemail===v&&liveSession.accepted; }
   function editVoicemail(existing) {
     const options=[{v:'',l:'Remetente personalizado'},...chars().map(p=>({v:p.id,l:p.name}))];
-    form(existing?'Editar voicemail':'Novo voicemail',[{k:'personId',l:'Contato',t:'sel',v:existing?.personId||'',o:options},{k:'caller',l:'Nome ou número (se não usar um contato)',v:existing?.caller},{k:'ts',l:'Data e hora',t:'datetime-local',v:toL(existing?.ts||nowTs())},{k:'transcript',l:'Transcrição da mensagem',t:'area',v:existing?.transcript},{k:'speechInterval',l:'Ritmo da transcrição (tempo entre palavras)',t:'sel',v:paceFor(existing?.speechInterval).v,o:voicemailPaces},{k:'vmposter',l:'Pôster (opcional, usa a foto do contato se vazio)',t:'file'}],v=>{
+    const previousInterval=intervalFor(existing?.speechInterval);
+    const speed=PlaybackSpeed.onStep(normalInterval/previousInterval);
+    form(existing?'Editar voicemail':'Novo voicemail',[{k:'personId',l:'Contato',t:'sel',v:existing?.personId||'',o:options},{k:'caller',l:'Nome ou número (se não usar um contato)',v:existing?.caller},{k:'ts',l:'Data e hora',t:'datetime-local',v:toL(existing?.ts||nowTs())},{k:'transcript',l:'Transcrição da mensagem',t:'area',v:existing?.transcript},{k:'speed',l:SiteLanguage.text('Velocidade do voicemail','Voicemail speed'),t:'speed',v:speed},{k:'vmposter',l:'Pôster (opcional, usa a foto do contato se vazio)',t:'file'}],v=>{
       if(!v.transcript.trim()||(!v.caller.trim()&&!person(v.personId))){alert('Informe o remetente e a transcrição.');return false}
-      const changes={personId:v.personId,caller:v.caller.trim(),ts:fromL(v.ts),transcript:v.transcript.trim(),speechInterval:paceFor(v.speechInterval).v,poster:v.vmposter||existing?.poster||''};
+      const speechInterval=PlaybackSpeed.onStep(v.speed)===speed?previousInterval:intervalForSpeed(v.speed);
+      const changes={personId:v.personId,caller:v.caller.trim(),ts:fromL(v.ts),transcript:v.transcript.trim(),speechInterval,poster:v.vmposter||existing?.poster||''};
       if(existing){
         Object.assign(existing,changes);stopTranscript();
-        if(liveSession?.voicemail===existing)liveSession.pace=paceFor(changes.speechInterval);
+        if(liveSession?.voicemail===existing)liveSession.interval=speechInterval;
       }
       else{
         const id=globalThis.crypto?.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -162,19 +161,26 @@ const PhoneApp = (() => {
   }
   function stopTranscript() { clearTimeout(transcriptTimer);transcriptRun=null; }
   function closeVoicemail() { voicemail=liveSession=null;stopTranscript(); }
-  function paintTranscript(v) {
+  function paintTranscript(v,part) {
     const el=$('#phone-live-transcript'),scroller=$('.phone-live-words');
     if(!el||!scroller||!accepted(v))return;
     const run=transcriptRun?.voicemail===v?transcriptRun:null;
     const text=run?run.text:String(v.transcript||'');
     const waiting=!!run&&!text;
-    el.textContent=waiting?'Waiting…':text||'No transcription available.';
+    if(part){
+      if(el.classList.contains('is-waiting'))el.replaceChildren();
+      const word=document.createElement('span');
+      word.className='phone-transcript-word';
+      word.textContent=part;
+      el.append(word);
+    }else el.textContent=waiting?'Waiting…':text||'No transcription available.';
     el.classList.toggle('is-waiting',waiting);
     if(run)scroller.scrollTop=scroller.scrollHeight;
   }
-  function showWholeTranscript(v) {
+  function showWholeTranscript(v,repaint=true) {
     if(!accepted(v))return;
-    stopTranscript();paintTranscript(v);
+    stopTranscript();
+    if(repaint)paintTranscript(v);
     const accessible=$('#phone-live-transcript-status');
     if(accessible)accessible.textContent=String(v.transcript||'No transcription available.');
     const skip=$('[data-phone-action=voicemail-skip]');
@@ -191,12 +197,17 @@ const PhoneApp = (() => {
     const step=()=>{
       if(transcriptRun!==run)return;
       if(cur!=='ph'||locked||currentVoicemail()!==v||!accepted(v)){stopTranscript();return}
-      run.text+=run.parts[run.visible++];
-      paintTranscript(v);
-      if(run.visible<run.parts.length)transcriptTimer=setTimeout(step,liveSession.pace.v);
-      else showWholeTranscript(v);
+      const part=run.parts[run.visible++];
+      run.text+=part;
+      paintTranscript(v,part);
+      if(run.visible<run.parts.length)run.schedule();
+      else showWholeTranscript(v,false);
     };
-    transcriptTimer=setTimeout(step,liveSession.pace.v);
+    run.schedule=()=>{
+      clearTimeout(transcriptTimer);
+      transcriptTimer=setTimeout(step,liveSession.interval);
+    };
+    run.schedule();
   }
   function messageDestination(p) {
     if(!p)return null;
@@ -224,16 +235,11 @@ const PhoneApp = (() => {
     const control=$('[data-phone-action=voicemail-register]');
     if(control){control.textContent='Registered in Recents';control.disabled=true}
   }
-  function changeVoicemailPace(step) {
-    if(!liveSession||!['-1','1'].includes(step))return;
-    const index=voicemailPaces.indexOf(liveSession.pace)+Number(step);
-    if(!voicemailPaces[index])return;
-    liveSession.pace=voicemailPaces[index];
-    $('#phone-live-pace').textContent=liveSession.pace.l;
-    const buttons=document.querySelectorAll('[data-phone-action=voicemail-pace]');
-    buttons[0].disabled=index===0;
-    buttons[1].disabled=index===voicemailPaces.length-1;
-  }
+  document.addEventListener('input',event=>{
+    if(event.target.id!=='phone-live-pace'||cur!=='ph'||!liveSession)return;
+    liveSession.interval=intervalForSpeed(event.target.valueAsNumber);
+    transcriptRun?.schedule();
+  });
   function toggleBlock() {
     const v=currentVoicemail();if(!v||person(v.personId))return;
     let list=blockedInSession.get(S);
@@ -254,12 +260,11 @@ const PhoneApp = (() => {
   }
   function liveVoicemail(v) {
     const p=person(v.personId), poster=voicemailPoster(v), blocked=isBlocked(v);
-    const started=accepted(v), pace=liveSession?.pace||paceFor(v.speechInterval);
-    const paceIndex=voicemailPaces.indexOf(pace);
+    const started=accepted(v), interval=liveSession?.interval||intervalFor(v.speechInterval);
     const run=transcriptRun?.voicemail===v?transcriptRun:null;
     const seed=started?(run?run.text:String(v.transcript||'')):'';
     const waiting=!started||!!run&&!seed;
-    const paceControls=`<div class="phone-live-pace"><small>Ritmo da transcrição</small><div><button type="button" ${action('voicemail-pace','-1')} aria-label="Mais rápido"${paceIndex===0?' disabled':''}>−</button><output id="phone-live-pace" aria-live="polite">${esc(pace.l)}</output><button type="button" ${action('voicemail-pace','1')} aria-label="Mais lento"${paceIndex===voicemailPaces.length-1?' disabled':''}>+</button></div></div>`;
+    const paceControls=PlaybackSpeed.markup(SiteLanguage.text('Velocidade do voicemail','Voicemail speed'),normalInterval/interval,'phone-live-pace');
     const register=started&&!readerMode?`<button type="button" ${action('voicemail-register')}${liveSession.recorded?' disabled':''}>${liveSession.recorded?'Registered in Recents':'Registrar em Recents'}</button>`:'';
     const options=`<details class="phone-live-info"><summary aria-label="Informações e ações do voicemail">${phoneIcon('<circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/>',22)}</summary><div class="phone-live-info-menu">${v.ts?`<small>${esc(fFull(v.ts))}</small>`:''}${reducedMotion.matches?'':paceControls}${started?button('voicemail-replay','Replay transcription'):''}${register}${p?button('connections','Conexões',p.id):''}${readerMode?'':`${button('edit-voicemail','Edit Voicemail')}${button('delete-voicemail','Delete Voicemail',v.id,'phone-live-danger')}`}</div></details>`;
     return `<section class="phone-live-voicemail${poster?' has-poster':''}" aria-label="Live Voicemail">${poster?`<img class="phone-live-poster" src="${esc(poster)}" alt="">`:''}<header class="phone-live-header"><div class="phone-live-top"><button type="button" ${action('back-voicemail')} class="phone-live-back" aria-label="Voltar para os recados">${phoneIcon('<path d="m14 5-7 7 7 7"/>',21)}</button>${options}</div><p class="phone-live-label">Voicemail</p><h2>${esc(voicemailName(v))}</h2>${blocked?'<small class="phone-live-blocked">Blocked for this session</small>':''}</header>
@@ -270,7 +275,7 @@ const PhoneApp = (() => {
     const v=messages().find(m=>m.id===id);if(!v)return;
     stopTranscript();
     voicemail=v.id;
-    liveSession={voicemail:v,pace:paceFor(v.speechInterval),accepted:false,recorded:false};
+    liveSession={voicemail:v,interval:intervalFor(v.speechInterval),accepted:false,recorded:false};
     R();
     $('.phone-live-back')?.focus({preventScroll:true});
   }
@@ -311,7 +316,6 @@ const PhoneApp = (() => {
     'voicemail-message':openMessagesFromVoicemail,
     'voicemail-block':toggleBlock,
     'voicemail-accept':acceptVoicemail,
-    'voicemail-pace':changeVoicemailPace,
     'voicemail-register':registerVoicemail,
     'delete-voicemail':id=>{if(!readerMode&&confirm('Excluir este voicemail?')){S.phoneVoicemails=messages().filter(m=>m.id!==id);closeVoicemail();save();R()}}
   };

@@ -1,0 +1,86 @@
+/* Live lock screen only. The notification editor keeps its own preview. */
+#lk #nts {
+  --notice-lift: 0px;
+  gap: 4px;
+  max-height: 54%;
+  padding: 4px 13px 5px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: default;
+}
+#lk #nts[hidden],
+#lk #nts [hidden] { display: none; }
+#lk #nts:not([data-expanded]) { padding-top: 28px; }
+.notice-stack-viewport {
+  position: relative;
+  min-height: 0;
+  padding: 0 2px 15px;
+  overflow: visible;
+  scrollbar-width: thin;
+  touch-action: none;
+}
+#nts[data-expanded] .notice-stack-viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-bottom: 3px;
+  overflow: hidden auto;
+  overscroll-behavior: contain;
+}
+.notice-stack-card { position: relative; flex: none; isolation: isolate; }
+#nts:not([data-expanded]) .notice-stack-card {
+  z-index: calc(3 - var(--notice-depth));
+  transform: translateY(calc(var(--notice-lift) * -1));
+}
+#nts:not([data-expanded]) .notice-stack-card:nth-child(n+2) {
+  position: absolute;
+  inset: 0 2px 15px;
+  pointer-events: none;
+  transform: translateY(calc(var(--notice-depth) * (6px + var(--notice-lift) * .23) - var(--notice-lift))) scaleX(calc(1 - var(--notice-depth) * .065));
+}
+#nts:not([data-expanded]) .notice-stack-card:only-child { margin-bottom: -9px; }
+.notice-stack-surface {
+  position: relative;
+  border-radius: 22px;
+  cursor: grab;
+  touch-action: none;
+}
+.notice-stack-surface:active { cursor: grabbing; }
+#lk #nts .notice-stack-surface .nf {
+  position: relative;
+  padding-inline-end: 36px;
+  background: linear-gradient(155deg,#edf0f6f2,#dce0ebed);
+}
+#nts:not([data-expanded]) .notice-stack-card:nth-child(n+2) .notice-stack-surface { height: 100%; overflow: hidden; }
+#nts:not([data-expanded]) .notice-stack-card:nth-child(n+2) .nf { height: 100%; filter: brightness(.92); }
+#lk #nts .notice-stack-dismiss {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 29px;
+  height: 29px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #4a597522;
+  color: #30394c;
+  font-size: 19px;
+  cursor: pointer;
+}
+#lk #nts .notice-stack-dismiss:hover { background: #a52c3226; color: #84232c; }
+#lk #nts .notice-stack-toggle {
+  flex: none;
+  align-self: center;
+  min-height: 26px;
+  padding: 3px 12px;
+  border: 1px solid #ffffff58;
+  border-radius: 999px;
+  background: #20283b98;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+}
+#lk #nts :is(.notice-stack-toggle,.notice-stack-dismiss):focus-visible { outline: 2px solid #398eff; outline-offset: 2px; }
