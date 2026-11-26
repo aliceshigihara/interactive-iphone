@@ -2,10 +2,10 @@
   if (readerMode || !globalThis.HTMLDialogElement?.prototype.showModal) return;
   const tr = SiteLanguage.text;
   const locale = SiteLanguage.lang === 'en' ? 'en' : 'pt-BR';
-  const monthNames = new Intl.DateTimeFormat(locale, {month:'short',timeZone:'UTC'});
+  const monthNames = new Intl.DateTimeFormat(locale, {month:'long',timeZone:'UTC'});
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const selector = 'input:is([type=date],[type=time],[type=datetime-local]), input[type=text]:is(#pt,#nh,#f_time,#f_messageTime,#f_date)';
-  const rowHeight = 36;
+  const rowHeight = 42;
   const prepared = new WeakSet();
   const pad = (value, digits = 2) => String(value).padStart(digits, '0');
   const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
@@ -79,92 +79,106 @@
     element.setAttribute('aria-label',name);
     wrap.append(caption,element);
     group.append(wrap);
-    const state = {element,field,min,max,rows:[],render};
-    let frame = 0, drag, ignoreClick = false;
-
+    // A small recycled window of rows: even the year wheel paints only nine nodes.
+    const state = {element,field,min,max,render};
+    let position = 0, frame = 0, timer = 0, drag = null, paintFrame = 0;
+    function schedulePaint(){if(!paintFrame) paintFrame=requestAnimationFrame(()=>{paintFrame=0;paint();});}
+    const rows = Array.from({length:9}, () => {
+      const row = document.createElement('div');
+      row.className = 'date-wheel-option';
+      row.setAttribute('aria-hidden','true');
+      element.append(row);
+      return row;
+    });
+    function stop() { cancelAnimationFrame(frame); cancelAnimationFrame(paintFrame); paintFrame=0; frame = 0; clearTimeout(timer); timer = 0; }
+    state.stop = stop;
     function render(limit) {
+      stop();
       state.max = limit;
-      const rows = Array.from({length:limit-min+1}, (_, i) => {
-        const row = document.createElement('div');
-        row.className = 'date-wheel-option';
-        row.dataset.value = String(i+min);
-        row.setAttribute('aria-hidden','true');
-        const copy = document.createElement('span');
-        copy.textContent = text(i+min);
-        row.append(copy);
-        return row;
-      });
-      state.rows = rows;
-      element.replaceChildren(...rows);
+      position = clamp(position,0,limit-min);
       element.setAttribute('aria-valuemin',String(min));
       element.setAttribute('aria-valuemax',String(limit));
     }
-
     function paint() {
-      frame = 0;
       if (!current || !dialog.open) return;
-      const position = element.scrollTop / rowHeight;
-      const index = clamp(Math.round(position),0,state.rows.length-1);
+      const index = clamp(Math.round(position),0,state.max-min);
       const value = min + index;
       const previous = current.values[field];
       current.values[field] = value;
-      element.setAttribute('aria-valuenow',String(value));
-      element.setAttribute('aria-valuetext',text(value));
-      for (let i = Math.max(0,index-4); i <= Math.min(state.rows.length-1,index+4); i++) {
-        const distance = position - i;
-        const row = state.rows[i];
-        row.style.setProperty('--wheel-angle', `${clamp(distance * 23,-74,74)}deg`);
-        row.style.setProperty('--wheel-opacity', String(Math.max(.2,1 - .28*Math.abs(distance))));
+      if (previous !== value || !element.hasAttribute('aria-valuenow')) {
+        element.setAttribute('aria-valuenow',String(value));
+        element.setAttribute('aria-valuetext',text(value));
+      }
+      const angle = Math.PI/8;
+      const radius = rowHeight / Math.tan(angle);
+      for (let j=0;j<rows.length;j++) {
+        const i=index+j-4, row=rows[j], d=i-position, theta=d*angle;
+        const hidden=i<0 || i>state.max-min || Math.abs(d)>=4;
+        row.hidden=hidden;
+        if(hidden) continue;
+        const v=min+i;
+        if(row.dataset.value!==String(v)) { row.dataset.value=String(v); row.textContent=text(v); }
+        row.style.transform=reduce.matches ? `translateY(${d*rowHeight}px)` : `translateZ(${-radius}px) rotateX(${-theta*180/Math.PI}deg) translateZ(${radius}px)`;
+        row.style.opacity=String(Math.max(.08,Math.cos(theta)**2));
+        row.classList.toggle('is-selected',i===index);
       }
       if (value !== previous && (field === 'month' || field === 'year')) adjustDay();
       if (value !== previous) error.hidden = true;
     }
-
-    function go(value, animate = false) {
-      element.scrollTo({top:(clamp(value,min,state.max)-min)*rowHeight, behavior:animate && !reduce.matches ? 'smooth' : 'instant'});
-      if (!animate || reduce.matches) paint();
-    }
-    state.go = go;
-    state.paint = paint;
-    element.addEventListener('scroll', () => {
-      if (!frame) frame = requestAnimationFrame(paint);
-    }, {passive:true});
-    element.addEventListener('keydown', event => {
-      const index = min + Math.round(element.scrollTop / rowHeight);
-      const key = {ArrowUp:index-1,ArrowDown:index+1,PageUp:index-5,PageDown:index+5,Home:min,End:state.max}[event.key];
-      if (key === undefined) return;
-      event.preventDefault();
-      go(key);
-    });
-    element.addEventListener('click', event => {
-      if (ignoreClick) { ignoreClick = false; return; }
-      const row = event.target.closest('[data-value]');
-      if (row) go(Number(row.dataset.value), true);
-    });
-    element.addEventListener('pointerdown', event => {
-      ignoreClick = false;
-      if (event.pointerType === 'mouse' && event.button === 0) drag = {id:event.pointerId,y:event.clientY,top:element.scrollTop};
-    });
-    element.addEventListener('pointermove', event => {
-      if (drag?.id !== event.pointerId || Math.abs(drag.y-event.clientY) < 4 && !drag.active) return;
-      if (!drag.active) {
-        drag.active = true;
-        element.classList.add('is-dragging');
-        element.setPointerCapture(event.pointerId);
+    function animateTo(target, duration=430, spring=true) {
+      stop(); target=clamp(target,0,state.max-min);
+      if(reduce.matches || Math.abs(target-position)<.005) { position=target; paint(); return; }
+      const start=position, t0=performance.now();
+      function tick(now) {
+        if(!dialog.open || !element.isConnected) {frame=0;return;}
+        const t=Math.min(1,(now-t0)/duration);
+        const u=t-1, ease=spring ? 1+1.45*u*u*u+.45*u*u : 1-(1-t)**3;
+        position=clamp(start+(target-start)*ease,0,state.max-min); paint();
+        if(t<1) frame=requestAnimationFrame(tick); else {frame=0;position=target;paint();}
       }
-      element.scrollTop = drag.top + drag.y - event.clientY;
-    });
-    for (const name of ['pointerup','pointercancel','lostpointercapture']) {
-      element.addEventListener(name, event => {
-        if (drag?.id !== event.pointerId) return;
-        if (drag.active) {
-          ignoreClick = true;
-          element.classList.remove('is-dragging');
-          go(min + Math.round(element.scrollTop / rowHeight),true);
-        }
-        drag = null;
-      });
+      frame=requestAnimationFrame(tick);
     }
+    function go(value, animate=false) {
+      const target=clamp(value,min,state.max)-min;
+      if(animate) animateTo(target); else {stop();position=target;paint();}
+    }
+    state.go=go; state.paint=paint;
+    element.addEventListener('keydown',event=>{
+      const index=min+Math.round(position);
+      const key={ArrowUp:index-1,ArrowDown:index+1,PageUp:index-5,PageDown:index+5,Home:min,End:state.max}[event.key];
+      if(key===undefined)return; event.preventDefault();go(key,true);
+    });
+    element.addEventListener('wheel',event=>{
+      event.preventDefault();stop();
+      const delta=event.deltaY*(event.deltaMode===1?16:event.deltaMode===2?180:1);
+      position=clamp(position+clamp(delta/125,-2,2),0,state.max-min);paint();
+      timer=setTimeout(()=>animateTo(Math.round(position)),160);
+    },{passive:false});
+    element.addEventListener('pointerdown',event=>{
+      if(!event.isPrimary || event.button!==0)return;
+      stop();element.focus({preventScroll:true});
+      drag={id:event.pointerId,y:event.clientY,start:position,moved:false,samples:[[performance.now(),position]],target:event.target.closest('[data-value]')?.dataset.value};
+      element.setPointerCapture(event.pointerId);element.classList.add('is-dragging');
+    });
+    element.addEventListener('pointermove',event=>{
+      if(drag?.id!==event.pointerId)return;
+      const delta=drag.y-event.clientY;
+      if(!drag.moved && Math.abs(delta)<4)return;
+      drag.moved=true;position=clamp(drag.start+delta/(rowHeight*1.35),0,state.max-min); schedulePaint();
+      const now=performance.now();drag.samples.push([now,position]);drag.samples=drag.samples.filter(x=>now-x[0]<100);
+    });
+    function release(event) {
+      if(drag?.id!==event.pointerId)return;
+      const d=drag;drag=null;element.classList.remove('is-dragging');
+      if(element.hasPointerCapture(event.pointerId))element.releasePointerCapture(event.pointerId);
+      if(event.type!=='pointerup'){animateTo(Math.round(position));return;}
+      if(!d.moved){go(d.target===undefined?min+Math.round(position):Number(d.target),true);return;}
+      const now=performance.now(), first=d.samples[0], last=d.samples.at(-1);
+      const v=first&&last&&now-last[0]<85 ? clamp((last[1]-first[1])/Math.max(16,last[0]-first[0]),-.065,.065):0;
+      const travel=reduce.matches?0:Math.sign(v)*Math.min(9,v*v/(2*.00055));
+      animateTo(Math.round(position+travel),Math.min(1250,480+Math.sqrt(Math.abs(travel))*220),Math.abs(travel)<2);
+    }
+    for(const name of ['pointerup','pointercancel','lostpointercapture'])element.addEventListener(name,release);
     render(max);
     return state;
   }
@@ -215,6 +229,7 @@
     dialog.addEventListener('close',() => {
       button.setAttribute('aria-expanded','false');
       if (button.isConnected) button.focus({preventScroll:true});
+      columns.forEach(column => column.stop());
       current = null;
     },{once:true});
   }

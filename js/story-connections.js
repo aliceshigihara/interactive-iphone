@@ -152,6 +152,8 @@ const StoryConnections = (() => {
   function pickerResults() {
     const state=pickerState;if(!state||S!==state.story)return;
     const kind=byId('story-item-kind').value, query=norm(byId('story-item-query').value);
+    state.selection=null;byId('story-picker-confirm').disabled=true;byId('story-picker-selection').textContent=SiteLanguage.text('Selecione um registro','Select an item');
+    for(const b of byId('story-picker-categories').children)b.setAttribute('aria-pressed',String(b.dataset.kind===kind));
     const root=byId('story-item-results');root.replaceChildren();
     const records=items(kind);
     const shown=records.map((r,i)=>description(kind,r,i)).filter(item=>(
@@ -159,6 +161,7 @@ const StoryConnections = (() => {
       !state.excludeItems?.some(other=>other?.kind===kind&&other.record===item.record)&&
       (!query||norm(`${item.title} ${item.subtitle} ${item.group}`).includes(query))
     ));
+    byId('story-picker-count').textContent=`${shown.length} ${SiteLanguage.text('registros encontrados','items found')}`;
     if(!shown.length){root.innerHTML='<p class="story-ref-empty">Nenhum registro disponível para este filtro.</p>';return}
     for(const item of shown.slice(0,100)){
       const button=document.createElement('button');
@@ -166,14 +169,13 @@ const StoryConnections = (() => {
       const info=[item.subtitle,dateLabel(item.dates),!visibleApps().includes(item.app)?'App oculto':''].filter(Boolean).join(' · ');
       const visual=item.kind==='photo'&&chatValidImage(item.record)?`<img class="story-picker-photo" src="${item.record}" alt="">`:icons(item.app);
       button.innerHTML=`${visual}<span><b>${esc(item.title)}</b>${info?`<small>${esc(info)}</small>`:''}</span><span class="story-ref-chevron" aria-hidden="true">›</span>`;
-      button.onclick=async()=>{
-        if(pickerState!==state||S!==state.story||state.busy||!items(item.kind).includes(item.record))return;
-        state.busy=true;
-        const select=byId('story-item-source'), destination=select?.value;
-        await closeEditorDialog(picker);
-        if(S!==state.story||!items(item.kind).includes(item.record))return;
-        const ref=snapshot(item);
-        if(ref)state.onSelect(ref,destination);
+      button.setAttribute('aria-pressed','false');
+      button.onclick=()=>{
+        if(pickerState!==state||S!==state.story||state.busy)return;
+        state.selection=item;
+        for(const b of root.querySelectorAll('button'))b.setAttribute('aria-pressed',String(b===button));
+        byId('story-picker-selection').textContent=item.title;
+        byId('story-picker-confirm').disabled=false;
       };
       root.append(button);
     }
@@ -194,6 +196,8 @@ const StoryConnections = (() => {
     kindField.closest('label').hidden = Boolean(options.kind);
     kindField.innerHTML=available.map(kind=>`<option value="${kind}">${esc(kinds[kind][1])}</option>`).join('')||'<option value="">Nenhum conteúdo</option>';
     byId('story-item-query').value='';
+    const categories=byId('story-picker-categories');categories.replaceChildren();categories.hidden=Boolean(options.kind);
+    for(const kind of available){const b=document.createElement('button');b.type='button';b.dataset.kind=kind;b.innerHTML=icons(kinds[kind][0])+`<span>${esc(kinds[kind][1])}</span>`;b.onclick=()=>{kindField.value=kind;kindField.dispatchEvent(new Event('change',{bubbles:true}))};categories.append(b)}
     pickerResults();
     openEditorDialog(picker);
   }
@@ -391,6 +395,14 @@ const StoryConnections = (() => {
       addOwnerPills(app.querySelector('.yt-channel-profile'),'channel',S.ytChannels[ytIndex]);
     }
   }
+  byId('story-picker-confirm').addEventListener('click',async()=>{
+    const state=pickerState,item=state?.selection;
+    if(!item||state.busy||S!==state.story||!items(item.kind).includes(item.record))return;
+    state.busy=true;const destination=byId('story-item-source')?.value;
+    await closeEditorDialog(picker);
+    if(S!==state.story||!items(item.kind).includes(item.record))return;
+    const ref=snapshot(item);if(ref)state.onSelect(ref,destination);
+  });
   byId('story-item-kind').addEventListener('change',pickerResults);
   byId('story-item-query').addEventListener('input',pickerResults);
   for(const d of [picker,dialog])d.addEventListener('click',event=>{

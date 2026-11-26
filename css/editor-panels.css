@@ -85,8 +85,7 @@
 .lock-preview-island { top: 2%; width: 29%; height: 3.8%; background: #070709; }
 .lock-preview-indicator { bottom: 1%; width: 35%; height: 3px; background: #fff; box-shadow: 0 0 2px #0004; }
 .lock-preview-screen .lk2 { bottom: 4.2%; padding: 0 10%; }
-.lock-preview-screen .lk2 .cb { width: 12cqw; height: 12cqw; }
-.lock-preview-screen .lk2 .cb svg { width: 55%; height: 55%; }
+.lock-preview-screen .lk2 .lock-shortcut { width: 14cqw; height: 14cqw; }
 #lock-preview-notices {
   max-height: 52%;
   flex-shrink: 1;
@@ -112,11 +111,11 @@
 .lock-notice-top { position: relative; isolation: isolate; }
 .lock-notice-top .nf { padding-right: 36px; }
 .lock-notice-group.is-stacked .lock-notice-top::before, .lock-notice-group.is-stacked .lock-notice-top::after {
-  content: ""; position: absolute; z-index: -1; top: 12px; border-radius: 18px; border: 1px solid #ffffff60; background: #e4e9ef9e; pointer-events: none;
+  content: ""; position: absolute; z-index: -1; top: 12px; border-radius: 18px; border: 1px solid var(--lock-glass-edge); background: var(--lock-glass-coat), #11182778; pointer-events: none;
 }
 .lock-notice-group.is-stacked .lock-notice-top::before { inset-inline: 17px; bottom: -10px; }
-.lock-notice-group.is-stacked .lock-notice-top::after { inset-inline: 9px; bottom: -5px; background: #e7edf3cc; }
-.lock-notice-count { position: absolute; top: 50%; right: 9px; transform: translateY(-50%); min-width: 20px; padding: 3px; border-radius: 11px; background: #f8fafbe0; color: #3d5268; font-weight: 700; font-size: 11px; text-align: center; pointer-events: none; }
+.lock-notice-group.is-stacked .lock-notice-top::after { inset-inline: 9px; bottom: -5px; }
+.lock-notice-count { position: absolute; top: 50%; right: 9px; transform: translateY(-50%); min-width: 20px; padding: 3px; border-radius: 11px; background: #11182760; color: #fff; font-weight: 700; font-size: 11px; text-align: center; pointer-events: none; }
 .lock-notice-top button { position: absolute; inset: 0; width: 100%; border: 0; border-radius: 20px; background: transparent; cursor: pointer; }
 .lock-notice-top button:focus-visible { outline: 2px solid #398eff; outline-offset: -3px; }
 #lock-preview-notices .lock-notice-top .nf { padding-right: 32px; }

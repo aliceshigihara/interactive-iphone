@@ -1,0 +1,25 @@
+/* Shared glass handwriting for the Editor and landing introductions. */
+.editor-hello {
+ position:fixed; inset:0; z-index:2147483646; display:grid; place-items:center;
+ background:radial-gradient(ellipse at 18% 18%,#d6e8ff 0,transparent 55%),radial-gradient(ellipse at 88% 85%,#a8caff 0,transparent 55%),#f4f8ff;
+ color:#254caa; opacity:1; transition:opacity .65s cubic-bezier(.22,1,.36,1),visibility .65s;
+ touch-action:manipulation; cursor:pointer;
+}
+:root[data-theme=dark] .editor-hello {background:radial-gradient(ellipse at 15% 12%,#204b9c 0,transparent 60%),radial-gradient(ellipse at 95% 85%,#153d79 0,transparent 55%),#0b1427;color:#e1edff;}
+.editor-hello svg {width:min(72vw,440px);height:auto;overflow:visible;filter:drop-shadow(0 5px 18px #487fd32a);}
+.editor-hello path {fill:none;stroke:currentColor;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:editor-hello-write 2.05s cubic-bezier(.42,0,.28,1) forwards;}
+.editor-hello.is-leaving {opacity:0;visibility:hidden;pointer-events:none;}
+@keyframes editor-hello-write {to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.editor-hello{display:none!important;}}
+
+/* The handwritten strokes themselves are the glass, not a surrounding card. */
+.editor-hello svg{width:min(72vw,440px);height:auto;overflow:visible;background:none;border:0;padding:0;box-shadow:none;filter:drop-shadow(0 6px 7px #244b8b40);}
+.editor-hello.landing-intro svg{width:min(88vw,680px);}
+.landing-intro.editor-hello path{animation-duration:2.5s;}
+.landing-intro.editor-hello .hello-f-crossbar{animation-duration:.26s;animation-delay:.62s;}
+.editor-hello .hello-glass-edge{stroke:url(#hello-glass-edge);stroke-width:13;}
+.editor-hello .hello-glass-body{stroke:url(#hello-glass-body);stroke-width:10.5;}
+.editor-hello .hello-glass-highlight{stroke:url(#hello-glass-highlight);stroke-width:2.4;transform:translate(-1px,-2px);opacity:.85;}
+.editor-hello svg stop{stop-color:var(--glass-color);}
+.editor-hello{--hello-edge-light:#fff;--hello-edge-dark:#436aab;--hello-body-light:#ffffffd9;--hello-body-dark:#729be7a8;--hello-body-mid:#b8d8ff85;}
+:root[data-theme=dark] .editor-hello{--hello-edge-light:#e9f5ff;--hello-edge-dark:#4777c0;--hello-body-light:#d7ecffcc;--hello-body-dark:#2758a3c9;--hello-body-mid:#6eafff85;}

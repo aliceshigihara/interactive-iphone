@@ -143,3 +143,94 @@ button.x-explore-feature { cursor: pointer; }
   .x-profile-tabs button span { transition: max-width .24s ease,opacity .2s ease,margin .2s ease; }
   .x-profile-tabs > i { transition: left .26s cubic-bezier(.22,.75,.3,1); }
 }
+
+/* Twitter UI 2: story-specific themes, independent of the editor's appearance. */
+#app:has(.x-view-shell) {
+  --x-paper:#fff; --x-ink:#0f1419; --x-secondary:#536471;
+  --x-line:#eff3f4; --x-line-strong:#cfd9de; --x-soft:#eff3f4;
+  --x-hover:#f7f9f9; --x-accent:#1d9bf0; --x-incoming:#eff3f4;
+  --x-outgoing:#1d9bf0; --x-outgoing-ink:#fff;
+  --x-glass:#fffffff0; --x-glass-edge:#e3e9ed; --x-glass-lens:#e7edf1;
+  background:var(--x-paper)!important; color:var(--x-ink);
+  color-scheme:light;
+}
+#app:has(.x-view-shell[data-x-theme="dim"]) {
+  --x-paper:#15202b; --x-ink:#f7f9f9; --x-secondary:#8b98a5;
+  --x-line:#2f3e4b; --x-line-strong:#465867; --x-soft:#273340;
+  --x-hover:#1d2b38; --x-incoming:#273340;
+  --x-glass:#192734ee; --x-glass-edge:#3a4c5a; --x-glass-lens:#304657;
+  color-scheme:dark;
+}
+#app:has(.x-view-shell[data-x-theme="lights-out"]) {
+  --x-paper:#000; --x-ink:#e7e9ea; --x-secondary:#71767b;
+  --x-line:#2f3336; --x-line-strong:#484c50; --x-soft:#202327;
+  --x-hover:#121416; --x-incoming:#202327;
+  --x-glass:#111315ee; --x-glass-edge:#33383c; --x-glass-lens:#242a30;
+  color-scheme:dark;
+}
+#app:has(.x-view-shell) :is(.x-view-shell,.x-body,.x-profile-page,.x-drawer-panel,.x-head,.x-extra-head,.x-nav,.x-post-menu>div) {background:var(--x-paper);color:var(--x-ink)}
+#app :is(.x-post,.x-main-post,.x-tabs,.x-extra-tabs,.x-profile-tabs,.x-reply-footer,.x-activity-like,.x-explore-news,.x-explore-news-row,.x-drawer-secondary,.x-post-img,.x-nav) {border-color:var(--x-line)}
+#app :is(.x-post-top,.x-post-text,.x-main-post,.x-main-meta b,.x-profile-summary,.x-profile-counts b,.x-extra-head h2,.x-extra-gear,.x-activity-post,.x-chat-row,.x-chat-row.is-unread small,.x-dm-intro b,.x-profile-pill,.x-explore-news-row) {color:var(--x-ink)}
+#app :is(.x-muted,.x-post-meta,.x-post-tools,.x-main-meta,.x-actions,.x-actions button,.x-views,.x-profile-meta,.x-profile-counts,.x-extra-tabs button,.x-profile-tabs button,.x-tabs button,.x-empty,.x-activity-post small,.x-activity-snippet,.x-chat-meta time,.x-chat-meta small,.x-dm-intro,.x-dm-bubble time,.x-explore-news-row small,.x-replying-to,.x-extra-search) {color:var(--x-secondary)}
+#app .x-actions .x-heart.on {color:#f91880}
+#app .x-actions .x-repost.on {color:#00ba7c}
+#app .x-actions .x-bookmark.on,#app .x-verified,#app .x-profile-meta a,#app .x-replying-to button {color:var(--x-accent)}
+#app :is(.x-tabs button.on,.x-extra-tabs button[aria-pressed=true],.x-profile-tabs button[aria-pressed=true],.x-head button,.x-nav button) {color:var(--x-ink)}
+#app .x-tabs button.on::after,#app .x-extra-tabs button[aria-pressed=true] span::after,#app .x-profile-tabs>i {background:var(--x-accent);height:3px;border-radius:999px}
+#app .x-tabs button.on:after {left:50%;right:auto;width: min(56px,65%);translate:-50% 0}
+#app .x-tabs button.x-tab-slide:after {animation:x-tab-slide .3s cubic-bezier(.2,.8,.2,1) both}
+@keyframes x-tab-slide {from{transform:translateX(var(--x-slide-from,0px))}to{transform:translateX(0)}}
+#app :is(.x-extra-search,.x-search,.x-reply-footer button,.x-profile-pill) {background:var(--x-soft);border-color:var(--x-line-strong)}
+#app .x-profile-pill {background:transparent}
+#app .x-profile-avatar {border-color:var(--x-paper);background:var(--x-paper)}
+#app .x-view-shell:has(.x-profile-past-cover)::before {background:linear-gradient(var(--x-paper),color-mix(in srgb,var(--x-paper) 92%,transparent) 65%,color-mix(in srgb,var(--x-paper) 70%,transparent))}
+#app .x-thread-line .x-post-avatar:after {background:var(--x-line-strong)}
+#app .x-dm-bubble {background:var(--x-incoming);color:var(--x-ink)}
+#app .x-dm-bubble.is-out {background:var(--x-outgoing);color:var(--x-outgoing-ink)}
+#app .x-dm-bubble.is-out time {color:#ffffffcc}
+#app :is(.x-search,.x-extra-search input,.x-chat-filter select) {color:var(--x-ink);-webkit-text-fill-color:var(--x-ink);caret-color:var(--x-accent)}
+#app .x-chat-filter select {border:1px solid var(--x-line-strong);background:var(--x-soft);border-radius:999px;padding:6px 8px;max-width:100%;font-size:12px}
+#app :is(.x-search,.x-extra-search input)::placeholder {color:var(--x-secondary);-webkit-text-fill-color:var(--x-secondary)}
+#app :is(.x-drawer-row:hover,.x-chat-row:hover,.x-post-menu button:hover,.x-profile-pill:hover) {background:var(--x-hover)!important}
+#app .x-post-menu>div {border:1px solid var(--x-line-strong);box-shadow:0 6px 24px #0003;animation:x-menu-in .16s ease-out}
+@keyframes x-menu-in {from{opacity:0;transform:translateY(-3px) scale(.97)}to{opacity:1;transform:none}}
+#app .x-post {padding:12px 12px 7px;gap:10px;align-items:flex-start}
+#app .x-post-avatar {width:42px;flex:none}
+#app .x-post-top {font-size:14px;line-height:19px;gap:3px;align-items:center}
+#app .x-post-top b {font-weight:700;flex:0 1 auto}
+#app .x-post-meta {flex:0 1 auto;gap:3px;font-size:13px}
+#app .x-post-text {font-size:15px;line-height:1.38;margin:1px 0 0}
+#app .x-main-post .x-post-text {font-size:17px;line-height:1.42;margin-top:7px}
+#app .x-post-img {margin-top:10px;border-radius:14px;max-height:420px;object-fit:contain;background:var(--x-soft)}
+#app .x-text-link {display:inline;color:var(--x-accent);font:inherit;border:0;background:none;padding:0;overflow-wrap:anywhere;text-align:left}
+#app button.x-text-link {cursor:pointer}
+#app button.x-text-link:hover {text-decoration:underline}
+#app .x-actions {margin-top:7px;min-height:31px;gap:3px}
+#app .x-actions .x-action-end {gap:7px}
+#app .x-actions button {font-size:12px;gap:3px;min-height:31px;position:relative;isolation:isolate;border-radius:99px}
+#app .x-views {font-size:12px;gap:3px}
+#app .x-actions svg {width:17px;height:17px}
+#app .x-detail-actions svg {width:21px;height:21px}
+#app .x-actions button:not(:disabled):hover {color:var(--x-accent)}
+#app .x-actions .x-heart:not(:disabled):hover {color:#f91880}
+#app .x-actions .x-repost:not(:disabled):hover {color:#00ba7c}
+#app .x-actions button:not(:disabled):hover::before {content:'';position:absolute;inset:3px auto 3px -4px;width:25px;border-radius:50%;background:currentColor;opacity:.1;z-index:-1;pointer-events:none}
+#app .x-actions button:disabled {opacity:.35}
+#app .x-fab,#app .x-fab-plus {background:var(--x-accent);color:#fff}
+#app .x-fab {width:54px;height:54px;box-shadow:0 4px 13px #0003}
+/* Retain the existing spring-driven iOS navigation lens, adapted to each theme. */
+#app .x-nav.liquid-tabs {
+  --glass-accent:var(--x-ink);--glass-ink:var(--x-secondary);
+  --glass-bg:var(--x-glass);--glass-edge:var(--x-glass-edge);
+  --glass-lens-fill:var(--x-glass-lens);--glass-shadow:#00000015;
+  background:var(--x-glass);border-color:var(--x-glass-edge);
+}
+#app .x-nav:not(.liquid-tabs) button.on {color:var(--x-accent)}
+#app :is(.x-tabs,.x-extra-tabs,.x-profile-tabs,.x-nav,.x-actions,.x-drawer-panel,.x-profile-controls) button:focus-visible {outline:2px solid var(--x-accent);outline-offset:1px}
+@media (prefers-reduced-motion:no-preference) {
+  #app :is(.x-actions button,.x-fab,.x-profile-pill,.x-avatar-button,.x-drawer-row,.x-extra-tabs button,.x-tabs button,.x-nav button) {transition:transform .18s cubic-bezier(.2,.8,.2,1),background-color .18s,color .18s}
+  #app :is(.x-actions button,.x-fab,.x-profile-pill,.x-avatar-button,.x-drawer-row,.x-extra-tabs button,.x-tabs button):not(:disabled):active {transform:scale(.93)}
+}
+@media (prefers-reduced-motion:reduce) {
+  #app .x-tab-slide:after,#app .x-post-menu>div {animation:none}
+}

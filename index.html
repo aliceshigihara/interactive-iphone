@@ -23,12 +23,15 @@
       }
       const root = document.documentElement;
       root.dataset.landingIntro = '';
-      setTimeout(() => delete root.dataset.landingIntro, 3300);
+      setTimeout(() => {
+        if (root.dataset.landingIntro === '') delete root.dataset.landingIntro;
+      }, 3300);
     })();
   </script>
-  <script src="js/landing-intro.js" defer></script>
+  <script src="js/editor-hello.js?v=5" data-landing-hello defer></script>
   <link rel="preload" href="assets/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="css/landing.css?v=hello">
+  <link rel="stylesheet" href="css/editor-hello.css?v=5">
   <link rel="stylesheet" href="css/theme-toggle.css">
   <link rel="stylesheet" href="css/site-language.css">
   <link rel="stylesheet" href="css/site-menu.css">
@@ -39,9 +42,7 @@
   <script src="js/landing.js" defer></script>
 </head>
 <body>
-  <div class="landing-intro" aria-hidden="true">
-    <svg class="landing-intro-mark" viewBox="0 0 527 124" aria-hidden="true"></svg>
-  </div>
+  <div class="landing-intro editor-hello" aria-hidden="true"></div>
   <div class="scanner" aria-hidden="true"><canvas id="scanner"></canvas></div>
   <header class="site-head">
     <a class="brand" href="././" data-keep-language aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>
@@ -141,7 +142,7 @@
       </div>
       <span class="sr-only" id="tool-status" aria-live="polite"></span>
     </section>
-    <div class="start"><a class="tactile-button" id="start-link" href="./editor.html" data-keep-language><span class="tactile-cap"><span class="tactile-led" aria-hidden="true"></span><span>Começar</span><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a></div>
+    <div class="start"><a class="liquid-metal-button" id="start-link" href="./editor.html" data-keep-language><span class="liquid-metal-face"><span>Começar</span></span></a></div>
   </main>
   <footer class="site-foot"><span>Fablyphone</span><span>Um iPhone fictício para as suas histórias.</span></footer>
 </body>

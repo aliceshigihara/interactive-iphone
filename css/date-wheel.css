@@ -146,3 +146,72 @@ html body .date-wheel-control[data-native] > button.date-wheel-trigger {
   .date-wheel-column { height: calc(3 * var(--wheel-row)); padding-block: var(--wheel-row); }
   .date-wheel-row::before { top: calc(21px + var(--wheel-row)); }
 }
+
+/* Drum picker: seven visible positions on a cylindrical surface. */
+.date-wheel-dialog { --wheel-row:42px; width:min(calc(100% - 24px),440px); padding:22px; border-radius:28px; }
+.date-wheel-dialog[open] { animation:wheel-dialog-in .32s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes wheel-dialog-in { from {opacity:0;transform:translateY(12px) scale(.96)} to {opacity:1;transform:none} }
+.date-wheel-row { gap:4px; padding:8px; border:1px solid var(--ed-line); border-radius:24px; background:color-mix(in srgb,var(--ed-input) 94%,var(--ed-accent-bright)); grid-template-columns:repeat(2,minmax(0,1fr)); }
+.date-wheel-row:has(> :nth-child(3)) {grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1fr)}
+:lang(pt-BR) .date-wheel-row:has(> :nth-child(3)) {grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) minmax(0,1fr)}
+.date-wheel-row::before {display:none}
+.date-wheel-caption {height:24px;font-size:11px;font-weight:550;letter-spacing:.04em;}
+.date-wheel-column {position:relative;height:230px;padding:0;overflow:hidden;scroll-snap-type:none;touch-action:none;perspective:550px;user-select:none;border-radius:16px;isolation:isolate;}
+.date-wheel-column::before {content:"";position:absolute;inset:calc(50% - 21px) 2px auto;height:42px;border-radius:12px;background:color-mix(in srgb,var(--ed-accent-bright) 11%,var(--ed-input));pointer-events:none;z-index:-1;}
+.date-wheel-option {position:absolute;top:calc(50% - 21px);left:0;right:0;height:42px;font-size:18px;font-weight:450;transform-origin:center;backface-visibility:hidden;cursor:inherit;}
+.date-wheel-option.is-selected {font-weight:650;}
+.date-wheel-option[hidden] {display:none;}
+.date-wheel-column.is-dragging {cursor:grabbing;}
+.date-wheel-actions {margin-top:18px;}
+.date-wheel-actions button {transition:transform .2s,background-color .2s;}
+.date-wheel-actions button:active {transform:scale(.96);}
+@media(max-height:650px){.date-wheel-column{height:180px}.date-wheel-dialog{padding:14px}.date-wheel-groups{gap:6px}}
+@media(prefers-reduced-motion:reduce){.date-wheel-dialog[open]{animation:none}.date-wheel-actions button{transition:none}}
+
+
+/* Fablyphone glass surface and restrained motion. */
+.date-wheel-dialog {
+  --site-button-blue: var(--ed-accent-bright);
+  --site-on-button-blue: #fff;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--ed-glass-strong) 88%, var(--ed-paper));
+  backdrop-filter: blur(24px) saturate(135%);
+  box-shadow: inset 0 1px 0 #ffffff50, 0 20px 56px var(--ed-shadow);
+}
+.date-wheel-dialog[open] { animation-duration: .44s; }
+.date-wheel-dialog::backdrop { background: #101c3540; backdrop-filter: blur(7px); }
+.date-wheel-dialog h2 { font-size: 18px; letter-spacing: -.02em; }
+.date-wheel-row { gap: 6px; padding: 6px; border-radius: 17px; border-color: var(--ed-line); background: color-mix(in srgb,var(--ed-glass) 65%,transparent); }
+.date-wheel-caption { font-weight: 650; letter-spacing: 0; font-size: 12px; }
+.date-wheel-column { border-radius: 12px; }
+.date-wheel-column::before { inset-inline: 2px; border-radius: 11px; border: 1px solid var(--ed-line); background: color-mix(in srgb,var(--ed-accent-bright) 11%,transparent); }
+.date-wheel-option { font-size: 16px; font-weight: 500; }
+.date-wheel-option.is-selected { color: var(--ed-accent); font-weight: 700; }
+.date-wheel-actions button { border-radius: 13px; min-height: 42px; background: var(--ed-glass-strong); transition: background-color .25s, transform .35s cubic-bezier(.22,1,.36,1); }
+.date-wheel-actions button:last-child { background: var(--site-button-blue); color: var(--site-on-button-blue); border-color: transparent; }
+.date-wheel-actions button:first-child:hover { background: color-mix(in srgb,var(--ed-accent-bright) 10%,var(--ed-input)); }
+:root[data-theme="dark"] .date-wheel-dialog { --site-button-blue: #7ea8ff; --site-on-button-blue: #071022; box-shadow: inset 0 1px 0 #ffffff16, 0 20px 56px var(--ed-shadow); }
+@media(prefers-reduced-motion:reduce) { .date-wheel-dialog[open] { animation: none; } .date-wheel-actions button { transition:none; } }
+
+/* Matched calendar/clock affordances, without a second filled button. */
+html body .date-wheel-control { align-items:center; gap:4px; }
+html body .date-wheel-control > input { min-width:0; padding-inline-end:4px; }
+html body .date-wheel-control > button.date-wheel-trigger,
+html body .date-wheel-control[data-native] > button.date-wheel-trigger {
+  position:relative; inset:auto; display:grid; place-items:center; flex:0 0 30px;
+  width:30px; height:32px; min-height:32px; padding:0; margin:0;
+  border:1px solid var(--ed-line); border-radius:10px;
+  background:color-mix(in srgb,var(--ed-accent-bright) 7%,var(--ed-input));
+  color:var(--ed-accent-bright); box-shadow:none; filter:none;
+  transition:background-color .2s, border-color .2s, transform .25s cubic-bezier(.22,1,.36,1);
+}
+html body .date-wheel-control > button.date-wheel-trigger:is(:hover,:focus-visible,[aria-expanded="true"]) {
+  background:color-mix(in srgb,var(--ed-accent-bright) 15%,var(--ed-input));
+  border-color:var(--ed-line-strong); box-shadow:none; filter:none;
+}
+html body .date-wheel-control > button.date-wheel-trigger:active { transform:scale(.94); }
+html body .date-wheel-control .date-wheel-trigger svg { width:17px;height:17px;padding:0;background:none;box-sizing:border-box; }
+html body .date-wheel-control[data-native] > input { pointer-events:auto; }
+html body .date-wheel-control[data-native] > input::-webkit-calendar-picker-indicator { display:none; }
+html body .date-wheel-control:has(> input:is(:disabled,[readonly])) > button.date-wheel-trigger { display:none; }
+@media(prefers-reduced-motion:reduce) { html body .date-wheel-control > button.date-wheel-trigger { transition:none; } }

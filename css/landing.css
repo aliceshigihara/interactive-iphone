@@ -51,31 +51,7 @@ svg { display: block; }
 
 html[data-landing-intro] { overflow: hidden; }
 html[data-landing-intro] body > :is(header, main, footer) { visibility: hidden; }
-.landing-intro {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  place-items: center;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 68% 35%, var(--aurora), transparent 63%),
-    radial-gradient(ellipse at 17% 79%, var(--aurora-secondary), transparent 57%),
-    var(--paper);
-  transition: opacity .28s ease;
-}
-html[data-landing-intro] .landing-intro, .landing-intro.is-leaving { display: grid; }
-.landing-intro.is-leaving { opacity: 0; pointer-events: none; }
-.landing-intro-mark {
-  width: min(78vw, 510px);
-  height: auto;
-  color: var(--accent-bright);
-  fill: currentColor;
-  transform: translateY(-.5rem);
-  transition: color .25s ease, transform .28s ease;
-}
-.landing-intro.is-formed .landing-intro-mark { color: var(--ink); }
-.landing-intro.is-leaving .landing-intro-mark { transform: translateY(-.85rem); }
+html:not([data-landing-intro]) .landing-intro:not(.is-leaving) { display: none; }
 
 .scanner { position: absolute; z-index: -1; inset: 0 0 auto; height: min(100%, 930px); overflow: hidden; pointer-events: none; }
 .scanner::before, .scanner::after, .scanner canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
@@ -382,31 +358,37 @@ html[data-landing-intro] .landing-intro, .landing-intro.is-leaving { display: gr
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .start { display: grid; justify-items: center; padding: clamp(54px,7vw,86px) 16px clamp(58px,8vw,94px); }
-/* Tactile rocker: recessed well, glass cap and illuminated bead. */
-.tactile-button {
-  display: inline-grid; width: min(100%, 254px); padding: 6px;
-  border-radius: 23px; perspective: 500px; touch-action: manipulation;
-  background: linear-gradient(155deg,#a7b9d8,#dce6f5 55%,#f9fbff);
-  border: 1px solid #9baec9; box-shadow: inset 0 3px 8px #253e7055, 0 12px 26px #233f7026, 0 1px 0 #fff;
-  -webkit-tap-highlight-color: transparent;
+/* Liquid-metal capsule — native adaptation of johuniq's reference. */
+@property --metal-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.liquid-metal-button {
+  position: relative; isolation: isolate; display: inline-grid;
+  width: min(100%, 254px); min-height: 68px; padding: 3px;
+  border-radius: 999px; background: #8999b6; overflow: hidden;
+  box-shadow: 0 1px 2px #152a5140, 0 13px 26px #172b6230, 0 26px 46px #172b6218;
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
+  touch-action: manipulation;
 }
-.tactile-cap {
-  position: relative; isolation: isolate; display: grid; grid-template-columns: 12px 1fr 20px; align-items: center; gap: 14px;
-  min-height: 59px; padding: 12px 18px; border-radius: 17px; color: #fff;
-  background: linear-gradient(180deg,#7198ec 0%,#436ed2 42%,#2549a3 100%);
-  border: 1px solid #ffffff70; font-size: 18px; font-weight: 720; text-align: center;
-  text-shadow: 0 1px 2px #18316b66;
-  box-shadow: inset 0 2px 2px #ffffff8c,inset 0 -3px 5px #152c7670,0 4px 0 #1b397e,0 7px 9px #1c397c66;
-  transform: translateY(-2px) rotateX(0deg); transform-origin: 50% 15%;
-  transition: transform .46s cubic-bezier(.25,1.35,.45,1),box-shadow .2s ease,filter .2s ease;
+.liquid-metal-button::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: conic-gradient(from var(--metal-angle), #9aa9c3 0%, #eef5ff 8%, #7184a8 13%, #263c6a 18%, #c5d5ed 23%, #faffff 27%, #88b3ff 30%, #657a9e 35%, #b7c4d8 45%, #e7effa 54%, #4b6090 62%, #172c57 68%, #97baff 73%, #fff 76%, #859abf 81%, #dce6f5 90%, #9aa9c3 100%);
+  animation: liquid-metal-flow 6s linear infinite;
 }
-.tactile-cap::before { content: ""; position: absolute; inset: 2px 3px 48%; border-radius: 14px 14px 9px 9px; background: linear-gradient(#ffffff48,#ffffff08); pointer-events: none; z-index: -1; }
-.tactile-led { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 25%,#e7f5ff,#7d9edb 55%,#2d4c90); box-shadow: inset 0 0 0 1px #17367155,0 1px 1px #ffffff55; transition: background .18s,box-shadow .18s; }
-.tactile-button:is(:hover,:focus-visible,.is-pressed) .tactile-led { background: radial-gradient(circle at 35% 25%,#fff,#a9e6ff 42%,#38bdf8 75%); box-shadow: 0 0 9px #7de2ff,0 0 18px #3acbff; }
-.tactile-button:is(:hover,:focus-visible) .tactile-cap { filter: brightness(1.06); }
-.tactile-button:is(:active,.is-pressed) .tactile-cap { transform: translateY(3px) rotateX(-12deg) scale(.985); box-shadow: inset 0 2px 4px #18316b55,inset 0 -1px 2px #ffffff24,0 1px 0 #1b397e; transition-duration: .13s; }
-:root[data-theme="dark"] .tactile-button { background: linear-gradient(155deg,#080f20,#253754 60%,#344865); border-color:#52698e; box-shadow: inset 0 3px 9px #0009,0 12px 26px #0005; }
-:root[data-theme="dark"] .tactile-cap { background: linear-gradient(180deg,#527fcf,#345cae 45%,#213d83); }
+@keyframes liquid-metal-flow { to { --metal-angle: 360deg; } }
+.liquid-metal-face {
+  position: relative; display: grid; place-items: center; border-radius: inherit;
+  min-height: 62px; padding: 12px 32px;
+  background: linear-gradient(180deg,#284b91 0%,#203d80 48%,#142957 100%);
+  border: 1px solid #c5d7ff60; color: #e1ebff;
+  font-size: 20px; font-weight: 540; letter-spacing: -.025em;
+  box-shadow: inset 0 1px 1px #ffffff33, inset 0 -2px 3px #07152f50;
+  transition: color .3s, filter .3s;
+}
+.liquid-metal-button:is(:hover,:focus-visible) { transform: translateY(-2px); box-shadow: 0 3px 5px #152a5140, 0 18px 36px #172b6240; }
+.liquid-metal-button:is(:hover,:focus-visible) .liquid-metal-face { color: #fff; filter: brightness(1.13); }
+.liquid-metal-button:is(:active,.is-pressed) { transform: translateY(1px) scale(.98); }
+:root[data-theme="dark"] .liquid-metal-button { box-shadow: 0 2px 4px #0008,0 14px 30px #0006; }
+:root[data-theme="dark"] .liquid-metal-face { background: linear-gradient(#223a6d,#14274d 50%,#0a152b); }
+@media(prefers-reduced-motion:reduce) { .liquid-metal-button::before { animation: none; } .liquid-metal-button,.liquid-metal-face { transition: none; } .liquid-metal-button:is(:hover,:active,.is-pressed) { transform:none; } }
 .site-foot { border-top: 1px solid var(--border); color: var(--muted); padding: 13px 0 16px; font-size: 11px; gap: 9px; }
 .site-foot span:first-child { font-weight: 750; color: var(--sub); }
 
@@ -438,6 +420,4 @@ html[data-landing-intro] .landing-intro, .landing-intro.is-leaving { display: gr
   html { scroll-behavior: auto; }
   .pressure.is-reactive { display: block; }
   .pressure span { font-variation-settings: "wght" 570, "wdth" 92; }
-  .tactile-cap, .tactile-led { transition: none; }
-  .tactile-button:is(:active,.is-pressed) .tactile-cap { transform: none; }
 }

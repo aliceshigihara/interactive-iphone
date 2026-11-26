@@ -21,7 +21,7 @@ function connection(){
 export async function publishStory(payload,name){
   if(typeof payload!=='string' || !/^(gz|raw)\.[A-Za-z0-9_-]+$/.test(payload))throw new Error('História inválida.');
   // O documento Firestore suporta no máximo 1 MiB; reservamos espaço para metadados.
-  if(new TextEncoder().encode(payload).length>850000)throw new Error('Esta história é grande demais para o plano atual do Firestore. Remova ou reduza algumas fotos.');
+  if(new TextEncoder().encode(payload).length>850000)throw new Error('Esta história é grande demais para o plano atual do Firestore. Remova ou reduza algumas fotos ou áudios.');
   const {auth,db}=connection();
   if(!auth.currentUser)await signInAnonymously(auth);
   const ref=await addDoc(collection(db,'publishedStories'),{

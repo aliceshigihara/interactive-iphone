@@ -69,17 +69,12 @@ const NotificationStack = (() => {
         await animation.finished.catch(()=>{});
       }
       if (state.story!==oldStory) return;
-      const before=positions(), active=row.contains(document.activeElement);
-      const next=row.nextElementSibling||row.previousElementSibling;
+      const before=positions();
       state.dismissed.add(notice);
       const index=state.entries.indexOf(notice);
       if(index>=0)state.entries.splice(index,1);
       row.remove();
       sync();animateFrom(before);
-      if(active){
-        const destination=next&&!next.inert&&!next.hidden?next.querySelector('button'):!toggle.hidden?toggle:list.querySelector('button');
-        destination?.focus({preventScroll:true});
-      }
     }
     state.update = (story,notices,markup) => {
       if(state.story!==story){
@@ -100,8 +95,7 @@ const NotificationStack = (() => {
           row=document.createElement('div');
           row.className='notice-stack-card';
           row.setAttribute('role','listitem');
-          row.innerHTML=`<div class="notice-stack-surface">${markup(record)}<button type="button" class="notice-stack-dismiss">×</button></div>`;
-          row.querySelector('button').setAttribute('aria-label',`${tr('Dispensar notificação','Dismiss notification')}: ${record.title||''}`);
+          row.innerHTML=`<div class="notice-stack-surface">${markup(record)}</div>`;
         }
         if(list.children[index]!==row)list.insertBefore(row,list.children[index]||null);
       }
@@ -115,8 +109,7 @@ const NotificationStack = (() => {
         event.stopPropagation();event.preventDefault();return;
       }
       const row=event.target.closest('.notice-stack-card');
-      if(event.target.closest('.notice-stack-dismiss'))dismiss(row,-1);
-      else if(event.target===toggle)expand(!state.expanded);
+      if(event.target===toggle)expand(!state.expanded);
       else if(row&&!state.expanded)expand(true);
     });
     host.addEventListener('wheel',event=>{

@@ -182,3 +182,15 @@
   .phone-live-action > span { transition: transform .17s ease, filter .17s ease; }
   .phone-live-action:active:enabled > span { transform: scale(.9); filter: brightness(1.1); }
 }
+/* Map controls: compact glass surfaces with tactile feedback, scoped to Maps/Find My. */
+.scr .globe-tools button, .scr .globe-avatar, .scr .globe-handle {
+  transition: scale .32s cubic-bezier(.22,1.3,.36,1), background-color .18s, color .18s, box-shadow .2s;
+  touch-action: manipulation;
+}
+.scr .globe-tools button { border-radius: 26px; }
+.scr .globe-tools button:active, .scr .globe-avatar:active { scale: .87; background-color: #ffffff75; }
+.scr .globe-handle:active { scale: 1.18 1.5; }
+.scr .globe-tools button[aria-pressed="true"] { background-color: #ffffff80; color: #007aff; }
+.scr .globe-sheet { will-change: auto; }
+.scr .globe-sheet[data-expanded="true"] .globe-handle { background-color: #547c8a; }
+@media (prefers-reduced-motion: reduce) { .scr :is(.globe-tools button,.globe-avatar,.globe-handle) { transition:none; scale:1 !important; } }

@@ -322,7 +322,7 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 :root[data-theme="dark"] .story-ref-section { border-color: var(--ed-line); }
 
 /* The light blue accent needs dark lettering when used as a solid fill. */
-:root[data-theme="dark"] .pc button:not(.g,.panel-help-toggle),
+:root[data-theme="dark"] .pc button:not(.g,.panel-help-toggle,.date-wheel-trigger),
 :root[data-theme="dark"] :is(.planner-primary, .story-help-primary, [data-status="complete"] .guide-stepper-badge, .mb .bt button:last-child, .ac-editor .ac-primary),
 :root[data-theme="dark"] #narration .sc-primary { color: var(--site-on-button-blue); }
 :root[data-theme="dark"] :is(.pc.show-help .panel-help-toggle, .pc .seg button.on, .pc .weather-quick button.on, #narration .nar-switch button[aria-pressed="true"]) { color: var(--site-on-button-blue) !important; }

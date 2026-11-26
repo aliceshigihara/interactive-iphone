@@ -1,0 +1,105 @@
+/* Only the simulated Messages app; the editor and other apps keep their themes. */
+#app:has(.im-inbox-head),#app:has(.msg-glass-head){--im-blue:#007aff;--msg-paper:#fff;background:#fff!important;color:#111}
+#app .im-inbox-head{position:relative;flex:none;padding:2px 16px 10px;background:#fff;z-index:4}
+#app .im-inbox-nav{display:flex;align-items:center;gap:16px;min-height:32px;color:var(--im-blue)}
+#app .im-inbox-nav>span{flex:1}
+#app .im-inbox-nav button{display:flex;align-items:center;gap:2px;border:0;background:none;padding:4px 0;font-size:16px;color:var(--im-blue);cursor:pointer}
+#app .im-inbox-head h1{font-size:34px;letter-spacing:-1.4px;line-height:1.18;margin:6px 0 9px;font-weight:750}
+#app .im-search{display:flex;align-items:center;gap:6px;background:#f0f0f2;border-radius:10px;height:36px;padding:0 9px;color:#8e8e93}
+#app .im-search input{flex:1;min-width:0;appearance:none;border:0;outline:0;background:none;font-size:16px;color:#111}
+#app .im-search input::placeholder{color:#8e8e93}
+#app .im-inbox-list{padding:0 14px 30px 8px;background:#fff}
+#app .im-inbox-row{display:flex;align-items:center;position:relative;width:100%;gap:10px;padding:0;border:0;background:#fff;text-align:left;cursor:pointer;min-height:76px;color:#111;transition:background .18s ease,transform .25s cubic-bezier(.2,.8,.2,1)}
+#app .im-inbox-row[hidden],#app .im-inbox-empty[hidden],#app .im-inbox-menu[hidden]{display:none!important}
+#app .im-inbox-row:active{background:#f4f4f6;transform:scale(.985)}
+#app .im-unread-dot{width:9px;height:9px;border-radius:50%;flex:none;opacity:0;background:var(--im-blue)}
+#app .im-inbox-row[data-unread="true"] .im-unread-dot{opacity:1}
+#app .im-inbox-row>.av{flex:none}
+#app .im-inbox-copy{display:grid;align-content:center;flex:1;min-width:0;min-height:76px;padding:10px 0;border-bottom:1px solid #ededf0;gap:3px}
+#app .im-inbox-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#app .im-inbox-top strong{font-size:16px;font-weight:650;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#app .im-inbox-time{flex:none;display:flex;align-items:center;gap:7px;color:#8e8e93;font-size:13px;font-weight:400}
+#app .im-inbox-time svg{color:#c5c5c9}
+#app .im-preview{font-size:14px;line-height:1.35;color:#8e8e93;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+#app .im-inbox-empty{text-align:center;color:#8e8e93;padding:36px 12px;font-size:14px}
+#app .im-inbox-menu{position:absolute;right:12px;top:36px;z-index:9;min-width:180px;background:#ffffffea;backdrop-filter:blur(24px);border:1px solid #e8e8ee;border-radius:16px;padding:5px;box-shadow:0 8px 30px #0002;animation:im-menu-in .26s cubic-bezier(.2,.8,.2,1)}
+#app .im-inbox-menu button{display:block;text-align:left;width:100%;padding:12px;border:0;background:none;border-radius:10px;font-size:14px;color:#111;cursor:pointer}
+#app .im-inbox-menu button:hover{background:#f1f1f4}
+#app .ios-chat-body #th{padding:12px 15px 18px;gap:4px}
+#app .im-message-unit{position:relative;display:flex;flex-direction:column;width:100%;min-width:0}
+#app .im-message-line{display:flex;align-items:flex-end;gap:5px;min-width:0;position:relative}
+#app .im-out .im-message-line{justify-content:flex-end}
+#app .im-bubble-host{position:relative;min-width:0;max-width:81%;display:flex;flex-direction:column;align-items:flex-start}
+#app .im-out .im-bubble-host{align-items:flex-end}
+#app .im-group.im-in .im-bubble-host{max-width:81%}
+#app .im-group.im-in.im-group-end .im-bubble-host{max-width:calc(81% - 25px)}
+#app .im-message-line .b,#app .im-message-line .message-audio{max-width:100%;margin-bottom:0}
+#app .im-message-line .b.tail{margin-bottom:4px}
+#app .im-message-line .b.me{background:#007aff}
+#app .im-message-line .b.th{background:#e6e6eb}
+/* A transparent cutout keeps the tail from painting over group avatars. */
+#app .im-message-line .b.tail::before{width:12px!important;height:12px!important;border-radius:0!important;clip-path:path("M0 0H5C5 6 8 10 12 12C7 12 3 10 0 7Z")}
+#app .im-message-line .b.me.tail::before{background:#007aff!important}
+#app .im-message-line .b.th.tail::before{background:#e6e6eb!important;transform:scaleX(-1)}
+#app .im-message-line .b.tail::after{display:none!important}
+#app .im-message-line .b{font-size:17px;line-height:1.28;border-radius:19px;padding:8px 12px}
+#app .im-group-person{width:28px;min-width:28px;align-self:flex-end;margin-bottom:4px;display:grid;place-items:center}
+#app .ios-chat-body .sn2{margin-left:36px}
+#app .im-message-options{position:absolute;top:50%;transform:translateY(-50%);right:0;display:grid;place-items:center;width:27px;height:27px;border:0;border-radius:50%;background:#f0f0f3;color:#6c6c72;opacity:0;cursor:pointer;transition:opacity .15s,scale .25s;z-index:2}
+#app .im-out .im-message-options{left:0;right:auto}
+#app .im-message-unit:hover .im-message-options,#app .im-message-unit:focus-within .im-message-options{opacity:1}
+#app .im-message-options:active{scale:.86}
+#app .im-tapback{position:absolute;z-index:3;top:-8px;right:-8px;display:grid;place-items:center;width:24px;height:24px;background:#f0f0f3;border:2px solid white;border-radius:50%;box-shadow:0 1px 2px #0001;pointer-events:none;animation:im-pop .3s cubic-bezier(.2,1.2,.4,1)}
+#app .im-out .im-tapback{left:-8px;right:auto}
+#app .im-tapback::after{content:"";position:absolute;right:0;bottom:-4px;width:7px;height:7px;border-radius:50%;background:#e6e6eb;border:1px solid #fff}
+#app .im-out .im-tapback::after{right:auto;left:0}
+#app .im-bubble-host:has(.im-tapback){margin-top:7px}
+#app .im-reply-context{position:relative;display:flex;flex-direction:column;gap:3px;align-items:flex-start;margin:8px 8px 3px;padding-bottom:12px}
+#app .im-reply-context.im-quote-mine{align-items:flex-end}
+#app .im-quote{max-width:74%;font-size:11px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:1px solid #e1e1e6;border-radius:12px;background:#fff;color:#8e8e93;padding:5px 9px;cursor:pointer;text-align:left}
+#app .im-quote-mine .im-quote{color:var(--im-blue);border-color:#65a8ff}
+#app .im-reply-context small{font-size:11px;color:var(--im-blue);margin:0 9px}
+#app .im-reply-curve{position:absolute;pointer-events:none;bottom:0;left:10px;width:12px;height:12px;border-left:2px solid #d8d8df;border-bottom:2px solid #d8d8df;border-bottom-left-radius:10px}
+#app .im-quote-mine .im-reply-curve{left:auto;right:10px;transform:scaleX(-1)}
+#app .im-group .im-reply-context{margin-left:35px}
+#app .im-flash .im-bubble-host{animation:im-highlight .85s ease-out}
+#app .im-has-stack .b[data-chat-image],#app .im-message-line .b[data-chat-image]:not(:has(.chat-once-label)){background:transparent!important;overflow:visible;padding:0!important;color:#111}
+#app .im-message-line .b[data-chat-image] .chat-attachment{width:min(212px,100%);border-radius:17px;max-height:300px;object-fit:contain}
+#app .im-message-line .b[data-chat-image] .chat-caption{background:#e6e6eb;border-radius:13px;padding:8px 10px;margin-top:4px;color:#111}
+#app .im-out .b[data-chat-image] .chat-caption{background:#007aff;color:#fff}
+#app .im-photo-stack{position:relative;display:block;width:166px;height:202px;border:0;background:none;cursor:zoom-in;padding:0;isolation:isolate;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+#app .im-photo-stack img{position:absolute;top:0;right:0;width:110px;height:144px;object-fit:cover;border-radius:13px;box-shadow:0 2px 7px #0002;transform:translate(calc(var(--im-photo)*-41px),calc(var(--im-photo)*42px));transition:transform .35s cubic-bezier(.2,.8,.2,1);border:1px solid #fff5;pointer-events:none}
+#app .im-photo-stack[data-count="3"]{height:235px;width:190px}
+#app .im-photo-stack[data-count="3"] img{transform:translate(calc(var(--im-photo)*-30px),calc(var(--im-photo)*34px))}
+#app .im-photo-stack>span{position:absolute;bottom:0;right:2px;font-size:11px;color:var(--im-blue);font-weight:550}
+#app .im-photo-stack:active{transform:scale(.95)}
+#app .ios-msg-footer{padding:8px 15px 24px;background:#fff}
+#app .ios-msg-footer .cmp{gap:11px;min-height:38px}
+#app .ios-msg-footer .pl{width:36px;min-width:36px;height:36px;border:0;background:#e8e8eb;box-shadow:none;backdrop-filter:none;color:#8e8e93}
+#app .ios-msg-footer .pl svg{width:21px;height:21px}
+#app .ios-msg-footer .pill{height:36px;border:1px solid #e2e2e7;box-shadow:none;backdrop-filter:none;background:#fff;padding:0 7px 0 12px}
+#app .ios-msg-footer .pill input{font-size:16px}
+#app .ios-msg-footer .pill .ios-glass-send{background:#007aff;width:27px;height:27px;margin:0;box-shadow:none;border:0}
+#app .ios-msg-footer .pill .ios-glass-send:not([hidden]){animation:im-pop .26s cubic-bezier(.2,1.2,.4,1)}
+#app .ios-msg-footer .ios-glass-wave{color:#9a9aa0;box-shadow:none;border:0;background:none}
+#app .ios-msg-footer .ios-glass-wave svg{width:19px;height:19px}
+#app .im-reply-draft{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 8px 8px 46px;animation:im-menu-in .22s ease-out}
+#app .im-reply-draft div{min-width:0;display:grid;gap:2px;border-left:2px solid #007aff;padding-left:8px}
+#app .im-reply-draft strong{font-size:11px;color:#007aff}
+#app .im-reply-draft span{font-size:12px;color:#8e8e93;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#app .im-reply-draft button{border:0;background:#f0f0f3;color:#777;border-radius:50%;width:25px;height:25px;flex:none;cursor:pointer}
+#photo-lightbox .im-gallery-image{touch-action:pan-y;max-height:76%;object-fit:contain}
+#photo-lightbox .im-gallery-nav{display:flex;justify-content:center;gap:25px;padding:8px}
+#photo-lightbox .im-gallery-nav button{display:grid;place-items:center;width:38px;height:38px;border:0;border-radius:50%;background:#ffffff30;color:white;cursor:pointer}
+#photo-lightbox .im-gallery-nav button:disabled{opacity:.25}
+@keyframes im-menu-in{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes im-pop{from{opacity:0;scale:.72}to{opacity:1;scale:1}}
+@keyframes im-highlight{0%,25%{filter:drop-shadow(0 0 6px #007aff88)}100%{filter:none}}
+@media (hover:none){#app .im-message-options{opacity:.65}}
+@media(prefers-reduced-motion:reduce){#app :is(.im-inbox-menu,.im-tapback,.im-flash .im-bubble-host,.im-reply-draft,.ios-glass-send,.im-photo-stack,.im-photo-stack img,.im-inbox-row){animation:none!important;transition:none!important}}
+#app .im-action-menu{position:relative;align-self:flex-start;display:flex;gap:3px;max-width:100%;z-index:5;padding:4px;margin:5px 0 3px;background:#fafafc;border:1px solid #e9e9ee;border-radius:14px;box-shadow:0 3px 12px #0001;animation:im-menu-in .23s cubic-bezier(.2,.8,.2,1)}
+#app .im-out .im-action-menu{align-self:flex-end}
+#app .im-action-menu button{display:flex;align-items:center;gap:5px;padding:8px 9px;color:#007aff;border:0;background:none;border-radius:10px;font-size:12px;cursor:pointer}
+#app .im-action-menu button:hover,#app .im-action-menu button:focus-visible{background:#eaf2ff}
+#app .im-action-menu svg{flex:none}
+@media(prefers-reduced-motion:reduce){#app .im-action-menu{animation:none}}

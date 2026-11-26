@@ -3,7 +3,7 @@ const ChatEditing = (() => {
   const tr = SiteLanguage.text;
   const editLabel = () => tr('Editar mensagem', 'Edit message');
   const timeLabel = () => tr('Editar horário', 'Edit time');
-  const hasAttachment = message => Boolean(message.image || message.links?.length);
+  const hasAttachment = message => Boolean(message.image || message.audio || message.links?.length);
 
   function thread() {
     if (isMessenger(cur) && cid != null) return activeChatsFor(cur).find(chat => String(chat.id) === String(cid));
@@ -53,13 +53,16 @@ const ChatEditing = (() => {
     const index = chat.msgs.indexOf(message);
     const action = trigger.dataset.chatEditAction;
     const fields = [
-      {k:'messageText', l:message.image ? tr('Legenda', 'Caption') : tr('Mensagem', 'Message'), t:'area', v:message[textKey]},
+      {k:'messageText', l:message.audio ? tr('Transcrição', 'Transcript') : message.image ? tr('Legenda', 'Caption') : tr('Mensagem', 'Message'), t:'area', v:message[textKey]},
       {k:'messageTime', l:dated ? tr('Data e horário', 'Date and time') : tr('Horário exibido', 'Displayed time'),
         t:dated ? 'datetime-local' : 'text', v:originalTime}
     ];
 
     const modal = form(editLabel(), fields, values => {
       if (readerMode || S !== story || cur !== appKey || thread() !== chat || !chat.msgs.includes(message)) return false;
+      if (message.audio && !message.audio.src && !values.messageText.trim()) {
+        return invalid(textField, tr('Escreva a transcrição do áudio.', 'Enter the audio transcript.'));
+      }
       if (!hasAttachment(message) && !values.messageText.trim()) {
         return invalid(textField, tr('Escreva uma mensagem.', 'Enter a message.'));
       }
@@ -139,7 +142,7 @@ const ChatEditing = (() => {
       editTime(index);
     } else if (message.image && !action) {
       chatImageOpen(index, cur === 'ig' ? chat.id : null);
-    } else {
+    } else if (!message.audio || action) {
       open(chat, message, target);
     }
   }
