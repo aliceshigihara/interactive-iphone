@@ -68,7 +68,10 @@
       clearTimeout(hold);
       overlay.classList.add('is-leaving');
       if (landing) delete root.dataset.landingIntro;
-      setTimeout(()=>overlay.remove(),700);
+      setTimeout(() => {
+        overlay.remove();
+        if (!landing) document.dispatchEvent(new Event('editor-hello:complete'));
+      },700);
       document.removeEventListener('keydown',onKey);
       motion.removeEventListener('change',onMotion);
     };

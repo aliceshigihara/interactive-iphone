@@ -111,7 +111,10 @@ const EditorGuide = (() => {
     $('#story-publish-confirm').addEventListener('click', () => closeEditorDialog(warning, 'publish'));
     let seen = false;
     try { seen = localStorage.getItem(seenKey) === '1'; } catch {}
-    if (!seen) openGuide();
+    if (!seen) {
+      if ($('.editor-hello')) document.addEventListener('editor-hello:complete', openGuide, {once:true});
+      else openGuide();
+    }
   }
 
   return {confirmPublish};
