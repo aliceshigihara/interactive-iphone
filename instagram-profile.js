@@ -82,8 +82,8 @@ const InstagramProfile = (() => {
     const profileTabs=`<nav class="ig-profile-tabs" aria-label="Profile sections">${tabs.map(([t,label])=>`<button type="button" aria-label="${label}" aria-pressed="${tab===t}" onclick="InstagramProfile.setTab(${key},'${t}')">${svg(t,23)}</button>`).join('')}</nav>`;
     const posts=S.posts.map((post,i)=>({post,i})).filter(({post})=>tab==='tagged'?same(post.igTagged,id):tab==='reposts'?same(post.igRepost,id):same(post.pid,id)&&(tab!=='reels'||!!post.views));
     const grid=posts.map(({post,i})=>{
-      const src=post.imgs?.[0]||post.img;
-      return button('Open post',`InstagramProfile.openTile(${i},${key},'${tab}')`,`${chatValidImage(src)?`<img src="${esc(src)}" alt="">`:post.cap?`<span class="ig-grid-caption">${esc(post.cap)}</span>`:''}${post.views?`<i>${svg('reels',15)}</i>`:post.imgs?.length>1?`<i>${svg('carousel',15)}</i>`:''}`,'ig-profile-tile');
+      const images=igPostImages(post),src=images[0];
+      return button('Open post',`InstagramProfile.openTile(${i},${key},'${tab}')`,`${chatValidImage(src)?`<img src="${esc(src)}" alt="">`:post.cap?`<span class="ig-grid-caption">${esc(post.cap)}</span>`:''}${post.views?`<i>${svg('reels',15)}</i>`:images.length>1?`<i>${svg('carousel',15)}</i>`:''}`,'ig-profile-tile');
     }).join('');
     const threads=xWebsite(p.threads);
     return `<header class="ig-profile-top${threads?' has-threads':''}">${editable?button('Create post',`addPost(${key})`,svg('plus')):!mine?button('Back','InstagramProfile.go(null)',svg('back')):'<span></span>'}${switcher}<span class="ig-profile-tools">${threads?`<a href="${esc(threads)}" target="_blank" rel="noopener noreferrer" aria-label="Threads">${svg('threads',23)}</a>`:''}${menu}</span></header>

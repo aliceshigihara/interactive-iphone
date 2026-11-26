@@ -7,13 +7,26 @@
   <meta name="theme-color" content="#f4f8ff">
   <title>Fablyphone — Histórias em uma tela</title>
   <script>
-    if (new URLSearchParams(location.search).get('reader') === '1') {
-      location.replace('editor.html' + location.search + location.hash);
-    }
+    const openingReader = new URLSearchParams(location.search).get('reader') === '1';
+    if (openingReader) location.replace('editor.html' + location.search + location.hash);
     try {
       if (localStorage.getItem('fablyphone:landing-theme') === 'dark') document.documentElement.dataset.theme = 'dark';
     } catch {}
+    (() => {
+      if (openingReader || location.hash || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (performance.getEntriesByType('navigation')[0]?.type === 'back_forward') return;
+      if (document.referrer) {
+        const from = new URL(document.referrer);
+        const landingPath = path => path.replace(/\/index\.html$/, '/');
+        if (from.origin === location.origin && landingPath(from.pathname) === landingPath(location.pathname)
+          && from.searchParams.get('lang') !== new URLSearchParams(location.search).get('lang')) return;
+      }
+      const root = document.documentElement;
+      root.dataset.landingIntro = '';
+      setTimeout(() => delete root.dataset.landingIntro, 3300);
+    })();
   </script>
+  <script src="landing-intro.js" defer></script>
   <link rel="preload" href="assets/roboto-flex-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="theme-toggle.css">
@@ -26,6 +39,9 @@
   <script src="landing.js" defer></script>
 </head>
 <body>
+  <div class="landing-intro" aria-hidden="true">
+    <svg class="landing-intro-mark" viewBox="0 0 527 124" aria-hidden="true"></svg>
+  </div>
   <div class="scanner" aria-hidden="true"><canvas id="scanner"></canvas></div>
   <header class="site-head">
     <a class="brand" href="./" data-keep-language aria-label="Fablyphone · início"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3.5" width="10" height="17" rx="3"/><path d="M10 6h4m-2 11.5h.01"/></svg></span>fablyphone</a>

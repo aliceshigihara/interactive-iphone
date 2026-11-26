@@ -21,6 +21,21 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+:root[data-theme-reveal]::view-transition-group(root) {
+  animation-duration: 400ms;
+}
+:root[data-theme-reveal]::view-transition-old(root),
+:root[data-theme-reveal]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+:root[data-theme-reveal]::view-transition-new(root) {
+  animation: theme-reveal-circle 400ms ease-in-out both;
+}
+@keyframes theme-reveal-circle {
+  from { clip-path: circle(0% at var(--theme-reveal-origin)); }
+  to { clip-path: circle(var(--theme-reveal-radius) at var(--theme-reveal-origin)); }
+}
 @media (prefers-reduced-motion: reduce) {
   .theme-switch { transition: none; }
   .theme-switch:active { scale: 1; }

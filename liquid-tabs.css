@@ -39,6 +39,81 @@
 #app .third-tabs.liquid-tabs {
   --glass-accent: #137d48;
 }
+#app.ios-weather > .wx-bottom {
+  --wx-glass: #e4f3ff36;
+  --wx-edge: #fff8;
+  --wx-shadow: #10244147;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 142px) 52px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+#app .wx-pages.liquid-tabs {
+  --glass-ink: white;
+  --glass-accent: #183f65;
+  --glass-bg: var(--wx-glass);
+  --glass-lens-fill: #e3f2ffdb;
+  --glass-edge: var(--wx-edge);
+  --glass-shadow: var(--wx-shadow);
+  position: relative;
+  min-height: 52px;
+  padding-block: 3px;
+  pointer-events: auto;
+}
+#app .wx-pages :is(button,.liquid-tabs-copy > span) {
+  min-height: 44px;
+}
+#app .wx-pages :is(button,.liquid-tabs-copy) svg {
+  width: 17px;
+  height: 17px;
+}
+.wx-page-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+#app .wx-pages > button:not([aria-current]) .wx-page-dot { opacity: .7; }
+#app .wx-utility {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid var(--wx-edge);
+  border-radius: 50%;
+  background: var(--wx-glass);
+  color: white;
+  box-shadow: 0 4px 14px var(--wx-shadow), inset 0 1px 2px var(--wx-edge);
+  -webkit-backdrop-filter: blur(20px) saturate(175%);
+  backdrop-filter: blur(20px) saturate(175%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+#app .wx-utility:is(:hover,[aria-expanded="true"]) { background: #e4f3ff60; }
+#app .wx-utility:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+#app .wx-utility:disabled { opacity: .5; cursor: default; }
+.wx-location-list { padding: 24px 16px; color: white; }
+.wx-location-list h2 { margin-bottom: 14px; font-size: 29px; text-align: start; }
+.wx-location-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #fff6;
+  border-radius: 17px;
+  background: #e4f3ff30;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.wx-location-row > span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.wx-location-row :is(small,strong) { display: block; }
+.wx-location-row strong { font-size: 17px; overflow-wrap: anywhere; }
+.wx-location-row b { font-size: 25px; font-weight: 550; }
 #app .liquid-tabs > button, #app .liquid-tabs .liquid-tabs-copy > span {
   display: flex;
   position: relative;

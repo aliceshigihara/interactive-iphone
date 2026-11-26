@@ -1,9 +1,11 @@
 <!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><script src="site-language.js"></script><script>try{if(new URLSearchParams(location.search).get('reader')!=='1'&&localStorage.getItem('fablyphone:editor-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Editor — Fablyphone</title>
 <link rel="stylesheet" href="site-language.css"><script src="editor-language.js" defer></script>
 <link rel="stylesheet" href="editor-panel-list.css">
+<link rel="stylesheet" href="date-wheel.css"><script src="date-wheel.js" defer></script>
 <link rel="stylesheet" href="message-call-log.css">
 <link rel="stylesheet" href="playback-speed.css">
 <link rel="stylesheet" href="notification-stack.css">
+<link rel="stylesheet" href="editor-undo.css">
 <link rel="stylesheet" href="site-menu.css"><script src="site-menu.js" defer></script>
 <style>
 :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -153,7 +155,7 @@ body{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:fle
 .pwb{position:absolute;bottom:42px;left:0;right:0;display:flex;justify-content:space-between;padding:0 52px;font-size:17px}.pwb span{cursor:pointer}
 .r2 .ud{position:absolute;left:4px;top:50%;margin-top:-5px}
 .cm.rp{margin-left:44px;padding-top:4px}.cs{color:#737373;font-size:12px;margin-top:3px;display:flex;gap:14px}.cs span{cursor:pointer;font-weight:600}.vr{margin:0 14px 4px 58px;font-size:12px;color:#737373;font-weight:600;cursor:pointer}.rb{background:#efefef;padding:6px 14px;font-size:12px;color:#555;display:flex;justify-content:space-between}
-.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;scrollbar-width:none}.car::-webkit-scrollbar{display:none}.car>div{flex:none;width:100%;aspect-ratio:1;scroll-snap-align:center;background:#ccc center/cover}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;width:100%;height:100%;scrollbar-width:none}.car::-webkit-scrollbar{display:none}.car>div{flex:none;width:100%;height:100%;scroll-snap-align:center;background:#ccc}.po .pi>img,.car img{display:block;width:100%;height:100%;object-fit:cover}.po .pi>:is(img,.car){position:absolute;inset:0}
 .cnt{position:absolute;top:10px;right:10px;background:#000a;color:#fff;font-size:12px;padding:3px 9px;border-radius:12px}
 .po .ac{position:relative}.dts{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:4px}.dts i{width:6px;height:6px;border-radius:50%;background:#c7c7c7}.dts i.on{background:#0095f6}
 .scr button{color:#000;font-family:inherit}
@@ -339,7 +341,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .wx-seg{display:flex;align-items:center;border-radius:20px;background:rgba(46,57,77,.55);padding:4px;gap:2px}.wx-seg span{width:40px;height:32px;border-radius:16px;display:grid;place-items:center;color:#dbe1ee;opacity:.75}.wx-seg span.on{background:rgba(255,255,255,.12);opacity:1}
 .wx-hours{display:flex;justify-content:space-between;gap:10px;overflow:auto;padding-top:4px}.wx-hour{min-width:52px;display:flex;flex-direction:column;align-items:center;gap:8px}.wx-hour span{font-size:14px;font-weight:600}.wx-hour b{font-size:18px;font-weight:600}
 .wx-day{display:grid;grid-template-columns:52px 36px 48px 1fr 48px;align-items:center;gap:8px;padding:12px 0;border-top:1px solid rgba(255,255,255,.12)}.wx-day:first-of-type{border-top:0;padding-top:4px}.wx-day strong{font-size:18px;font-weight:600}.wx-day em,.wx-day b{font-style:normal;font-size:17px}.wx-day em{color:#bcc6d6}.wx-track{height:8px;border-radius:999px;background:rgba(68,79,97,.95);position:relative;overflow:hidden}.wx-track i{position:absolute;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#f6cf2b,#ff9407)}
-.wx-bottom{position:absolute;left:14px;right:14px;bottom:18px;display:flex;justify-content:space-between;align-items:center}.wx-tab,.wx-center{height:54px;border-radius:28px;background:rgba(63,72,89,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.10);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}.wx-tab{width:72px}.wx-tab svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.wx-center{width:154px;gap:14px}.wx-center svg{width:18px;height:18px;fill:#fff}.wx-dots{display:flex;gap:10px}.wx-dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.34);display:block}.wx-dots i.on{background:#fff}
 
 /* v3.4 native glass lists */
 .native-top{display:flex;align-items:center;justify-content:space-between;padding:5px 15px 12px;flex:none;min-height:56px}.native-top-right{display:flex;gap:10px;align-items:center}.native-round,.native-pill,.native-search{border:1px solid #d6d6da;background:linear-gradient(155deg,#fff,#f5f5f7b0);box-shadow:inset 0 1px 3px #fff,0 3px 9px #00000008;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.native-round,.native-pill{display:grid;place-items:center;position:relative;height:44px;min-width:44px;border-radius:24px;padding:0 15px;font-size:17px;cursor:pointer}.native-round{width:44px;padding:0}.native-round svg{width:23px;height:23px;stroke:#111}.native-round small{position:absolute;right:-3px;top:-5px;background:#008bff;color:white;border-radius:20px;padding:3px 6px;font-size:11px}.native-round.selected{background:#e1efff}.native-heading{padding:5px 16px 12px;font-size:34px;font-weight:750;letter-spacing:-.8px;flex:none}.native-heading p{font-size:14px;font-weight:400;color:#8e8e93;letter-spacing:0;margin-top:2px}.native-list{padding:0 15px 90px;min-height:0}.native-row{display:flex;align-items:flex-start;gap:9px;position:relative;padding:11px 0 13px;min-height:78px}.native-row[hidden]{display:none!important}.native-dot{width:7px;height:7px;border-radius:50%;flex:none;margin-top:18px}.native-dot.unread{background:#008bff}.native-row .av{background:linear-gradient(#a9c4e1,#7781b8) center/cover no-repeat;margin-top:2px}.native-row-copy{flex:1;min-width:0;cursor:pointer;border-bottom:1px solid #e1e1e4;padding-bottom:13px}.native-row-top{display:flex;align-items:baseline;justify-content:space-between;gap:5px;font-size:16px}.native-row-top b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.native-row-top span{white-space:nowrap;font-size:13px;color:#8e8e93}.native-row-top i{font-style:normal;color:#c1c1c7;font-size:21px}.native-row-copy p{font-size:14px;line-height:1.3;color:#8e8e93;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere}.native-subject{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.native-mail .av{border-radius:12px}.native-bottom{position:absolute;bottom:24px;left:14px;right:14px;display:flex;align-items:center;gap:10px;z-index:3}.native-search{display:flex;align-items:center;gap:8px;height:48px;border-radius:28px;flex:1;min-width:0;padding:0 12px;background:#ffffffd9}.native-search input{border:0;background:none;outline:0;width:100%;min-width:0;font-size:16px}.native-search svg{flex:none}.native-bottom .native-round{height:48px;width:48px;background:#ffffffdf}.native-remove{border:0;background:#ff453a;color:white!important;border-radius:50%;width:22px;height:22px;flex:none;cursor:pointer}.native-empty{padding:18px;text-align:center;color:#8e8e93;font-size:14px}.ios-clock{color:white;background:#000!important}.ios-clock .native-heading{color:#fff}.clock-top{justify-content:flex-end;gap:10px}.ios-clock .native-pill,.ios-clock .native-round{color:#fff;background:linear-gradient(#292929,#171717);border-color:#3b3b3b;box-shadow:inset 0 1px 2px #ffffff22}.ios-clock .native-round svg{stroke:#fff}.clock-body{padding:8px 16px 95px;color:#fff;min-height:0}.clock-body h3{font-size:19px;font-weight:650;display:flex;align-items:center;gap:5px;margin:10px 0}.clock-body h3.clock-other{margin-top:44px}.clock-row{display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #29292c;padding:13px 0;min-height:85px}.clock-row:last-child{border-bottom:1px solid #29292c}.clock-row strong{font-size:49px;font-weight:300;letter-spacing:-2px;line-height:1.05;font-variant-numeric:tabular-nums}.clock-row p{font-size:14px;margin-top:3px}.clock-row.off{color:#8e8e93}.clock-alarm-text{flex:1;cursor:pointer}.clock-change{background:#242426;border:0;border-radius:22px;padding:9px 12px;color:#ff9f0a!important;font-size:13px;font-weight:700}.clock-toggle{width:58px;height:29px;border:0;border-radius:30px;background:#414144;position:relative;cursor:pointer;flex:none}.clock-toggle i{position:absolute;left:2px;top:2px;width:32px;height:25px;border-radius:20px;background:#fff;transition:transform .2s}.clock-toggle.on{background:#30d158}.clock-toggle.on i{transform:translateX(22px)}.clock-tabs{position:absolute;bottom:23px;left:12px;right:12px;display:flex;padding:4px;border-radius:35px;background:#252525d9;backdrop-filter:blur(22px);border:1px solid #454545;box-shadow:inset 0 1px 2px #ffffff25;z-index:3}.clock-tabs button{flex:1;min-width:0;border:0;border-radius:29px;background:transparent;color:#fff!important;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 1px;font-size:10px;white-space:nowrap}.clock-tabs button.active{color:#ff9f0a!important;background:#111}.clock-live{font-size:53px;text-align:center;font-weight:200;letter-spacing:-2px;margin:70px 0 30px;font-variant-numeric:tabular-nums}.clock-actions{display:flex;justify-content:space-between;margin:20px 0}.clock-actions button{border:0;border-radius:50%;width:66px;height:66px;background:#29292b;color:#fff!important}.clock-actions .start{background:#123a20;color:#30d158!important}.clock-actions .stop{background:#401717;color:#ff453a!important}.clock-lap{border-top:1px solid #333;padding:12px 0;display:flex;justify-content:space-between}.clock-pickers{display:flex;justify-content:center;gap:6px}.clock-pickers label{font-size:12px;color:#ccc}.clock-pickers select{background:#292929;color:#fff!important;-webkit-text-fill-color:#fff!important;border:0;border-radius:8px;padding:8px}#scr:has(#app.on.ios-clock){--home-indicator-color:#fff;--home-indicator-shadow:none}
@@ -607,12 +608,20 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 .msg-glass-contact>.av,.msg-glass-avatar{position:relative;z-index:1;border-radius:50%;box-shadow:0 3px 7px #474f7229}
 .msg-glass-avatar{display:grid;place-items:center;width:58px;height:58px;background:linear-gradient(#a7c2db,#7985bd);color:#fff}
 .msg-glass-avatar svg{width:45px;height:45px}
+.msg-group-avatars{display:flex;flex:none;align-items:center;justify-content:center}
+.msg-group-avatars>.av{flex:none;margin-top:0;border:1.5px solid var(--msg-paper,#fff)}
+.msg-group-avatars>.av+.av{margin-inline-start:calc(-1 * var(--msg-avatar-overlap))}
 .msg-glass-name{display:flex;align-items:center;gap:4px;max-width:100%;min-height:33px;margin-top:-4px;padding:2px 11px 0;border-radius:999px;color:#111;font-weight:700;font-size:16px}
 .msg-glass-name span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .msg-glass-name svg{flex:none;color:#9b9ea1}
 .ios-chat-body{background:var(--msg-paper,#fff)}
 .ios-chat-body .b.me.tail::after,.ios-chat-body .b.th.tail::after{background:var(--msg-paper,#fff)!important}
 .ios-chat-body .dv{align-self:center;text-align:center;color:#85858b;font-size:11px;font-weight:500;line-height:1.3}
+[data-chat-edit]{cursor:pointer}
+[data-chat-edit]:focus-visible{outline:2px solid #1679ef;outline-offset:2px}
+.ig-msg,.third-bubble{white-space:pre-wrap}
+.ig-dm-edited-time{align-self:center;color:#666b73;font-size:12px}
+#app .chat-edit-attachment{display:inline-grid;place-items:center;width:30px;height:30px;margin-inline-start:5px;vertical-align:middle;border:0;border-radius:50%;background:#80808024;color:inherit;cursor:pointer}
 .ios-msg-footer .pill input::placeholder{color:#a5a9ac;-webkit-text-fill-color:#a5a9ac}
 .msg-read-panel{border-top:1px solid #e8e9ee;margin-top:2px;padding-top:4px}
 .msg-read-panel summary{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;list-style:none;padding:7px 0;color:#555963}
@@ -970,8 +979,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar,body *::-webkit-scrollbar{displa
 </dialog>
 <div id="story-link-feedback" role="status" hidden></div>
 <script src="playback-speed.js"></script>
+<script src="chat-time.js"></script>
+<script src="editor-undo.js"></script>
 <script src="notification-stack.js"></script>
 <script src="story-connections.js"></script><script src="message-call-log.js"></script><script src="phone-app.js"></script><script src="scripted-call-ui.js"></script><script src="liquid-tabs.js"></script><script src="twitter-extra.js"></script><script src="instagram-profile.js"></script>
+<script src="chat-editing.js"></script>
+<script src="weather-navigation.js"></script>
 <script>
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const readerMode=new URLSearchParams(location.search).get('reader')==='1';
@@ -1003,19 +1016,27 @@ st:P('<rect width="60" height="60" fill="url(#gG)"/><circle cx="30" cy="30" r="1
 mu:P('<rect width="60" height="60" fill="url(#gR)"/><path fill="#fff" d="M39 13v21.500a6.500 6.500 0 11-3-5.500V21l-13 3v15.500a6.500 6.500 0 11-3-5.500V19z"/>'),
 rem:P('<rect width="60" height="60" fill="#fff"/><circle cx="14" cy="17" r="4.500" fill="none" stroke="#0a84ff" stroke-width="2"/><circle cx="14" cy="30" r="4.500" fill="none" stroke="#ff3b30" stroke-width="2"/><circle cx="14" cy="43" r="4.500" fill="none" stroke="#ff9500" stroke-width="2"/><path d="M25 17h26M25 30h26M25 43h26" stroke="#d6d6da" stroke-width="2"/>')};
 const dparts=()=>({wd:S.date.split(',')[0].trim(),day:(S.date.match(/\d+/)||[''])[0]});
+function storyYear(){const year=Number(S.dateYear);return Number.isInteger(year)&&year>0&&year<=275760?year:YR}
+function storyCalendarDate(year,month,day,hours=0,minutes=0){
+ const date=new Date(2000,0,1,hours,minutes);
+ date.setFullYear(year,month,day);
+ return date;
+}
 function setPhoneDate(value){
 if(readerMode||!value)return;
 const [year,month,day]=value.split('-').map(Number);
-const date=new Date(year,month-1,day);
+const date=storyCalendarDate(year,month-1,day);
+if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return;
 const weekdays=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 S.date=`${weekdays[date.getDay()]}, ${MN[month-1]} ${day}`;
+S.dateYear=year;cmo=null;
 save();R();
 }
 function phoneDateValue(){
 const monthIndex=MN.findIndex(name=>S.date.includes(name));
 const day=+(S.date.match(/\d+/)||[0])[0];
 if(monthIndex<0||!day)return '';
-return `${YR}-${String(monthIndex+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+return `${String(storyYear()).padStart(4,'0')}-${String(monthIndex+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
 }
 const OFFICIAL_ICON={
  msg:'com.apple.MobileSMS-large.png',mail:'com.apple.mobilemail-large.png',saf:'com.apple.mobilesafari-large.png',
@@ -1035,7 +1056,16 @@ const nv=(l,r)=>`<div class="nv"><div>${l}</div><div>${r}</div></div>`;
 const plus=f=>`<a onclick="${f}">${I('<path d="M12 5v14M5 12h14"/>',26,'none','#0a84ff',2.2)}</a>`;
 const ch=id=>S.chars.find(c=>c.id==id)||[...S.chats,...(S.waChats||[]),...(S.kaChats||[])].flatMap(c=>c.extras||[]).find(c=>c.id==id)||{name:'Unknown',photo:''};
 const av=(c,s=44)=>{const ini=String(c.name||'?').replace(/[{}]/g,'').trim().charAt(0).toUpperCase()||'?';return `<i class="av" style="width:${s}px;height:${s}px;font-size:${s*.42}px;${c.photo?`background-image:url(${c.photo});background-size:cover;background-position:center;background-repeat:no-repeat`:''}">${c.photo?'':esc(ini)}</i>`};
-const del=(a,i)=>{if(readerMode)return;S[a].splice(i,1);save();R()};
+const del=(a,i)=>{
+ const items=S[a];
+ const labels={
+  mails:{pt:'E-mail excluído.',en:'Email deleted.'},chats:{pt:'Conversa excluída.',en:'Conversation deleted.'},
+  calls:{pt:'Ligação excluída.',en:'Call deleted.'},notifs:{pt:'Notificação excluída.',en:'Notification deleted.'},
+  events:{pt:'Evento excluído.',en:'Event deleted.'},
+ };
+ if(!EditorUndo.remove(items,i,labels[a]||{pt:'Registro excluído.',en:'Item deleted.'},()=>S[a]===items))return;
+ save();R();
+};
 function go(a,el,prepare){const app=$('#app');if(a)homeCloseFolder();
 if(a){if(!visibleApps().includes(a))return;if(a==='map'||a==='find'){if(cur!==a){locationPick=null;mapPinMode=false;mapPinMove=null;if(onlineMap||mapStarting)disposeOnlineMap();}if(cur!==a&&$('#app').querySelector('#vectorMap'))$('#app').innerHTML='';globeMode=false;if(a==='map')applyMapStart();else{[globeLon,globeLat]=storyLocation();mZoom=20}mSelected=-1;mapQuery='';globeOpen=false;}if(a==='saf'){academicView='start';newsPage=null}if(a==='wallet')walletSelected=-1;if(a==='bar'){barclaysShowAll=false;barclaysSearchOpen=false;barclaysQuery=''}if(a==='yt'){ytTab='home';ytIndex=-1;ytQuery='';ytPlaying=false}if(a==='x'){xTab='home';xDetail=null;xQuery='';}if(isMessenger(a)){messengerSearch='';messengerTab='chats';messengerFilter='all'}cur=a;cid=mid=igv=sty=null;nview=1;nid=null;cmo=null;cinfo=false;cy_=YR;cedit=false;cflt=0;if(el){const r=el.getBoundingClientRect(),s=$('#scr').getBoundingClientRect();app.style.transformOrigin=`${r.left-s.left+r.width/2}px ${r.top-s.top+r.height/2}px`}
  if(a==='ph')PhoneApp.reset();if(a==='x')xReset();if(prepare)prepare();app.className='pre on';R();void app.offsetWidth;app.classList.remove('pre');$('#hm').classList.add('away')}
@@ -1045,7 +1075,7 @@ function img(file,max=700){return new Promise(r=>{const fr=new FileReader();fr.o
 function cropRatio(key=''){const k=String(key||'').toLowerCase();
 if(k==='wph'||k==='wpl'||k==='wallpaper'||k==='wp')return 370/824;
  if(k==='s'||k==='story'||k==='i'||k==='cover'||k==='vmposter'||k==='ighighlight')return 9/16;
-if(k==='image'||k==='ytthumb')return 16/9;if(k==='ytbanner')return 3/1;
+if(k==='image'||k==='ytthumb')return 16/9;if(k==='ytbanner')return 3/1;if(k==='banner')return 2.5;
 if(k==='imgs'||k==='post'||k==='carousel')return 4/5;
 return 1}
 function form(title,fs,ok,host='#md',existing={},afterSave){
@@ -1053,14 +1083,25 @@ function form(title,fs,ok,host='#md',existing={},afterSave){
  const preview=resolveFormPreview(title,fs,cur,existing),insidePhone=host==='#md';
  if(preview||(insidePhone&&matchMedia('(max-width:760px)').matches&&document.body.dataset.mobileView!=='phone'))host='#pm';
  const m=$(host);
- m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t==='speed'?PlaybackSpeed.markup(f.l,f.v,`f_${f.k}`):f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${esc(o.v)}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v??'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${esc(o.v)}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v??'')}">`}</label>`).join('')}<div class="bt"><button type="button">${insidePhone?'Cancel':'Cancelar'}</button><button type="button" id="okb">${insidePhone?'Save':'OK'}</button></div></div>`;
+ m.innerHTML=`<div class="mb"><b>${title}</b>${fs.map(f=>f.t==='chat-time'?ChatTime.markup(f):f.t==='speed'?PlaybackSpeed.markup(f.l,f.v,`f_${f.k}`):f.t=='chk'?`<label>${f.l}</label><div id="f_${f.k}">${f.o.map(o=>`<label class="ck"><input type="checkbox" value="${esc(o.v)}"> ${esc(o.l)}</label>`).join('')}</div>`:`<label>${f.l}${f.t=='area'?`<textarea id="f_${f.k}">${esc(f.v??'')}</textarea>`:f.t=='sel'?`<select id="f_${f.k}">${f.o.map(o=>`<option value="${esc(o.v)}"${o.v==f.v?' selected':''}>${esc(o.l)}</option>`).join('')}</select>`:`<input id="f_${f.k}" type="${f.t||'text'}" ${f.t=='file'?'accept="image/*"'+(f.m?' multiple':''):''} value="${esc(f.v??'')}">`}</label>`).join('')}<div class="bt"><button type="button">${insidePhone?'Cancel':'Cancelar'}</button><button type="button" id="okb">${insidePhone?'Save':'OK'}</button></div></div>`;
  const panel=m.querySelector('.mb'),okb=panel.querySelector('#okb'),fields=fs.map(f=>[f,panel.querySelector('#f_'+f.k)]),photos=new Map();
- let pending=0,updatePreview=()=>{};
+ let pending=0,updatePreview=()=>{},updateCover=()=>{};
  function readForm(){return Object.fromEntries(fields.filter(([,e])=>e).map(([f,e])=>[f.k,f.t==='file'?photos.get(e).value():f.t==='chk'?[...e.querySelectorAll('input:checked')].map(x=>x.value):e.value]))}
  panel.querySelector('.bt button').onclick=()=>closeEditorForm(m,panel);
- for(const [f,e] of fields)if(e&&f.t==='file')photos.set(e,photoPicker(e,{ratio:cropRatio(f.k),onBusy:busy=>{pending+=busy?1:-1;okb.disabled=pending>0;if(!busy)updatePreview()}}));
+ for(const [f,e] of fields)if(e&&f.t==='file')photos.set(e,photoPicker(e,{
+  ratio:cropRatio(f.k),initial:f.initial,
+  getRatio:f.ratioField?()=>igPostRatio(panel.querySelector('#f_'+f.ratioField).value):null,
+  onOrder:f.carousel?()=>{updateCover();updatePreview()}:null,
+  onBusy:busy=>{pending+=busy?1:-1;okb.disabled=pending>0;if(!busy){updateCover();updatePreview()}}
+ }));
+ for(const [f,e] of fields)if(e&&f.photoRatio){
+  const file=fields.find(([field])=>field.ratioField===f.k)?.[1];
+  updateCover=mountPostRatio(e,f,()=>photos.get(file)?.value()[0]);
+  updateCover();
+ }
  if(preview)updatePreview=mountFormPreview(panel,preview,readForm);
- okb.onclick=async()=>{okb.disabled=true;try{if(await ok(readForm())===false){okb.disabled=false;return}await closeEditorForm(m,panel);save();R();afterSave?.()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}};
+ ChatTime.mount(panel);
+ okb.onclick=async()=>{const invalid=panel.querySelector('.chat-time input:invalid');if(invalid){invalid.reportValidity();return}okb.disabled=true;try{if(await ok(readForm())===false){okb.disabled=false;return}await closeEditorForm(m,panel);save();R();afterSave?.()}catch(e){okb.disabled=false;console.error('Form submission failed:',e)}};
  m.style.display='flex';
  return m;
 }
@@ -1106,12 +1147,29 @@ function renderLockNotices(target,draft){
 }
 /* Messages */
 const cname=c=>c.name||c.mem.map(i=>ch(i).name).join(', ');
-const gav=(c,s)=>c.mem.length==1?av(ch(c.mem[0]),s):`<div style="position:relative;width:${s}px;height:${s}px;flex:none">${c.mem.slice(0,3).map((id,k)=>`<div style="position:absolute;left:${[24,0,48][k]}%;top:${[0,46,46][k]}%">${av(ch(id),s*.52)}</div>`).join('')}</div>`;
+function gav(c,s){
+ if(c.mem.length===1)return av(ch(c.mem[0]),s);
+ const members=c.mem.slice(0,3);
+ if(cur==='msg'){
+  const two=members.length===2;
+  const diameter=s*(two ? .62 : .49), overlap=s*(two ? .15 : .19);
+  return `<span class="msg-group-avatars" aria-hidden="true" style="width:${s*1.1}px;height:${s}px;--msg-avatar-overlap:${overlap}px">${members.map(id=>av(ch(id),diameter)).join('')}</span>`;
+ }
+ return `<div style="position:relative;width:${s}px;height:${s}px;flex:none">${members.map((id,k)=>`<div style="position:absolute;left:${[24,0,48][k]}%;top:${[0,46,46][k]}%">${av(ch(id),s*.52)}</div>`).join('')}</div>`;
+}
 const snd=c=>[{n:'Me'},...c.mem.map(id=>({id,n:ch(id).name}))];
 function addChat(){form('New Message',[{k:'m',l:'Personagens existentes',t:'chk',o:charOpts()},{k:'names',l:'Figurantes temporários (separados por vírgula)'},{k:'photos',l:'Fotos dos figurantes',t:'file',m:1},{k:'n',l:'Nome do grupo'}],v=>{const selected=(v.m||[]).map(Number),names=v.names.split(',').map(s=>s.trim()).filter(Boolean),photos=v.photos||[],extras=[];names.forEach((name,i)=>extras.push({id:-((Date.now()+i+1)),name,photo:photos[i]||''}));const mem=[...selected,...extras.map(p=>p.id)];if(!mem.length)return;const id=Date.now();S.chats.unshift({id,mem,name:v.n&&mem.length>1?v.n:'',extras,base:nowTs(),cursor:nowTs(),unread:false,msgs:[]});cid=id;who=0})}
 function send(){if(readerMode)return;const i=$('#mi'),c=S.chats.find(x=>x.id==cid);if(!i.value.trim())return;const s=snd(c)[who%snd(c).length];c.msgs.push(s.id?{m:0,s:s.id,t:i.value}:{m:1,t:i.value});c.t=S.time;pop=true;save();R();$('#mi').focus()}
 function addTime(){form('Time marker',[{k:'t',l:'Text',v:'Today '+S.time}],v=>S.chats.find(x=>x.id==cid).msgs.push({m:2,t:v.t}))}
-const del2=i=>{if(readerMode)return;activeChatsFor(cur).find(x=>x.id==cid).msgs.splice(i,1);save();R()};
+const del2=i=>{
+ if(readerMode)return;
+ const app=cur,chat=activeChatsFor(app).find(item=>item.id==cid),items=chat?.msgs;
+ const entry=items?.[i];
+ const label=entry?.m===2?{pt:'Marcador excluído.',en:'Time marker deleted.'}:
+  entry?.callLog?{pt:'Ligação removida da conversa.',en:'Call removed from the conversation.'}:{pt:'Mensagem excluída.',en:'Message deleted.'};
+ if(!EditorUndo.remove(items,i,label,()=>activeChatsFor(app).includes(chat)&&chat.msgs===items))return;
+ save();R();
+};
 function vMsg(){if(cid){const c=S.chats.find(x=>x.id==cid),ms=c.msgs,l=ms[ms.length-1],grp=c.mem.length>1,ss=snd(c),cs=ss[who%ss.length];
 const same=(a,b)=>a&&b&&a.m==b.m&&a.s==b.s;
 const bs=ms.map((m,i)=>{if(m.m==2){const w=m.t.split(' ');return `<div class="dv" onclick="if(ed)del2(${i})"><b>${esc(w[0])}</b> ${esc(w.slice(1).join(' '))}</div>`}
@@ -1286,7 +1344,7 @@ const n=S.photos.length;const a=S.photos;
 }
 function vPhotoOpen(){const host=$('#photo-lightbox');if(!S.photos[photoSelected])return;host.style.display='flex';host.innerHTML=`<div class="photo-view-top"><button onclick="vPhotoClose()">‹ <span>Photos</span></button><span>${photoSelected+1} of ${S.photos.length}</span><button onclick="photoAction()">•••</button></div><img class="photo-full" src="${S.photos[photoSelected]}" alt="Selected photo"><div class="photo-film">${S.photos.map((url,i)=>`<img src="${url}" onclick="photoSelected=${i};vPhotoOpen()" class="${i===photoSelected?'current':''}">`).join('')}</div><div class="photo-tools"><button onclick="photoSelected=Math.min(S.photos.length-1,photoSelected+1);vPhotoOpen()">‹ Next</button><button onclick="photoAction()">⋯</button><button onclick="photoDelete()">${I('<path d="M4 7h16M10 7V4h4v3M6 7l1 14h10l1-14M10 11v6M14 11v6"/>',22,'none','#ff453a')}</button></div>`;}
 function vPhotoClose(){const h=$('#photo-lightbox');h.style.display='none';h.innerHTML=''}
-function photoDelete(){if(readerMode)return; if(!confirm('Delete this photo from this story?'))return;S.photos.splice(photoSelected,1);save();R();if(S.photos.length){photoSelected=Math.min(photoSelected,S.photos.length-1);vPhotoOpen()}else vPhotoClose()}
+function photoDelete(){if(readerMode||!confirm('Delete this photo from this story?'))return;del('photos',photoSelected);if(S.photos.length){photoSelected=Math.min(photoSelected,S.photos.length-1);vPhotoOpen()}else vPhotoClose()}
 function photoAction(){if(readerMode)return;const f=S.photos[photoSelected];if(!f)return;const a=document.createElement('a');a.href=f;a.download='iphone-photo.png';a.click()}
 
 /* Instagram 2026-inspired Explore, Direct and Reels. These conversations live in the story JSON. */
@@ -1297,13 +1355,24 @@ function igSearchRefresh(){const q=igSearch.toLowerCase().trim(),people=S.profil
 function igThread(id){if(!S.igDms)S.igDms=[];let d=S.igDms.find(d=>+d.id===+id);if(!d){d={id:+id,msgs:[]};if(!readerMode){S.igDms.push(d);save()}}return d}
 function igStartDm(id){igv={t:'dm',id:+id};R()}
 function vIgInbox(){let threads=(S.igDms||[]).map(x=>({id:x.id,last:x.msgs[x.msgs.length-1]}));return `<div class="ig-dm-head"><a onclick="igBack()">${BK}</a><b>${esc((me()||{}).user||'Direct')}</b><a onclick="igv={t:'newdm'};R()">${I('<path d="M12 20h9M17 4l3 3-12 12-4 1 1-4z"/>',24)}</a></div><div class="ig-inbox-heading">Messages <span onclick="igv={t:'newdm'};R()">New</span></div><div class="bd"><div class="ig-search-pill ig-search-inbox">${I('<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',18)}<input placeholder="Search messages" oninput="igInboxFilter(this.value)"></div><div id="ig-inbox-list">${igInboxRows(threads)}</div></div>${TABS()}`}
-function igInboxRows(threads){return threads.map(({id,last})=>`<div class="ig-account ig-thread-row" onclick="igStartDm(${id})">${avp(pf(id),54)}<div><b>${esc(pf(id).user)}</b><small>${esc(last?chatPreview(last,true):'Start a conversation')} · ${last?.time||'now'}</small></div><span>›</span></div>`).join('')||'<div class="ig-dm-empty">Your messages<br><small>Tap New to start a conversation.</small></div>'}
+function igInboxRows(threads){return threads.map(({id,last})=>`<div class="ig-account ig-thread-row" onclick="igStartDm(${id})">${avp(pf(id),54)}<div><b>${esc(pf(id).user)}</b><small>${esc(last?chatPreview(last,true):'Start a conversation')} · ${esc(last?.time||'now')}</small></div><span>›</span></div>`).join('')||'<div class="ig-dm-empty">Your messages<br><small>Tap New to start a conversation.</small></div>'}
 function igInboxFilter(q){const list=$('#ig-inbox-list');if(!list)return;list.innerHTML=igInboxRows((S.igDms||[]).filter(d=>pf(d.id).user.toLowerCase().includes(q.toLowerCase())).map(d=>({id:d.id,last:d.msgs[d.msgs.length-1]})))}
 function vIgNewDm(){return `<div class="ig-dm-head"><a onclick="igv={t:'inbox'};R()">${BK}</a><b>New message</b><span></span></div><div class="bd"><div class="ig-result-title">To</div>${S.profiles.filter(p=>p.id!==(me()||{}).id).map(p=>`<div class="ig-account" onclick="igStartDm(${p.id})">${avp(p,48)}<div><b>${esc(p.user)}</b><small>${esc(p.name)}</small></div><span>›</span></div>`).join('')||'<div class="ig-dm-empty">Create another Instagram profile to chat.</div>'}</div>`}
-function vIgDm(id){let d=igThread(id),p=pf(id);return `<div class="ig-dm-head"><a onclick="igv={t:'inbox'};R()">${BK}</a><div class="ig-dm-person" onclick="igv={t:'prof',id:${id}};R()">${avp(p,32)}<b>${esc(p.user)}</b></div><span>ⓘ</span></div><div class="bd ig-chat-scroll" id="ig-chat-scroll"><div class="ig-chat-intro">${avp(p,78)}<strong>${esc(p.user)}</strong><small>${esc(p.name)}</small><button onclick="igv={t:'prof',id:${id}};R()">View profile</button></div>${d.msgs.map((m,i)=>`<div class="ig-msg ${m.mine?'mine':'theirs'}" ${m.image?'data-chat-image="true"':''} onclick="if(ed&&!readerMode)igMsgAction(${id},${i});else if(${!!m.image})chatImageOpen(${i},${id});else igMsgAction(${id},${i})">${chatImageContent(m,true)}</div>`).join('')}</div><div class="ig-chat-compose"><button onclick="igComposePhoto()" title="Photo">${I('<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="3"/>',23)}</button><input id="ig-dm-input" placeholder="Message..." onkeydown="if(event.key==='Enter'){event.preventDefault();igSend(${id})}"><button class="ig-send" onclick="igSend(${id})">Send</button><button onclick="igIncoming(${id})" title="Add message from ${esc(p.user)}">＋</button></div>`}
+function vIgDm(id){
+ const d=igThread(id),p=pf(id);
+ const messages=d.msgs.map((m,i)=>{
+  const time=m.timeEdited&&m.time?`<time class="ig-dm-edited-time"${ChatEditing.time(i)}>${esc(m.time)}</time>`:'';
+  return `${time}<div class="ig-msg ${m.mine?'mine':'theirs'}"${m.image?' data-chat-image="true"':''}${ChatEditing.bubble(i,m)}>${chatImageContent(m,true)}${ChatEditing.attachmentButton(i,m)}</div>`;
+ }).join('');
+ return `<div class="ig-dm-head"><a onclick="igv={t:'inbox'};R()">${BK}</a><div class="ig-dm-person" onclick="igv={t:'prof',id:${id}};R()">${avp(p,32)}<b>${esc(p.user)}</b></div><span>ⓘ</span></div><div class="bd ig-chat-scroll" id="ig-chat-scroll"><div class="ig-chat-intro">${avp(p,78)}<strong>${esc(p.user)}</strong><small>${esc(p.name)}</small><button onclick="igv={t:'prof',id:${id}};R()">View profile</button></div>${messages}</div><div class="ig-chat-compose"><button onclick="igComposePhoto()" title="Photo">${I('<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="3"/>',23)}</button><input id="ig-dm-input" placeholder="Message..." onkeydown="if(event.key==='Enter'){event.preventDefault();igSend(${id})}"><button class="ig-send" onclick="igSend(${id})">Send</button><button onclick="igIncoming(${id})" title="Add message from ${esc(p.user)}">＋</button></div>`;
+}
 function igSend(id){if(readerMode)return;const el=$('#ig-dm-input');const text=el?.value.trim();if(!text)return;igThread(id).msgs.push({mine:true,text,time:S.time});save();R();igScrollChat()}
 function igIncoming(id){if(readerMode)return;const text=prompt('Message from @'+pf(id).user);if(!text?.trim())return;igThread(id).msgs.push({mine:false,text:text.trim(),time:S.time});save();R();igScrollChat()}
-function igMsgAction(id,i){if(readerMode)return;if(confirm('Delete this message?')){igThread(id).msgs.splice(i,1);save();R()}}
+function igMsgAction(id,i){
+ if(readerMode||!confirm('Delete this message?'))return;
+ const chat=igThread(id),items=chat.msgs;
+ if(EditorUndo.remove(items,i,{pt:'Mensagem excluída.',en:'Message deleted.'},()=>S.igDms?.includes(chat)&&chat.msgs===items)){save();R()}
+}
 function igComposePhoto(){if(readerMode)return;const id=igv.id;if(id==null)return;form('Enviar imagem',[{k:'sender',l:'Remetente',t:'sel',v:'me',o:[{v:'me',l:'Me'},{v:'them',l:pf(id).user}]},{k:'mode',l:'Visualização',t:'sel',v:'normal',o:[{v:'normal',l:'Normal'},{v:'once',l:'Visualização única'}]}],v=>chatPickImage(id,v.sender==='me',v.mode==='once'),'#pm')}
 function igScrollChat(){const x=$('#ig-chat-scroll');if(x)x.scrollTop=x.scrollHeight}
 function vIgReels(){const p=S.posts.find(x=>x.views);return `<div class="ig-dm-head"><a onclick="igBack()">${BK}</a><b>Reels</b><span>▷</span></div><div class="bd ig-reels"><div class="ig-reels-placeholder">${p?.img?`<img src="${p.img}">`:''}<span>Reels</span><small>${p?esc(p.cap):'Create a post with views to show a reel here.'}</small></div></div>${TABS()}`}
@@ -1327,11 +1396,35 @@ const num=n=>(+n||0).toLocaleString('en-US');
 const pf=id=>S.profiles.find(p=>p.id==id)||{id:0,user:'unknown',name:'Unknown',photo:'',fol:'0',fng:'0',bio:''};
 const avp=(p,s)=>av({name:p.user,photo:p.photo},s);
 const HRT='<path d="M12 21s-8-5.200-8-11a4.600 4.600 0 018-3 4.600 4.600 0 018 3c0 5.800-8 11-8 11z"/>',CMT='<path d="M20 12a8 8 0 01-11.700 7L4 20l1.200-4.200A8 8 0 1120 12z"/>',BKM='<path d="M6 3h12v18l-6-4.500L6 21z"/>';
-function addPost(id){if(readerMode)return;if(!S.profiles.length)return form('Create an Instagram profile in the side panel first.',[],()=>{});form('New post',[{k:'pid',l:'Author',t:'sel',v:id??me()?.id,o:S.profiles.map(p=>({v:p.id,l:p.user}))},{k:'imgs',l:'Photos (select several for a carousel)',t:'file',m:1},{k:'cap',l:'Caption',t:'area'},{k:'likes',l:'Likes',t:'number',v:'1024'},{k:'views',l:'Views (optional; marks it as a video/reel)',t:'number'},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(nowTs())}],v=>S.posts.unshift({...v,ts:fromL(v.ts),img:(v.imgs||[])[0]||'',pid:+v.pid,likes:+v.likes||0,liked:0,saved:0,comments:[]}))}
+function igPostRatio(value){
+ const ratio=Number(value);
+ return ratio>=1/3&&ratio<=3?ratio:1;
+}
+function igPostImages(post){return Array.isArray(post.imgs)&&post.imgs.length?post.imgs:post.img?[post.img]:[]}
+function igPostPhotoFields(post){
+ const tr=SiteLanguage.text,ratio=post?igPostRatio(post.ratio):4/5;
+ const ratios=photoRatios.some(([value])=>value===ratio)?photoRatios:[[ratio,tr('Atual','Current')],...photoRatios];
+ return [
+  {k:'ratio',l:tr('Proporção do post','Post aspect ratio'),t:'hidden',photoRatio:true,v:ratio,o:ratios.map(([v,l])=>({v,l}))},
+  {k:'imgs',l:tr('Fotos do carrossel','Carousel photos'),t:'file',m:1,carousel:true,ratioField:'ratio',initial:post?igPostImages(post):[]},
+ ];
+}
+function addPost(id){
+ if(readerMode)return;
+ if(!S.profiles.length)return form('Create an Instagram profile in the side panel first.',[],()=>{});
+ form('New post',[{k:'pid',l:'Author',t:'sel',v:id??me()?.id,o:S.profiles.map(p=>({v:p.id,l:p.user}))},...igPostPhotoFields(),
+  {k:'cap',l:'Caption',t:'area'},{k:'likes',l:'Likes',t:'number',v:'1024'},{k:'views',l:'Views (optional; marks it as a video/reel)',t:'number'},
+  {k:'ts',l:'Date & time',t:'datetime-local',v:toL(nowTs())}],
+  v=>S.posts.unshift({...v,ratio:igPostRatio(v.ratio),ts:fromL(v.ts),img:v.imgs[0]||'',pid:+v.pid,likes:+v.likes||0,liked:0,saved:0,comments:[]}));
+}
 function editPost(i){
  if(readerMode)return;const p=S.posts[i];if(ed){if(igv?.t==='post')igv=igv.id!=null?{t:'prof',id:igv.id,tab:igv.tab}:{t:'search'};return del('posts',i)}
  const profiles=[{v:'',l:'Nenhum'},...S.profiles.map(p=>({v:p.id,l:'@'+p.user}))];
- form('Edit post',[{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())},{k:'igTagged',l:'Perfil marcado',t:'sel',v:p.igTagged||'',o:profiles},{k:'igRepost',l:'Republicado por',t:'sel',v:p.igRepost||'',o:profiles}],v=>Object.assign(p,{cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts),igTagged:v.igTagged||null,igRepost:v.igRepost||null}),'#md',p)
+ form('Edit post',[...igPostPhotoFields(p),{k:'cap',l:'Caption',v:p.cap},{k:'likes',l:'Likes',t:'number',v:p.likes},{k:'ts',l:'Date & time',t:'datetime-local',v:toL(p.ts||nowTs())},{k:'igTagged',l:'Perfil marcado',t:'sel',v:p.igTagged||'',o:profiles},{k:'igRepost',l:'Republicado por',t:'sel',v:p.igRepost||'',o:profiles}],v=>{
+  const previous=igPostImages(p);
+  const reordered=previous.length!==v.imgs.length||previous.some((image,index)=>v.imgs[index]!==image);
+  Object.assign(p,{imgs:v.imgs,img:v.imgs[0]||'',ratio:igPostRatio(v.ratio),ci:reordered?0:p.ci,cap:v.cap,likes:+v.likes||0,ts:fromL(v.ts),igTagged:v.igTagged||null,igRepost:v.igRepost||null});
+ },'#md',p)
 }
 function like(i){if(readerMode)return;const p=S.posts[i];p.liked=!p.liked;p.likes=Math.max(0,(+p.likes||0)+(p.liked?1:-1));save();R()}
 function dbl(i){if(readerMode)return;if(!S.posts[i].liked)like(i);const e=document.querySelector(`[data-i="${i}"]`);e&&e.insertAdjacentHTML('beforeend','<b class="hb">❤</b>')}
@@ -1358,7 +1451,11 @@ const cn_=()=>S.notes.find(x=>x.id==nid);
 function newNote(){if(readerMode)return;const id=Date.now();S.notes.unshift({id,title:'',body:'',grp:'Today',rd:S.time,hd:hdate()});nview=2;nid=id;save();R();setTimeout(()=>{const t=$('#nti');t&&t.focus()},60)}
 function openNote(id){nid=id;nview=2;R()}
 function closeNote(){const n=cn_();if(!readerMode&&n&&!n.title.trim()&&!n.body.trim())S.notes=S.notes.filter(x=>x!==n);nview=1;nid=null;save();R()}
-function delN(id){if(readerMode)return;S.notes=S.notes.filter(x=>x.id!=id);if(nid==id){nid=null;nview=1}save();R()}
+function delN(id){
+ const items=S.notes;
+ if(!EditorUndo.remove(items,items.findIndex(item=>item.id==id),{pt:'Nota excluída.',en:'Note deleted.'},()=>S.notes===items))return;
+ if(nid==id){nid=null;nview=1}save();R();
+}
 function nin(k,v){if(readerMode)return;const n=cn_();if(n){n[k]=v;save()}}
 function nset(k,v){if(readerMode)return;const n=cn_();if(n){n[k]=v;save();R()}}
 const ar=e=>{if(e){e.style.height='auto';e.style.height=Math.max(300,e.scrollHeight)+'px'}};
@@ -1376,7 +1473,7 @@ const me=()=>S.profiles.find(p=>p.id==S.meId)||S.profiles[0];
 function goMe(){const m=me();igv=m?{t:'prof',id:m.id}:null;R()}
 const tod=()=>{const m=MN.findIndex(x=>S.date.includes(x));return{m:m<0?10:m,d:+dparts().day||1}};
 const CHV=I('<path d="M9 5l7 7-7 7"/>',14,'none','#c4c4c7',2.4);
-function evW(){const T=tod(),te=S.events.filter(e=>e.y==YR&&e.m==T.m&&e.d==T.d).slice(0,2).map(e=>[e.title,e.time]),it=te.length?te:S.cal.split('\n').filter(Boolean).slice(0,2).map(l=>l.split('|'));return it.map(q=>`<div class="ev">${esc(q[0])}<small>${esc(q[1]||'All-day')}</small></div>`).join('')}
+function evW(){const T=tod(),year=storyYear(),te=S.events.filter(e=>e.y==year&&e.m==T.m&&e.d==T.d).slice(0,2).map(e=>[e.title,e.time]),it=te.length?te:S.cal.split('\n').filter(Boolean).slice(0,2).map(l=>l.split('|'));return it.map(q=>`<div class="ev">${esc(q[0])}<small>${esc(q[1]||'All-day')}</small></div>`).join('')}
 function extraSync(){const f=[['so_name',S.owner.name],['so_wifi',S.st.wifi],['so_bt',S.st.bt],['so_batt',S.st.batt]];for(const [i,v] of f)if(document.activeElement.id!=i)$('#'+i).value=v;
 $('#meSel').innerHTML=S.profiles.map(p=>`<option value="${p.id}">@${esc(p.user)}</option>`).join('');if(me())$('#meSel').value=me().id;
 $('#bf').setAttribute('width',Math.max(2,19*(+S.st.batt||0)/100))}
@@ -1406,10 +1503,10 @@ const evF=(e={})=>[{k:'t',l:'Title',v:e.title||''},{k:'date',l:'Date',t:'date',v
 const evSave=(e,v)=>{if(!v.t)return;const [y,m,d]=v.date.split('-').map(Number);Object.assign(e,{y,m:m-1,d,title:v.t,time:v.time,c:v.c})};
 function addEvent(){form('New event',evF(),v=>{const e={id:Date.now()};evSave(e,v);if(e.title)S.events.push(e)})}
 function editEv(i){const e=S.events[i];if(ed)return del('events',i);form('Edit event',evF(e),v=>evSave(e,v))}
-function cm(dl){cmo+=dl;if(cmo<0){cmo=11;cy_--}if(cmo>11){cmo=0;cy_++}const T=tod();csel=(cmo==T.m&&cy_==YR)?T.d:1;R()}
-function vCal(){const T=tod();if(cmo==null){cmo=T.m;csel=T.d}
-const first=new Date(cy_,cmo,1).getDay(),dim=new Date(cy_,cmo+1,0).getDate(),cs=[];for(let i=0;i<first;i++)cs.push(0);for(let d=1;d<=dim;d++)cs.push(d);while(cs.length%7)cs.push(0);
-const has=d=>S.events.some(e=>e.y==cy_&&e.m==cmo&&e.d==d),isT=d=>cy_==YR&&cmo==T.m&&d==T.d,evs=S.events.map((e,i)=>({e,i})).filter(x=>x.e.y==cy_&&x.e.m==cmo&&x.e.d==csel),R_='#ff3b30';
+function cm(dl){cmo+=dl;if(cmo<0){cmo=11;cy_--}if(cmo>11){cmo=0;cy_++}const T=tod();csel=(cmo==T.m&&cy_==storyYear())?T.d:1;R()}
+function vCal(){const T=tod(),year=storyYear();if(cmo==null){cmo=T.m;csel=T.d;cy_=year}
+const first=storyCalendarDate(cy_,cmo,1).getDay(),dim=storyCalendarDate(cy_,cmo+1,0).getDate(),cs=[];for(let i=0;i<first;i++)cs.push(0);for(let d=1;d<=dim;d++)cs.push(d);while(cs.length%7)cs.push(0);
+const has=d=>S.events.some(e=>e.y==cy_&&e.m==cmo&&e.d==d),isT=d=>cy_==year&&cmo==T.m&&d==T.d,evs=S.events.map((e,i)=>({e,i})).filter(x=>x.e.y==cy_&&x.e.m==cmo&&x.e.d==csel),R_='#ff3b30';
 let rows='';for(let i=0;i<cs.length;i+=7)rows+=`<div class="rw">${cs.slice(i,i+7).map((d,j)=>d?`<div class="cd2" onclick="csel=${d};R()"><i class="${d==csel?(isT(d)?'sel t':'sel'):isT(d)?'t0':(j==0||j==6)?'wk':''}">${d}</i><s class="${has(d)?'dt':''}"></s></div>`:'<div></div>').join('')}</div>`;
 return `<div class="nv" style="color:${R_}"><a>${I('<path d="M15 5l-7 7 7 7"/>',26,'none',R_,2.4)} ${cy_}</a><a onclick="addEvent()">${I('<path d="M12 5v14M5 12h14"/>',26,'none',R_,2.2)}</a></div><div class="cmh"><b>${MN[cmo]}</b><span><a onclick="cm(-1)">‹</a><a onclick="cm(1)">›</a></span></div><div class="cwd">${'SMTWTFS'.split('').map(x=>`<span>${x}</span>`).join('')}</div><div>${rows}</div><div class="bd cev">${evs.map(({e,i})=>`<div class="ev2" onclick="editEv(${i})"><u style="background:${e.c}"></u><span>${esc(e.title)}</span><em>${esc(e.time)}</em></div>`).join('')||'<div class="mb2" style="text-align:center"><p class="m">No Events</p></div>'}</div><div class="ctb"><a onclick="cmo=null;cy_=YR;R()">Today</a><a>Calendars</a><a>Inbox</a></div>`}
 /* Instagram: profile */
@@ -1419,9 +1516,9 @@ function editProf(id){
 }
 function vProf(id){return InstagramProfile.render(id)}
 /* ---- v6: time hierarchy, passcode, replies, carousel ---- */
-const sod=t=>{const d=new Date(t);return new Date(d.getFullYear(),d.getMonth(),d.getDate()).getTime()};
+const sod=t=>{const d=new Date(t);return storyCalendarDate(d.getFullYear(),d.getMonth(),d.getDate()).getTime()};
 const WDN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-function nowTs(){const T=tod(),m=(S.time||'').match(/(\d{1,2}):(\d{2})\s*([AaPp])?/);let h=m?+m[1]:12,mi=m?+m[2]:0;if(m&&m[3])h=h%12+(/p/i.test(m[3])?12:0);return new Date(YR,T.m,T.d,h,mi).getTime()}
+function nowTs(){const T=tod(),m=(S.time||'').match(/(\d{1,2}):(\d{2})\s*([AaPp])?/);let h=m?+m[1]:12,mi=m?+m[2]:0;if(m&&m[3])h=h%12+(/p/i.test(m[3])?12:0);return storyCalendarDate(storyYear(),T.m,T.d,h,mi).getTime()}
 const ddiff=t=>Math.round((sod(nowTs())-sod(t))/864e5);
 const fT=t=>new Date(t).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
 const fD=t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`};
@@ -1429,10 +1526,10 @@ const fList=t=>{const k=ddiff(t);return k==0?fT(t):k==1?'Yesterday':k>1&&k<7?WDN
 const fMail=t=>{const k=ddiff(t);return k==0?'Today':k==1?'Yesterday':fD(t)};
 const fDiv=t=>{const k=ddiff(t),d=new Date(t);return [k==0?'Today':k==1?'Yesterday':k>1&&k<7?WDN[d.getDay()]:`${WDN[d.getDay()].slice(0,3)}, ${MN[d.getMonth()].slice(0,3)} ${d.getDate()}`,fT(t)]};
 const fFull=t=>{const d=new Date(t);return `${MN[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} at ${fT(t)}`};
-const toL=t=>{const d=new Date(t),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`};
+const toL=t=>{const d=new Date(t),p=n=>String(n).padStart(2,'0');return `${String(d.getFullYear()).padStart(4,'0')}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`};
 const fromL=s=>s?new Date(s).getTime():nowTs();
 const sT=()=>S.time.replace(/\s*[ap]\.?m\.?/i,'').trim();
-const igAgo=t=>{if(!t||!Number.isFinite(+t))return '';const m=Math.round((nowTs()-t)/6e4);if(m<1)return 'JUST NOW';if(m<60)return m+' MINUTE'+(m>1?'S':'')+' AGO';const h=Math.round(m/60);if(h<24)return h+' HOUR'+(h>1?'S':'')+' AGO';const d=Math.round(h/24);if(d<7)return d+' DAY'+(d>1?'S':'')+' AGO';const x=new Date(+t);return (MN[x.getMonth()]||'').toUpperCase()+' '+x.getDate()+(x.getFullYear()!=YR?', '+x.getFullYear():'')};
+const igAgo=t=>{if(!t||!Number.isFinite(+t))return '';const m=Math.round((nowTs()-t)/6e4);if(m<1)return 'JUST NOW';if(m<60)return m+' MINUTE'+(m>1?'S':'')+' AGO';const h=Math.round(m/60);if(h<24)return h+' HOUR'+(h>1?'S':'')+' AGO';const d=Math.round(h/24);if(d<7)return d+' DAY'+(d>1?'S':'')+' AGO';const x=new Date(+t);return (MN[x.getMonth()]||'').toUpperCase()+' '+x.getDate()+(x.getFullYear()!=storyYear()?', '+x.getFullYear():'')};
 const ordS=(a,b)=>S.ord=='asc'?a-b:b-a;
 let lastKey='',rep=null,pin='';
 function migrate(){const n=nowTs();
@@ -1447,8 +1544,36 @@ const cts=c=>{let x=c.base||nowTs();c.msgs.forEach(m=>{if(m.ts&&m.m!=2)x=m.ts;el
 function addChat(){form('New Message',[{k:'m',l:'Personagens existentes',t:'chk',o:charOpts()},{k:'names',l:'Figurantes temporários (separados por vírgula)'},{k:'photos',l:'Fotos dos figurantes',t:'file',m:1},{k:'n',l:'Nome do grupo'}],v=>{const selected=(v.m||[]).map(Number),names=(v.names||'').split(',').map(s=>s.trim()).filter(Boolean),photos=v.photos||[],extras=[];names.forEach((name,i)=>extras.push({id:-((Date.now()+i+1)),name,photo:photos[i]||''}));const mem=[...selected,...extras.map(p=>p.id)];if(!mem.length)return;const id=Date.now();activeChatsFor(cur).unshift({id,mem,name:v.n&&mem.length>1?v.n:'',extras,base:nowTs(),cursor:nowTs(),unread:false,msgs:[]});cid=id;who=0})}
 function chatCursor(c){if(c.cursor)return c.cursor;return cts(c)}
 function send(){if(readerMode)return;const i=$('#mi'),c=activeChatsFor(cur).find(x=>x.id==cid);if(!i.value.trim())return;const s=snd(c)[who%snd(c).length];const ts=chatCursor(c);c.msgs.push(s.id?{m:0,s:s.id,t:i.value,ts}:{m:1,t:i.value,ts});c.cursor=ts+60000;pop=true;save();R();$('#mi').focus()}
-function addTime(){const c=activeChatsFor(cur).find(x=>x.id==cid);form('Date & time',[{k:'ts',l:'Date & time for the messages that follow',t:'datetime-local',v:toL(cts(c))}],v=>{const ts=fromL(v.ts);c.msgs.push({m:2,ts});c.cursor=ts+60000;save();R()})}
-function editTime(i){const m=activeChatsFor(cur).find(x=>x.id==cid).msgs[i];form('Edit date & time',[{k:'ts',l:'Date & time',t:'datetime-local',v:toL(m.ts)}],v=>{m.ts=fromL(v.ts)})}
+function addTime(){chatTimeForm()}
+function editTime(i){chatTimeForm(i)}
+function chatTimeForm(index){
+ if(readerMode||!isMessenger(cur))return;
+ const app=cur,chat=activeChatsFor(app).find(item=>item.id==cid),story=S;
+ const marker=chat?.msgs[index];
+ if(!chat||(index!==undefined&&marker?.m!==2))return;
+ const tr=SiteLanguage.text,reference=nowTs(),base=Number((marker?marker.ts:chatCursor(chat))||reference);
+ const field={k:'ts',t:'chat-time',v:toL(base),base,story:reference};
+ const stillOpen=()=>S===story&&cur===app&&cid==chat.id&&activeChatsFor(app).includes(chat);
+ const composer=app==='msg'?'#mi':'#third-input';
+ const draft=$(composer)?.value;
+ form(marker?tr('Editar data e hora','Edit date & time'):tr('Adicionar data e hora','Add date & time'),[field],v=>{
+  const ts=ChatTime.calendar(v.ts);
+  if(ts===null||!stillOpen()||(marker&&!chat.msgs.includes(marker)))return false;
+  const inStory=()=>activeChatsFor(app).includes(chat);
+  if(marker)EditorUndo.edit({pt:'Data e hora alteradas.',en:'Date and time changed.'},
+   [[marker,['ts']], [chat,['cursor'],()=>chat.msgs.at(-1)===marker]],
+   ()=>inStory()&&chat.msgs.includes(marker),()=>{
+    marker.ts=ts;
+    if(chat.msgs.at(-1)===marker)chat.cursor=ts;
+   });
+  else EditorUndo.appendTime(chat,ts,inStory);
+ },'#md',{},()=>{
+  const input=$(composer);
+  if(!stillOpen()||!input||draft===undefined)return;
+  input.value=draft;
+  if(app==='msg')msgGlassInput(input);
+ });
+}
 function markUnread(){if(readerMode)return;const c=activeChatsFor(cur).find(x=>x.id==cid);c.unread=true;cid=null;save();R()}
 function toggleChatRead(i){if(readerMode)return;const c=activeChatsFor(cur)[i];if(c){c.unread=!c.unread;save();R();$('#cul').querySelectorAll('.read-toggle')[i]?.focus()}}
 function openChatContact(){const c=activeChatsFor(cur).find(x=>x.id==cid);if(!c)return;if(c.mem.length!==1){StoryConnections.openParticipants(c,()=>form('Informações do grupo',[{k:'name',l:'Nome do grupo',v:c.name||cname(c)}],v=>{if(v.name.trim())c.name=v.name.trim()},'#pm'));return}
@@ -1460,12 +1585,12 @@ if(cinfo){if(c.mem.length!==1){cinfo=false}else{const p=ch(c.mem[0]);return `<di
 const same=(a,b)=>a&&b&&a.m==b.m&&a.s==b.s;
  const dateLabel=ts=>{const [day,time]=fDiv(ts);return `${esc(day)} at ${esc(time)}`};
  const bs=ms.map((m,i)=>{
-  if(m.m==2)return `<div class="dv"${readerMode?'':` style="cursor:pointer" onclick="if(ed)del2(${i});else editTime(${i})"`}>${dateLabel(m.ts)}</div>`;
+  if(m.m==2)return `<div class="dv"${ChatEditing.time(i,true)}>${dateLabel(m.ts||c.base||nowTs())}</div>`;
   const prev=ms[i-1],newDay=m.ts&&(!prev||(prev.m!=2&&prev.ts&&sod(prev.ts)!=sod(m.ts)));
-  const date=newDay?`<div class="dv">${dateLabel(m.ts)}</div>`:'';
+  const date=m.ts&&(newDay||m.timeEdited)?`<div class="dv"${m.callLog?'':ChatEditing.time(i)}>${dateLabel(m.ts)}</div>`:'';
   if(m.callLog)return date+MessageCallLog.render(m,i);
   const lab=grp&&m.m==0&&(newDay||!same(prev,m))?`<div class="sn2">${esc(ch(m.s).name)}</div>`:'';
-  return date+lab+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${chatImageContent(m)}</div>`;
+  return date+lab+`<div class="b ${m.m?'me':'th'}${same(m,ms[i+1])?'':' tail'}${pop&&i==ms.length-1?' pop':''}"${m.image?' data-chat-image="true"':''} data-sc-msg="${i}"${ChatEditing.bubble(i,m)}>${chatImageContent(m)}${ChatEditing.attachmentButton(i,m)}</div>`;
  }).join('');
  const avatar=grp||ch(c.mem[0]).photo?gav(c,58):`<span class="msg-glass-avatar" aria-hidden="true">${I('<circle cx="12" cy="8" r="4.5"/><path d="M4 18.5c0-2 3.6-4.2 8-4.2s8 2.2 8 4.2a10.7 10.7 0 0 1-16 0Z"/>',45,'currentColor','none',0)}</span>`;
  return `<header class="msg-glass-head">
@@ -1487,7 +1612,7 @@ const callU=v=>({name:v.name,sub:v.sub,dir:v.dir,n:+v.n||1,ts:fromL(v.ts)});
 function addCall(){form('New call',callF2(),v=>v.name&&S.calls.push(callU(v)))}
 function editCall(i){const c=S.calls[i];form('Edit call',callF2(c),v=>Object.assign(c,callU(v)))}
 /* Notes (no folders, auto grouping by date) */
-const ngrp=n=>{if(n.pin)return 'Pinned';const k=ddiff(n.ts);if(k<=0)return 'Today';if(k==1)return 'Yesterday';if(k<=7)return 'Previous 7 Days';if(k<=30)return 'Previous 30 Days';const d=new Date(n.ts);return MN[d.getMonth()]+(d.getFullYear()!=YR?' '+d.getFullYear():'')};
+const ngrp=n=>{if(n.pin)return 'Pinned';const k=ddiff(n.ts);if(k<=0)return 'Today';if(k==1)return 'Yesterday';if(k<=7)return 'Previous 7 Days';if(k<=30)return 'Previous 30 Days';const d=new Date(n.ts);return MN[d.getMonth()]+(d.getFullYear()!=storyYear()?' '+d.getFullYear():'')};
 function newNote(){if(readerMode)return;const id=Date.now();S.notes.unshift({id,title:'',body:'',ts:nowTs(),pin:false});nview=2;nid=id;save();R();setTimeout(()=>{const t=$('#nti');t&&t.focus()},60)}
 function noteSync(){const n=cur=='nt'&&nview==2?cn_():null;if(cur=='nt'&&nview==2)ar($('#nbd'));$('#nfields').style.display=n?'flex':'none';$('#nhint').style.display=n?'none':'';if(n){if(document.activeElement.id!='ntsIn')$('#ntsIn').value=toL(n.ts);$('#npin').checked=!!n.pin}}
 function vNotes(){const cnt=S.notes.length;
@@ -1504,9 +1629,14 @@ function delCom(i,id){if(readerMode)return;S.posts[i].comments=S.posts[i].commen
 function vCom(i){const p=S.posts[i],a=pf(p.pid),ps=S.profiles,me_=ps[cas%ps.length]||pf(0),top=p.comments.filter(c=>!c.par),rt=rep?p.comments.find(x=>x.id==rep):null;if(!rt)rep=null;
 const row=(c,sm)=>{const u=pf(c.pid);return `<div class="cm${sm?' rp':''}"><div class="aw" onclick="igv={t:'prof',id:${u.id}};R()">${avp(u,sm?24:34)}</div><div><b>${esc(u.user)}</b> ${esc(c.text)}<div class="cs"><span onclick="setRep('${c.id}')">Reply</span>${ed?`<span style="color:#ff3b30" onclick="delCom(${i},'${c.id}')">Delete</span>`:''}</div></div><a onclick="likeCom(${i},'${c.id}')">${I(HRT,sm?12:14,c.l?'#ff3040':'none',c.l?'#ff3040':'#8e8e93')}</a></div>`};
  return `<div class="nv"><a onclick="igBackFromComments()">${BK}</a><b style="color:#000">Comments</b><span style="width:26px"></span></div><div class="bd"><div class="cm">${avp(a,34)}<div><b>${esc(a.user)}</b> ${esc(p.cap)}</div></div>${top.map(c=>{const rs=p.comments.filter(x=>x.par==c.id);return row(c)+(rs.length?`<div class="vr" onclick="togCom(${i},'${c.id}')">—— ${c.open?'Hide replies':`View ${rs.length} ${rs.length>1?'replies':'reply'}`}</div>`+(c.open?rs.map(x=>row(x,1)).join(''):''):'')}).join('')}</div>${rt?`<div class="rb"><span>Replying to ${esc(pf(rt.pid).user)}</span><a onclick="rep=null;R()">✕</a></div>`:''}<div class="cmp" style="padding-top:6px"><a onclick="cas++;R()">${avp(me_,32)}</a><div class="pill"><input id="ci" placeholder="Comment as ${esc(me_.user)}…" onkeydown="if(event.key==='Enter')addCom(${i})"><button onclick="addCom(${i})">↑</button></div></div>`}
-function pimg(p,i){const im=p.imgs&&p.imgs.length?p.imgs:(p.img?[p.img]:[]);
-if(im.length<2)return `<div class="pi" data-i="${i}" ondblclick="dbl(${i})" style="${im[0]?`background-image:url(${im[0]})`:'background:linear-gradient(135deg,#c9ccd6,#9aa0b0)'}">${im[0]?'':''}</div>`;
-return `<div class="pi" data-i="${i}" ondblclick="dbl(${i})"><div class="car" data-ci="${p.ci||0}" onscroll="carS(this,${i})">${im.map(u=>`<div style="background-image:url(${u})"></div>`).join('')}</div><span class="cnt">${(p.ci||0)+1}/${im.length}</span></div>`}
+function pimg(p,i){
+ const images=igPostImages(p),ratio=igPostRatio(p.ratio);
+ const frame=`<div class="pi" data-i="${i}" ondblclick="dbl(${i})" style="aspect-ratio:${ratio}${images.length?'':';background:linear-gradient(135deg,#c9ccd6,#9aa0b0)'}">`;
+ const photo=url=>`<img src="${esc(url)}" alt="" draggable="false">`;
+ if(images.length<2)return `${frame}${images.length?photo(images[0]):''}</div>`;
+ const index=Math.max(0,Math.min(images.length-1,Math.trunc(Number(p.ci)||0)));
+ return `${frame}<div class="car" data-ci="${index}" onscroll="carS(this,${i})">${images.map(url=>`<div>${photo(url)}</div>`).join('')}</div><span class="cnt">${index+1}/${images.length}</span></div>`;
+}
 const pdots=p=>{const n=(p.imgs||[]).length;return n>1?`<div class="dts">${p.imgs.map((_,k)=>`<i class="${k==(p.ci||0)?'on':''}"></i>`).join('')}</div>`:''};
 function carS(el,i){if(!el.clientWidth||!S.posts[i])return;const k=Math.max(0,Math.min(el.children.length-1,Math.round(el.scrollLeft/el.clientWidth)));S.posts[i].ci=k;el.parentNode.querySelector('.cnt').textContent=(k+1)+'/'+el.children.length;el.closest('.po')?.querySelectorAll('.dts i').forEach((d,j)=>d.classList.toggle('on',j===k))}
 /* Passcode */
@@ -1650,15 +1780,18 @@ const wxSkies={
  night:{sun:['#172747','#364b75'],partly:['#263653','#4b5f7f'],cloud:['#303b50','#546078'],rain:['#212e42','#42536c'],snow:['#2a415a','#526c87']}
 };
 function wxBg(d=wxData(),h=new Date(nowTs()).getHours()){const colors=wxSkies[wxAtNight(h)?'night':'day'];return `linear-gradient(165deg,${(colors[d.k]||colors.sun).join(',')})`}
-function vWx(){const d=wxData(),now=new Date(nowTs()),dl=S.wxl.split('\n').filter(Boolean).map(l=>l.split('|').map(x=>x.trim())),gmin=Math.min(...dl.map(x=>+x[2]||0),d.L),gmax=Math.max(...dl.map(x=>+x[3]||0),d.H),span=(gmax-gmin)||1;
+function vWx(){
+ const d=wxData(),section=WeatherNavigation.section(),nav=WeatherNavigation.controls();
+ if(section==='locations')return `<div class="bd wxb">${WeatherNavigation.locations(d)}</div>${nav}`;
+ const now=new Date(nowTs()),dl=forecastRows(),gmin=Math.min(...dl.map(x=>+x[2]||0),d.L),gmax=Math.max(...dl.map(x=>+x[3]||0),d.H),span=(gmax-gmin)||1;
  const alertTitle=d.k==='rain'?'Rain alert':'Snow alert';
  const alertText=d.k==='rain'?`${esc(d.c)} expected later today. Conditions may intensify by 00:00.`:`Check the hourly forecast for changing conditions.`;
  const hrs=[...Array(6)].map((_,i)=>{const h=(now.getHours()+i)%24,t=i?Math.round((d.H+d.L)/2+(d.H-d.L)/2*Math.sin(2*Math.PI*(h-9)/24)):d.t;return `<div class="wx-hour"><span>${i?String(h).padStart(2,'0'):'Now'}</span>${wxIcon(wxCurrentIcon(d.k,h),30)}<b>${t}°</b></div>`}).join('');
-return `<div class="bd wxb"><div class="whero"><div class="wplace">${I('<path d="M12 4 20 8 12 20 10 12 4 10Z"',16,'#fff','none',0)}My Location</div><div class="wcity">${esc(d.city)}</div><div class="wtemp">${d.t}°</div><div class="wcnd">${esc(d.c)}</div><div class="wrange">H:${d.H}°  L:${d.L}°</div></div>
- ${['rain','snow'].includes(d.k)?`<div class="wx-card"><div class="wx-alert-title">${I('<path d="M12 3 2.7 19.5a1 1 0 0 0 .87 1.5h16.86a1 1 0 0 0 .87-1.5L12 3Zm0 5.5v5M12 17h.01"',22,'none','#fff',2)}<span>${alertTitle}</span></div><div class="wx-alert-copy">${alertText}</div><div class="wx-alert-source">Story weather forecast</div></div>`:""}
- <div class="wx-card"><div class="wx-card-head"><div><h4>Conditions</h4><p>Temperature (°C)</p></div><div class="wx-seg"><span class="on">${wxIcon(wxCurrentIcon(d.k,now.getHours()),20)}</span><span>${I('<path d="M12 4v10"/><path d="M8 14a4 4 0 1 0 8 0"/>',20,'none','#fff',2)}</span><span>${I('<path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>',20,'none','#fff',2)}</span></div></div><div class="wx-hours">${hrs}</div></div>
-<div class="wx-card">${dl.map((x,i)=>{const lo=+x[2]||0,hi=+x[3]||0,l=(lo-gmin)/span*100,r=(hi-gmin)/span*100;return `<div class="wx-day"><strong>${esc(x[0])}</strong>${wxIcon(x[1]||'sun',28)}<em>${lo}°</em><div class="wx-track"><i style="left:${l}%;width:${Math.max(12,r-l)}%"></i></div><b>${hi}°</b></div>`}).join('')}</div>
-</div><div class="wx-bottom"><div class="wx-tab">${I('<path d="M4 6l6-2 6 2 6-2v14l-6 2-6-2-6 2zM9 4v14M15 6v14"/>',24,'none','#fff',2)}</div><div class="wx-center">${I('<path d="M12 4 20 8 12 20 10 12 4 10Z"',18,'#fff','none',0)}<div class="wx-dots"><i class="on"></i><i></i><i></i></div></div><div class="wx-tab">${I('<path d="M8 6h10M8 12h10M8 18h10"/><circle cx="5" cy="6" r="1.4" fill="#fff" stroke="none"/><circle cx="5" cy="12" r="1.4" fill="#fff" stroke="none"/><circle cx="5" cy="18" r="1.4" fill="#fff" stroke="none"/>',24,'none','#fff',2)}</div></div>`}
+ const alert=section==='summary'&&['rain','snow'].includes(d.k)?`<div class="wx-card"><div class="wx-alert-title">${I('<path d="M12 3 2.7 19.5a1 1 0 0 0 .87 1.5h16.86a1 1 0 0 0 .87-1.5L12 3Zm0 5.5v5M12 17h.01"/>',22,'none','#fff',2)}<span>${alertTitle}</span></div><div class="wx-alert-copy">${alertText}</div><div class="wx-alert-source">Story weather forecast</div></div>`:'';
+ const hourly=section==='daily'?'':`<div class="wx-card"><div class="wx-card-head"><div><h4>${section==='hourly'?'Hourly Forecast':'Conditions'}</h4><p>Temperature (°C)</p></div><div class="wx-seg"><span class="on">${wxIcon(wxCurrentIcon(d.k,now.getHours()),20)}</span><span>${I('<path d="M12 4v10"/><path d="M8 14a4 4 0 1 0 8 0"/>',20,'none','#fff',2)}</span><span>${I('<path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0"/>',20,'none','#fff',2)}</span></div></div><div class="wx-hours">${hrs}</div></div>`;
+ const daily=section==='hourly'?'':`<div class="wx-card">${section==='daily'?'<h4>10-Day Forecast</h4>':''}${dl.map(x=>{const lo=+x[2]||0,hi=+x[3]||0,l=(lo-gmin)/span*100,r=(hi-gmin)/span*100;return `<div class="wx-day"><strong>${esc(x[0])}</strong>${wxIcon(x[1]||'sun',28)}<em>${lo}°</em><div class="wx-track"><i style="left:${l}%;width:${Math.max(12,r-l)}%"></i></div><b>${hi}°</b></div>`}).join('')||'<p>No daily forecast.</p>'}</div>`;
+ return `<div class="bd wxb"><div class="whero"><div class="wplace">${WeatherNavigation.locationIcon()}My Location</div><div class="wcity">${esc(d.city)}</div><div class="wtemp">${d.t}°</div><div class="wcnd">${esc(d.c)}</div><div class="wrange">H:${d.H}°  L:${d.L}°</div></div>${alert}${hourly}${daily}</div>${nav}`;
+}
 function setOrderMode(v){S.ord=v;const sel=$('#pord');if(sel)sel.value=v;const a=$('#ordAscBtn'),d=$('#ordDescBtn');if(d)d.classList.toggle('on',v==='desc');if(a)a.classList.toggle('on',v==='asc');save();R()}
 function updateWeatherPanelField(el){if(readerMode)return;const d=wxData(),fields=['City','Temp','Cond','High','Low'],vals=[d.city,d.t,d.c,d.H,d.L];const k=fields.findIndex(x=>el.id.startsWith('wx'+x));if(k<0)return;const v=el.value.trim();if(!v||([1,3,4].includes(k)&&!Number.isFinite(Number(v))))return;vals[k]=v.replace(/,/g,' ');S.wx=vals.join(', ');save();R()}
 function setWeatherCondition(v){if(readerMode)return;const d=wxData();S.wx=[d.city,d.t,v,d.H,d.L].join(', ');save();R()}
@@ -1692,13 +1825,28 @@ function thirdChooseFilter(x){messengerFilter=x;R()}
 function thirdSearch(v){messengerSearch=v;const root=$('#third-list');if(!root)return;root.querySelectorAll('.third-chat-row').forEach(row=>{row.hidden=!row.dataset.search.includes(v.toLocaleLowerCase())})}
 function thirdSwitchTab(x){messengerTab=x;messengerFilter='all';R()}
 function thirdOpenChat(id){cid=id;who=0;const c=activeChatsFor(cur).find(c=>c.id===id);if(c&&!readerMode){c.unread=false;save()}R()}
-function thirdDeleteChat(i){if(readerMode)return;activeChatsFor(cur).splice(i,1);cid=null;save();R()}
+function thirdDeleteChat(i){
+ if(readerMode)return;
+ const app=cur,items=activeChatsFor(app);
+ if(!EditorUndo.remove(items,i,{pt:'Conversa excluída.',en:'Conversation deleted.'},()=>activeChatsFor(app)===items))return;
+ cid=null;save();R();
+}
 function thirdStartFriend(id){const arr=activeChatsFor(cur);const existing=arr.find(c=>c.mem.length===1&&c.mem[0]===id);if(existing){thirdOpenChat(existing.id);return}if(readerMode)return;const ts=nowTs(),chat={id:ts,mem:[id],name:'',base:ts,cursor:ts,unread:false,msgs:[]};arr.unshift(chat);cid=chat.id;who=0;save();R()}
 function thirdToggleFavorite(){if(readerMode)return;const c=activeChatsFor(cur).find(c=>c.id===cid);if(c){c.favorite=!c.favorite;save();R()}}
 function thirdSend(){if(readerMode)return;const input=$('#third-input');if(!input||!input.value.trim()||!cid)return;const c=activeChatsFor(cur).find(c=>c.id===cid);if(!c)return;const sender=snd(c)[who%snd(c).length],ts=chatCursor(c);c.msgs.push(sender.id?{m:0,s:sender.id,t:input.value.trim(),ts}:{m:1,t:input.value.trim(),ts});c.cursor=ts+60000;pop=true;save();R();const sc=$('#third-messages');if(sc)sc.scrollTop=sc.scrollHeight}
 function thirdSvg(kind){const paths={search:'<circle cx="10" cy="10" r="7"/><path d="M15 15l6 6"/>',plus:'<path d="M12 4v16M4 12h16"/>',back:'<path d="M15 5l-7 7 7 7"/>',send:'<path d="M4 12l16-8-5 16-3-7-8-1z"/>',more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',chat:'<path d="M20 11a8 8 0 0 1-8 8c-2 0-3-.3-4-1l-5 2 2-5a8 8 0 1 1 15-4z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',call:'<path d="M4 3h4l2 5-2 2a15 15 0 0 0 4 4l2-2 5 2v5c0 1-2 2-3 2C10 21 3 14 3 6c0-2 0-3 1-3z"/>',updates:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>',settings:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>',menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',camera:'<path d="M4 7h4l2-3h4l2 3h4v12H4z"/><circle cx="12" cy="12" r="3"/>',attach:'<path d="M7 12l6-6a4 4 0 0 1 6 6l-9 9a6 6 0 0 1-8-8l10-10"/>'};return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[kind]||paths.more}</svg>`}
 function thirdTabs(){const k=cur,wa=k==='wa',tabs=wa?[['updates','Updates','updates'],['calls','Calls','call'],['communities','Communities','user'],['chats','Chats','chat'],['settings','Settings','settings']]:[['friends','Friends','user'],['chats','Chats','chat'],['open','Open Chat','chat'],['more','More','more']];return `<nav class="third-tabs">${tabs.map(([id,label,ic])=>`<button type="button" class="${messengerTab===id?'on':''}" onclick="thirdSwitchTab('${id}')">${thirdSvg(ic)}<span>${label}</span></button>`).join('')}</nav>`}
-function thirdConversation(){const c=activeChatsFor(cur).find(c=>c.id===cid);if(!c){cid=null;return vThirdPartyChat()}const group=c.mem.length>1;const wa=cur==='wa';const items=(c.msgs||[]).map((m,i)=>{if(m.m===2){return `<div class="third-date">${esc(fFull(m.ts||nowTs()))}</div>`}const participant=m.m===0;const label=group&&participant?`<span class="third-sender">${esc(ch(m.s).name)}</span>`:'';return `<div class="third-bubble ${participant?'them':'me'}" ${m.image?'data-chat-image="true"':''} data-sc-msg="${i}" onclick="if(ed&&!readerMode)del2(${i});else chatImageOpen(${i})">${label}${chatImageContent(m)}<small>${esc(m.ts?fT(m.ts):S.time)} ${participant?'':wa?'✓✓':''}</small></div>`}).join('');return `<div class="third-chat-detail"><header class="third-detail-header"><button class="third-icon-btn" onclick="cid=null;R()" aria-label="Voltar">${thirdSvg('back')}</button>${gav(c,36)}<span class="third-detail-title"><b>${esc(cname(c))}</b><small>${wa?'tap here for contact info':'chatroom'}</small></span><button class="third-icon-btn" aria-label="Buscar" onclick="thirdSwitchTab('chats')">${thirdSvg('search')}</button><button class="third-icon-btn" aria-label="Opções" onclick="openChatContact()">${thirdSvg('more')}</button></header><div class="third-messages" id="third-messages">${items||'<p class="third-empty">Comece a conversar</p>'}</div><div class="third-compose"><button class="third-icon-btn" type="button" aria-label="Anexar imagem" onclick="chatPickImage()">${thirdSvg('plus')}</button><button class="chat-once-compose" type="button" aria-label="Enviar visualização única" title="Visualização única" onclick="chatPickImage(null,true,true)">${chatOnceIcon()}</button><input type="text" id="third-input" placeholder="${wa?'Message':'메시지 입력'}" aria-label="Escrever mensagem" onkeydown="if(event.key==='Enter')thirdSend()"><button type="button" class="third-send" aria-label="Enviar" onclick="thirdSend()">${thirdSvg('send')}</button></div></div>`}
+function thirdConversation(){
+ const c=activeChatsFor(cur).find(c=>c.id===cid);if(!c){cid=null;return vThirdPartyChat()}
+ const group=c.mem.length>1,wa=cur==='wa';
+ const items=(c.msgs||[]).map((m,i)=>{
+  if(m.m===2)return `<div class="third-date"${ChatEditing.time(i,true)}>${esc(fFull(m.ts||c.base||nowTs()))}</div>`;
+  const participant=m.m===0;
+  const label=group&&participant?`<span class="third-sender">${esc(ch(m.s).name)}</span>`:'';
+  return `<div class="third-bubble ${participant?'them':'me'}"${m.image?' data-chat-image="true"':''} data-sc-msg="${i}"${ChatEditing.bubble(i,m)}>${label}${chatImageContent(m)}${ChatEditing.attachmentButton(i,m)}<small>${esc(m.ts?fT(m.ts):S.time)} ${participant?'':wa?'✓✓':''}</small></div>`;
+ }).join('');
+ return `<div class="third-chat-detail"><header class="third-detail-header"><button class="third-icon-btn" onclick="cid=null;R()" aria-label="Voltar">${thirdSvg('back')}</button>${gav(c,36)}<span class="third-detail-title"><b>${esc(cname(c))}</b><small>${wa?'tap here for contact info':'chatroom'}</small></span><button class="third-icon-btn" aria-label="Buscar" onclick="thirdSwitchTab('chats')">${thirdSvg('search')}</button><button class="third-icon-btn" aria-label="Opções" onclick="openChatContact()">${thirdSvg('more')}</button></header><div class="third-messages" id="third-messages">${items||'<p class="third-empty">Comece a conversar</p>'}</div><div class="third-compose"><button class="third-icon-btn" type="button" aria-label="Anexar imagem" onclick="chatPickImage()">${thirdSvg('plus')}</button><button class="chat-once-compose" type="button" aria-label="Enviar visualização única" title="Visualização única" onclick="chatPickImage(null,true,true)">${chatOnceIcon()}</button><input type="text" id="third-input" placeholder="${wa?'Message':'메시지 입력'}" aria-label="Escrever mensagem" onkeydown="if(event.key==='Enter')thirdSend()"><button type="button" class="third-send" aria-label="Enviar" onclick="thirdSend()">${thirdSvg('send')}</button></div></div>`;
+}
 function waListView(){const list=activeChatsFor('wa'),unread=list.filter(c=>c.unread).length,filtered=list.map((c,i)=>({c,i})).filter(({c})=>messengerFilter==='all'||(messengerFilter==='unread'&&c.unread)||(messengerFilter==='groups'&&c.mem.length>1)||(messengerFilter==='favorites'&&c.favorite));return `<div class="wa-toolbar"><button class="third-icon-btn" aria-label="Opções" onclick="waOptions()">${thirdSvg('more')}</button><div class="third-top-actions"><button class="third-icon-btn" aria-label="Câmera" onclick="go('pho')">${thirdSvg('camera')}</button><button class="third-icon-btn accent" aria-label="Nova conversa" onclick="addChat()">${thirdSvg('plus')}</button></div></div><header class="third-top"><h1>Chats</h1></header><div class="third-search"><span class="wa-ai-ring" aria-hidden="true"></span><input aria-label="Pesquisar conversas" placeholder="Search chats" value="${esc(messengerSearch)}" oninput="thirdSearch(this.value)"></div><div class="third-filter">${[['all','All'],['unread','Unread'+(unread?' '+unread:'')],['groups','Groups'],['favorites','Favourites']].map(([id,n])=>`<button class="${messengerFilter===id?'on':''}" onclick="thirdChooseFilter('${id}')">${n}</button>`).join('')}</div><div class="third-list" id="third-list">${filtered.map(({c,i})=>{const last=[...c.msgs].reverse().find(m=>m.m!==2),preview=last?chatPreview(last):'',t=last?.ts?fList(last.ts):'',search=(cname(c)+' '+preview).toLowerCase();return `<div class="third-chat-row" ${search.includes(messengerSearch.toLowerCase())?'':'hidden'} data-search="${esc(search)}" onclick="if(ed)thirdDeleteChat(${i});else thirdOpenChat(${c.id})">${gav(c,51)}<div class="third-row-content"><div class="third-row-top"><b>${esc(cname(c))}</b><time>${esc(t)}</time></div><p>${last?.m===1?'<span style="color:#8c9397">✓✓ </span>':''}${esc(preview)}</p></div>${c.unread?'<i class="third-unread"></i>':''}</div>`}).join('')||'<div class="third-empty">No chats</div>'}</div>${thirdTabs()}`}
 function waOptions(){thirdChooseFilter(messengerFilter==='all'?'unread':'all')}
 function vThirdPartyChat(){const k=cur,wa=k==='wa',title=wa?({updates:'Updates',calls:'Calls',communities:'Communities',settings:'Settings'}[messengerTab]||'Chats'):messengerTab==='friends'?'Friends':messengerTab==='more'?'More':messengerTab==='open'?'Open Chat':'Chats', list=activeChatsFor(k);let inner;if(cid){inner=thirdConversation()}else if(wa&&messengerTab==='chats'){inner=waListView()}else if(messengerTab==='friends' && !wa){inner=`<header class="third-top"><h1>Friends</h1><div class="third-top-actions"><button class="third-icon-btn accent" onclick="addChar()" aria-label="Novo contato">${thirdSvg('plus')}</button></div></header><div class="third-search">${thirdSvg('search')}<input placeholder="Search friends" oninput="thirdSearch(this.value)"></div><div class="third-list" id="third-list">${S.chars.map(p=>`<div class="third-chat-row" data-search="${esc(p.name.toLowerCase())}" onclick="thirdStartFriend(${p.id})">${av(p,51)}<div class="third-row-content"><div class="third-row-top"><b>${esc(p.name)}</b></div><p>Toque para conversar</p></div></div>`).join('')||'<div class="third-empty">Adicione personagens para ver seus amigos aqui.</div>'}</div>${thirdTabs()}`} else if(!['chats','friends'].includes(messengerTab)){inner=`<div class="third-top"><h1>${title}</h1></div><div class="third-empty">${wa?'Personalize suas conversas no editor.':'Personalize os personagens e grupos no editor.'}</div>${thirdTabs()}`}else{const filtered=list.map((c,i)=>({c,i})).filter(({c})=>(messengerFilter==='all'||(messengerFilter==='unread'&&c.unread)||(messengerFilter==='groups'&&c.mem.length>1)||(messengerFilter==='favorites'&&c.favorite)));inner=`<header class="third-top"><h1>${title}</h1><div class="third-top-actions"><button class="third-icon-btn" aria-label="Câmera" onclick="go('pho')">${thirdSvg('camera')}</button><button class="third-icon-btn accent" aria-label="Nova conversa" onclick="addChat()">${thirdSvg('plus')}</button></div></header><div class="third-search">${thirdSvg('search')}<input aria-label="Pesquisar conversas" placeholder="${wa?'Ask Meta AI or Search':'Search'}" value="${esc(messengerSearch)}" oninput="thirdSearch(this.value)"></div>${messengerTab==='chats'?`<div class="third-filter">${[['all','All'],['unread','Unread'],['favorites','Favorites'],['groups','Groups']].map(([id,n])=>`<button class="${messengerFilter===id?'on':''}" onclick="thirdChooseFilter('${id}')">${n}</button>`).join('')}</div>`:''}<div class="third-list" id="third-list">${filtered.map(({c,i})=>{const last=[...c.msgs].reverse().find(m=>m.m!==2),preview=last?chatPreview(last):'Toque para escrever',t=last?.ts?fList(last.ts):'';return `<div class="third-chat-row" data-search="${esc((cname(c)+' '+preview).toLowerCase())}" onclick="if(ed)thirdDeleteChat(${i});else thirdOpenChat(${c.id})">${gav(c,51)}<div class="third-row-content"><div class="third-row-top"><b>${esc(cname(c))}</b><time>${esc(t)}</time></div><p>${esc(preview)}</p></div>${c.unread?'<i class="third-unread"></i>':''}</div>`}).join('')||'<div class="third-empty">Ainda não há conversas.<br>Use o botão + para criar uma.</div>'}</div>${thirdTabs()}`}return `<section class="third-chat ${wa?'wa':'ka'}">${inner}</section>`}
@@ -1750,7 +1898,7 @@ function walletNetwork(b){if(b==='Mastercard')return '<span class="wallet-networ
 function walletCard(c,i,click=true){const b=walletBrands.includes(c.brand)?c.brand:'Visa',t=walletTiers.includes(c.tier)?c.tier:'Classic',p=walletPalettes[t];return `<${click?'button':'div'} class="wallet-card" style="--card:linear-gradient(135deg,${p[0]},${p[1]});--ink:${p[2]}" ${click?`onclick="walletOpen(${i})" aria-label="${esc(b+' '+t)}"`:''}><div class="wallet-card-top"><div><b>${esc(c.issuer||b)}</b><div class="wallet-tier">${esc(t)}</div></div>${walletNetwork(b)}</div><div class="wallet-demo">FICTIONAL · NOT VALID</div><div class="wallet-card-bottom"><b>${esc(c.holder||'{Your name}')}</b><span>•••• ${esc(c.last4||'0000')}</span></div></${click?'button':'div'}>`}
 function walletOpen(i){walletSelected=i;R()}
 function walletForm(i=-1){if(readerMode)return;const c=walletData()[i]||{};const opt=a=>a.map(v=>({v,l:v}));form(i<0?'Adicionar cartão fictício':'Editar cartão fictício',[{k:'brand',l:'Bandeira',t:'sel',o:opt(walletBrands),v:c.brand||'Visa'},{k:'tier',l:'Categoria / visual',t:'sel',o:opt(walletTiers),v:c.tier||'Classic'},{k:'issuer',l:'Nome do banco (fictício ou real)',v:c.issuer||''},{k:'holder',l:'Nome do personagem',v:c.holder||S.owner.name},{k:'last4',l:'Últimos 4 dígitos fictícios',v:c.last4||'0000'}],v=>{const q={brand:walletBrands.includes(v.brand)?v.brand:'Visa',tier:walletTiers.includes(v.tier)?v.tier:'Classic',issuer:v.issuer.trim().slice(0,40),holder:v.holder.trim().slice(0,60),last4:/^\d{4}$/.test(v.last4)?v.last4:'0000'};if(i<0)walletData().unshift(q);else walletData()[i]=q;walletSelected=-1},'#pm')}
-function walletRemove(i){if(readerMode)return;askOk('Excluir este cartão fictício?',()=>{walletData().splice(i,1);walletSelected=-1;save();R()})}
+function walletRemove(i){if(readerMode)return;askOk('Excluir este cartão fictício?',()=>{walletSelected=-1;del('walletCards',i)})}
 function walletEditor(){const e=$('#wallet-editor');if(!e)return;e.innerHTML=walletData().map((c,i)=>`<div class="wallet-editor-row"><span>${esc(c.brand)}<small>${esc(c.tier)} · •••• ${esc(c.last4)}</small></span><button class="g" onclick="walletForm(${i})">Editar</button><button class="g" onclick="walletRemove(${i})" aria-label="Excluir">×</button></div>`).join('')}
 function vWalletBase(){const cards=walletData(),c=cards[walletSelected];return `<header class="wallet-head">${c?`<button onclick="walletOpen(-1)" aria-label="Back">${I('<path d="m15 5-7 7 7 7"/>',24,'none','#fff')}</button><h1 style="font-size:22px">Card</h1><span style="width:40px"></span>`:`<h1>Wallet</h1>${readerMode?'':`<button onclick="walletForm()" aria-label="Add card">${I('<path d="M12 5v14M5 12h14"/>',25,'none','#fff')}</button>`}`}</header><div class="bd wallet-body">${c?`<div class="wallet-detail">${walletCard(c,walletSelected,false)}<div class="wallet-info"><div><span>Network</span><b>${esc(c.brand)}</b></div><div><span>Card type</span><b>${esc(c.tier)}</b></div><div><span>Cardholder</span><b>${esc(c.holder)}</b></div><div><span>Card number</span><b>•••• ${esc(c.last4)}</b></div></div>${readerMode?'':`<button style="margin-top:18px;background:#252525;color:white;border:0;border-radius:12px;padding:12px;width:100%" onclick="walletForm(${walletSelected})">Edit card</button>`}</div>`:cards.length?`<div class="wallet-stack">${cards.map((c,i)=>walletCard(c,i)).join('')}</div>`:`<div class="wallet-empty">${I('<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/>',58,'none','#999')}<b>No cards</b><p>${readerMode?'No cards in this story.':'Add fictional cards to your story using the + button.'}</p></div>`}<p class="wallet-disclaimer">Fictional cards for storytelling. No payment functionality.</p></div>`}
 
@@ -2179,7 +2327,7 @@ function vX(){
  return `<div class="x-view-shell">${head}<div class="bd x-body${xTab==='post'?' x-thread-body':bodyClass}"${xTab==='search'?' id="x-results"':''}>${body}</div>${footer}${nav}</div>${['post','profile','menu','news','dm'].includes(xTab)?'':xDrawerContent(owner)}`;
 }
 
-function R(){if(!['map','find'].includes(cur)){mapPinMode=false;mapPinMove=null;locationPick=null;if(onlineMap||mapStarting)disposeOnlineMap();if($('#app')?.querySelector('#vectorMap'))$('#app').innerHTML=''}if(!S.v6)migrate();panelSync();const back=!locked&&cur;
+function R(){EditorUndo.sync();if(!['map','find'].includes(cur)){mapPinMode=false;mapPinMove=null;locationPick=null;if(onlineMap||mapStarting)disposeOnlineMap();if($('#app')?.querySelector('#vectorMap'))$('#app').innerHTML=''}if(!S.v6)migrate();panelSync();const back=!locked&&cur;
 $('#t1').innerHTML=esc(sT());
 $('#lt').textContent=sT();$('#ld').textContent=S.date;
 applyStatusTheme();
@@ -2335,7 +2483,13 @@ function scSavePast(d){
  if(d.onSave({name,ts,lines,speed:PlaybackSpeed.limit(d.speed)})) scCancelDraft(true);
 }
 function scEdit(i){const c=scData()[i];if(c){scDraft=JSON.parse(JSON.stringify(c));scEditor()}}
-function scRemove(i){if(readerMode||!confirm('Excluir esta chamada?'))return;const c=scData()[i];if(scDraft?.id===c?.id){scDraft=null;$('#sc-editor').innerHTML=''}S.scriptedCalls.splice(i,1);save();scList()}
+function scRemove(i){
+ if(readerMode||!confirm('Excluir esta chamada?'))return;
+ const calls=scData(),call=calls[i];
+ if(!EditorUndo.remove(calls,i,{pt:'Chamada excluída.',en:'Call deleted.'},()=>scData()===calls,scList))return;
+ if(scDraft?.id===call.id)scCancelDraft(false);
+ save();scList();
+}
 function scEditor(){
  const d=scDraft;if(!d)return;
  const editor=$('#sc-editor');
@@ -2430,7 +2584,11 @@ function narrationSection(section){const calls=section==='calls';$('#nar-events'
 $('#narration').addEventListener('close',()=>{$('#nar-form').innerHTML='';narDraft=null});
 $('#narration').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)narrationClose()});
 function narrationList(){if(readerMode)return;$('#nar-list').innerHTML=storyEvents().map((e,i)=>`<div class="nar-row"><div><b>${e.kind==='message'?'Mensagem':'Notificação'}</b><small>${esc(e.text||e.title)} · ${esc(FN[e.targetApp]||e.targetApp)} · ${e.delay}s</small></div><button onclick="eventForm('${e.kind}',${i})">Editar</button><button onclick="eventRemove(${i})" aria-label="Excluir">×</button></div>`).join('')||'<p class="nar-empty">Nenhum evento programado.</p>'}
-function eventRemove(i){if(readerMode)return;S.storyEvents.splice(i,1);save();narrationList()}
+function eventRemove(i){
+ const events=S.storyEvents;
+ if(!EditorUndo.remove(events,i,{pt:'Evento de narração excluído.',en:'Story event deleted.'},()=>S.storyEvents===events,narrationList))return;
+ save();narrationList();
+}
 function eventForm(kind,i=-1){if(readerMode)return;narDraft=i<0?{id:'event-'+Date.now()+'-'+Math.random().toString(36).slice(2),kind,targetApp:'msg',targetChat:'',person:'',text:'',title:'',trigger:'time',app:'msg',chat:'',message:-1,delay:5}:JSON.parse(JSON.stringify(storyEvents()[i]));eventEditor()}
 function eventEditor(){const d=narDraft;if(!d)return;const opts=(a,v)=>a.map(([k,n])=>`<option value="${esc(String(k))}" ${String(k)===String(v)?'selected':''}>${esc(n)}</option>`).join('');const sel=(k,label,a,refresh=true)=>`<label>${label}<select onchange="narDraft.${k}=this.value;${k==='trigger'?"if(['chat','message'].includes(narDraft.trigger)&&!scApps[narDraft.app])narDraft.app='msg';":k==='app'?"narDraft.chat='';narDraft.message=-1;":k==='chat'?"narDraft.message=-1;":k==='targetApp'?"narDraft.targetChat='';narDraft.person='';":k==='targetChat'?"narDraft.person='';":''}${refresh?'eventEditor()':''}">${opts(a,d[k])}</select></label>`;const chats=activeChatsFor(d.app),chat=chats.find(c=>String(c.id)===String(d.chat)),target=activeChatsFor(d.targetApp).find(c=>String(c.id)===String(d.targetChat));$('#nar-form').innerHTML=`<h3>${d.kind==='message'?'Mensagem programada':'Notificação dinâmica'}</h3>${sel('targetApp','Aplicativo de destino',d.kind==='message'?Object.entries(scApps):Object.entries(FN))}${d.kind==='message'?sel('targetChat','Conversa',[['','Selecione'],...activeChatsFor(d.targetApp).map(c=>[c.id,cname(c)])])+sel('person','Remetente',[['','Primeiro participante'],...(target?.mem||[]).map(id=>[id,ch(id).name])],false):`<label>Título<input value="${esc(d.title)}" oninput="narDraft.title=this.value"></label>`}<label>Texto<textarea oninput="narDraft.text=this.value">${esc(d.text)}</textarea></label>${sel('trigger','Quando acontece',[['time','Após desbloquear'],['app','Ao abrir aplicativo'],['chat','Ao abrir conversa'],['message','Após visualizar mensagem']])}${d.trigger!=='time'?sel('app','Aplicativo gatilho',d.trigger==='app'?Object.entries(FN):Object.entries(scApps)):''}${['chat','message'].includes(d.trigger)?sel('chat','Conversa gatilho',[['','Selecione'],...chats.map(c=>[c.id,cname(c)])]):''}${d.trigger==='message'?sel('message','Mensagem gatilho',[[-1,'Selecione'],...(chat?.msgs||[]).map((m,i)=>[i,m]).filter(([i,m])=>m.m!==2).map(([i,m])=>[i,m.t])],false):''}<label>Atraso em segundos<input type="number" min="0" max="3600" value="${esc(String(d.delay))}" oninput="narDraft.delay=+this.value"></label><div class="nar-actions"><button onclick="eventCommit()">Salvar evento</button><button onclick="narDraft=null;document.getElementById('nar-form').innerHTML=''">Cancelar</button></div>`}
 function eventCommit(){const d=narDraft;if(readerMode||!d)return;if(!d.text.trim()||(d.kind==='notification'&&!d.title.trim()))return alert('Preencha o texto e o título quando necessário.');if(d.kind==='message'&&!activeChatsFor(d.targetApp).some(c=>String(c.id)===String(d.targetChat)))return alert('Selecione a conversa de destino.');if(['chat','message'].includes(d.trigger)){const c=activeChatsFor(d.app).find(c=>String(c.id)===String(d.chat));if(!c)return alert('Selecione a conversa gatilho.');if(d.trigger==='message'){const m=c.msgs[+d.message];if(!m||m.m===2)return alert('Selecione a mensagem gatilho.');d.messageText=m.t;d.messageType=m.m;d.messageTs=m.ts||null}}d.delay=Math.max(0,Math.min(3600,+d.delay||0));if(!Array.isArray(S.storyEvents))S.storyEvents=[];const i=S.storyEvents.findIndex(e=>e.id===d.id);if(i<0)S.storyEvents.push(d);else S.storyEvents[i]=d;save();narDraft=null;$('#nar-form').innerHTML='';narrationList()}
@@ -2500,8 +2658,23 @@ function chatOnceOpened(m){return !!chatOnceSeen.get(S)?.has(m.onceId||m)}
 function chatOnceMark(m){let seen=chatOnceSeen.get(S);if(!seen){seen=new Set();chatOnceSeen.set(S,seen)}seen.add(m.onceId||m)}
 function chatImageContent(m,ig=false){if(m.viewOnce&&chatValidImage(m.image)){const opened=chatOnceOpened(m);return `<span class="chat-once-label ${opened?'opened':''}">${chatOnceIcon()}<span>${opened?'Opened':'Photo'}</span></span>`}const text=ig?m.text:m.t;const content=chatValidImage(m.image)?`<img class="chat-attachment" src="${m.image}" alt="Photo" draggable="false">${text?`<span class="chat-caption">${esc(text)}</span>`:''}`:esc(text||'');return content+StoryConnections.messageMarkup(m)}
 function chatImageOpen(i,igId=null){const m=igId!==null?S.igDms?.find(d=>String(d.id)===String(igId))?.msgs[i]:activeChatsFor(cur).find(c=>c.id==cid)?.msgs[i];if(!chatValidImage(m?.image))return;if(m.viewOnce){if(chatOnceOpened(m))return;chatOnceMark(m)}const host=$('#photo-lightbox');host.style.display='flex';host.innerHTML=`<div class="photo-view-top"><button onclick="vPhotoClose()" aria-label="Close photo">‹ Close</button><span>${m.viewOnce?'View once':'Photo'}</span><span></span></div><img class="chat-full-image" src="${m.image}" alt="Photo">`;if(m.viewOnce)R()}
-async function chatCompress(file){if(!file.type.startsWith('image/')||file.size>25*1024*1024)throw Error('Selecione uma imagem de até 25 MB.');const url=URL.createObjectURL(file);try{const im=new Image();await new Promise((resolve,reject)=>{im.onload=resolve;im.onerror=()=>reject(Error('Formato de imagem não suportado.'));im.src=url});let max=1440;for(let i=0;i<7;i++){const k=Math.min(1,max/Math.max(im.naturalWidth,im.naturalHeight)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(im.naturalWidth*k));canvas.height=Math.max(1,Math.round(im.naturalHeight*k));const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(im,0,0,canvas.width,canvas.height);for(const q of [.88,.76,.64]){const data=canvas.toDataURL('image/webp',q);if(chatValidImage(data)&&data.length<=125000)return data;const jpg=canvas.toDataURL('image/jpeg',q);if(jpg.length<=125000)return jpg}max=Math.round(max*.8)}throw Error('Não foi possível reduzir a imagem.')}finally{URL.revokeObjectURL(url)}}
-function chatPickImage(igId=null,mine=true,viewOnce=false){if(readerMode)return;const story=S,app=cur,chat=igId===null?activeChatsFor(app).find(c=>c.id==cid):null;if(igId===null&&(!chat||!['msg','wa','ka'].includes(app)))return;const sender=chat?snd(chat)[who%snd(chat).length]:null;const field=igId!==null?'#ig-dm-input':app==='msg'?'#mi':'#third-input',caption=viewOnce?'':($(field)?.value.trim()||'');const input=document.createElement('input');input.type='file';input.accept='image/png,image/jpeg,image/webp,image/gif,image/*';input.style.display='none';document.body.appendChild(input);input.addEventListener('cancel',()=>input.remove(),{once:true});input.addEventListener('change',async()=>{const file=input.files[0];input.remove();if(!file)return;try{const image=await chatCompress(file);if(S!==story||readerMode)return;const once=viewOnce?{viewOnce:true,onceId:globalThis.crypto?.randomUUID?.()||Date.now()+'-'+Math.random()}:{};if(igId!==null){if(!S.profiles.some(p=>String(p.id)===String(igId)))return;igThread(igId).msgs.push({mine,text:caption,image,time:S.time,...once})}else{if(!activeChatsFor(app).includes(chat))return;const ts=chatCursor(chat);chat.msgs.push({... (sender.id?{m:0,s:sender.id}:{m:1}),t:caption,image,ts,...once});chat.cursor=ts+60000;chat.t=S.time}pop=true;save();R();if(cur===app){const el=$(igId!==null?'#ig-chat-scroll':app==='msg'?'#bd':'#third-messages');if(el)el.scrollTop=el.scrollHeight}}catch(e){alert(e.message||'Não foi possível anexar a imagem.')}},{once:true});input.click()}
+function chatCompress(source){
+ const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
+ for(let i=0;i<7;i++){
+  const scale=.8**i;
+  canvas.width=Math.max(1,Math.round(source.width*scale));
+  canvas.height=Math.max(1,Math.round(source.height*scale));
+  ctx.drawImage(source,0,0,canvas.width,canvas.height);
+  for(const quality of [.88,.76,.64]){
+   const webp=canvas.toDataURL('image/webp',quality);
+   if(chatValidImage(webp)&&webp.length<=125000)return webp;
+   const jpg=canvas.toDataURL('image/jpeg',quality);
+   if(jpg.length<=125000)return jpg;
+  }
+ }
+ throw Error(SiteLanguage.text('Não foi possível reduzir a imagem.','Could not compress the image.'));
+}
+function chatPickImage(igId=null,mine=true,viewOnce=false){if(readerMode)return;const story=S,app=cur,chat=igId===null?activeChatsFor(app).find(c=>c.id==cid):null;if(igId===null&&(!chat||!['msg','wa','ka'].includes(app)))return;const sender=chat?snd(chat)[who%snd(chat).length]:null;const field=igId!==null?'#ig-dm-input':app==='msg'?'#mi':'#third-input',caption=viewOnce?'':($(field)?.value.trim()||'');const input=document.createElement('input');input.type='file';input.accept='image/*';input.style.display='none';document.body.appendChild(input);input.addEventListener('cancel',()=>input.remove(),{once:true});input.addEventListener('change',async()=>{const file=input.files[0];input.remove();if(!file)return;try{const image=await cropImageFile(file,null,1440,'',{encode:chatCompress});if(!image||S!==story||readerMode)return;const once=viewOnce?{viewOnce:true,onceId:globalThis.crypto?.randomUUID?.()||Date.now()+'-'+Math.random()}:{};if(igId!==null){if(!S.profiles.some(p=>String(p.id)===String(igId)))return;igThread(igId).msgs.push({mine,text:caption,image,time:S.time,...once})}else{if(!activeChatsFor(app).includes(chat))return;const ts=chatCursor(chat);chat.msgs.push({... (sender.id?{m:0,s:sender.id}:{m:1}),t:caption,image,ts,...once});chat.cursor=ts+60000;chat.t=S.time}pop=true;save();R();if(cur===app){const el=$(igId!==null?'#ig-chat-scroll':app==='msg'?'#bd':'#third-messages');if(el)el.scrollTop=el.scrollHeight}}catch(e){alert(e.message||'Não foi possível anexar a imagem.')}},{once:true});input.click()}
 
 if(!readerMode)R();
 boot().then(()=>{scReady=true;scTrack();storyEventTrack()});

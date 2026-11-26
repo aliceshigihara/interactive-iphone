@@ -1,6 +1,6 @@
 /* Shared controls for the editor and app choice menus. */
 html:not(.reader-mode) :is(.pc, #story-planner, #narration, #home-organizer, #md .mb, .pmod .mb, .story-connection-dialog, .story-help-dialog, .photo-crop)
-  button:where(:not(.panel-help-toggle, .panel-pin, .panel-collapse, .lock-notification-remove, .planner-icon, .org-app-chip, .theme-switch, [hidden])) {
+  button:where(:not(.panel-help-toggle, .panel-pin, .panel-collapse, .lock-notification-remove, .planner-icon, .org-app-chip, .theme-switch, .photo-ratio-track button, .photo-order button, [hidden])) {
   min-height: 38px;
   border-radius: 12px;
   font-weight: 650;

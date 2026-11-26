@@ -1,0 +1,37 @@
+.editor-undo {
+  position: fixed;
+  inset: auto max(18px,env(safe-area-inset-right)) max(18px,env(safe-area-inset-bottom)) auto;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  margin: 0;
+  padding: 8px 9px 8px 14px;
+  border: 1px solid var(--ed-line-strong);
+  border-radius: 15px;
+  background: var(--ed-input);
+  color: var(--ed-ink);
+  box-shadow: 0 6px 24px var(--ed-shadow);
+  font-size: 13px;
+}
+.editor-undo[hidden], .editor-undo[popover]:not(:popover-open) { display: none; }
+.editor-undo button {
+  flex: none;
+  min-height: 36px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--site-button-blue-soft);
+  color: var(--ed-accent);
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+.editor-undo button:last-child { padding-inline: 8px; background: transparent; color: var(--ed-muted); font-size: 17px; }
+.editor-undo button:focus-visible { outline: 2px solid var(--ed-accent-bright); outline-offset: 1px; }
+@media (max-width:760px) {
+  .editor-undo { bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .editor-undo button { min-height: 40px; }
+}

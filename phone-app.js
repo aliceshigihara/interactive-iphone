@@ -317,7 +317,12 @@ const PhoneApp = (() => {
     'voicemail-block':toggleBlock,
     'voicemail-accept':acceptVoicemail,
     'voicemail-register':registerVoicemail,
-    'delete-voicemail':id=>{if(!readerMode&&confirm('Excluir este voicemail?')){S.phoneVoicemails=messages().filter(m=>m.id!==id);closeVoicemail();save();R()}}
+    'delete-voicemail':id=>{
+      if(readerMode||!confirm('Excluir este voicemail?'))return;
+      const items=messages();
+      if(!EditorUndo.remove(items,items.findIndex(m=>m.id===id),{pt:'Voicemail excluído.',en:'Voicemail deleted.'},()=>messages()===items))return;
+      closeVoicemail();save();R();
+    }
   };
   document.addEventListener('click',async event=>{
     const control=event.target.closest?.('#app [data-phone-tab], #app [data-phone-action]');

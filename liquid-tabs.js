@@ -1,6 +1,6 @@
 /* The upper copy of the tabs is visible only where the moving glass lens crosses it. */
 const LiquidTabs = (() => {
-  const selector = '.phone-tabbar,.clock-tabs,.third-tabs,.x-nav,.yt-nav';
+  const selector = '.phone-tabbar,.clock-tabs,.third-tabs,.x-nav,.yt-nav,.wx-pages';
   const selected = '[aria-current="page"],.active,.on';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let view, x, goal, velocity = 0, last = 0, frame = 0, drag, suppressClick = false;

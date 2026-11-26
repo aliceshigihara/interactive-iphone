@@ -114,7 +114,7 @@ const TwitterExtra = (() => {
   function thread(id){
     const d=getThread(id);if(!d)return {title:'Chat',body:empty('Conversation unavailable'),footer:''};
     const p=xPerson(d.pid);
-    return {title:esc(p.name),body:`<div class="x-dm-intro">${av(p,54)}<b>${esc(p.name)} ${xBadges(p)}</b><span>@${esc(p.user)}</span></div><div class="x-dm-bubbles">${(d.msgs||[]).map(m=>`<div class="x-dm-bubble${m.out?' is-out':''}"><span>${esc(m.text)}</span>${m.time?`<time>${esc(m.time)}</time>`:''}</div>`).join('')}</div>`,
+    return {title:esc(p.name),body:`<div class="x-dm-intro">${av(p,54)}<b>${esc(p.name)} ${xBadges(p)}</b><span>@${esc(p.user)}</span></div><div class="x-dm-bubbles">${(d.msgs||[]).map((m,i)=>`<div class="x-dm-bubble${m.out?' is-out':''}"${ChatEditing.bubble(i,m)}><span>${esc(m.text)}</span>${m.time?`<time>${esc(m.time)}</time>`:''}</div>`).join('')}</div>`,
     footer:!readerMode?`<div class="x-reply-footer"><button type="button" onclick="TwitterExtra.dmForm(${xArg(id)})">Add message</button></div>`:''};
   }
   function dmForm(id){
@@ -135,5 +135,5 @@ const TwitterExtra = (() => {
     xVisit('menu',section);
   }
   function reset(){topic='Explore';activity='All';inbox='All';dmQuery=''}
-  return {reset,explore,exploreRows,pickTopic,showStory,story,exploreForm,notifications,pickActivity,likeForm,mail,filterDM,pickInbox,openDM,thread,dmForm,settings};
+  return {reset,explore,exploreRows,pickTopic,showStory,story,exploreForm,notifications,pickActivity,likeForm,mail,filterDM,pickInbox,openDM,thread,getThread,dmForm,settings};
 })();

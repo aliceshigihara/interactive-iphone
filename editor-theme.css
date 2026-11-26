@@ -299,7 +299,7 @@ html:not(.reader-mode) body { background: transparent; color: var(--ed-ink); }
 :root[data-theme="dark"] :is(.photo-crop-head p, .photo-crop-position, .story-picker-filters label, .story-link-source, .story-ref-empty, .story-ref-heading p, .story-picker-item small, .story-ref-open small, .story-connected-identity small) {
   color: var(--ed-sub);
 }
-:root[data-theme="dark"] .photo-crop button:not([data-action="apply"]) {
+:root[data-theme="dark"] .photo-crop button:not([data-action="apply"], [role="radio"]) {
   background: var(--site-button-blue-soft);
   color: var(--ed-accent);
 }

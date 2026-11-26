@@ -17,8 +17,9 @@ const {resolveFormPreview, mountFormPreview} = (() => {
     if (has('brand','tier','last4')) return card('wallet', v => walletCard({...v,last4:/^\d{4}$/.test(v.last4)?v.last4:'0000'},0,false));
     if (has('cap','likes')) return card('ig', v => {
       const a = pf(v.pid || base.pid);
-      const imgs = v.imgs?.length ? v.imgs : base.imgs?.length ? base.imgs : [base.img];
-      return `<div class="fp-social-head">${avatar(a.user,a.photo,32)}<b>${text(a.user,'username')}</b><span>⋯</span></div><div class="fp-media">${photo(imgs[0]) || '<span>Foto da publicação</span>'}${imgs.length>1?`<i>1/${imgs.length}</i>`:''}</div><div class="fp-post-actions">${I(HRT,21)}${I(CMT,21)}${InstagramProfile.dmIcon(21)}${I(BKM,21)}</div><b>${count(v.likes)} likes</b><p class="fp-copy"><b>${text(a.user,'username')}</b> ${text(v.cap,'Legenda da publicação')}</p>${v.views ? `<small>${count(v.views)} views</small>` : ''}${v.ts ? `<small>${text(igAgo(fromL(v.ts)))}</small>` : ''}`;
+      const imgs = v.imgs ?? igPostImages(base);
+      const ratio = igPostRatio(v.ratio ?? base.ratio);
+      return `<div class="fp-social-head">${avatar(a.user,a.photo,32)}<b>${text(a.user,'username')}</b><span>⋯</span></div><div class="fp-media" style="aspect-ratio:${ratio}">${photo(imgs[0]) || '<span>Foto da publicação</span>'}${imgs.length>1?`<i>1/${imgs.length}</i>`:''}</div><div class="fp-post-actions">${I(HRT,21)}${I(CMT,21)}${InstagramProfile.dmIcon(21)}${I(BKM,21)}</div><b>${count(v.likes)} likes</b><p class="fp-copy"><b>${text(a.user,'username')}</b> ${text(v.cap,'Legenda da publicação')}</p>${v.views ? `<small>${count(v.views)} views</small>` : ''}${v.ts ? `<small>${text(igAgo(fromL(v.ts)))}</small>` : ''}`;
     });
     if (has('b','f1','f2') || has('bio','fol','fng')) return card('ig', v => {
       const user = (v.u ?? v.user ?? '').trim().replace(/\s+/g,'.').toLowerCase();
@@ -38,7 +39,16 @@ const {resolveFormPreview, mountFormPreview} = (() => {
       const members = (v.m||[]).map(ch).concat((v.names||'').split(',').map(s=>s.trim()).filter(Boolean).map((name,i)=>({name,photo:v.photos?.[i]})));
       return `<div class="fp-contact"><div class="fp-avatars">${(members.length?members.slice(0,4):[{name:'?'}]).map(p=>avatar(p.name,p.photo,46)).join('')}</div><h3>${text(v.n||members.map(p=>p.name).join(', '),'Nova conversa')}</h3><small>${members.length} ${members.length===1?'participante':'participantes'}</small></div>`;
     });
-    if (title==='Informações do grupo' || title==='Date & time' || title==='Edit date & time') return card(inMessenger, v => `<div class="fp-contact"><h3>${text(v.name || (v.ts && new Date(v.ts).toLocaleString('en-US')), 'Data e hora da conversa')}</h3></div>`);
+    if (fields.some(field=>field.t==='chat-time')) return card(inMessenger, v => {
+      const ts=ChatTime.calendar(v.ts);
+      const tr=SiteLanguage.text;
+      if(ts===null)return `<p class="fp-chat-marker">${tr('Escolha uma data e hora','Choose a date and time')}</p>`;
+      const [day,time]=fDiv(ts);
+      const marker=inMessenger==='msg'?`${day} at ${time}`:fFull(ts);
+      const exact=new Intl.DateTimeFormat(tr('pt-BR','en-US'),{dateStyle:'full',timeStyle:'short'}).format(ts);
+      return `<div class="fp-chat-marker"><b>${text(marker)}</b><small>${text(exact)}</small></div>`;
+    });
+    if (title==='Informações do grupo') return card(inMessenger, v => `<div class="fp-contact"><h3>${text(v.name, 'Data e hora da conversa')}</h3></div>`);
     if (title==='Add story') return card('ig', v => `<div class="fp-story">${photo(v.i)||'<span>Foto do story</span>'}<i></i></div>`);
     if (has('channel','duration','ytthumb')) return card('yt', v => {
       const c = ytChannel({channel:v.channel});
@@ -99,7 +109,17 @@ const {resolveFormPreview, mountFormPreview} = (() => {
     };
     panel.append(tabs,form,side);
     const surface = side.querySelector('.fp-app-card');
-    const refresh = () => { surface.innerHTML = preview.render(read()); };
+    let rendered;
+    const refresh = () => {
+      const markup = preview.render(read());
+      if (markup === rendered) return;
+      rendered = markup;
+      const previous = surface.querySelector('.fp-media');
+      const before = previous && {width:previous.offsetWidth,height:previous.offsetHeight};
+      surface.innerHTML = markup;
+      const frame = surface.querySelector('.fp-media');
+      if (frame && before && previous.style.aspectRatio !== frame.style.aspectRatio) animatePhotoFrame(frame,before);
+    };
     form.addEventListener('input', refresh);
     form.addEventListener('change', refresh);
     refresh();

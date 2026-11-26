@@ -38,6 +38,47 @@
 .photo-picker:hover .photo-picker-button { background: var(--site-button-blue-soft-hover); }
 .photo-picker:focus-within { outline: 2px solid #368eff; outline-offset: 2px; }
 .photo-picker:has(input:disabled) { opacity: .65; }
+.photo-order {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.photo-order li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--ed-line);
+}
+.photo-order img { flex: none; width: 38px; height: 38px; border-radius: 8px; object-fit: cover; }
+.photo-order span { flex: 1; font-size: 13px; font-variant-numeric: lining-nums tabular-nums; }
+.photo-order button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--ed-line);
+  border-radius: 10px;
+  background: var(--ed-input);
+  color: var(--ed-accent);
+  cursor: pointer;
+}
+.photo-order .photo-order-remove {
+  margin-inline-start: 2px;
+  color: var(--ed-danger);
+}
+.photo-order button:enabled:hover { background: var(--site-button-blue-soft); box-shadow: none; transform: none; }
+.photo-order .photo-order-remove:hover { background: color-mix(in srgb,var(--ed-input) 90%,var(--ed-danger)); }
+.photo-order button:disabled {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  opacity: .38;
+  cursor: default;
+}
+.photo-order button:focus-visible { outline: 2px solid var(--ed-accent-bright); outline-offset: 2px; }
 
 .photo-crop {
   position: fixed;
@@ -60,19 +101,36 @@
 .photo-crop-head h2 { margin: 2px 0 4px; font-size: clamp(19px, 4vw, 25px); line-height: 1.15; }
 .photo-crop-head p, .photo-crop-position { color: #55637a; font-size: 12px; line-height: 1.35; }
 .photo-crop-stage {
+  --crop-stage-height: min(42dvh, 360px);
+  --crop-stage-padding: 12px;
   display: grid;
   place-items: center;
+  height: calc(var(--crop-stage-height) + 2 * var(--crop-stage-padding));
   background: radial-gradient(ellipse at top, #354761, #1a2537 80%);
   border-radius: 15px;
-  padding: 12px;
+  padding: var(--crop-stage-padding);
 }
 .photo-crop-frame {
   position: relative;
-  width: min(100%, 500px, calc(min(46dvh, 380px) * var(--crop-ratio)));
+  container-type: size;
+  width: min(100%, 440px, calc(var(--crop-stage-height) * var(--crop-ratio)));
   aspect-ratio: var(--crop-ratio);
+  overflow: hidden;
+  border-radius: 12px;
   box-shadow: 0 0 0 1px #fff9, 0 8px 22px #050d2080;
 }
-.photo-crop canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.photo-crop-frame > img {
+  position: absolute;
+  left: calc(50% + var(--crop-pan-x));
+  top: calc(50% + var(--crop-pan-y));
+  width: 100cqw;
+  height: 100cqh;
+  object-fit: cover;
+  transform: translate(-50%,-50%) rotate(var(--crop-turn)) scale(var(--crop-zoom));
+  pointer-events: none;
+}
+.photo-crop-frame[data-turned] > img { width: 100cqh; height: 100cqw; }
+.photo-crop canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; opacity: 0; cursor: grab; touch-action: none; }
 .photo-crop canvas:active { cursor: grabbing; }
 .photo-crop-grid {
   position: absolute;
@@ -89,14 +147,79 @@
 .photo-crop-tools > div { display: flex; gap: 6px; }
 .photo-crop button { border: 0; border-radius: 10px; background: #e7eef8; color: #304560; min-height: 36px; padding: 7px 12px; font-size: 13px; font-weight: 650; cursor: pointer; }
 .photo-crop button:hover { filter: brightness(.96); }
-.photo-crop button:focus-visible, .photo-crop input:focus-visible, .photo-crop canvas:focus-visible { outline: 2px solid #398eff; outline-offset: 2px; }
+.photo-crop button:focus-visible, .photo-crop input:focus-visible, .photo-crop-frame:has(canvas:focus-visible) { outline: 2px solid #398eff; outline-offset: 2px; }
 .photo-crop .photo-crop-close { width: 36px; flex: none; font-size: 22px; font-weight: 400; padding: 0; }
+.photo-ratios {
+  overflow-x: auto;
+  max-width: 100%;
+  border-radius: 22px;
+  background: color-mix(in srgb,var(--ed-input) 90%,var(--ed-accent));
+}
+.photo-ratio-track {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  gap: 2px;
+  width: max-content;
+  margin-inline: auto;
+  padding: 4px;
+}
+.photo-ratio-pill {
+  position: absolute;
+  inset: 4px auto 4px 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--ed-input,#fff);
+  box-shadow: 0 1px 3px #14284522;
+  pointer-events: none;
+}
+.photo-ratio-track button[role="radio"] {
+  z-index: 1;
+  flex: none;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ed-sub,#304560);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.photo-ratio-track button[aria-checked="true"] { color: var(--ed-accent,#005dcc); }
+.photo-ratio-track button[role="radio"]:is(:hover,:active) { transform: none; box-shadow: none; }
+.photo-ratio-track button:focus-visible { outline: 2px solid var(--ed-accent,#005dcc); outline-offset: -2px; }
+.photo-crop .photo-ratios { margin-bottom: 8px; }
+.photo-aspect-field { min-width: 0; margin-top: 8px; }
+.photo-aspect-label { margin-bottom: 4px; color: var(--ed-muted,#59677d); font-size: 12px; }
+.photo-aspect-stage {
+  --aspect-stage-height: clamp(136px, 24dvh, 200px);
+  display: grid;
+  place-items: center;
+  height: var(--aspect-stage-height);
+  margin: 8px 0;
+  overflow: hidden;
+}
+.photo-aspect-frame {
+  position: relative;
+  width: min(100%, 330px, calc(var(--aspect-stage-height) * var(--post-ratio)));
+  aspect-ratio: var(--post-ratio);
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--ed-paper,#edf3fa);
+}
+.photo-aspect-frame :is(svg,img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .photo-crop-position { margin-right: auto; }
 .photo-crop-footer button[data-action="apply"] { color: var(--site-on-button-blue); background: var(--site-button-blue); }
 
 @media (max-width: 520px) {
   .photo-crop { padding: 14px; border-radius: 20px; }
   .photo-crop button { min-height: 42px; }
-  .photo-crop-stage { padding: 9px; }
+  .photo-crop-stage { --crop-stage-padding: 9px; }
   .photo-picker-button { min-height: 36px; }
+  .photo-order button { min-width: 44px; min-height: 44px; }
 }

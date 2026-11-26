@@ -97,3 +97,22 @@
   .fp-panel[data-fp-tab=edit] .fp-aside, .fp-panel[data-fp-tab=preview] .fp-editor { display: none; }
   .fp-aside { position: static; }
 }
+.chat-time { display: grid; gap: 10px; }
+.chat-time .chat-time-shortcuts { display: flex; flex-wrap: wrap; gap: 6px; }
+.chat-time .chat-time-shortcuts button {
+  min-height: 34px;
+  padding: 5px 10px;
+  border: 1px solid var(--ed-line);
+  border-radius: 10px;
+  background: var(--ed-input);
+  color: var(--ed-accent);
+  font-size: 12px;
+  cursor: pointer;
+}
+.chat-time .chat-time-shortcuts button:hover { background: var(--site-button-blue-soft); }
+.chat-time :is(small,.chat-time-feedback) { font-size: 12px; line-height: 1.45; }
+.chat-time small { color: var(--ed-muted); }
+.chat-time-feedback { color: var(--ed-danger); }
+.chat-time-feedback:empty { display: none; }
+.fp-chat-marker { display: grid; gap: 4px; padding: 16px 8px; text-align: center; color: #454953; font-size: 13px; }
+.fp-chat-marker small { color: #596474; font-size: 12px; line-height: 1.4; }

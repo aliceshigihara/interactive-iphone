@@ -1,4 +1,4 @@
-/* Animate UI Theme Toggler Button, adapted for the static pages. */
+/* Magic UI's circular theme reveal, using native same-document view transitions. */
 (() => {
   const root = document.documentElement;
   if (root.classList.contains('reader-mode')) return;
@@ -15,7 +15,7 @@
     moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42m0-14.14-1.42 1.42M6.35 17.65l-1.42 1.42"/>',
   };
-  let animation;
+  let animation, transition;
 
   function apply(theme, animate = false) {
     const dark = theme === 'dark';
@@ -39,10 +39,42 @@
     root.dispatchEvent(new Event('themechange'));
   }
 
+  function changeTheme(theme, animateIcon = false) {
+    apply(theme, animateIcon);
+    try { localStorage.setItem(key, theme); } catch {}
+  }
+
   apply(root.dataset.theme);
   button.addEventListener('click', () => {
-    apply(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
-    try { localStorage.setItem(key, root.dataset.theme); } catch {}
+    if (transition) return;
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    if (motion.matches || typeof document.startViewTransition !== 'function') {
+      changeTheme(next, !motion.matches);
+      return;
+    }
+
+    const {left,top,width,height} = button.getBoundingClientRect();
+    const viewportWidth = window.innerWidth, viewportHeight = window.innerHeight;
+    const x = left + width/2, y = top + height/2;
+    const radius = Math.hypot(Math.max(x,viewportWidth-x),Math.max(y,viewportHeight-y));
+    // Clip-path circle percentages use the normalized diagonal of the snapshot.
+    root.style.setProperty('--theme-reveal-origin',`${100*x/viewportWidth}% ${100*y/viewportHeight}%`);
+    root.style.setProperty('--theme-reveal-radius',`${100*(radius+1)/(Math.hypot(viewportWidth,viewportHeight)/Math.SQRT2)}%`);
+    root.setAttribute('data-theme-reveal','');
+    const cleanup = () => {
+      transition = null;
+      root.removeAttribute('data-theme-reveal');
+      root.style.removeProperty('--theme-reveal-origin');
+      root.style.removeProperty('--theme-reveal-radius');
+    };
+    try {
+      transition = document.startViewTransition(() => changeTheme(next));
+      transition.ready.catch(() => {});
+      transition.finished.then(cleanup, cleanup);
+    } catch {
+      cleanup();
+      changeTheme(next);
+    }
   });
   window.addEventListener('storage', event => {
     if (event.storageArea === localStorage && (event.key === key || event.key === null)) apply(event.newValue);
